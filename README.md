@@ -1,5 +1,5 @@
 # CSC473 Project
-# Escape The Room
+# Escape
 
 * Team members: Ali Ahmed, William Chung, Yifang He, Lam Tran
 
