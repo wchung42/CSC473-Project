@@ -1,0 +1,38 @@
+[
+    {
+        "id": "1",
+        "Title": "Shepard Hall",
+        "Difficulty": 4,
+        "Story": "This is a very long long long long long long long long long long long long story",
+        "tag": "#ccny, #shepard_hall",
+        "images": "Sherapd",
+        "popular": true
+    },
+    {
+        "id": "2",
+        "Title": "Harris Hall",
+        "Difficulty": 2,
+        "Story": "This is a very short story",
+        "tag": "#ccny, #harris_hall",
+        "images": "Harris",
+        "popular": false
+    },
+    {
+        "id": "3",
+        "Title": "Wingate Hall",
+        "Difficulty": 3,
+        "Story": "This is not a story",
+        "tag": "#ccny, #wingate_hall",
+        "images": "Wingate",
+        "popular": false
+    },
+    {
+        "id": "4",
+        "Title": "Marshak Hall",
+        "Difficulty": 4,
+        "Story": "This is a very short story",
+        "tag": "#ccny, #marshak_hall",
+        "images": "Marshak",
+        "popular": true
+    }
+]

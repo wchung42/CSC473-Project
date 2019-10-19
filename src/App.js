@@ -1,51 +1,27 @@
 import React, { Component } from 'react';
 import './App.css';
+import games from './games.json';
+// import Sherapd from "./images/shepard0.jpeg";
+// import Harris from "./images/harris0.jpeg";
+// import Wingate from "./images/wingate0.jpeg";
+// import Marshak from "./images/marshak0.jpeg";
+
 
 
 class App extends Component {
   // this state later will be written into a file in a backend so creator can generate new games without coding
   render = () => {
-    let games = [
-      {
-        "id": "1",
-        "Title": "Shepard Hall",
-        "Difficulty": 4,
-        "Story": "This is a very long long long long long long long long long long long long story",
-        "tag": "#ccny, #shepard_hall",
-        "popular": true
-      },
-      {
-        "id": "2",
-        "Title": "Harris Hall",
-        "Difficulty": 2,
-        "Story": "This is a very short story",
-        "tag": "#ccny, #harris_hall",
-        "popular": false
-      },
-      {
-        "id": "3",
-        "Title": "Wingate Hall",
-        "Difficulty": 3,
-        "Story": "This is not a story",
-        "tag": "#ccny, #wingate_hall",
-        "popular": false
-      },
-      {
-        "id": "4",
-        "Title": "Marshak Hall",
-        "Difficulty": 4,
-        "Story": "This is a very short story",
-        "tag": "#ccny, #marshak_hall",
-        "popular": true
-      },
-    ];
+    let thumbNails = ["Sherapd", "Harris", "Wingate", "Marshak"]
     console.log(games)
     //listLength to automatically generate the <ul>
 
     let listItems = games
       .filter(item => item.popular == true)
       .map(item =>
-        <li key={item.id}> {item.Title}</li>
+        <li key={item.id}>
+          {item.Title}
+          {/* <img src={require({ item[images] })} /> */}
+        </li>
       );
 
 
@@ -62,7 +38,7 @@ class App extends Component {
           </h1>
         </header>
         <body className="body">
-          <p>This is Body</p>
+          <p><strong>Popular Games</strong></p>
           <ul>{listItems}</ul>
         </body>
         <footer>
