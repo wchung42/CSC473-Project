@@ -1,30 +1,25 @@
 import React, { Component } from 'react';
 import './App.css';
 import games from './games.json';
-// import Sherapd from "./images/shepard0.jpeg";
-// import Harris from "./images/harris0.jpeg";
-// import Wingate from "./images/wingate0.jpeg";
-// import Marshak from "./images/marshak0.jpeg";
-
+// import sherapd from './images/sherapd0.jpg'
 
 
 class App extends Component {
   // this state later will be written into a file in a backend so creator can generate new games without coding
   render = () => {
-    let thumbNails = ["Sherapd", "Harris", "Wingate", "Marshak"]
+    function importAll(r) {
+      return r.keys().map(r);
+    }
     console.log(games)
-    //listLength to automatically generate the <ul>
-
     let listItems = games
-      .filter(item => item.popular == true)
+      .filter(game => game.popular == true)
       .map(item =>
         <li key={item.id}>
           {item.Title}
-          {/* <img src={require({ item[images] })} /> */}
+          <img src={require('./images/' + item.images + '.jpg')} />
+          {/* <img src={sherapd} alt={"sherapd"} /> */}
         </li>
       );
-
-
 
     return (
       <div className="App">
@@ -34,7 +29,7 @@ class App extends Component {
         <link rel="stylesheet" href="styles.css"></link>
         <header>
           <h1 className="greeting">
-            Hello World
+            ESCAPE
           </h1>
         </header>
         <body className="body">
