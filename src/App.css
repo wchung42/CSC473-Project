@@ -46,20 +46,22 @@
 .bodyTitle{
   list-style-type: none;
   font-size: 20px;
-  text-align-last: left;
+  text-align-last: center;
+  padding: 5em;
 }
 
 .bodyImage{
-  width: 90vw;
+  width: 30em;
   height: 40vh;
+  
 }
 
 footer {
-  position: absolute;
+  
   bottom: 0;
   width: 100%;
   color: #fff;
-  background-color: #000;
+  background-color: black;
 }
 
 

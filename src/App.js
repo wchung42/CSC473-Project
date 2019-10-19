@@ -30,7 +30,7 @@ class App extends Component {
         <link rel="stylesheet" href="styles.css"></link>
         <header>
           <h1 className="greeting">
-            ESCAPE
+            <br/>
           </h1>
         </header>
         <body className="body">
