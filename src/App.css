@@ -43,6 +43,16 @@
   color:green;
 }
 
+.bodyTitle{
+  list-style-type: none;
+  font-size: 20px;
+  text-align-last: left;
+}
+
+.bodyImage{
+  width: 90vw;
+  height: 40vh;
+}
 
 footer {
   position: absolute;

@@ -7,18 +7,17 @@ import games from './games.json';
 class App extends Component {
   // this state later will be written into a file in a backend so creator can generate new games without coding
   render = () => {
-    function importAll(r) {
-      return r.keys().map(r);
-    }
     console.log(games)
     let listItems = games
       .filter(game => game.popular == true)
       .map(item =>
-        <li key={item.id}>
-          {item.Title}
-          <img src={require('./images/' + item.images + '.jpg')} />
-          {/* <img src={sherapd} alt={"sherapd"} /> */}
-        </li>
+        <li className="bodyTitle" key={item.id} onMouseEnter={console.log(item.Story)}>
+          <strong>{item.Title} </strong>
+          <strong>({item.Difficulty}/5)</strong>
+          <br />
+          <img className="bodyImage" src={require('./images/' + item.images + '.jpg')} />
+
+        </li >
       );
 
     return (
@@ -34,7 +33,7 @@ class App extends Component {
         </header>
         <body className="body">
           <p><strong>Popular Games</strong></p>
-          <ul>{listItems}</ul>
+          <ol >{listItems}</ol>
         </body>
         <footer>
           <a id="profile-link" href="" target="_blank" className="btn contact-details"><i className="fab fa-github"></i> GitHub</a>
