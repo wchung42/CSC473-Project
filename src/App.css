@@ -20,3 +20,34 @@
 .App-link {
   color: #09d3ac;
 }
+#LinkedIn{
+  color:#0e76a8
+}
+#profile-link{
+  color:white
+}
+#facebook{
+  color:blue;
+}
+#inst-logo{
+   color: #fff;
+  background: #d6249f;
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+  box-shadow: 0px 3px 10px rgba(0,0,0,.25);
+}
+#instagram{
+  color: #d6249f;
+}
+
+#freecodecamp{
+  color:green;
+}
+
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  color: #fff;
+  background-color: #000;
+}
