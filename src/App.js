@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import './App.css';
-import games from './games.json';
-// import sherapd from './images/sherapd0.jpg'
 
+import games from './games.json';
+import './App.css';
+import Navbar from './components/Navbar/Navbar';
+// import sherapd from './images/sherapd0.jpg'
 
 class App extends Component {
   // this state later will be written into a file in a backend so creator can generate new games without coding
@@ -22,6 +22,8 @@ class App extends Component {
 
     return (
       <div className="App">
+         <Navbar />                           
+                                         
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
           integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
           crossorigin="anonymous" />
