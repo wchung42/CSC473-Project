@@ -15,22 +15,22 @@ class App extends Component {
           <strong>{item.Title} </strong>
           <strong>({item.Difficulty}/5)</strong>
           <br />
-          <img className="bodyImage" src={require('./images/' + item.images + '.jpg')} />
+          <img className="bodyImage" src={require('./images/' + item.thumbnail + '.jpg')} />
 
         </li >
       );
 
     return (
       <div className="App">
-         <Navbar />                           
-                                         
+        <Navbar />
+
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
           integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
           crossorigin="anonymous" />
         <link rel="stylesheet" href="styles.css"></link>
         <header>
           <h1 className="greeting">
-            <br/>
+            <br />
           </h1>
         </header>
         <body className="body">
