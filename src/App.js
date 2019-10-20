@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import games from './games.json';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
+import runImages from './components/Body/runImages.js';
 // import sherapd from './images/sherapd0.jpg'
 
 class App extends Component {
@@ -11,11 +12,15 @@ class App extends Component {
     let listItems = games
       .filter(game => game.popular == true)
       .map(item =>
-        <li className="bodyTitle" key={item.id} onMouseEnter={console.log(item.Story)}>
+        <li className="bodyTitle" key={item.id} onMouseEnter={runImages}>
           <strong>{item.Title} </strong>
           <strong>({item.Difficulty}/5)</strong>
           <br />
-          <img className="bodyImage" src={require('./images/' + item.thumbnail + '.jpg')} />
+          <img
+            className="bodyImage"
+            src={require('./images/' + item.thumbnail + '.jpg')}
+            onMouseEnter={runImages}
+          />
 
         </li >
       );
