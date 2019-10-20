@@ -37,13 +37,37 @@ class App extends Component {
           <p><strong>Popular Games</strong></p>
           <ol >{listItems}</ol>
         </body>
-        <footer>
-          <a id="profile-link" href="" target="_blank" className="btn contact-details"><i className="fab fa-github"></i> GitHub</a>
-          <a id="facebook" href="" target="_blank" className="btn contact-details"><i className="fab fa-facebook"></i> Facebook</a>
-          <a id="instagram" href="" target="_blank" className="btn contact-details"><i className="fab fa-instagram" id="inst-logo"></i> Instagram</a>
-          <a id="freecodecamp" href="" target="_blank" className="btn contact-details"><i className="fab fa-free-code-camp"></i> FreeCodeCamp</a>
-          <a id="LinkedIn" href="" target="_blank" className="btn contact-details"><i className="fab fa-linkedin"></i> LinkedIn</a>
-        </footer>
+
+
+        <footer className="footer-all">
+
+			    <div className="footer-social">
+
+				<a href="#"><i className="fab fa-facebook"></i></a>
+				<a href="#"><i className="fab fa-twitter"></i></a>
+				<a href="#"><i className="fab fa-linkedin"></i></a>
+				<a href="#"><i className="fab fa-github"></i></a>
+
+			  </div>
+
+			<div className="footer-info">
+
+				<p>
+					<a href="#">Home</a>
+					·
+					<a href="#">Games</a>
+					·
+					<a href="#">About</a>
+					·
+					<a href="#">Faq</a>
+					·
+					<a href="#">Contact</a>
+				</p>
+
+				<p><strong>Escape Team © 2019</strong></p>
+			</div>
+
+		</footer>
       </div>
     );
   }
