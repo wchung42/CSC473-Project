@@ -6,7 +6,7 @@
         "Story": "This is a very long long long long long long long long long long long long story",
         "tag": "#ccny, #shepard_hall",
         "thumbnail": "1/sherapd0",
-        "images": " ",
+        "images": 3,
         "popular": true
     },
     {
@@ -16,7 +16,7 @@
         "Story": "This is a very short story",
         "tag": "#ccny, #harris_hall",
         "thumbnail": "2/harris0",
-        "images": " ",
+        "images": 2,
         "popular": true
     },
     {
@@ -26,7 +26,7 @@
         "Story": "This is not a story",
         "tag": "#ccny, #wingate_hall",
         "thumbnail": "3/wingate0",
-        "images": " ",
+        "images": 0,
         "popular": false
     },
     {
@@ -36,7 +36,7 @@
         "Story": "This is a very short story",
         "tag": "#ccny, #marshak_hall",
         "thumbnail": "4/marshak0",
-        "images": " ",
+        "images": 0,
         "popular": false
     }
 ]

@@ -2,26 +2,36 @@ import React, { Component } from 'react';
 import games from './games.json';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
-import runImages from './components/Body/runImages.js';
-// import sherapd from './images/sherapd0.jpg'
+import List from './components/Body/runImages.js';
+import changeImageOverTime from './components/Body/runImages.js';
+
+// const List = (props) => {
+//   let item = props.game;
+//   let className = "img" + item.id;
+//   console.log(className);
+//   const rotator = document.getElementsByClassName(className);
+//   console.log("rotator: ", rotator);
+
+//   return <p>{props.game.Title}</p>
+// }
 
 class App extends Component {
   // this state later will be written into a file in a backend so creator can generate new games without coding
   render = () => {
-    console.log(games)
+    // console.log(games)
     let listItems = games
       .filter(game => game.popular == true)
       .map(item =>
-        <li className="bodyTitle" key={item.id} onMouseEnter={runImages}>
+        <li className="bodyTitle" key={item.id} >
           <strong>{item.Title} </strong>
           <strong>({item.Difficulty}/5)</strong>
           <br />
           <img
-            className="bodyImage"
+            key={item.id}
+            className={("img" + item.id)}
             src={require('./images/' + item.thumbnail + '.jpg')}
-            onMouseEnter={runImages}
+            onMouseEnter={changeImageOverTime(item)}
           />
-
         </li >
       );
 
@@ -40,7 +50,7 @@ class App extends Component {
         </header>
         <body className="body">
           <p><strong>Popular Games</strong></p>
-          <ol >{listItems}</ol>
+          <ol>{listItems}</ol>
         </body>
         <footer>
           <a id="profile-link" href="" target="_blank" className="btn contact-details"><i className="fab fa-github"></i> GitHub</a>
