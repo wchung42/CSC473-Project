@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import games from './games.json';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
+import SideDrawerMenu from './components/SideDrawerMenu/SideDrawerMenu';
 // import sherapd from './images/sherapd0.jpg'
 
 class App extends Component {
@@ -22,7 +23,8 @@ class App extends Component {
 
     return (
       <div className="App">
-         <Navbar />                           
+         <Navbar />
+         <SideDrawerMenu />                           
                                          
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
           integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
