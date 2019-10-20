@@ -17,6 +17,11 @@ class App extends Component {
       return {sideDrawerMenuOpen: !prevState.sideDrawerMenuOpen};
     })
   };
+
+  // clicking backdrop closes side drawer
+  backdropClickHandler = () => {
+    this.setState({sideDrawerMenuOpen: false});
+  }
   
   // this state later will be written into a file in a backend so creator can generate new games without coding
   render = () => {
@@ -39,7 +44,7 @@ class App extends Component {
 
     if (this.state.sideDrawerMenuOpen) {
       sideDrawerMenu = <SideDrawerMenu />;
-      backdrop = <Backdrop />;
+      backdrop = <Backdrop click = { this.backdropClickHandler }/>;
     }
     
     return (
