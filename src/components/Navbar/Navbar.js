@@ -6,7 +6,7 @@ const navbar = props => (
     <header className = "navbar">
         <nav className = "navigation">
             
-            <div className = "nav-logo"><a href = "/">LOGO</a></div>
+            <div className = "nav-logo"><a href = "/"><img src = {require("./escape.png")} alt = "logo" /></a></div>
             <div className = "space-btw-logo-items" />
             <div className = "nav-items">
                 <ul>

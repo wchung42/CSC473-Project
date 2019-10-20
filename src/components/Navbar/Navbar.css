@@ -20,6 +20,11 @@
     margin-left: 10px;
 }
 
+.nav-logo a img {
+    width: 5em;
+    padding-top: 0.25em;
+}
+
 .nav-items a {
     color: white;
     text-decoration: none;
