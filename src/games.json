@@ -5,7 +5,7 @@
         "Difficulty": 4,
         "Story": "This is a very long long long long long long long long long long long long story",
         "tag": "#ccny, #shepard_hall",
-        "thumbnail": "1/sherapd0",
+        "thumbnail": "1/sherapd0.jpg",
         "images": 3,
         "popular": true
     },
@@ -15,7 +15,7 @@
         "Difficulty": 2,
         "Story": "This is a very short story",
         "tag": "#ccny, #harris_hall",
-        "thumbnail": "2/harris0",
+        "thumbnail": "2/harris0.jpg",
         "images": 2,
         "popular": true
     },
@@ -25,7 +25,7 @@
         "Difficulty": 3,
         "Story": "This is not a story",
         "tag": "#ccny, #wingate_hall",
-        "thumbnail": "3/wingate0",
+        "thumbnail": "3/wingate0.jpg",
         "images": 0,
         "popular": false
     },
@@ -35,7 +35,7 @@
         "Difficulty": 4,
         "Story": "This is a very short story",
         "tag": "#ccny, #marshak_hall",
-        "thumbnail": "4/marshak0",
+        "thumbnail": "4/marshak0.jpg",
         "images": 0,
         "popular": false
     }

@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import games from './games.json';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
-import List from './components/Body/runImages.js';
+
 import changeImageOverTime from './components/Body/runImages.js';
+import resetThumbnail from './components/Body/resetThumbNail.js';
 
 // const List = (props) => {
 //   let item = props.game;
@@ -29,8 +30,9 @@ class App extends Component {
           <img
             key={item.id}
             className={("img" + item.id)}
-            src={require('./images/' + item.thumbnail + '.jpg')}
+            src={require('./images/' + item.thumbnail)}
             onMouseEnter={changeImageOverTime(item)}
+            onMouseOut={resetThumbnail(item)}
           />
         </li >
       );

@@ -15,11 +15,18 @@ function changeImageOverTime(element) {
         console.log(className);
         console.log(source);
         console.log(rotator.src);
-        rotator.src = "https://pbs.twimg.com/media/DV4pD0pVAAUVWFf.png";
+        // setInterval(function () {                           //interval changer
+        //     rotator.src = require(dir + "/" + num + '.jpg');                 //reset if limit reached
+        //     num = (num === limit) ? 1 : ++num;                                    //increment counter
+        // }, 1 * 1000);
+        // rotator.src = "https://pbs.twimg.com/media/DV4pD0pVAAUVWFf.png";
     }
 }
 
-export default changeImageOverTime;
+
+
+export default changeImageOverTime
+
 // const List = (props) => {
 //     let item = props.game;
 //     let className = "img" + item.id;
@@ -33,10 +40,7 @@ export default changeImageOverTime;
 
 // let delayInSeconds = 1;
 
-// setInterval(function () {                           //interval changer
-//     rotator.src = require(dir + "/" + num + '.jpg');                 //reset if limit reached
-//     num = (num === limit) ? 1 : ++num;                                    //increment counter
-// }, delayInSeconds * 1000);
+
 // console.log("rotator source: ", rotator.src);
 // return null;
 // }
