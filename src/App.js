@@ -7,6 +7,17 @@ import Backdrop from './components/Backdrop/Backdrop';
 // import sherapd from './images/sherapd0.jpg'
 
 class App extends Component {
+  state = {
+    sideDrawerMenuOpen: false
+  };
+
+  // toggle drawer button handler
+  drawerToggleClickHandler = () => {
+    this.setState((prevState) => {
+      return {sideDrawerMenuOpen: !prevState.sideDrawerMenuOpen};
+    })
+  };
+  
   // this state later will be written into a file in a backend so creator can generate new games without coding
   render = () => {
     console.log(games)
@@ -21,12 +32,21 @@ class App extends Component {
 
         </li >
       );
+    
+    // handle side drawer 
+    let sideDrawerMenu;
+    let backdrop;
 
+    if (this.state.sideDrawerMenuOpen) {
+      sideDrawerMenu = <SideDrawerMenu />;
+      backdrop = <Backdrop />;
+    }
+    
     return (
       <div className="App">
-         <Navbar />
-         <SideDrawerMenu />
-         <Backdrop />                           
+         <Navbar drawerClickHandler = { this.drawerToggleClickHandler }/>
+         { sideDrawerMenu }
+         { backdrop }                           
                                          
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
           integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"

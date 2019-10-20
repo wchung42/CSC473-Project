@@ -16,7 +16,7 @@ const navbar = props => (
                 </ul>
             </div>
             <div>
-                <DrawerToggleButton />
+                <DrawerToggleButton click = { props.drawerClickHandler } />
             </div>
         </nav>
     </header>
