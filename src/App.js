@@ -35,7 +35,7 @@ class App extends Component {
     let listItems = games
       .filter(game => game.popular == true)
       .map(item =>
-        <li className="bodyTitle" key={item.id} >
+        <li className="bodyCard" key={item.id} >
           <div className="card">
             <img
               key={item.id}
@@ -79,7 +79,7 @@ class App extends Component {
         </header>
 
         <body className="Body-Section">
-          <p className="pop-game"><strong>POPULAR GAMES</strong></p>
+          <p className="popular-game"><strong>POPULAR GAMES</strong></p>
           <ol className="cards" >{listItems}</ol>
         </body>
 
