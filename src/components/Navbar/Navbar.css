@@ -1,3 +1,4 @@
+
 .navbar {
     position: fixed;
     background-color: #383838;
@@ -14,6 +15,7 @@
 }
 
 .nav-logo a {
+    
     color: white;
     text-decoration: none;
     font-size: 1.6rem;
@@ -21,11 +23,13 @@
 }
 
 .nav-logo a img {
+    
     width: 5em;
     padding-top: 0.25em;
 }
 
 .nav-items a {
+    
     color: white;
     text-decoration: none;
     font-size: 1rem;
