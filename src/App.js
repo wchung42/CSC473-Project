@@ -24,17 +24,23 @@ class App extends Component {
   }
   
   // this state later will be written into a file in a backend so creator can generate new games without coding
+
   render = () => {
-    console.log(games)
+    // console.log(games) 
     let listItems = games
       .filter(game => game.popular == true)
       .map(item =>
-        <li className="bodyTitle" key={item.id} onMouseEnter={console.log(item.Story)}>
+        <li className="bodyTitle" key={item.id} >
           <strong>{item.Title} </strong>
           <strong>({item.Difficulty}/5)</strong>
           <br />
-          <img className="bodyImage" src={require('./images/' + item.images + '.jpg')} />
-
+          <img
+            key={item.id}
+            className={("img" + item.id)}
+            src={require('./images/' + item.thumbnail)}
+            onMouseEnter={e => e.currentTarget.src = require('./images/' + item.id + "/1.jpg")}
+            onMouseOut={e => e.currentTarget.src = require('./images/' + item.thumbnail)}
+          />
         </li >
       );
     
@@ -49,6 +55,7 @@ class App extends Component {
     
     return (
       <div className="App">
+
          <Navbar drawerClickHandler = { this.drawerToggleClickHandler }/>
          { sideDrawerMenu }
          { backdrop }                           
@@ -59,7 +66,7 @@ class App extends Component {
         <link rel="stylesheet" href="styles.css"></link>
         <header>
           <h1 className="greeting">
-            <br/>
+            <br />
           </h1>
         </header>
         <body className="body">
