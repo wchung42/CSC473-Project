@@ -8,9 +8,14 @@ import 'bootstrap/dist/css/bootstrap.css';
 // import sherapd from './images/sherapd0.jpg'
 
 class App extends Component {
-  state = {
-    sideDrawerMenuOpen: false
-  };
+  constructor(props) {
+    super(props)
+    this.state = {
+      latitude: null,
+      longitude: null,
+      sideDrawerMenuOpen: false
+    }
+  }
 
   // toggle drawer button handler
   drawerToggleClickHandler = () => {
@@ -52,16 +57,17 @@ class App extends Component {
       );
 
     // handle side drawer 
-    let sideDrawerMenu;
     let backdrop;
-
     if (this.state.sideDrawerMenuOpen) {
-      sideDrawerMenu = <SideDrawerMenu />;
-      backdrop = <Backdrop click={this.backdropClickHandler} />;
+      backdrop = <Backdrop click = { this.backdropClickHandler }/>;
     }
 
     return (
       <div className="App">
+         <Navbar drawerClickHandler = { this.drawerToggleClickHandler }/>;
+         <SideDrawerMenu show = { this.state.sideDrawerMenuOpen }/>;
+         { backdrop };                           
+
 
         <Navbar drawerClickHandler={this.drawerToggleClickHandler} />
         {sideDrawerMenu}
