@@ -14,7 +14,7 @@
     align-items: center;
     height: 100%;
     width: 100%;
-    
+
 }
 
 .nav-logo a {
@@ -50,5 +50,5 @@
 }
 
 .space-btw-logo-items {
-    width: 34rem;
+    flex: 1;
 }
