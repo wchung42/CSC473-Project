@@ -59,19 +59,15 @@ class App extends Component {
     // handle side drawer 
     let backdrop;
     if (this.state.sideDrawerMenuOpen) {
-      backdrop = <Backdrop click = { this.backdropClickHandler }/>;
+      backdrop = <Backdrop click = { this.backdropClickHandler }/>
     }
 
     return (
       <div className="App">
-         <Navbar drawerClickHandler = { this.drawerToggleClickHandler }/>;
-         <SideDrawerMenu show = { this.state.sideDrawerMenuOpen }/>;
-         { backdrop };                           
+         <Navbar drawerClickHandler = { this.drawerToggleClickHandler }/>
+         <SideDrawerMenu show = { this.state.sideDrawerMenuOpen }/>
+         { backdrop }                           
 
-
-        <Navbar drawerClickHandler={this.drawerToggleClickHandler} />
-        {sideDrawerMenu}
-        {backdrop}
 
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
           integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
@@ -83,7 +79,7 @@ class App extends Component {
           </h1>
         </header>
         <body className="body">
-          <p><strong>Popular Games</strong></p>
+          <p className="game"><strong>Popular Games</strong></p>
           <ol >{listItems}</ol>
         </body>
 
