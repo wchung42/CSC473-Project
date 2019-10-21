@@ -20,8 +20,15 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
-
-
+.card{
+  align-content: center;
+  width: 40em;
+  margin-top: 40px;
+  left: 47px;
+}
+.pop-game{
+  text-align: center;
+}
 .bodyTitle{
   list-style-type: none;
   font-size: 20px;
@@ -31,8 +38,8 @@
 }
 
 .card-img-top{
-  width: 50%;
-  height: 5%;
+  width: 1114px;
+  height: 619px;
 }
 
 footer {

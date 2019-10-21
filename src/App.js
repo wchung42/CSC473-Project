@@ -36,7 +36,7 @@ class App extends Component {
       .filter(game => game.popular == true)
       .map(item =>
         <li className="bodyTitle" key={item.id} >
-          <div className="card" style={{ width: "18rem" }}>
+          <div className="card">
             <img
               key={item.id}
               className="card-img-top"
@@ -48,7 +48,7 @@ class App extends Component {
               <h5 className="card-title">
                 <strong>{item.Title} ({item.Difficulty}/5)</strong>
               </h5>
-              <p class="card-text"> {item.Story}</p>
+              <p className="card-text"> {item.Story}</p>
               <a href="#" class="btn btn-primary">Play</a>
             </div>
           </div>
@@ -79,7 +79,7 @@ class App extends Component {
           </h1>
         </header>
         <body className="body">
-          <p className="game"><strong>Popular Games</strong></p>
+          <p className="pop-game"><strong>Popular Games</strong></p>
           <ol className ="cards" >{listItems}</ol>
         </body>
 
