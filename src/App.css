@@ -47,7 +47,7 @@
   list-style-type: none;
   font-size: 20px;
   text-align-last: center;
-
+  overflow: scroll;
   /* align: left; */
   /* padding: 5em; */
 }
@@ -56,13 +56,12 @@
   font-size:30px;
 }
 .card-img-top{
-  width: 80vh;
-  height: 30vh;
+  width: 1114px;
+  height: 619px;
 }
 
 footer {
   bottom:0;
-  
 }
 
 .footer-all {
@@ -70,7 +69,6 @@ footer {
   background-color: #292c2f;
   box-sizing: border-box;
   width: 100%;
-  height:10vh;
   font: normal 16px sans-serif;
   padding: 45px 50px;
   /* margin-top: 80px; */
