@@ -4,6 +4,7 @@ import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import SideDrawerMenu from './components/SideDrawerMenu/SideDrawerMenu';
 import Backdrop from './components/Backdrop/Backdrop';
+import 'bootstrap/dist/css/bootstrap.css';
 // import sherapd from './images/sherapd0.jpg'
 
 class App extends Component {
@@ -14,15 +15,14 @@ class App extends Component {
   // toggle drawer button handler
   drawerToggleClickHandler = () => {
     this.setState((prevState) => {
-      return {sideDrawerMenuOpen: !prevState.sideDrawerMenuOpen};
+      return { sideDrawerMenuOpen: !prevState.sideDrawerMenuOpen };
     })
   };
 
   // clicking backdrop closes side drawer
   backdropClickHandler = () => {
-    this.setState({sideDrawerMenuOpen: false});
+    this.setState({ sideDrawerMenuOpen: false });
   }
-  
   // this state later will be written into a file in a backend so creator can generate new games without coding
 
   render = () => {
@@ -31,35 +31,42 @@ class App extends Component {
       .filter(game => game.popular == true)
       .map(item =>
         <li className="bodyTitle" key={item.id} >
-          <strong>{item.Title} </strong>
-          <strong>({item.Difficulty}/5)</strong>
-          <br />
-          <img
-            key={item.id}
-            className={("img" + item.id)}
-            src={require('./images/' + item.thumbnail)}
-            onMouseEnter={e => e.currentTarget.src = require('./images/' + item.id + "/1.jpg")}
-            onMouseOut={e => e.currentTarget.src = require('./images/' + item.thumbnail)}
-          />
+          <div className="card" style={{ width: "18rem" }}>
+            <img
+              key={item.id}
+              className="card-img-top"
+              src={require('./images/' + item.thumbnail)}
+              onMouseEnter={e => e.currentTarget.src = require('./images/' + item.id + "/1.jpg")}
+              onMouseOut={e => e.currentTarget.src = require('./images/' + item.thumbnail)}
+            />
+            <div className="card-body">
+              <h5 className="card-title">
+                <strong>{item.Title} ({item.Difficulty}/5)</strong>
+              </h5>
+              <p class="card-text"> {item.Story}</p>
+              <a href="#" class="btn btn-primary">Play</a>
+            </div>
+          </div>
+
         </li >
       );
-    
+
     // handle side drawer 
     let sideDrawerMenu;
     let backdrop;
 
     if (this.state.sideDrawerMenuOpen) {
       sideDrawerMenu = <SideDrawerMenu />;
-      backdrop = <Backdrop click = { this.backdropClickHandler }/>;
+      backdrop = <Backdrop click={this.backdropClickHandler} />;
     }
-    
+
     return (
       <div className="App">
 
-         <Navbar drawerClickHandler = { this.drawerToggleClickHandler }/>
-         { sideDrawerMenu }
-         { backdrop }                           
-                                         
+        <Navbar drawerClickHandler={this.drawerToggleClickHandler} />
+        {sideDrawerMenu}
+        {backdrop}
+
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
           integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
           crossorigin="anonymous" />
@@ -77,33 +84,33 @@ class App extends Component {
 
         <footer className="footer-all">
 
-			    <div className="footer-social">
+          <div className="footer-social">
 
-				<a href="#"><i className="fab fa-facebook"></i></a>
-				<a href="#"><i className="fab fa-twitter"></i></a>
-				<a href="#"><i className="fab fa-linkedin"></i></a>
-				<a href="#"><i className="fab fa-github"></i></a>
+            <a href="#"><i className="fab fa-facebook"></i></a>
+            <a href="#"><i className="fab fa-twitter"></i></a>
+            <a href="#"><i className="fab fa-linkedin"></i></a>
+            <a href="#"><i className="fab fa-github"></i></a>
 
-			  </div>
+          </div>
 
-			<div className="footer-info">
+          <div className="footer-info">
 
-				<p>
-					<a href="#">Home</a>
-					·
+            <p>
+              <a href="#">Home</a>
+              ·
 					<a href="#">Games</a>
-					·
+              ·
 					<a href="#">About</a>
-					·
+              ·
 					<a href="#">Faq</a>
-					·
+              ·
 					<a href="#">Contact</a>
-				</p>
+            </p>
 
-				<p><strong>Escape Team © 2019</strong></p>
-			</div>
+            <p><strong>Escape Team © 2019</strong></p>
+          </div>
 
-		</footer>
+        </footer>
       </div>
     );
   }

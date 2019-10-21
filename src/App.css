@@ -22,14 +22,14 @@
 .bodyTitle{
   list-style-type: none;
   font-size: 20px;
-  text-align-last: center;
-  padding: 5em;
+  text-align-last: left;
+  /* align: left; */
+  /* padding: 5em; */
 }
 
-.bodyImage{
-  width: 30em;
-  height: 40vh;
-  
+.card-img-top{
+  width: 50%;
+  height: 5%;
 }
 
 footer {
