@@ -64,6 +64,7 @@ class App extends Component {
 
     return (
       <div className="App">
+        <meta name="viewport" content="800px"></meta>
          <Navbar drawerClickHandler = { this.drawerToggleClickHandler }/>
          <SideDrawerMenu show = { this.state.sideDrawerMenuOpen }/>
          { backdrop }                           
@@ -80,7 +81,7 @@ class App extends Component {
         </header>
         <body className="body">
           <p className="game"><strong>Popular Games</strong></p>
-          <ol >{listItems}</ol>
+          <ol className ="cards" >{listItems}</ol>
         </body>
 
 

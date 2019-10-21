@@ -7,9 +7,9 @@
 .App-logo {
   height: 40vmin;
 }
-.game{
-  text-align: center;
-}
+
+
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -25,7 +25,7 @@
 .bodyTitle{
   list-style-type: none;
   font-size: 20px;
-  text-align-last: left;
+  text-align-last: center;
   /* align: left; */
   /* padding: 5em; */
 }
@@ -40,6 +40,7 @@ footer {
 }
 
 .footer-all {
+  bottom:0;
   background-color: #292c2f;
   box-sizing: border-box;
   width: 100%;
