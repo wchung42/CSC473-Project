@@ -7,9 +7,14 @@ import Backdrop from './components/Backdrop/Backdrop';
 // import sherapd from './images/sherapd0.jpg'
 
 class App extends Component {
-  state = {
-    sideDrawerMenuOpen: false
-  };
+  constructor(props) {
+    super(props)
+    this.state = {
+      latitude: null,
+      longitude: null,
+      sideDrawerMenuOpen: false
+    }
+  }
 
   // toggle drawer button handler
   drawerToggleClickHandler = () => {
