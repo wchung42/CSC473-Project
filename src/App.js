@@ -42,8 +42,7 @@ class App extends Component {
               className="card-img-top"
               src={require('./images/' + item.thumbnail)}
               onMouseEnter={e => e.currentTarget.src = require('./images/' + item.id + "/1.jpg")}
-              onMouseOut={e => e.currentTarget.src = require('./images/' + item.thumbnail)}
-            />
+              onMouseOut={e => e.currentTarget.src = require('./images/' + item.thumbnail)} />
             <div className="card-body">
               <h5 className="card-title">
                 <strong>{item.Title} ({item.Difficulty}/5)</strong>
@@ -52,40 +51,39 @@ class App extends Component {
               <a href="#" class="btn btn-primary">Play</a>
             </div>
           </div>
-
         </li >
       );
 
     // handle side drawer 
     let backdrop;
     if (this.state.sideDrawerMenuOpen) {
-      backdrop = <Backdrop click = { this.backdropClickHandler }/>
+      backdrop = <Backdrop click={this.backdropClickHandler} />
     }
 
     return (
       <div className="App">
-        <meta name="viewport" content="800px"></meta>
-         <Navbar drawerClickHandler = { this.drawerToggleClickHandler }/>
-         <SideDrawerMenu show = { this.state.sideDrawerMenuOpen }/>
-         { backdrop }                           
+        <meta name="viewport" content="600px"></meta>
+        <Navbar drawerClickHandler={this.drawerToggleClickHandler} />
+        <SideDrawerMenu show={this.state.sideDrawerMenuOpen} />
+        {backdrop}
 
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
           integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
           crossorigin="anonymous" />
         <link rel="stylesheet" href="styles.css"></link>
-        <header>
+        <header className="Welcome-Section">
           <h1 className="greeting">
+            Hello World
             <br />
           </h1>
         </header>
-        <body className="body">
-          <p className="pop-game"><strong>Popular Games</strong></p>
-          <ol className ="cards" >{listItems}</ol>
+
+        <body className="Body-Section">
+          <p className="pop-game"><strong>POPULAR GAMES</strong></p>
+          <ol className="cards" >{listItems}</ol>
         </body>
 
-
         <footer className="footer-all">
-
           <div className="footer-social">
 
             <a href="#"><i className="fab fa-facebook"></i></a>
