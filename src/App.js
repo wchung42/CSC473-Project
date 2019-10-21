@@ -62,7 +62,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <meta name="viewport" content="600px"></meta>
+        <meta name="viewport" content="1300px"></meta>
         <Navbar drawerClickHandler={this.drawerToggleClickHandler} />
         <SideDrawerMenu show={this.state.sideDrawerMenuOpen} />
         {backdrop}
