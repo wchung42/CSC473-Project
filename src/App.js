@@ -2,8 +2,29 @@ import React, { Component } from 'react';
 import games from './games.json';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
+import SideDrawerMenu from './components/SideDrawerMenu/SideDrawerMenu';
+import Backdrop from './components/Backdrop/Backdrop';
+// import sherapd from './images/sherapd0.jpg'
 
 class App extends Component {
+  state = {
+    sideDrawerMenuOpen: false
+  };
+
+  // toggle drawer button handler
+  drawerToggleClickHandler = () => {
+    this.setState((prevState) => {
+      return {sideDrawerMenuOpen: !prevState.sideDrawerMenuOpen};
+    })
+  };
+
+  // clicking backdrop closes side drawer
+  backdropClickHandler = () => {
+    this.setState({sideDrawerMenuOpen: false});
+  }
+  
+  // this state later will be written into a file in a backend so creator can generate new games without coding
+
   render = () => {
     // console.log(games) 
     let listItems = games
@@ -22,11 +43,23 @@ class App extends Component {
           />
         </li >
       );
+    
+    // handle side drawer 
+    let sideDrawerMenu;
+    let backdrop;
 
+    if (this.state.sideDrawerMenuOpen) {
+      sideDrawerMenu = <SideDrawerMenu />;
+      backdrop = <Backdrop click = { this.backdropClickHandler }/>;
+    }
+    
     return (
       <div className="App">
-        <Navbar />
 
+         <Navbar drawerClickHandler = { this.drawerToggleClickHandler }/>
+         { sideDrawerMenu }
+         { backdrop }                           
+                                         
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
           integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
           crossorigin="anonymous" />
@@ -40,13 +73,37 @@ class App extends Component {
           <p><strong>Popular Games</strong></p>
           <ol >{listItems}</ol>
         </body>
-        <footer>
-          <a id="profile-link" href="" target="_blank" className="btn contact-details"><i className="fab fa-github"></i> GitHub</a>
-          <a id="facebook" href="" target="_blank" className="btn contact-details"><i className="fab fa-facebook"></i> Facebook</a>
-          <a id="instagram" href="" target="_blank" className="btn contact-details"><i className="fab fa-instagram" id="inst-logo"></i> Instagram</a>
-          <a id="freecodecamp" href="" target="_blank" className="btn contact-details"><i className="fab fa-free-code-camp"></i> FreeCodeCamp</a>
-          <a id="LinkedIn" href="" target="_blank" className="btn contact-details"><i className="fab fa-linkedin"></i> LinkedIn</a>
-        </footer>
+
+
+        <footer className="footer-all">
+
+			    <div className="footer-social">
+
+				<a href="#"><i className="fab fa-facebook"></i></a>
+				<a href="#"><i className="fab fa-twitter"></i></a>
+				<a href="#"><i className="fab fa-linkedin"></i></a>
+				<a href="#"><i className="fab fa-github"></i></a>
+
+			  </div>
+
+			<div className="footer-info">
+
+				<p>
+					<a href="#">Home</a>
+					·
+					<a href="#">Games</a>
+					·
+					<a href="#">About</a>
+					·
+					<a href="#">Faq</a>
+					·
+					<a href="#">Contact</a>
+				</p>
+
+				<p><strong>Escape Team © 2019</strong></p>
+			</div>
+
+		</footer>
       </div>
     );
   }
