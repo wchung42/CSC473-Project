@@ -67,7 +67,8 @@ footer {
 
 .footer-all {
   bottom:0;
-  background-color: #292c2f;
+  /*background-color: #292c2f;*/
+  background-color: black;
   box-sizing: border-box;
   width: 100%;
   font: normal 16px sans-serif;
