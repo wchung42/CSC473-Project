@@ -53,13 +53,24 @@
   left: 5%;
 }
 
+
 .card-title{
   font-size:30px;
 }
 .card-img-top{
   width: 70vw;
   height: 30vh;
+
 }
+  
+
+.card-img-top{
+    width: 50%;
+    height: 5%;
+  }
+  
+
+
 
 footer {
   bottom:0;
