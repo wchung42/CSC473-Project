@@ -1,6 +1,6 @@
 .navbar {
     position: fixed;
-    background-color: #383838;
+    background-color: black;
     top: 0;
     left: 0;
     width: 100%;
@@ -25,7 +25,7 @@
 .nav-logo a img {
     
     width: 5em;
-    padding-top: 0.25em;
+    padding-bottom: 5px;
 }
 
 .nav-items a {

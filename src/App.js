@@ -5,7 +5,6 @@ import Navbar from './components/Navbar/Navbar';
 import SideDrawerMenu from './components/SideDrawerMenu/SideDrawerMenu';
 import Backdrop from './components/Backdrop/Backdrop';
 import 'bootstrap/dist/css/bootstrap.css';
-import About from './components/About/About';
 // import sherapd from './images/sherapd0.jpg'
 
 class App extends Component {
@@ -33,23 +32,18 @@ class App extends Component {
 
   render = () => {
     // console.log(games) 
-    
     let listItems = games
       .filter(game => game.popular == true)
       .map(item =>
-
         <li className="bodyCard" key={item.id} >
           <div className="card">
-
             <img
               key={item.id}
-              className="card-img-top "
+              className="card-img-top"
               src={require('./images/' + item.thumbnail)}
               onMouseEnter={e => e.currentTarget.src = require('./images/' + item.id + "/1.jpg")}
-
               onMouseOut={e => e.currentTarget.src = require('./images/' + item.thumbnail)} />
             <div className="card-body">
-
               <h5 className="card-title">
                 <strong>{item.Title} ({item.Difficulty}/5)</strong>
               </h5>
@@ -77,21 +71,15 @@ class App extends Component {
           integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
           crossorigin="anonymous" />
         <link rel="stylesheet" href="styles.css"></link>
+        <section className="middle">
         <header className="Welcome-Section">
-          <h1 className="greeting">
-            Hello World
-            
-           
-            <br />
-          </h1>
-          <About />
         </header>
-        
+
         <body className="Body-Section">
           <p className="popular-game"><strong>POPULAR GAMES</strong></p>
           <ol className="cards" >{listItems}</ol>
         </body>
-        
+        </section>
 
         <footer className="footer-all">
           <div className="footer-social">
