@@ -1,5 +1,3 @@
-
-
 .App {
   text-align: center;
 }
@@ -7,9 +5,7 @@
 .App-logo {
   height: 40vmin;
 }
-.game{
-  text-align: center;
-}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -21,20 +17,45 @@
   color: white;
 }
 
+.Welcome-Section{
+  background: linear-gradient(90deg, #01000e 0%, #92030f 50%, #01000e 100%);
+  height: 100vh;
+}
 
-.bodyTitle{
+.Body-Section{
+  background: linear-gradient(90deg, #01000e 0%, #92030f 50%, #01000e 100%);
+  height: 100vh;
+}
+
+.popular-game{
+  text-align: center;
+  font-size: 40px;
+  color: Red;
+}
+
+.bodyCard{
   list-style-type: none;
   font-size: 20px;
-  text-align-last: left;
+  text-align-last: center;
+  overflow: hidden;
   /* align: left; */
   /* padding: 5em; */
 }
+.card{
+  align-content: center;
+  width: 80vw;
+  margin-top: 2vh;
+  left: 5%;
+}
 
 
-.bodyImage{
-  width: 30em;
-  height: 40vh;
-  
+.card-title{
+  font-size:30px;
+}
+.card-img-top{
+  width: 70vw;
+  height: 30vh;
+
 }
   
 
@@ -51,12 +72,13 @@ footer {
 }
 
 .footer-all {
+  bottom:0;
   background-color: #292c2f;
   box-sizing: border-box;
   width: 100%;
   font: normal 16px sans-serif;
   padding: 45px 50px;
-  margin-top: 80px;
+  /* margin-top: 80px; */
 }
 
 .footer-social {
