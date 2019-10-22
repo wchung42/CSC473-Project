@@ -5,6 +5,7 @@ import Navbar from './components/Navbar/Navbar';
 import SideDrawerMenu from './components/SideDrawerMenu/SideDrawerMenu';
 import Backdrop from './components/Backdrop/Backdrop';
 import 'bootstrap/dist/css/bootstrap.css';
+import About from './components/About/About';
 // import sherapd from './images/sherapd0.jpg'
 
 class App extends Component {
@@ -32,6 +33,7 @@ class App extends Component {
 
   render = () => {
     // console.log(games) 
+    
     let listItems = games
       .filter(game => game.popular == true)
       .map(item =>
@@ -47,6 +49,7 @@ class App extends Component {
 
               onMouseOut={e => e.currentTarget.src = require('./images/' + item.thumbnail)} />
             <div className="card-body">
+
               <h5 className="card-title">
                 <strong>{item.Title} ({item.Difficulty}/5)</strong>
               </h5>
@@ -77,14 +80,18 @@ class App extends Component {
         <header className="Welcome-Section">
           <h1 className="greeting">
             Hello World
+            
+           
             <br />
           </h1>
+          <About />
         </header>
-
+        
         <body className="Body-Section">
           <p className="popular-game"><strong>POPULAR GAMES</strong></p>
           <ol className="cards" >{listItems}</ol>
         </body>
+        
 
         <footer className="footer-all">
           <div className="footer-social">
