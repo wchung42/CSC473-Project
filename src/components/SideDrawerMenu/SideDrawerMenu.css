@@ -18,7 +18,8 @@
     display: flex;
     flex-direction: column;
     list-style: none;
-    padding-top: 1rem;
+    padding-top: 1vh;
+    margin-top: 5vh;
 }
 
 .side-drawer li {
@@ -29,7 +30,7 @@
 
 .side-drawer a {
     text-decoration: none;
-    font-size: 1.4rem;
+    font-size: 4.5vh;
     color: white;
 }
 
