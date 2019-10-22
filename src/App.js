@@ -71,17 +71,15 @@ class App extends Component {
           integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
           crossorigin="anonymous" />
         <link rel="stylesheet" href="styles.css"></link>
+        <section className="middle">
         <header className="Welcome-Section">
-          <h1 className="greeting">
-            Hello World
-            <br />
-          </h1>
         </header>
 
         <body className="Body-Section">
           <p className="popular-game"><strong>POPULAR GAMES</strong></p>
           <ol className="cards" >{listItems}</ol>
         </body>
+        </section>
 
         <footer className="footer-all">
           <div className="footer-social">
