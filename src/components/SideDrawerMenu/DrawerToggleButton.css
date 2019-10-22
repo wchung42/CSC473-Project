@@ -2,12 +2,12 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    height: 1.5vh;
+    height: 2vh;
     width: 1.5vh;
     background: transparent;
     border: none;
-    margin-right: 1rem;
-    margin-left: 1rem;
+    margin-right: 1vh;
+    margin-left: 1vh;
 }
 
 .toggle-button:focus {
@@ -15,7 +15,7 @@
 }
 
 .toggle-button-line {
-    width: 1.5vh;
+    width: 2vh;
     height: 0.25vh;
     background: white;
 
