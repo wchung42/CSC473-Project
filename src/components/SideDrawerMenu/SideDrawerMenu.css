@@ -5,7 +5,7 @@
     top: 0;
     right: 0;
     width: 65%;
-    max-width: 400px;
+    max-width: 75%;
     z-index: 100;
     /* transition animation - side drawer comes in from the right*/
     transform: translateX(100%);
