@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import games from './Game.json';
-import './game.css';
+import './Game.css';
 
 class Game extends Component {
   constructor(props) {
@@ -21,12 +20,19 @@ class Game extends Component {
     console.log(this.state.latitude, this.state.longitude)
   }
 
+  //Want to load the game in here based on the name
   render = () => {
-    
+
     return (
-      <div className="game">
-        
-      </div>
+      <div >
+      <body className='gameBody'></body>
+      <footer className='cr'>
+          <div >
+            <p><strong>Escape Team © 2019</strong></p>
+          </div>
+
+        </footer>
+        </div>
     );
   }
 }

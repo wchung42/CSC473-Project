@@ -5,7 +5,7 @@ import Navbar from './components/Navbar/Navbar';
 import SideDrawerMenu from './components/SideDrawerMenu/SideDrawerMenu';
 import Backdrop from './components/Backdrop/Backdrop';
 import 'bootstrap/dist/css/bootstrap.css';
-// import sherapd from './images/sherapd0.jpg'
+
 
 class App extends Component {
   constructor(props) {
