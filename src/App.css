@@ -27,7 +27,6 @@
 }
 
 .Body-Section{
-  height: 110vh;
   background: linear-gradient(90deg, #01000e 0%, #4157a0 50%, #01000e 100%);
 }
 
@@ -59,7 +58,7 @@
 }
 .card-img-top{
   width: 70vw;
-  height: 30vh;
+  height: 10px;
 
 }
   
@@ -68,11 +67,9 @@
     width: 50%;
     height: 5%;
   }
-  
-
-
 
 footer {
+  
   bottom:0;
 }
 
@@ -85,6 +82,7 @@ footer {
   font: normal 100px sans-serif;
   padding: 45px 50px;
   /* margin-top: 80px; */
+  
 }
 
 .footer-social {
