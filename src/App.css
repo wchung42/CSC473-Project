@@ -27,7 +27,7 @@
 }
 
 .Body-Section{
-  height: 100vh;
+  height: 110vh;
   background: linear-gradient(90deg, #01000e 0%, #4157a0 50%, #01000e 100%);
 }
 
@@ -71,7 +71,7 @@ footer {
   background-color: black;
   box-sizing: border-box;
   width: 100%;
-  font: normal 16px sans-serif;
+  font: normal 100px sans-serif;
   padding: 45px 50px;
   /* margin-top: 80px; */
 }
@@ -82,18 +82,17 @@ footer {
 
 .footer-social a {
   display: inline-block;
-  width: 35px;
-  height: 35px;
-  background-color: #33383b;
+  width: 10%;
+  /*height: 10%;*/
   border-radius: 2px;
-  font-size: 27px;
+  font-size: 50%;
   color: white;
   line-height: 38px;
   margin-left: 3px;
 }
 
 .footer-info {
-  font-size: 18px;
+  font-size: 35%;
   font-weight: bold;
   color: #ffffff;
 }
