@@ -11,8 +11,6 @@ const navbar = props => (
             <div className="nav-items">
                 <ul>
                     <li ><a href="#">Log in</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Games</a></li>
                 </ul>
             </div>
             <div>
