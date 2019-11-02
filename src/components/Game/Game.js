@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
+import DrawerToggleButton from '../SideDrawerMenu/DrawerToggleButton';
 
 class Game extends Component {
   constructor(props) {
@@ -9,6 +10,16 @@ class Game extends Component {
       longitude: null,
     }
   }
+
+   navbar = props => (
+    <header className="navbarGame">
+        <nav className="navigation">
+
+            <div className="nav-logo"><a href="/"><img src={require("../Navbar/escapeInverted.png")} alt="logo" /></a></div>
+            <div className="space-btw-logo-items" />
+        </nav>
+    </header>
+);
 
   position = async () => {
     await navigator.geolocation.getCurrentPosition(
@@ -25,15 +36,18 @@ class Game extends Component {
 
     return (
       <div className="Game">
+        <div>
+        <this.navbar drawerClickHandler={this.drawerToggleClickHandler} />
+        </div>
         <section className = "middle">
         <body>
+          <br/>
     
       <div className="exit">
-    <p>Nav should be here</p>
     <button className="btn-large btn-danger" type="button">&nbsp; Exit &nbsp;</button>
     </div>
     <div className ="text-center">
-    <p className="text-center">Question{/*states for question*/}</p>
+    <p className="text-center quest">Question{/*states for question*/}</p>
     
     <br/>
     <br/>
@@ -43,11 +57,15 @@ class Game extends Component {
     <br/>
     <input type="text" className ="text-center textbox"/>
     <br/>
+    
+    <text className = "hint">hint should print here</text>
+    <br/>
     <br/>
     <div >
     <button className="btn-large  btn-success" type="button">&nbsp; Answer &nbsp;</button>
     <br/>
     <br/>
+
     <button className="btn-large btn-warning " type="button">Hint</button>
     </div>
     </div>
