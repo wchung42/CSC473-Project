@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Game.css';
+import 'bootstrap/dist/css/bootstrap.css';
 
 class Game extends Component {
   constructor(props) {
@@ -25,15 +26,33 @@ class Game extends Component {
 
     return (
       <div className="Game">
-      <body className="gameBody">
-        <img className = "g-image" src="https://www.ccny.cuny.edu/sites/default/files/SHEPARD%206%20overall%20after%20%281%29.jpg" alt="Smiley face"></img>
-        <br/>
-        <br/>
-        <input type = "text" className = "textbox" ></input>
-      </body>
-          <footer className = ".footer-all">
-          <p className = "footP"><strong>Escape Team © 2019</strong></p>
-        </footer>
+        <section className = "middle">
+        <body>
+    <p className="text-center">{/*states for question*/}</p>
+    
+   
+    <div className ="text-center">
+
+    <button className="btn btn-primary" type="button">&nbsp; Exit &nbsp;</button>
+    <br/>
+    <br/>
+    <img className = "" src = "https://static01.nyt.com/images/2016/05/28/nyregion/29CUNY1/29CUNY1-articleLarge.jpg?quality=75&auto=webp&disable=upscale"/>
+    <br/>
+    <br/>
+    <br/>
+    <input type="text" className="text-center"/>
+    <br/>
+    <br/>
+    <button className="btn btn-primary" type="button">Answer</button>
+    <br/>
+    <br/>
+    <button className="btn btn-primary" type="button">Hint</button>
+    </div>
+
+
+  </body>
+      </section>
+          
         </div>
     );
   }
