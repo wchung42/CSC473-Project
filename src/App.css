@@ -148,6 +148,10 @@ text-align: center;
 .hint{
   font-size:200%;
 }
+.questN{
+  font-size: 200%;
+  font-style:italic ;
+}
 .quest{
   font-size: 300%;
 }
