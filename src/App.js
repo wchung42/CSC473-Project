@@ -5,7 +5,7 @@ import Navbar from './components/Navbar/Navbar';
 import SideDrawerMenu from './components/SideDrawerMenu/SideDrawerMenu';
 import Backdrop from './components/Backdrop/Backdrop';
 import 'bootstrap/dist/css/bootstrap.css';
-
+import Game from './components/Game/Game';
 
 class App extends Component {
   constructor(props) {
@@ -14,6 +14,7 @@ class App extends Component {
       latitude: null,
       longitude: null,
       sideDrawerMenuOpen: false
+      
     }
   }
 
@@ -96,7 +97,7 @@ class App extends Component {
             <p>
               <a href="#">Home</a>
               ·
-					<a href="#">Games</a>
+					<a href="<Game/>">Games</a> 
               ·
 					<a href="#">About</a>
               ·
