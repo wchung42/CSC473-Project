@@ -23,6 +23,13 @@
             "3": 6,
             "4": 8,
             "5": 10
+        },
+        "hint": {
+            "1": "use your damn calculator",
+            "2": "use your damn calculator",
+            "3": "use your damn calculator",
+            "4": "use your damn calculator",
+            "5": "use your damn calculator"
         }
     },
     {
@@ -49,6 +56,13 @@
             "3": 6,
             "4": 8,
             "5": 10
+        },
+        "hint": {
+            "1": "use your damn calculator",
+            "2": "use your damn calculator",
+            "3": "use your damn calculator",
+            "4": "use your damn calculator",
+            "5": "use your damn calculator"
         }
     },
     {
@@ -75,6 +89,13 @@
             "3": 6,
             "4": 8,
             "5": 10
+        },
+        "hint": {
+            "1": "use your damn calculator",
+            "2": "use your damn calculator",
+            "3": "use your damn calculator",
+            "4": "use your damn calculator",
+            "5": "use your damn calculator"
         }
     },
     {
@@ -101,6 +122,13 @@
             "3": 6,
             "4": 8,
             "5": 10
+        },
+        "hint": {
+            "1": "use your damn calculator",
+            "2": "use your damn calculator",
+            "3": "use your damn calculator",
+            "4": "use your damn calculator",
+            "5": "use your damn calculator"
         }
     }
 ]
