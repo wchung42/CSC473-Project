@@ -153,8 +153,6 @@ text-align: center;
 }
 
 .navbarGame{
-  
-    
     background-color: white;
     top: 0;
     left: 0;
@@ -163,4 +161,12 @@ text-align: center;
     border-style: solid;
     border-color: black;
 
+}
+.toggleGame-button-line {
+  width: 2vh;
+  height: 0.25vh;
+  background: black;
+}
+.spaceGame-btw-logo-items {
+  flex: .95;
 }

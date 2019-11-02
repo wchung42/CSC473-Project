@@ -16,7 +16,9 @@ class Game extends Component {
         <nav className="navigation">
 
             <div className="nav-logo"><a href="/"><img src={require("../Navbar/escapeInverted.png")} alt="logo" /></a></div>
-            <div className="space-btw-logo-items" />
+            <div className="spaceGame-btw-logo-items" />
+            <button className = "fa fa-bars fa-4x " onClick = { props.click }>
+            </button>
         </nav>
     </header>
 );
@@ -35,7 +37,14 @@ class Game extends Component {
   render = () => {
 
     return (
+
+      
       <div className="Game">
+
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+          integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+          crossorigin="anonymous" />
+
         <div>
         <this.navbar drawerClickHandler={this.drawerToggleClickHandler} />
         </div>
