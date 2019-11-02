@@ -62,16 +62,10 @@
 
 }
   
-
 .card-img-top{
     width: 50%;
     height: 5%;
   }
-
-footer {
-  
-  bottom:0;
-}
 
 .footer-all {
   bottom:0;
@@ -114,4 +108,33 @@ footer {
 
 .footer-all .footer-left, .footer-distributed .footer-right {
   text-align: center;
+}
+
+/* 
+Everything below this point is strictly for the game page
+The seperation is for if we want to move it to a different file
+
+*/
+.Game{
+  background-color: purple;
+  text-align: center;
+}
+
+.textbox{
+  width:50%;
+  margin-left:25%;
+  font-size:30px;
+ text-align: center;
+}
+
+.g-image{
+  align-content: center;
+  margin-top:10%;
+  margin-left: 15%;
+  width: 70vw;
+  height: 25vh;
+}
+
+.footP{
+  font-size:20vw;
 }
