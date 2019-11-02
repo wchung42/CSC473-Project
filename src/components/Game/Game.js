@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import games from './games.json';
 import getAnswer from './gameFunctions.js';
+import './Game.css'
 
 class Game extends Component {
   constructor(props) {
@@ -70,14 +71,12 @@ class Game extends Component {
                 <button className="btn-large  btn-success" type="button" onClick={getAnswer(this.state.index, this.state.questionIndex)}>&nbsp; Submit &nbsp;</button>
                 <p id="result"></p>
 
-                <button hidden
+                <button id="nextBttn"
                   className="btn-large btn-success"
-
                   onClick={this.nextQuestion}>Next
                 </button>
                 <br />
                 <br />
-
                 <button className="btn-large btn-warning " type="button">Hint</button>
 
               </div>

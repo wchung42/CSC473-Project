@@ -11,16 +11,19 @@ function getAnswer(gameIndex, questionIndex) {
     return function () {
         let userAnswer = document.getElementById("answer").value;
         let answer = games[gameIndex].answers[questionIndex];
+        let nextBttn = document.getElementById("nextBttn");
         console.log(games[gameIndex].questions[questionIndex]);
         console.log(userAnswer);
         console.log(answer);
         if (userAnswer == answer) {
             document.getElementById("result").innerText = "Correct";
-            console.log(questionIndex)
+            nextBttn.style.display = "block";
+            console.log(questionIndex);
         }
         else {
             document.getElementById("result").innerText = "Wrong";
-            console.log(questionIndex)
+            console.log(questionIndex);
+            nextBttn.style.display = "none";
         }
     }
 }
