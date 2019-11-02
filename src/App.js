@@ -14,7 +14,7 @@ class App extends Component {
       latitude: null,
       longitude: null,
       sideDrawerMenuOpen: false
-      
+
     }
   }
 
@@ -73,13 +73,13 @@ class App extends Component {
           crossorigin="anonymous" />
         <link rel="stylesheet" href="styles.css"></link>
         <section className="middle">
-        <header className="Welcome-Section">
-        </header>
+          <header className="Welcome-Section">
+          </header>
 
-        <body className="Body-Section">
-          <p className="popular-game"><strong>POPULAR GAMES</strong></p>
-          <ol className="cards" >{listItems}</ol>
-        </body>
+          <body className="Body-Section">
+            <p className="popular-game"><strong>POPULAR GAMES</strong></p>
+            <ol className="cards" >{listItems}</ol>
+          </body>
         </section>
 
         <footer className="footer-all">
@@ -97,7 +97,7 @@ class App extends Component {
             <p>
               <a href="#">Home</a>
               ·
-					<a href="<Game/>">Games</a> 
+					<a href="<Game/>">Games</a>
               ·
 					<a href="#">About</a>
               ·

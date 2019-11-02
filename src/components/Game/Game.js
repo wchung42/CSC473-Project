@@ -1,14 +1,33 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
+import games from './games.json';
+import getAnswer from './gameFunctions.js';
+import './Game.css'
 import DrawerToggleButton from '../SideDrawerMenu/DrawerToggleButton';
+
 
 class Game extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      index: 0,
+      questionIndex: 1,
+      hintCount: 0,
       latitude: null,
       longitude: null,
     }
+    // this.getAnswer = this.getAnswer.bind(this);
+    this.nextQuestion = this.nextQuestion.bind(this);
+  }
+
+  nextQuestion() {
+    console.log("executed", this.state.questionIndex);
+    let index = this.state.questionIndex + 1;
+    this.setState({
+      questionIndex: index
+    })
+    console.log(this.state.questionIndex);
+
   }
 
    navbar = props => (
@@ -25,11 +44,11 @@ class Game extends Component {
 
   position = async () => {
     await navigator.geolocation.getCurrentPosition(
-      position => this.setState({ 
-        latitude: position.coords.latitude, 
+      position => this.setState({
+        latitude: position.coords.latitude,
         longitude: position.coords.longitude
       }), newState => console.log(newState))
-      
+
     console.log(this.state.latitude, this.state.longitude)
   }
 
@@ -56,7 +75,16 @@ class Game extends Component {
     <button className="btn-large btn-danger" type="button">&nbsp; Exit &nbsp;</button>
     </div>
     <div className ="text-center">
-    <p className="text-center quest">Question{/*states for question*/}</p>
+      
+       <h1 className="gameTitle">
+                {games[this.state.index].Title} Challenge
+              </h1>
+              <p className="text-center">
+                Question {this.state.questionIndex}
+              </p>
+              <p className="text-center">
+                {games[this.state.index].questions[this.state.questionIndex]}
+              </p>
     
     <br/>
     <br/>
@@ -71,7 +99,13 @@ class Game extends Component {
     <br/>
     <br/>
     <div >
-    <button className="btn-large  btn-success" type="button">&nbsp; Answer &nbsp;</button>
+    <button className="btn-large  btn-success" type="button" onClick={getAnswer(this.state.index, this.state.questionIndex)}>&nbsp; Submit &nbsp;</button>
+                <p id="result"></p>
+
+                <button id="nextBttn"
+                  className="btn-large btn-success"
+                  onClick={this.nextQuestion}>Next
+                </button>
     <br/>
     <br/>
 
@@ -79,12 +113,11 @@ class Game extends Component {
     </div>
     </div>
 
-      <p className="cr text-center"><strong>Escape Team © 2019</strong></p>
+            <p className="cr text-center"><strong>Escape Team © 2019</strong></p>
+          </body>
+        </section>
 
-  </body>
-      </section>
-          
-        </div>
+      </div>
     );
   }
 }

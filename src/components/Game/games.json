@@ -1,0 +1,106 @@
+[
+    {
+        "id": 1,
+        "Title": "Shepard Hall",
+        "Difficulty": 4,
+        "Story": "This is a very long long long long long long long long long long long long story",
+        "tag": "#ccny, #shepard_hall",
+        "thumbnail": "1/sherapd0.jpg",
+        "images": 3,
+        "popular": true,
+        "total_questions": 5,
+        "total_hint": 2,
+        "questions": {
+            "1": "What is 1 + 1?",
+            "2": "What is 2 + 2?",
+            "3": "What is 3 + 3",
+            "4": "What is 4 + 4",
+            "5": "What is 5 + 5"
+        },
+        "answers": {
+            "1": 2,
+            "2": 4,
+            "3": 6,
+            "4": 8,
+            "5": 10
+        }
+    },
+    {
+        "id": 2,
+        "Title": "Harris Hall",
+        "Difficulty": 2,
+        "Story": "This is a very short story",
+        "tag": "#ccny, #harris_hall",
+        "thumbnail": "2/harris0.jpg",
+        "images": 2,
+        "popular": true,
+        "total_questions": 5,
+        "total_hint": 2,
+        "questions": {
+            "1": "What is 1 + 1?",
+            "2": "What is 2 + 2?",
+            "3": "What is 3 + 3",
+            "4": "What is 4 + 4",
+            "5": "What is 5 + 5"
+        },
+        "answers": {
+            "1": 2,
+            "2": 4,
+            "3": 6,
+            "4": 8,
+            "5": 10
+        }
+    },
+    {
+        "id": 3,
+        "Title": "Wingate Hall",
+        "Difficulty": 3,
+        "Story": "This is not a story",
+        "tag": "#ccny, #wingate_hall",
+        "thumbnail": "3/wingate0.jpg",
+        "images": 0,
+        "popular": false,
+        "total_questions": 5,
+        "total_hint": 2,
+        "questions": {
+            "1": "What is 1 + 1?",
+            "2": "What is 2 + 2?",
+            "3": "What is 3 + 3",
+            "4": "What is 4 + 4",
+            "5": "What is 5 + 5"
+        },
+        "answers": {
+            "1": 2,
+            "2": 4,
+            "3": 6,
+            "4": 8,
+            "5": 10
+        }
+    },
+    {
+        "id": 4,
+        "Title": "Marshak Hall",
+        "Difficulty": 4,
+        "Story": "This is a very short story",
+        "tag": "#ccny, #marshak_hall",
+        "thumbnail": "4/marshak0.jpg",
+        "images": 0,
+        "popular": false,
+        "total_questions": 5,
+        "total_hint": 2,
+        "questions": {
+            "1": "What is 1 + 1?",
+            "2": "What is 2 + 2?",
+            "3": "What is 3 + 3",
+            "4": "What is 4 + 4",
+            "5": "What is 5 + 5"
+        },
+        "answers": {
+            "1": 2,
+            "2": 4,
+            "3": 6,
+            "4": 8,
+            "5": 10
+        }
+    }
+]
