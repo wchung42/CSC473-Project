@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import games from './games.json';
+import getAnswer from './gameFunctions.js';
 
 class Game extends Component {
   constructor(props) {
@@ -12,6 +13,18 @@ class Game extends Component {
       latitude: null,
       longitude: null,
     }
+    // this.getAnswer = this.getAnswer.bind(this);
+    this.nextQuestion = this.nextQuestion.bind(this);
+  }
+
+  nextQuestion() {
+    console.log("executed", this.state.questionIndex);
+    let index = this.state.questionIndex + 1;
+    this.setState({
+      questionIndex: index
+    })
+    console.log(this.state.questionIndex);
+
   }
 
   position = async () => {
@@ -54,15 +67,22 @@ class Game extends Component {
               <br />
               <br />
               <div >
-                <button className="btn-large  btn-success" type="button">&nbsp; Submit &nbsp;</button>
+                <button className="btn-large  btn-success" type="button" onClick={getAnswer(this.state.index, this.state.questionIndex)}>&nbsp; Submit &nbsp;</button>
+                <p id="result"></p>
+
+                <button hidden
+                  className="btn-large btn-success"
+
+                  onClick={this.nextQuestion}>Next
+                </button>
                 <br />
                 <br />
+
                 <button className="btn-large btn-warning " type="button">Hint</button>
+
               </div>
             </div>
-
             <p className="cr text-center"><strong>Escape Team © 2019</strong></p>
-
           </body>
         </section>
 
