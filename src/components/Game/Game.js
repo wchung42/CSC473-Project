@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './Game.css';
 import 'bootstrap/dist/css/bootstrap.css';
 
 class Game extends Component {
@@ -28,27 +27,32 @@ class Game extends Component {
       <div className="Game">
         <section className = "middle">
         <body>
-    <p className="text-center">{/*states for question*/}</p>
     
-   
+      <div className="exit">
+    <p>Nav should be here</p>
+    <button className="btn-large btn-danger" type="button">&nbsp; Exit &nbsp;</button>
+    </div>
     <div className ="text-center">
-
-    <button className="btn btn-primary" type="button">&nbsp; Exit &nbsp;</button>
+    <p className="text-center">Question{/*states for question*/}</p>
+    
     <br/>
     <br/>
     <img className = "" src = "https://static01.nyt.com/images/2016/05/28/nyregion/29CUNY1/29CUNY1-articleLarge.jpg?quality=75&auto=webp&disable=upscale"/>
     <br/>
     <br/>
     <br/>
-    <input type="text" className="text-center"/>
+    <input type="text" className ="text-center textbox"/>
     <br/>
     <br/>
-    <button className="btn btn-primary" type="button">Answer</button>
+    <div >
+    <button className="btn-large  btn-success" type="button">&nbsp; Answer &nbsp;</button>
     <br/>
     <br/>
-    <button className="btn btn-primary" type="button">Hint</button>
+    <button className="btn-large btn-warning " type="button">Hint</button>
+    </div>
     </div>
 
+      <p className="cr text-center"><strong>Escape Team © 2019</strong></p>
 
   </body>
       </section>

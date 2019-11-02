@@ -121,13 +121,13 @@ The seperation is for if we want to move it to a different file
 }
 
 .textbox{
-  width:50%;
-  margin-left:25%;
-  font-size:30px;
- text-align: center;
+width:50%;
+font-size:30px;
+text-align: center;
 }
 
 .g-image{
+
   align-content: center;
   margin-top:10%;
   margin-left: 15%;
@@ -135,9 +135,16 @@ The seperation is for if we want to move it to a different file
   height: 25vh;
 }
 
-.footP{
-  font-size:20vw;
+
+.btn-large{
+  font-size: 3rem;
+  
 }
-.Bod{
-  background-color: purple;
+
+.exit{
+  margin-left: 5%;
+}
+.cr{
+  padding:10%;
+  font-size: 300%;
 }

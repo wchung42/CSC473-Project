@@ -14,6 +14,7 @@ class App extends Component {
       latitude: null,
       longitude: null,
       sideDrawerMenuOpen: false
+      
     }
   }
 
