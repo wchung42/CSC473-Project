@@ -60,17 +60,11 @@ class Game extends Component {
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
           integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
           crossOrigin="anonymous" />
-        <div>
-          <Navbar drawerClickHandler={this.drawerToggleClickHandler} />
-          <SideDrawerMenu show={this.state.sideDrawerMenuOpen} />
-          {backdrop}
-        </div>
 
         <div className = "game-state">
           <Puzzle />
         </div>
         <br />
-        <Footer />
       </div>
     );
   }
