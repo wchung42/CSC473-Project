@@ -3,9 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import {BrowserRouter} from 'react-router-dom';
 import Game from './components/Game/Game';
+import About from './components/About/About'
 
-ReactDOM.render(<Game />, document.getElementById('root'));
+ReactDOM.render(
+<BrowserRouter>
+<App />
+</BrowserRouter>, document.getElementById('root'));
 
 
 

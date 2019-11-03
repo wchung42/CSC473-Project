@@ -6,6 +6,9 @@ import SideDrawerMenu from './components/SideDrawerMenu/SideDrawerMenu';
 import Backdrop from './components/Backdrop/Backdrop';
 import 'bootstrap/dist/css/bootstrap.css';
 import Game from './components/Game/Game';
+import About from './components/About/About';
+
+import {BrowserRouter as Router,Route,Switch,Link,Redirect}from "react-router-dom";
 
 class App extends Component {
   constructor(props) {
@@ -62,7 +65,10 @@ class App extends Component {
     }
 
     return (
+      
+
       <div className="App">
+        
         <meta name="viewport" content="600px"></meta>
         <Navbar drawerClickHandler={this.drawerToggleClickHandler} />
         <SideDrawerMenu show={this.state.sideDrawerMenuOpen} />
@@ -110,6 +116,8 @@ class App extends Component {
           </div>
 
         </footer>
+       
+         
       </div>
     );
   }

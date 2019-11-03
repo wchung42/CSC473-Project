@@ -2,7 +2,7 @@ import React from 'react';
 
 
 
-const about=(props)=>{
+const About=(props)=>{
     return(
         <div>
             
@@ -18,5 +18,5 @@ const about=(props)=>{
     )
 };
 
-export default about;
+export default About;
 
