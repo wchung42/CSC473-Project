@@ -31,7 +31,6 @@ const footer = props => (
           </div>
 
         </footer>
-        {/* <p id = "name" className="cr text-center"><strong>Escape Team © 2019</strong></p> */}
     </div>
 );
 
