@@ -53,6 +53,11 @@ class Game extends Component {
       answerBox.value = "";
       // console.log(this.state.questionIndex);
     }
+    document.getElementById("submitBttn").disabled = true;
+    // document.getElementById("hintBttn").style.backgroundColor = "gray";
+    setTimeout(function () {
+      document.getElementById("submitBttn").disabled = false;
+    }, 2000)
   }
 
   getHint() {
@@ -80,7 +85,7 @@ class Game extends Component {
     // document.getElementById("hintBttn").style.backgroundColor = "gray";
     setTimeout(function () {
       document.getElementById("hintBttn").disabled = false;
-    }, 4000)
+    }, 2000)
   }
 
   navbar = props => (
@@ -167,7 +172,7 @@ class Game extends Component {
               <br />
               <br />
               <div >
-                <button className="btn-large  btn-success" type="button" onClick={this.getAnswer}>&nbsp; Submit &nbsp;</button>
+                <button id="submitBttn" className="btn-large  btn-success" type="button" onClick={this.getAnswer}>&nbsp; Submit &nbsp;</button>
                 <p id="result" className="questN"></p>
                 <br />
                 <br />
