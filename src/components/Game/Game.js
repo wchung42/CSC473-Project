@@ -114,10 +114,10 @@ class Game extends Component {
               <h1 className="gameTitle">
                 {games[this.state.index].Title} Challenge
               </h1>
-              <p className="text-center">
+              <p className="text-center questN">
                 Question {this.state.questionIndex}
               </p>
-              <p className="text-center">
+              <p className="text-center quest">
                 {games[this.state.index].questions[this.state.questionIndex]}
               </p>
 
@@ -129,12 +129,12 @@ class Game extends Component {
               <br />
               <input id="answer" type="text" className="text-center textbox" />
               <br />
-              <p id="hint"></p>
+              <p id="hint" className="questN"></p>
               <br />
               <br />
               <div >
                 <button className="btn-large  btn-success" type="button" onClick={this.getAnswer}>&nbsp; Submit &nbsp;</button>
-                <p id="result"></p>
+                <p id="result" className="questN"></p>
                 <br />
                 <br />
 
