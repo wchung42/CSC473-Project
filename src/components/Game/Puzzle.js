@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import games from './games.json';
 import './Game.css';
+import Endgame from './Endgame';
 
 class Puzzle extends Component {
     constructor(props) {
@@ -15,8 +16,9 @@ class Puzzle extends Component {
           usedHint: false,
           latitude: null,
           longitude: null,
-          // temp side drawer
-          sideDrawerOpen: false
+          // game ends when last question is completed
+          gameState: true,
+          win: false
         }
         this.getAnswer = this.getAnswer.bind(this);
         this.getHint = this.getHint.bind(this);
@@ -31,6 +33,14 @@ class Puzzle extends Component {
         let answerBox = document.getElementById("answer");
         let userAnswer = answerBox.value; //USER ANSWER = VALUE OF ANSWER BOX
         // console.log(answer);
+        // check if for more questions
+        if (localQuestionIndex == games[localIndex].total_questions) {
+            this.setState({
+                gameState: false,
+                win: true
+            })
+            console.log("End of game");
+        }
         if (userAnswer == answer) {
           document.getElementById("result").innerText = "Correct";
           answerBox.style.borderColor = "palegreen";
@@ -84,6 +94,20 @@ class Puzzle extends Component {
     }
 
     render () {
+        // game states - playing or end game
+        if ( !this.state.gameState ) {
+            setTimeout(function () {
+                console.log("Ending game", 1500)
+            })
+            return (
+                <div>
+                    <Endgame outcome = {this.state.win}/>;
+                    <button id="submitBttn" className="btn-large  btn-success" type="button" onClick='#'>Submit</button>;
+                    <button id="hintBttn" className="btn-large btn-warning " type="button" onClick='#'>Home</button>
+                </div>
+               
+            )
+        }
         return (
             <div className = "game">
                 <section className="middle">
@@ -126,6 +150,8 @@ class Puzzle extends Component {
         
         )
     }
+    
+
 }
 
 export default Puzzle;

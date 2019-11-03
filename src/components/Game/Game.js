@@ -1,40 +1,17 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-import games from './games.json';
 // import getAnswer from './gameFunctions.js';
 import './Game.css';
-import Navbar from '../Navbar/Navbar';
-import SideDrawerMenu from '../SideDrawerMenu/SideDrawerMenu';
-import Backdrop from '../Backdrop/Backdrop';
-import Footer from '../Footer/Footer';
-
-// import puzzle component
-import Puzzle from './Puzzle';
+import Puzzle from './Puzzle'; // import puzzle component
 
 
 class Game extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      // game state
-      gameState: true,
-      // temp side drawer
-      sideDrawerOpen: false
+
     }
   }
-
-  /* this is temporary ****************************************** */
-  drawerToggleClickHandler = () => {
-    this.setState((prevState) => {
-      return { sideDrawerMenuOpen: !prevState.sideDrawerMenuOpen };
-    })
-  };
-
-  // clicking backdrop closes side drawer
-  backdropClickHandler = () => {
-    this.setState({ sideDrawerMenuOpen: false });
-  }
-  /* *************************************************************** */
 
   // position = async () => {
   //   await navigator.geolocation.getCurrentPosition(
@@ -48,11 +25,6 @@ class Game extends Component {
 
   //Want to load the game in here based on the name
   render = () => {
-
-    let backdrop;
-    if (this.state.sideDrawerMenuOpen) {
-      backdrop = <Backdrop click={this.backdropClickHandler} />
-    }
 
     return (
       <div className="Game">
