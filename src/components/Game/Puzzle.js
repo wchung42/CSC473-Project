@@ -17,7 +17,8 @@ class Puzzle extends Component {
           latitude: null,
           longitude: null,
           // game ends when last question is completed
-          gameState: true
+          gameState: true,
+          win: false
         }
         this.getAnswer = this.getAnswer.bind(this);
         this.getHint = this.getHint.bind(this);
@@ -35,11 +36,12 @@ class Puzzle extends Component {
         // check if for more questions
         if (localQuestionIndex == games[localIndex].total_questions) {
             this.setState({
-                gameState: false
+                gameState: false,
+                win: true
             })
             console.log("End of game");
         }
-        else if (userAnswer == answer) {
+        if (userAnswer == answer) {
           document.getElementById("result").innerText = "Correct";
           answerBox.style.borderColor = "palegreen";
           answerBox.value = "";
@@ -93,6 +95,12 @@ class Puzzle extends Component {
 
     render () {
         // game states - playing or end game
+        if ( !this.state.gameState ) {
+            setTimeout(function () {
+                console.log("Ending game", 1500)
+            })
+            return <Endgame outcome = {this.state.win}/>
+        }
         return (
             <div className = "game">
                 <section className="middle">
