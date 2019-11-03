@@ -96,9 +96,6 @@ class Puzzle extends Component {
     render () {
         // game states - playing or end game
         if ( !this.state.gameState ) {
-            setTimeout(function () {
-                console.log("Ending game", 1500)
-            })
             return (
                 <div>
                     <Endgame outcome = {this.state.win}/>;
