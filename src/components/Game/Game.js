@@ -17,6 +17,7 @@ class Game extends Component {
       longitude: null,
     }
     this.getAnswer = this.getAnswer.bind(this);
+    this.getHint = this.getHint.bind(this);
   }
 
   getAnswer() {
@@ -44,6 +45,23 @@ class Game extends Component {
     }
   }
 
+  getHint() {
+    let localIndex = this.state.index;
+    let localQuestionIndex = this.state.questionIndex;
+    let totalHint = games[localIndex].total_hint;
+    let hintCount = this.state.hintCount;
+    let hintArea = document.getElementById("hint");
+    if (hintCount < totalHint) {
+      hintCount += 1;
+      hintArea.innerText = games[localIndex].hint[localQuestionIndex];
+      this.setState({
+        hintCount: hintCount
+      })
+    }
+    else {
+      hintArea.innerText = "Sorry You've Run Out Of Hint! NOW USE YOUR DAMN BRAIN"
+    }
+  }
 
   navbar = props => (
     <header className="navbarGame">
@@ -88,16 +106,13 @@ class Game extends Component {
 
               <h1 className="gameTitle">
                 {games[this.state.index].Title} Challenge
-                
               </h1>
-              <br/>
-              <p className="text-center questN">
-                Question {this.state.questionIndex}:
+              <p className="text-center">
+                Question {this.state.questionIndex}
               </p>
-              <p className="text-center quest">
+              <p className="text-center">
                 {games[this.state.index].questions[this.state.questionIndex]}
               </p>
-
 
               <br />
               <br />
@@ -107,8 +122,7 @@ class Game extends Component {
               <br />
               <input id="answer" type="text" className="text-center textbox" />
               <br />
-
-              <text className="hint">hint should print here</text>
+              <p id="hint"></p>
               <br />
               <br />
               <div >
@@ -117,10 +131,9 @@ class Game extends Component {
                 <br />
                 <br />
 
-                <button className="btn-large btn-warning " type="button">Hint</button>
+                <button className="btn-large btn-warning " type="button" onClick={this.getHint}>Hint</button>
               </div>
             </div>
-
 
             <p className="cr text-center"><strong>Escape Team © 2019</strong></p>
           </body>
