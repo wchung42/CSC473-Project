@@ -110,14 +110,11 @@ class Puzzle extends Component {
                             <img className = "imgG" src= {games[this.state.index].images[this.state.imageIndex]} alt = "puzzle" />
                             <br /><br /><br />
                             <input id="answer" type="text" className="text-center textbox" />
-                            <br />
                             <p id="hint" className="questN"></p>
-                            <br /><br />
                             <div >
                                 <button id="submitBttn" className="btn-large  btn-success" type="button" onClick={this.getAnswer}>&nbsp; Submit &nbsp;</button>
                                 <p id="result" className="questN"></p>
-                                <br />
-                                <br />
+                                
 
                                 <button id="hintBttn" className="btn-large btn-warning " type="button" onClick={this.getHint}>
                                 {games[this.state.index].total_hint - this.state.hintCount} Hint(s) Left</button>
