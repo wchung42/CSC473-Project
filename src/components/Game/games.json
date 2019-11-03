@@ -6,7 +6,13 @@
         "Story": "This is a very long long long long long long long long long long long long story",
         "tag": "#ccny, #shepard_hall",
         "thumbnail": "1/sherapd0.jpg",
-        "images": 3,
+        "images": {
+            "1": "https://static01.nyt.com/images/2016/05/28/nyregion/29CUNY1/29CUNY1-articleLarge.jpg?quality=75&auto=webp&disable=upscale",
+            "2": "https://i.pinimg.com/originals/59/c4/d5/59c4d514e013778b456ad77cfc22e4fa.jpg",
+            "3": "https://pbs.twimg.com/media/C3v6KXJWAAAXmIP.jpg",
+            "4": "https://heavyeditorial.files.wordpress.com/2018/11/spongebob-squarepants-meme-pic.jpg?quality=65&strip=all",
+            "5": "https://66.media.tumblr.com/2aca601a57f8a8643c52c44f61f8bae8/tumblr_inline_on2zdfCMbY1tmokms_540.png"
+        },
         "popular": true,
         "total_questions": 5,
         "total_hint": 2,

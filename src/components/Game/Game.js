@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import games from './games.json';
 // import getAnswer from './gameFunctions.js';
-import './Game.css'
-import DrawerToggleButton from '../SideDrawerMenu/DrawerToggleButton';
+import './Game.css';
+import Navbar from '../Navbar/Navbar';
+import SideDrawerMenu from '../SideDrawerMenu/SideDrawerMenu';
+import Backdrop from '../Backdrop/Backdrop';
 
 
 class Game extends Component {
@@ -12,10 +14,14 @@ class Game extends Component {
     this.state = {
       index: 0,
       questionIndex: 1,
+      // image change
+      imageIndex: 1,
       hintCount: 0,
       usedHint: false,
       latitude: null,
       longitude: null,
+      // temp side drawer
+      sideDrawerOpen: false
     }
     this.getAnswer = this.getAnswer.bind(this);
     this.getHint = this.getHint.bind(this);
@@ -25,6 +31,7 @@ class Game extends Component {
     let localIndex = this.state.index;
     let localQuestionIndex = this.state.questionIndex;
     let qIndex = localQuestionIndex + 1;  //INDICATE THE NEXT QUESTION
+    let imgIndex = qIndex; // IMAGE INDEX 
     let answer = games[localIndex].answers[localQuestionIndex];
     let answerBox = document.getElementById("answer");
     let userAnswer = answerBox.value; //USER ANSWER = VALUE OF ANSWER BOX
@@ -35,6 +42,7 @@ class Game extends Component {
       answerBox.value = "";
       this.setState({
         questionIndex: qIndex,
+        imageIndex: imgIndex,
         usedHint: false
       })
       // console.log(this.state.questionIndex);
@@ -81,6 +89,19 @@ class Game extends Component {
     </header>
   );
 
+  /* this is temporary ****************************************** */
+  drawerToggleClickHandler = () => {
+    this.setState((prevState) => {
+      return { sideDrawerMenuOpen: !prevState.sideDrawerMenuOpen };
+    })
+  };
+
+  // clicking backdrop closes side drawer
+  backdropClickHandler = () => {
+    this.setState({ sideDrawerMenuOpen: false });
+  }
+  /* *************************************************************** */
+
   // position = async () => {
   //   await navigator.geolocation.getCurrentPosition(
   //     position => this.setState({
@@ -94,13 +115,21 @@ class Game extends Component {
   //Want to load the game in here based on the name
   render = () => {
 
+    let backdrop;
+    if (this.state.sideDrawerMenuOpen) {
+      backdrop = <Backdrop click={this.backdropClickHandler} />
+    }
+
     return (
       <div className="Game">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
           integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
           crossOrigin="anonymous" />
         <div>
-          <this.navbar drawerClickHandler={this.drawerToggleClickHandler} />
+          {/* <this.navbar drawerClickHandler={this.drawerToggleClickHandler} /> */}
+          <Navbar drawerClickHandler = {this.drawerToggleClickHandler}/>
+          <SideDrawerMenu show = {this.state.sideDrawerMenuOpen} />
+          {backdrop}
         </div>
         <section className="middle">
           <body>
@@ -123,7 +152,7 @@ class Game extends Component {
 
               <br />
               <br />
-              <img className="" src="https://static01.nyt.com/images/2016/05/28/nyregion/29CUNY1/29CUNY1-articleLarge.jpg?quality=75&auto=webp&disable=upscale" />
+              <img className="" src= {games[this.state.index].images[this.state.imageIndex]} alt = "puzzle" />
               <br />
               <br />
               <br />
