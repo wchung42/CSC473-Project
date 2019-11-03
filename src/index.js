@@ -7,10 +7,7 @@ import {BrowserRouter} from 'react-router-dom';
 import Game from './components/Game/Game';
 import About from './components/About/About'
 
-ReactDOM.render(
-<BrowserRouter>
-<App />
-</BrowserRouter>, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
 
 
 
