@@ -138,7 +138,8 @@ class Game extends Component {
                 <br />
                 <br />
 
-                <button className="btn-large btn-warning " type="button" onClick={this.getHint}>Hint</button>
+                <button className="btn-large btn-warning " type="button" onClick={this.getHint}>
+                  {games[this.state.index].total_hint - this.state.hintCount} Hint(s) Left</button>
               </div>
             </div>
 
