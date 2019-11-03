@@ -7,14 +7,8 @@ import SideDrawerMenu from './components/SideDrawerMenu/SideDrawerMenu';
 import Backdrop from './components/Backdrop/Backdrop';
 import 'bootstrap/dist/css/bootstrap.css';
 import Game from './components/Game/Game';
-<<<<<<< HEAD
-import About from './components/About/About';
-
-import {BrowserRouter as Router,Route,Switch,Link,Redirect}from "react-router-dom";
-=======
 import Home from  './components/home';
 import Footer from './components/Footer/Footer'
->>>>>>> 996896bb55aab14b3b6480ad970c95e916c444d7
 
 class App extends Component {
   constructor(props) {
@@ -48,18 +42,8 @@ class App extends Component {
     }
 
     return (
-      
-
       <div className="App">
         
-<<<<<<< HEAD
-        <meta name="viewport" content="600px"></meta>
-        <Navbar drawerClickHandler={this.drawerToggleClickHandler} />
-        <SideDrawerMenu show={this.state.sideDrawerMenuOpen} />
-        {backdrop}
-
-=======
->>>>>>> 996896bb55aab14b3b6480ad970c95e916c444d7
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
           integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
           crossorigin="anonymous" />
@@ -70,11 +54,6 @@ class App extends Component {
         <SideDrawerMenu show={this.state.sideDrawerMenuOpen} />
         {backdrop}
 
-<<<<<<< HEAD
-        </footer>
-       
-         
-=======
         <Router>
         <Switch>
         <Route path ='/Home' component ={Home}/>
@@ -83,7 +62,6 @@ class App extends Component {
           </Switch>
           </Router>
           <Footer/>
->>>>>>> 996896bb55aab14b3b6480ad970c95e916c444d7
       </div>
     );
   }
