@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import games from './games.json';
 // import getAnswer from './gameFunctions.js';
-import './Game.css'
-import DrawerToggleButton from '../SideDrawerMenu/DrawerToggleButton';
+import './Game.css';
+import Navbar from '../Navbar/Navbar';
+import SideDrawerMenu from '../SideDrawerMenu/SideDrawerMenu';
+import Backdrop from '../Backdrop/Backdrop';
 
 
 class Game extends Component {
@@ -12,10 +14,13 @@ class Game extends Component {
     this.state = {
       index: 0,
       questionIndex: 1,
+      // image change
       hintCount: 0,
       usedHint: false,
       latitude: null,
       longitude: null,
+      // temp side drawer
+      sideDrawerOpen: false
     }
     this.getAnswer = this.getAnswer.bind(this);
     this.getHint = this.getHint.bind(this);
@@ -81,6 +86,19 @@ class Game extends Component {
     </header>
   );
 
+  /* this is temporary ****************************************** */
+  drawerToggleClickHandler = () => {
+    this.setState((prevState) => {
+      return { sideDrawerMenuOpen: !prevState.sideDrawerMenuOpen };
+    })
+  };
+
+  // clicking backdrop closes side drawer
+  backdropClickHandler = () => {
+    this.setState({ sideDrawerMenuOpen: false });
+  }
+  /* *************************************************************** */
+
   // position = async () => {
   //   await navigator.geolocation.getCurrentPosition(
   //     position => this.setState({
@@ -94,13 +112,21 @@ class Game extends Component {
   //Want to load the game in here based on the name
   render = () => {
 
+    let backdrop;
+    if (this.state.sideDrawerMenuOpen) {
+      backdrop = <Backdrop click={this.backdropClickHandler} />
+    }
+
     return (
       <div className="Game">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
           integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
           crossOrigin="anonymous" />
         <div>
-          <this.navbar drawerClickHandler={this.drawerToggleClickHandler} />
+          {/* <this.navbar drawerClickHandler={this.drawerToggleClickHandler} /> */}
+          <Navbar drawerClickHandler = {this.drawerToggleClickHandler}/>
+          <SideDrawerMenu show = {this.state.sideDrawerMenuOpen} />
+          {backdrop}
         </div>
         <section className="middle">
           <body>
