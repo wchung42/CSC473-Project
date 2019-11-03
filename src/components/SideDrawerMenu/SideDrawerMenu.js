@@ -11,6 +11,7 @@ const sideDrawerMenu = props => {
     return (
         <nav className = { animateDrawer }>
             <ul>
+                <li><a href = "#">Log in</a> </li>
                 <li><a href = "#">Games</a></li>
                 <li><a href = "#">About Us</a></li>
                 <li><a href = "#">Contact Us</a></li>
