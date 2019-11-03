@@ -97,7 +97,7 @@ class App extends Component {
             <p>
               <a href="#">Home</a>
               ·
-					<a href="<Game/>">Games</a>
+					<a href ="#">Games</a>
               ·
 					<a href="#">About</a>
               ·
