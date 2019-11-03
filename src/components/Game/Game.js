@@ -65,6 +65,7 @@ class Game extends Component {
           <SideDrawerMenu show={this.state.sideDrawerMenuOpen} />
           {backdrop}
         </div>
+
         <div className = "game-state">
           <Puzzle />
         </div>
