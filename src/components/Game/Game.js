@@ -122,6 +122,10 @@ class Game extends Component {
 
     return (
       <div className="Game">
+         
+
+
+
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
           integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
           crossOrigin="anonymous" />
@@ -139,10 +143,11 @@ class Game extends Component {
               <button className="btn-large btn-danger" type="button">&nbsp; Exit &nbsp;</button>
             </div>
             <div className="text-center">
-
+              <br/>
               <h1 className="gameTitle">
                 {games[this.state.index].Title} Challenge
               </h1>
+              <br/>
               <p className="text-center questN">
                 Question {this.state.questionIndex}
               </p>
@@ -152,7 +157,7 @@ class Game extends Component {
 
               <br />
               <br />
-              <img className="" src= {games[this.state.index].images[this.state.imageIndex]} alt = "puzzle" />
+              <img  src= {games[this.state.index].images[this.state.imageIndex]} alt = "puzzle" />
               <br />
               <br />
               <br />
