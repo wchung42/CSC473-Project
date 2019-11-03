@@ -1,66 +1,65 @@
 
 .textbox{
-    width:70%;
-    font-size:30px;
-    text-align: center;
-    }
+  width:70%;
+  font-size:30px;
+  text-align: center;
+}
     
-    .g-image{
-    
-      align-content: center;
-      margin-top:10%;
-      margin-left: 15%;
-      width: 70vw;
-      height: 25vh;
-    }
-    
-    
-    .btn-large{
-      font-size: 3vh;
-      
-    }
-    
-    .exit{
-      margin-left: 5%;
-    }
-    .cr{
-      padding:10%;
-      font-size: 300%;
-    }
-    .hint{
-      font-size:200%;
-    }
-    .questN{
-      font-size: 200%;
-      font-style:italic ;
-    }
-    .quest{
-      font-size: 225%;
-    }
-    
-    .navbarGame{
-        background-color: white;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 7vh;
-        border-style: solid;
-        border-color: black;
-    
-    }
-    .toggleGame-button-line {
-      width: 2vh;
-      height: 0.25vh;
-      background: black;
-    }
-    .spaceGame-btw-logo-items {
-      flex: .95;
-    }
-    .gameTitle{
-      text-decoration: underline;
-    }
-    .imgG{
-      width: 85%;
-      height: auto;
-    }
-    
+.g-image{
+
+  align-content: center;
+  margin-top:10%;
+  margin-left: 15%;
+  width: 70vw;
+  height: 25vh;
+}
+
+
+.btn-large{
+  font-size: 3vh;
+  
+}
+
+.exit{
+  margin-left: 5%;
+}
+.cr{
+  padding:10%;
+  font-size: 300%;
+}
+.hint{
+  font-size:200%;
+}
+.questN{
+  font-size: 200%;
+  font-style:italic ;
+}
+.quest{
+  font-size: 225%;
+}
+
+.navbarGame{
+    background-color: white;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 7vh;
+    border-style: solid;
+    border-color: black;
+
+}
+.toggleGame-button-line {
+  width: 2vh;
+  height: 0.25vh;
+  background: black;
+}
+.spaceGame-btw-logo-items {
+  flex: .95;
+}
+.gameTitle{
+  text-decoration: underline;
+}
+.imgG{
+  width: 85%;
+  height: auto;
+}

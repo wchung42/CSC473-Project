@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import games from './games.json';
 import './Game.css';
+import Endgame from './Endgame';
 
 class Puzzle extends Component {
     constructor(props) {
@@ -15,8 +16,8 @@ class Puzzle extends Component {
           usedHint: false,
           latitude: null,
           longitude: null,
-          // temp side drawer
-          sideDrawerOpen: false
+          // game ends when last question is completed
+          gameState: true
         }
         this.getAnswer = this.getAnswer.bind(this);
         this.getHint = this.getHint.bind(this);
@@ -31,7 +32,14 @@ class Puzzle extends Component {
         let answerBox = document.getElementById("answer");
         let userAnswer = answerBox.value; //USER ANSWER = VALUE OF ANSWER BOX
         // console.log(answer);
-        if (userAnswer == answer) {
+        // check if for more questions
+        if (localQuestionIndex == games[localIndex].total_questions) {
+            this.setState({
+                gameState: false
+            })
+            console.log("End of game");
+        }
+        else if (userAnswer == answer) {
           document.getElementById("result").innerText = "Correct";
           answerBox.style.borderColor = "palegreen";
           answerBox.value = "";
@@ -84,6 +92,7 @@ class Puzzle extends Component {
     }
 
     render () {
+        // game states - playing or end game
         return (
             <div className = "game">
                 <section className="middle">
@@ -126,6 +135,8 @@ class Puzzle extends Component {
         
         )
     }
+    
+
 }
 
 export default Puzzle;
