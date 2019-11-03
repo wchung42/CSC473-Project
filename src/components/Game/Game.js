@@ -6,6 +6,7 @@ import './Game.css';
 import Navbar from '../Navbar/Navbar';
 import SideDrawerMenu from '../SideDrawerMenu/SideDrawerMenu';
 import Backdrop from '../Backdrop/Backdrop';
+import Footer from '../Footer/Footer';
 
 
 class Game extends Component {
@@ -175,10 +176,11 @@ class Game extends Component {
               </div>
             </div>
 
-            <p className="cr text-center"><strong>Escape Team © 2019</strong></p>
+            
           </body>
         </section>
-
+        <br />
+        <Footer />
       </div>
     );
   }
