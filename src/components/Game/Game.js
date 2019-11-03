@@ -53,6 +53,11 @@ class Game extends Component {
       answerBox.value = "";
       // console.log(this.state.questionIndex);
     }
+    document.getElementById("submitBttn").disabled = true;
+    // document.getElementById("hintBttn").style.backgroundColor = "gray";
+    setTimeout(function () {
+      document.getElementById("submitBttn").disabled = false;
+    }, 2000)
   }
 
   getHint() {
@@ -76,6 +81,11 @@ class Game extends Component {
     else {
       hintArea.innerText = "Sorry You've Run Out Of Hint! NOW USE YOUR DAMN BRAIN"
     }
+    document.getElementById("hintBttn").disabled = true;
+    // document.getElementById("hintBttn").style.backgroundColor = "gray";
+    setTimeout(function () {
+      document.getElementById("hintBttn").disabled = false;
+    }, 2000)
   }
 
   navbar = props => (
@@ -127,8 +137,8 @@ class Game extends Component {
           crossOrigin="anonymous" />
         <div>
           {/* <this.navbar drawerClickHandler={this.drawerToggleClickHandler} /> */}
-          <Navbar drawerClickHandler = {this.drawerToggleClickHandler}/>
-          <SideDrawerMenu show = {this.state.sideDrawerMenuOpen} />
+          <Navbar drawerClickHandler={this.drawerToggleClickHandler} />
+          <SideDrawerMenu show={this.state.sideDrawerMenuOpen} />
           {backdrop}
         </div>
         <section className="middle">
@@ -152,7 +162,7 @@ class Game extends Component {
 
               <br />
               <br />
-              <img className="" src= {games[this.state.index].images[this.state.imageIndex]} alt = "puzzle" />
+              <img className="" src={games[this.state.index].images[this.state.imageIndex]} alt="puzzle" />
               <br />
               <br />
               <br />
@@ -162,12 +172,12 @@ class Game extends Component {
               <br />
               <br />
               <div >
-                <button className="btn-large  btn-success" type="button" onClick={this.getAnswer}>&nbsp; Submit &nbsp;</button>
+                <button id="submitBttn" className="btn-large  btn-success" type="button" onClick={this.getAnswer}>&nbsp; Submit &nbsp;</button>
                 <p id="result" className="questN"></p>
                 <br />
                 <br />
 
-                <button className="btn-large btn-warning " type="button" onClick={this.getHint}>
+                <button id="hintBttn" className="btn-large btn-warning " type="button" onClick={this.getHint}>
                   {games[this.state.index].total_hint - this.state.hintCount} Hint(s) Left</button>
               </div>
             </div>
