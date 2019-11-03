@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import {BrowserRouter} from 'react-router-dom';
 import Game from './components/Game/Game';
+
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
