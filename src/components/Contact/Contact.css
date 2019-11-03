@@ -1,0 +1,18 @@
+
+.container{
+    height: 500px;
+    display: flexbox;
+
+
+}
+.inner-box{
+    display: inline-block;
+    border-radius: 4px;
+    border-style: solid;
+    margin: 5%;
+    border-width: 2px;
+    
+    
+    
+
+}
