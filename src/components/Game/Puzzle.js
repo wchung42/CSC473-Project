@@ -99,7 +99,14 @@ class Puzzle extends Component {
             setTimeout(function () {
                 console.log("Ending game", 1500)
             })
-            return <Endgame outcome = {this.state.win}/>
+            return (
+                <div>
+                    <Endgame outcome = {this.state.win}/>;
+                    <button id="submitBttn" className="btn-large  btn-success" type="button" onClick='#'>Submit</button>;
+                    <button id="hintBttn" className="btn-large btn-warning " type="button" onClick='#'>Home</button>
+                </div>
+               
+            )
         }
         return (
             <div className = "game">
