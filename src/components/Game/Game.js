@@ -13,6 +13,7 @@ class Game extends Component {
       index: 0,
       questionIndex: 1,
       hintCount: 0,
+      usedHint: false,
       latitude: null,
       longitude: null,
     }
@@ -33,7 +34,8 @@ class Game extends Component {
       answerBox.style.borderColor = "palegreen";
       answerBox.value = "";
       this.setState({
-        questionIndex: qIndex
+        questionIndex: qIndex,
+        usedHint: false
       })
       // console.log(this.state.questionIndex);
     }
@@ -51,12 +53,17 @@ class Game extends Component {
     let totalHint = games[localIndex].total_hint;
     let hintCount = this.state.hintCount;
     let hintArea = document.getElementById("hint");
-    if (hintCount < totalHint) {
+    let usedHint = this.state.usedHint;
+    if (hintCount < totalHint && !usedHint) {
       hintCount += 1;
       hintArea.innerText = games[localIndex].hint[localQuestionIndex];
       this.setState({
-        hintCount: hintCount
+        hintCount: hintCount,
+        usedHint: true
       })
+    }
+    else if (usedHint) {
+      hintArea.innerText = games[localIndex].hint[localQuestionIndex];
     }
     else {
       hintArea.innerText = "Sorry You've Run Out Of Hint! NOW USE YOUR DAMN BRAIN"
