@@ -9,6 +9,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Game from './components/Game/Game';
 import Home from  './components/home';
 import Footer from './components/Footer/Footer'
+import about from './components/About/About.js';
 
 class App extends Component {
   constructor(props) {
@@ -56,9 +57,9 @@ class App extends Component {
 
         <Router>
         <Switch>
-        <Route path ='/Home' component ={Home}/>
+        <Route path = '/Home' component ={Home}/>
         <Route path ='/Game' component ={Game}/>
-            
+        <Route path ='/About' component ={about}/>
           </Switch>
           </Router>
           <Footer/>

@@ -17,8 +17,8 @@ const sideDrawerMenu = props => {
             <ul>
                 <li><a href = "/Home">Log in</a> </li>
                 <li><a href = "/Game">Games</a></li>
-                <li><a href = "#">About Us</a></li>
-                <li><a href = "#">Contact Us</a></li>
+                <li><a href = "/About">About Us</a></li>
+                <li><a href = "/Contact">Contact Us</a></li>
             </ul>
         </nav>
     )

@@ -16,15 +16,15 @@ const footer = props => (
           <div className="footer-info">
 
             <p>
-              <a href="#">Home</a>
+              <a href="/Home">Home</a>
               ·
-					<a href="<Game/>">Games</a>
+					<a href="/Game">Games</a>
               ·
-					<a href="#">About</a>
+					<a href="/About">About</a>
               ·
-					<a href="#">Faq</a>
+					<a href="/FAQ">Faq</a>
               ·
-					<a href="#">Contact</a>
+					<a href="/Contact">Contact</a>
             </p>
 
             <p><strong>Escape Team © 2019</strong></p>
