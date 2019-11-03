@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-import games from './games.json';
 // import getAnswer from './gameFunctions.js';
 import './Game.css';
-
-// import puzzle component
-import Puzzle from './Puzzle';
+import Puzzle from './Puzzle'; // import puzzle component
 
 
 class Game extends Component {
@@ -15,19 +12,6 @@ class Game extends Component {
 
     }
   }
-
-  /* this is temporary ****************************************** */
-  drawerToggleClickHandler = () => {
-    this.setState((prevState) => {
-      return { sideDrawerMenuOpen: !prevState.sideDrawerMenuOpen };
-    })
-  };
-
-  // clicking backdrop closes side drawer
-  backdropClickHandler = () => {
-    this.setState({ sideDrawerMenuOpen: false });
-  }
-  /* *************************************************************** */
 
   // position = async () => {
   //   await navigator.geolocation.getCurrentPosition(
