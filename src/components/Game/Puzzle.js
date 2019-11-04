@@ -107,10 +107,9 @@ class Puzzle extends Component {
         }
         return (
             <div className = "game">
-                <section className="middle">
-                    <body>
+                    <section className="middle">
+                                   
                         <br />
-
                         <div className="exit">
                         <button className="btn-large btn-danger" type="button">&nbsp; Exit &nbsp;</button>
                         </div>
@@ -141,8 +140,7 @@ class Puzzle extends Component {
                                 {games[this.state.index].total_hint - this.state.hintCount} Hint(s) Left</button>
                         </div>
                         </div>
-                    </body>
-                </section>
+                    </section>
             </div>
         
         )
