@@ -60,11 +60,15 @@ class Puzzle extends Component {
           answerBox.value = "";
           // console.log(this.state.questionIndex);
         }
-        document.getElementById("submitBttn").disabled = true;
-        // document.getElementById("hintBttn").style.backgroundColor = "gray";
-        setTimeout(function () {
-          document.getElementById("submitBttn").disabled = false;
-        }, 2000)
+        if (qIndex > games[localIndex].total_questions) {
+            console.log("Submit button time out not necessary");
+        } else {
+            document.getElementById("submitBttn").disabled = true;
+            // document.getElementById("hintBttn").style.backgroundColor = "gray";
+            setTimeout(function () {
+            document.getElementById("submitBttn").disabled = false;
+            }, 2000)
+        }
       }
     
     getHint() {
@@ -88,11 +92,15 @@ class Puzzle extends Component {
         else {
             hintArea.innerText = "Sorry You've Run Out Of Hint! NOW USE YOUR DAMN BRAIN"
         }
-        document.getElementById("hintBttn").disabled = true;
-        // document.getElementById("hintBttn").style.backgroundColor = "gray";
-        setTimeout(function () {
-            document.getElementById("hintBttn").disabled = false;
-        }, 2000)
+        if (localQuestionIndex + 1 > games[localIndex].total_questions) {
+            console.log("Hint button timeout not necessary");
+        } else {
+            document.getElementById("hintBttn").disabled = true;
+            // document.getElementById("hintBttn").style.backgroundColor = "gray";
+            setTimeout(function () {
+                document.getElementById("hintBttn").disabled = false;
+            }, 2000)
+        }
     }
 
     render () {
@@ -101,10 +109,7 @@ class Puzzle extends Component {
             return (
                 <div>
                     <Endgame outcome = {this.state.win}/>;
-                    <button id="submitBttn" className="btn-large  btn-success" type="button" onClick='#'>Submit</button>;
-                    <button id="hintBttn" className="btn-large btn-warning " type="button" onClick='#'>Home</button>
                 </div>
-               
             )
         }
         return (
