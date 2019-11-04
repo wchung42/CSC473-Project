@@ -33,14 +33,8 @@ class Puzzle extends Component {
         let answerBox = document.getElementById("answer");
         let userAnswer = answerBox.value; //USER ANSWER = VALUE OF ANSWER BOX
         // console.log(answer);
-        // check if for more questions
-        if (localQuestionIndex == games[localIndex].total_questions) {
-            this.setState({
-                gameState: false,
-                win: true
-            })
-            console.log("End of game");
-        }
+        
+       
         if (userAnswer == answer) {
           document.getElementById("result").innerText = "Correct";
           answerBox.style.borderColor = "palegreen";
@@ -50,6 +44,14 @@ class Puzzle extends Component {
             imageIndex: imgIndex,
             usedHint: false
           })
+          // check if for more questions
+          if (localQuestionIndex == games[localIndex].total_questions) {
+            this.setState({
+                gameState: false,
+                win: true
+            })
+            console.log("End of game");
+        }
           // console.log(this.state.questionIndex);
         }
         else {
