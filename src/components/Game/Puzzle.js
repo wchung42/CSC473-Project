@@ -33,14 +33,8 @@ class Puzzle extends Component {
         let answerBox = document.getElementById("answer");
         let userAnswer = answerBox.value; //USER ANSWER = VALUE OF ANSWER BOX
         // console.log(answer);
-        // check if for more questions
-        if (localQuestionIndex == games[localIndex].total_questions) {
-            this.setState({
-                gameState: false,
-                win: true
-            })
-            console.log("End of game");
-        }
+        
+       
         if (userAnswer == answer) {
           document.getElementById("result").innerText = "Correct";
           answerBox.style.borderColor = "palegreen";
@@ -50,6 +44,14 @@ class Puzzle extends Component {
             imageIndex: imgIndex,
             usedHint: false
           })
+          // check if for more questions
+          if (localQuestionIndex == games[localIndex].total_questions) {
+            this.setState({
+                gameState: false,
+                win: true
+            })
+            console.log("End of game");
+        }
           // console.log(this.state.questionIndex);
         }
         else {
@@ -96,9 +98,6 @@ class Puzzle extends Component {
     render () {
         // game states - playing or end game
         if ( !this.state.gameState ) {
-            setTimeout(function () {
-                console.log("Ending game", 1500)
-            })
             return (
                 <div>
                     <Endgame outcome = {this.state.win}/>;
@@ -110,10 +109,9 @@ class Puzzle extends Component {
         }
         return (
             <div className = "game">
-                <section className="middle">
-                    <body>
+                    <section className="middle">
+                                   
                         <br />
-
                         <div className="exit">
                         <button className="btn-large btn-danger" type="button">&nbsp; Exit &nbsp;</button>
                         </div>
@@ -144,8 +142,7 @@ class Puzzle extends Component {
                                 {games[this.state.index].total_hint - this.state.hintCount} Hint(s) Left</button>
                         </div>
                         </div>
-                    </body>
-                </section>
+                    </section>
             </div>
         
         )
