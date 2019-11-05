@@ -23,6 +23,13 @@
             "4": "What is 4 + 4",
             "5": "What is 5 + 5"
         },
+        "Game_Story":{
+            "1": " Clock: You there, I need you to set me free, of all the things I could have been trapped in, I’ve been trapped in this clock counting all the seconds 94,670,777, 94,670,778 …. I’ve lost count again.\\n Clock: You need to free me, look at my small hand and big hand, and go to the respective row and column. The last 4 black numbers that sticks will free me.",
+            "2": " ??? : You’re freeing trapped spirits?!?!, LOOK OVER HERE, SAY MY NAME AND I WILL BE FREE, nobody notices me until I’m pulled, then no one stops looking.",
+            "3": " ???: ME NEXT!! ME NEXT!! A lot of people sit here to use the computers, you can tell which one I am by the unique symbol I have at the start of me. Besides the letters, what else is there?",
+            "4": " ???: OH PLEASE HELP ME, I’M AFRIAD OF HEIGHTS AND HANGING OF THE CEILING, RELEASE ME BY TELLING ME WHAT ROW AND COLUMN I’M IN.",
+            "5": " ??? in unison: We’re the last ones in the room, yet there’s so many of us, you couldn’t count us with all your fingers and toes, tell us what we are and we can finally be freed!"
+        },
         "answers": {
             "1": 2,
             "2": 4,

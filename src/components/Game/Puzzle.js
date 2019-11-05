@@ -126,7 +126,7 @@ class Puzzle extends Component {
                             Question {this.state.questionIndex}:
                         </p>
                         <p className="text-center quest">
-                            {games[this.state.index].questions[this.state.questionIndex]}
+                            {games[this.state.index].Game_Story[this.state.questionIndex].replace("\\n", "\n")}
                         </p>
 
                         <br /><br />
