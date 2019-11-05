@@ -130,7 +130,7 @@ class Puzzle extends Component {
                         </p>
 
                         <br /><br />
-                        <img className = "imgG" src= {games[this.state.index].images[this.state.imageIndex]} alt = "puzzle" />
+                        <img className = "imgG" src= {games[this.state.index].images[this.state.imageIndex]}/>
                         <br /><br /><br />
                         <input id="answer" type="text" className="text-center textbox" />
                         <p id="hint" className="questN"></p>
