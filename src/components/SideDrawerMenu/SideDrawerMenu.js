@@ -3,7 +3,6 @@ import './SideDrawerMenu.css';
 import Game from '../Game/Game.js'
 import Puzzle from '../Game/Puzzle';
 
-
 const sideDrawerMenu = props => {
     let animateDrawer = 'side-drawer';
 
