@@ -1,7 +1,7 @@
 import React from 'react';
 import './Footer.css';
 
-const footer = props => (
+const footer = () => (
     <div className = "footer" >
         <footer className="footer-all">
           <div className="footer-social">
@@ -16,7 +16,7 @@ const footer = props => (
           <div className="footer-info">
 
             <p>
-              <a href="/Home">Home</a>
+          <a href="/Home">Home</a>
               ·
 					<a href="/Game">Games</a>
               ·

@@ -53,10 +53,13 @@ class App extends Component {
         <link rel="stylesheet" href="styles.css"></link>
 
         <meta name="viewport" content="600px"></meta>
+        <div>
         <Navbar drawerClickHandler={this.drawerToggleClickHandler} />
+        
         <SideDrawerMenu show={this.state.sideDrawerMenuOpen} />
         {backdrop}
-
+        </div>
+        <div>
         <Router>
           <Switch>
 
@@ -67,7 +70,7 @@ class App extends Component {
         
           </Switch>
         </Router>
-
+        </div>
         <Footer/>
       </div>
     );

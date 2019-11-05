@@ -122,9 +122,6 @@ class Puzzle extends Component {
                             {games[this.state.index].Title} Challenge
                         </h1>
                         <br/>
-                        <p className="text-center questN ">
-                            Question {this.state.questionIndex}:
-                        </p>
                         <p className="text-center quest">
                             {games[this.state.index].Game_Story[this.state.questionIndex].replace("\\n", "\n")}
                         </p>

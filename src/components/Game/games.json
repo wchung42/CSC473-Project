@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "Title": "The Living Room",
+        "Title": "The Haunted Room",
         "Difficulty": 4,
         "Story": "This is a very long long long long long long long long long long long long story",
         "tag": "#ccny, #shepard_hall",
@@ -28,7 +28,7 @@
             "2": " ???: You’re freeing trapped spirits?!?!, LOOK OVER HERE, SAY MY NAME AND I WILL BE FREE. Nobody notices me until I’m pulled, once I'm pulled no one looks away.",
             "3": " ???: ME NEXT!! ME NEXT!! A lot of people sit here to use the computers, you can tell which one I am by the unique symbol I have at the start of me. Besides the letters, what else is there?",
             "4": " ???: OH PLEASE HELP ME, I’M AFRIAD OF HEIGHTS AND HANGING OF THE CEILING, RELEASE ME BY TELLING HOW MANY LETTERS MY NAME HAS.",
-            "5": " ??? in unison: We’re the last ones in the room, yet there’s so many of us, you couldn’t count us with all your fingers and toes, tell us what we are and we can finally be freed!"
+            "5": " ???: in unison: We’re the last ones in the room, yet there’s so many of us, you couldn’t count us with all your fingers and toes, tell us what we are and we can finally be freed!"
         },
         "answers": {
             "1": "7880",

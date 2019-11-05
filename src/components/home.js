@@ -25,11 +25,9 @@ let listItems = games
 );
 
 return(
-    <section className="middle">
+    <section>
           <header className="Welcome-Section">
           </header>
-          
-
           <body className="Body-Section">
             <p className="popular-game"><strong>POPULAR GAMES</strong></p>
             <ol className="cards" >{listItems}</ol>
