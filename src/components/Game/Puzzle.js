@@ -33,14 +33,8 @@ class Puzzle extends Component {
         let answerBox = document.getElementById("answer");
         let userAnswer = answerBox.value; //USER ANSWER = VALUE OF ANSWER BOX
         // console.log(answer);
-        // check if for more questions
-        if (localQuestionIndex == games[localIndex].total_questions) {
-            this.setState({
-                gameState: false,
-                win: true
-            })
-            console.log("End of game");
-        }
+        
+       
         if (userAnswer == answer) {
           document.getElementById("result").innerText = "Correct";
           answerBox.style.borderColor = "palegreen";
@@ -50,6 +44,14 @@ class Puzzle extends Component {
             imageIndex: imgIndex,
             usedHint: false
           })
+          // check if for more questions
+          if (localQuestionIndex == games[localIndex].total_questions) {
+            this.setState({
+                gameState: false,
+                win: true
+            })
+            console.log("End of game");
+        }
           // console.log(this.state.questionIndex);
         }
         else {
@@ -58,11 +60,15 @@ class Puzzle extends Component {
           answerBox.value = "";
           // console.log(this.state.questionIndex);
         }
-        document.getElementById("submitBttn").disabled = true;
-        // document.getElementById("hintBttn").style.backgroundColor = "gray";
-        setTimeout(function () {
-          document.getElementById("submitBttn").disabled = false;
-        }, 2000)
+        if (qIndex > games[localIndex].total_questions) {
+            console.log("Submit button time out not necessary");
+        } else {
+            document.getElementById("submitBttn").disabled = true;
+            // document.getElementById("hintBttn").style.backgroundColor = "gray";
+            setTimeout(function () {
+            document.getElementById("submitBttn").disabled = false;
+            }, 2000)
+        }
       }
     
     getHint() {
@@ -86,66 +92,58 @@ class Puzzle extends Component {
         else {
             hintArea.innerText = "Sorry You've Run Out Of Hint! NOW USE YOUR DAMN BRAIN"
         }
-        document.getElementById("hintBttn").disabled = true;
-        // document.getElementById("hintBttn").style.backgroundColor = "gray";
-        setTimeout(function () {
-            document.getElementById("hintBttn").disabled = false;
-        }, 2000)
+        if (localQuestionIndex + 1 > games[localIndex].total_questions) {
+            console.log("Hint button timeout not necessary");
+        } else {
+            document.getElementById("hintBttn").disabled = true;
+            // document.getElementById("hintBttn").style.backgroundColor = "gray";
+            setTimeout(function () {
+                document.getElementById("hintBttn").disabled = false;
+            }, 2000)
+        }
     }
 
     render () {
         // game states - playing or end game
         if ( !this.state.gameState ) {
-            setTimeout(function () {
-                console.log("Ending game", 1500)
-            })
             return (
                 <div>
                     <Endgame outcome = {this.state.win}/>;
-                    <button id="submitBttn" className="btn-large  btn-success" type="button" onClick='#'>Submit</button>;
-                    <button id="hintBttn" className="btn-large btn-warning " type="button" onClick='#'>Home</button>
                 </div>
-               
             )
         }
         return (
             <div className = "game">
-                <section className="middle">
-                    <body>
-                        <br />
+                    <section className="middle">
 
-                        <div className="exit">
-                        <button className="btn-large btn-danger" type="button">&nbsp; Exit &nbsp;</button>
-                        </div>
-                            <div className="text-center">
-                            <br/>
-                            <h1 className="gameTitle">
-                                {games[this.state.index].Title} Challenge
-                            </h1>
-                            <br/>
-                            <p className="text-center questN ">
-                                Question {this.state.questionIndex}:
-                            </p>
-                            <p className="text-center quest">
-                                {games[this.state.index].questions[this.state.questionIndex]}
-                            </p>
+                        <div className="text-center">
+                        <br/>
+                        <h1 className="gameTitle">
+                            {games[this.state.index].Title} Challenge
+                        </h1>
+                        <br/>
+                        <p className="text-center questN ">
+                            Question {this.state.questionIndex}:
+                        </p>
+                        <p className="text-center quest">
+                            {games[this.state.index].questions[this.state.questionIndex]}
+                        </p>
 
-                            <br /><br />
-                            <img className = "imgG" src= {games[this.state.index].images[this.state.imageIndex]} alt = "puzzle" />
-                            <br /><br /><br />
-                            <input id="answer" type="text" className="text-center textbox" />
-                            <p id="hint" className="questN"></p>
-                            <div >
-                                <button id="submitBttn" className="btn-large  btn-success" type="button" onClick={this.getAnswer}>&nbsp; Submit &nbsp;</button>
-                                <p id="result" className="questN"></p>
-                                
+                        <br /><br />
+                        <img className = "imgG" src= {games[this.state.index].images[this.state.imageIndex]} alt = "puzzle" />
+                        <br /><br /><br />
+                        <input id="answer" type="text" className="text-center textbox" />
+                        <p id="hint" className="questN"></p>
+                        <div >
+                            <button id="submitBttn" className="btn-large  btn-success" type="button" onClick={this.getAnswer}>&nbsp; Submit &nbsp;</button>
+                            <p id="result" className="questN"></p>
+                            
 
-                                <button id="hintBttn" className="btn-large btn-warning " type="button" onClick={this.getHint}>
-                                {games[this.state.index].total_hint - this.state.hintCount} Hint(s) Left</button>
+                            <button id="hintBttn" className="btn-large btn-warning " type="button" onClick={this.getHint}>
+                            {games[this.state.index].total_hint - this.state.hintCount} Hint(s) Left</button>
                         </div>
                         </div>
-                    </body>
-                </section>
+                    </section>
             </div>
         
         )
