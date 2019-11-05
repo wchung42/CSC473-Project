@@ -39,6 +39,7 @@ class Puzzle extends Component {
           document.getElementById("result").innerText = "Correct";
           answerBox.style.borderColor = "palegreen";
           answerBox.value = "";
+          document.getElementById("hint").innerText ="";
           this.setState({
             questionIndex: qIndex,
             imageIndex: imgIndex,
@@ -130,8 +131,8 @@ class Puzzle extends Component {
                         <img className = "imgG" src= {games[this.state.index].images[this.state.imageIndex]}/>
                         <br /><br /><br />
                         <input id="answer" type="text" className="text-center textbox" />
-                        <p id="hint" className="questN"></p>
-                        <div >
+                        <p id="hint" className="questN" value =""></p>
+                        <div>
                             <button id="submitBttn" className="btn-large  btn-success" type="button" onClick={this.getAnswer}>&nbsp; Submit &nbsp;</button>
                             <p id="result" className="questN"></p>
                             
