@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 // import getAnswer from './gameFunctions.js';
 import './Game.css';
 import Puzzle from './Puzzle'; // import puzzle component
+import Timer from './Timer';
 
 
 class Game extends Component {
@@ -36,7 +37,9 @@ class Game extends Component {
         <div className="exit">
           <button className="btn-large btn-danger" type="button">&nbsp; Exit &nbsp;</button>
         </div>
-        <p id = "timer">Timer</p>
+        <div>
+          <Timer startCount = "300" />
+        </div>
         <div className = "game-state">
           <Puzzle />
         </div>
