@@ -115,36 +115,32 @@ class Puzzle extends Component {
         return (
             <div className = "game">
                     <section className="middle">
-                                   
-                        <br />
-                        <div className="exit">
-                        <button className="btn-large btn-danger" type="button">&nbsp; Exit &nbsp;</button>
-                        </div>
-                            <div className="text-center">
-                            <br/>
-                            <h1 className="gameTitle">
-                                {games[this.state.index].Title} Challenge
-                            </h1>
-                            <br/>
-                            <p className="text-center questN ">
-                                Question {this.state.questionIndex}:
-                            </p>
-                            <p className="text-center quest">
-                                {games[this.state.index].questions[this.state.questionIndex]}
-                            </p>
 
-                            <br /><br />
-                            <img className = "imgG" src= {games[this.state.index].images[this.state.imageIndex]} alt = "puzzle" />
-                            <br /><br /><br />
-                            <input id="answer" type="text" className="text-center textbox" />
-                            <p id="hint" className="questN"></p>
-                            <div >
-                                <button id="submitBttn" className="btn-large  btn-success" type="button" onClick={this.getAnswer}>&nbsp; Submit &nbsp;</button>
-                                <p id="result" className="questN"></p>
-                                
+                        <div className="text-center">
+                        <br/>
+                        <h1 className="gameTitle">
+                            {games[this.state.index].Title} Challenge
+                        </h1>
+                        <br/>
+                        <p className="text-center questN ">
+                            Question {this.state.questionIndex}:
+                        </p>
+                        <p className="text-center quest">
+                            {games[this.state.index].questions[this.state.questionIndex]}
+                        </p>
 
-                                <button id="hintBttn" className="btn-large btn-warning " type="button" onClick={this.getHint}>
-                                {games[this.state.index].total_hint - this.state.hintCount} Hint(s) Left</button>
+                        <br /><br />
+                        <img className = "imgG" src= {games[this.state.index].images[this.state.imageIndex]} alt = "puzzle" />
+                        <br /><br /><br />
+                        <input id="answer" type="text" className="text-center textbox" />
+                        <p id="hint" className="questN"></p>
+                        <div >
+                            <button id="submitBttn" className="btn-large  btn-success" type="button" onClick={this.getAnswer}>&nbsp; Submit &nbsp;</button>
+                            <p id="result" className="questN"></p>
+                            
+
+                            <button id="hintBttn" className="btn-large btn-warning " type="button" onClick={this.getHint}>
+                            {games[this.state.index].total_hint - this.state.hintCount} Hint(s) Left</button>
                         </div>
                         </div>
                     </section>

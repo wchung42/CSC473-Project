@@ -32,7 +32,11 @@ class Game extends Component {
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
           integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
           crossOrigin="anonymous" />
-
+        <br />
+        <div className="exit">
+          <button className="btn-large btn-danger" type="button">&nbsp; Exit &nbsp;</button>
+        </div>
+        <p id = "timer">Timer</p>
         <div className = "game-state">
           <Puzzle />
         </div>
