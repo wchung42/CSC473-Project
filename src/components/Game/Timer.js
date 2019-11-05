@@ -8,11 +8,18 @@ class Timer extends Component {
         }
     }
 
+    convertSeconds (seconds) {
+        let min = Math.floor(seconds / 60);
+        let sec = seconds % 60;
+        return String(min).padStart(2, '0') + ':' + String(sec).padStart(2, '0');
+    }
+
     render () {
         const { count } = this.state;
+        
         return (
             <div id = "time">
-                <h1>Time: { count }</h1>
+                <h1>Time: { this.convertSeconds(count) }</h1>
             </div>
         )
     }
