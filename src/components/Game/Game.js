@@ -70,11 +70,11 @@ class Game extends Component {
             <button className="btn-large btn-danger" type="button"><a href="http://localhost:3000/home">&nbsp; Exit &nbsp;</a></button>
           </div>
           <div>
-            <Timer startCount="300" />
+            <Timer gameId={this.state.gameID} startCount="300" />
           </div>
-          <div className="game-state">
+          {/* <div className="game-state">
             <Puzzle gameId={this.state.gameID} />
-          </div>
+          </div> */}
           <br />
         </div>
       );
