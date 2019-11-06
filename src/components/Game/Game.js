@@ -39,6 +39,7 @@ class Game extends Component {
         </div>
         <div>
           <Timer startCount = "60" />
+          {/* <Puzzle /> */}
         </div>
         <br />
       </div>

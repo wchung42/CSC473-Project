@@ -7,8 +7,15 @@ class Timer extends Component {
         super(props);
         this.state = {
             count: 1,
-            gameStatus: props.gameStatus
+            isPaused: false
         }
+        this.gameHandler = this.gameHandler.bind(this);
+    }
+
+    gameHandler() {
+        this.setState({
+            isPaused: true
+        })
     }
 
     convertSeconds (seconds) {
@@ -28,7 +35,7 @@ class Timer extends Component {
             return (
             <div id = "time">
                 <h1>Time: { this.convertSeconds(count) }</h1>
-                <Puzzle />
+                <Puzzle gameHandler = {this.gameHandler} />
             </div>
             )
         }
@@ -41,9 +48,10 @@ class Timer extends Component {
             count: startCount
         })
         this.myInterval = setInterval(() => {
-            this.setState(prevState => ({
+            if (!this.state.isPaused) {
+                this.setState(prevState => ({
                 count: prevState.count - 1
-            }))
+            }))}
         }, 1000)
     }
 
