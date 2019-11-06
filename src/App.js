@@ -52,6 +52,7 @@ class App extends Component {
         <link rel="stylesheet" href="styles.css"></link>
 
         <meta name="viewport" content="600px"></meta>
+
         <div>
           <Navbar drawerClickHandler={this.drawerToggleClickHandler} />
 
