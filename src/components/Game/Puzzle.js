@@ -9,19 +9,18 @@ class Puzzle extends Component {
     constructor(props) {
         super(props)
         this.state = {
-
-          index: 0,
-          questionIndex: 1,
-          // image change
-          imageIndex: 1,
-          hintCount: 0,
-          usedHint: false,
-          latitude: null,
-          longitude: null,
-          // game ends when last question is completed
-          gameState: true,
-          win: false,
-          timeStopper: 0 // used to stop timer
+            index: this.props.gameId,
+            questionIndex: 1,
+            // image change
+            imageIndex: 1,
+            hintCount: 0,
+            usedHint: false,
+            latitude: null,
+            longitude: null,
+            // game ends when last question is completed
+            gameState: true,
+            win: false,
+            timeStopper: 0 // used to stop timer
 
         }
         this.getAnswer = this.getAnswer.bind(this);
@@ -111,16 +110,16 @@ class Puzzle extends Component {
 
     componentDidUpdate() {
         if (this.state.win && this.state.timeStopper === 0) {
-            this.setState({ timeStopper: 1})
-            this.props.gameHandler();   
+            this.setState({ timeStopper: 1 })
+            this.props.gameHandler();
         }
-           
+
     }
 
-    render () {
+    render() {
         // game states - playing or end game
-        if ( !this.state.gameState ) {
-            const winPage = <Endgame outcome = {this.state.win}/>;
+        if (!this.state.gameState) {
+            const winPage = <Endgame outcome={this.state.win} />;
             return (
                 <div>
                     {/* <Endgame outcome = {this.state.win}/>; */}
