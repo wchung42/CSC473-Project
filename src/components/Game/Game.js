@@ -67,7 +67,7 @@ class Game extends Component {
             crossOrigin="anonymous" />
           <br />
           <div className="exit">
-            <button className="btn-large btn-danger" type="button"><a href="http://localhost:3000/home">&nbsp; Exit &nbsp;</a></button>
+            <button className="btn-large btn-danger" type="button"><a href="/Game">&nbsp; Exit &nbsp;</a></button>
           </div>
           <div>
             <Timer gameId={this.state.gameID} startCount="300" />
