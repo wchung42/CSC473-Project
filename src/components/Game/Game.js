@@ -26,7 +26,7 @@ class Game extends Component {
 
   //Want to load the game in here based on the name
   render = () => {
-
+    
     return (
       <div className="Game">
 
@@ -38,10 +38,7 @@ class Game extends Component {
           <button className="btn-large btn-danger" type="button"><a href ="http://localhost:3000/home">&nbsp; Exit &nbsp;</a></button>
         </div>
         <div>
-          <Timer startCount = "300" />
-        </div>
-        <div className = "game-state">
-          <Puzzle />
+          <Timer startCount = "60" />
         </div>
         <br />
       </div>
