@@ -37,6 +37,7 @@ class Game extends Component {
 
   //Want to load the game in here based on the name
   render = () => {
+
     if (!this.state.gameReady) {
       return (
         <div className="Game">
