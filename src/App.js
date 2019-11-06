@@ -63,10 +63,11 @@ class App extends Component {
           <Router>
             <Switch>
 
-              <Route path='/Home' component={Home} />
+              
               <Route path='/Game' component={Game} />
               <Route path='/about' component={About} />
               <Route path='/contact' component={Contact} />
+              <Route path='/' component={Home} />
 
             </Switch>
           </Router>

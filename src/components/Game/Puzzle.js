@@ -32,13 +32,13 @@ class Puzzle extends Component {
         let localQuestionIndex = this.state.questionIndex;
         let qIndex = localQuestionIndex + 1;  //INDICATE THE NEXT QUESTION
         let imgIndex = qIndex; // IMAGE INDEX 
-        let answer = games[localIndex].answers[localQuestionIndex];
+        let answer = games[localIndex].answers[localQuestionIndex].toLowerCase();
         let answerBox = document.getElementById("answer");
         let userAnswer = answerBox.value.toLowerCase(); //USER ANSWER = VALUE OF ANSWER BOX
         // console.log(answer);
 
 
-        if (userAnswer.toLowerCase() == answer) {
+        if (userAnswer == answer) {
             document.getElementById("result").innerText = "Correct";
             answerBox.style.borderColor = "palegreen";
             answerBox.value = "";
