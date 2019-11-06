@@ -31,7 +31,7 @@ class Puzzle extends Component {
         let imgIndex = qIndex; // IMAGE INDEX 
         let answer = games[localIndex].answers[localQuestionIndex].toLowerCase();
         let answerBox = document.getElementById("answer");
-        let userAnswer = answerBox.value; //USER ANSWER = VALUE OF ANSWER BOX
+        let userAnswer = answerBox.value.toLowerCase(); //USER ANSWER = VALUE OF ANSWER BOX
         // console.log(answer);
         
        

@@ -16,7 +16,7 @@ const footer = () => (
           <div className="footer-info">
 
             <p>
-          <a href="/">Home</a>
+          <a href="/Home">Home</a>
               ·
 					<a href="/Game">Games</a>
               ·
