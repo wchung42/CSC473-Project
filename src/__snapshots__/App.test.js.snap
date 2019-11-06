@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MyComponent should render correctly in "debug" mode 1`] = `
+<div
+  className="App"
+>
+  <link
+    crossOrigin="anonymous"
+    href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+    integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+    rel="stylesheet"
+  />
+  <link
+    href="styles.css"
+    rel="stylesheet"
+  />
+  <meta
+    content="600px"
+    name="viewport"
+  />
+  <navbar
+    drawerClickHandler={[Function]}
+  />
+  <sideDrawerMenu
+    show={false}
+  />
+  <BrowserRouter>
+    <Switch>
+      <Route
+        component={[Function]}
+        path="/Home"
+      />
+      <Route
+        component={[Function]}
+        path="/Game"
+      />
+      <Route
+        component={[Function]}
+        path="/about"
+      />
+      <Route
+        component={[Function]}
+        path="/contact"
+      />
+    </Switch>
+  </BrowserRouter>
+  <footer />
+</div>
+`;
+
+exports[`should render banner text correctly with given strings 1`] = `
+<div
+  className="App"
+>
+  <link
+    crossOrigin="anonymous"
+    href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+    integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+    rel="stylesheet"
+  />
+  <link
+    href="styles.css"
+    rel="stylesheet"
+  />
+  <meta
+    content="600px"
+    name="viewport"
+  />
+  <navbar
+    drawerClickHandler={[Function]}
+  />
+  <sideDrawerMenu
+    show={false}
+  />
+  <BrowserRouter>
+    <Switch>
+      <Route
+        component={[Function]}
+        path="/Home"
+      />
+      <Route
+        component={[Function]}
+        path="/Game"
+      />
+      <Route
+        component={[Function]}
+        path="/about"
+      />
+      <Route
+        component={[Function]}
+        path="/contact"
+      />
+    </Switch>
+  </BrowserRouter>
+  <footer />
+</div>
+`;
