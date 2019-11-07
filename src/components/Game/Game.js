@@ -88,7 +88,6 @@ class Game extends Component {
         </div>
       )
     }
-    // else if (!this.state.gameReady && )
     else if (this.state.gameReady && (this.state.gameSynopsis === 0) && (this.state.gameStart === 1)) {
       return (
         <div className="Game">
@@ -103,9 +102,6 @@ class Game extends Component {
           <div>
             <Timer gameId={this.state.gameID} startCount="300" />
           </div>
-          {/* <div className="game-state">
-            <Puzzle gameId={this.state.gameID} />
-          </div> */}
           <br />
         </div>
       );
