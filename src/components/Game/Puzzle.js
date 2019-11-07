@@ -3,7 +3,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 import games from './games.json';
 import './Game.css';
 import Endgame from './Endgame';
-import Timer from './Timer'
 
 class Puzzle extends Component {
     constructor(props) {
@@ -108,13 +107,13 @@ class Puzzle extends Component {
         }
     }
 
-
+    // when state changes, check to see if the game has ended
+    // stop timer when game is completed
     componentDidUpdate() {
         if (this.state.win && this.state.timeStopper === 0) {
             this.setState({ timeStopper: 1 })
             this.props.gameHandler();
         }
-
     }
 
     render() {
@@ -123,9 +122,8 @@ class Puzzle extends Component {
             const winPage = <Endgame outcome={this.state.win} />;
             return (
                 <div>
-                    {/* <Endgame outcome = {this.state.win}/>; */}
+                    {/* display win page when game is completed before timer hits 0 */}
                     {winPage}
-
                 </div>
             )
         }
