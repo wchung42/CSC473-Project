@@ -14,7 +14,7 @@ class Endgame extends Component {
                         <form id = "feedback-form">
                             <div className = "form-group" id = "rating">    
                                 <label for = "rating" id = "rating-label">Rating:</label>
-                                <select class = "form-control" id = "rating-select">
+                                <select className = "form-control" id = "rating-select">
                                     <option defaultValue>1</option>
                                     <option>2</option>
                                     <option>3</option>
@@ -26,7 +26,9 @@ class Endgame extends Component {
                             <div className = "form-group">     
                                 <label for = "feedback">Review:</label>
                                 <textarea className = "form-control" id = "feedback" placeholder = "Write your review"/>
-                            </div>      
+                            </div>
+                            <br/>
+                            <button className = "gameButton">Submit</button>   
                         </form>
                     </div>
                 </div>

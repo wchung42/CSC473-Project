@@ -11,4 +11,12 @@
 
 #feedback-form {
     margin: 0 auto;
+    font-size:2vh;
+}
+
+#rating-select{
+    font-size:3vh;
+}
+#feedback{
+    font-size:3vh;
 }

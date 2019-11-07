@@ -49,10 +49,10 @@ class Game extends Component {
             <button className="btn-large btn-danger" type="button"><a href="http://localhost:3000/home">&nbsp; Exit &nbsp;</a></button>
           </div>
           <div>
-            <button id="bttn1" type="button" onClick={this.getGameId} value="0">0</button>
-            <button id="bttn2" type="button" onClick={this.getGameId} value="1">1</button>
-            <button id="bttn3" type="button" onClick={this.getGameId} value="2">2</button>
-            <button id="bttn4" type="button" onClick={this.getGameId} value="3">3</button>
+            <button id="bttn1" className = "gameButton" type="button" onClick={this.getGameId} value="0">0</button><br/><br/>
+            <button id="bttn2" className = "gameButton" type="button" onClick={this.getGameId} value="1">1</button><br/><br/>
+            <button id="bttn3" className = "gameButton" type="button" onClick={this.getGameId} value="2">2</button><br/><br/>
+            <button id="bttn4" className = "gameButton" type="button" onClick={this.getGameId} value="3">3</button><br/><br/>
           </div>
           <br />
         </div>
