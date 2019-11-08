@@ -114,7 +114,6 @@ class Puzzle extends Component {
             this.setState({ timeStopper: 1 })
             this.props.gameHandler();
         }
-
     }
 
     render() {
@@ -123,14 +122,11 @@ class Puzzle extends Component {
             const winPage = <Endgame outcome={this.state.win} />;
             return (
                 <div>
-                    {/* <Endgame outcome = {this.state.win}/>; */}
                     {winPage}
-
                 </div>
             )
         }
         return (
-
             <div className="game">
                 <section className="middle">
 
@@ -143,7 +139,6 @@ class Puzzle extends Component {
                         <p className="text-center quest">
                             {games[this.state.index].Game_Story[this.state.questionIndex].replace("\\n", "\n")}
                         </p>
-
                         <br /><br />
                         <img className="imgG" src={games[this.state.index].images[this.state.imageIndex]} />
                         <br /><br /><br />
@@ -152,7 +147,6 @@ class Puzzle extends Component {
                         <div>
                             <button id="submitBttn" className="btn-large  btn-success" type="button" onClick={this.getAnswer}>&nbsp; Submit &nbsp;</button>
                             <p id="result" className="questN"></p>
-
 
                             <button id="hintBttn" className="btn-large btn-warning " type="button" onClick={this.getHint}>
                                 {games[this.state.index].total_hint - this.state.hintCount} Hint(s) Left</button>
@@ -168,3 +162,13 @@ class Puzzle extends Component {
 }
 
 export default Puzzle;
+
+  // position = async () => {
+  //   await navigator.geolocation.getCurrentPosition(
+  //     position => this.setState({
+  //       latitude: position.coords.latitude,
+  //       longitude: position.coords.longitude
+  //     }), newState => console.log(newState))
+
+  //   console.log(this.state.latitude, this.state.longitude)
+  // }

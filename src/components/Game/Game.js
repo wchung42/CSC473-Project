@@ -25,16 +25,6 @@ class Game extends Component {
     console.log(this.state.gameID)
   }
 
-  // position = async () => {
-  //   await navigator.geolocation.getCurrentPosition(
-  //     position => this.setState({
-  //       latitude: position.coords.latitude,
-  //       longitude: position.coords.longitude
-  //     }), newState => console.log(newState))
-
-  //   console.log(this.state.latitude, this.state.longitude)
-  // }
-
   //Want to load the game in here based on the name
   render = () => {
 
@@ -46,13 +36,13 @@ class Game extends Component {
             crossOrigin="anonymous" />
           <br />
           <div className="exit">
-            <button className="btn-large btn-danger" type="button"><a href="http://localhost:3000/home">&nbsp; Exit &nbsp;</a></button>
+            <button className="btn-large btn-danger" type="button"><a href="/Game">&nbsp; Exit &nbsp;</a></button>
           </div>
-          <div>
-            <button id="bttn1" className = "gameButton" type="button" onClick={this.getGameId} value="0">0</button><br/><br/>
-            <button id="bttn2" className = "gameButton" type="button" onClick={this.getGameId} value="1">1</button><br/><br/>
-            <button id="bttn3" className = "gameButton" type="button" onClick={this.getGameId} value="2">2</button><br/><br/>
-            <button id="bttn4" className = "gameButton" type="button" onClick={this.getGameId} value="3">3</button><br/><br/>
+          <div className="gameInterface">
+            <button id="bttn1" className="gameButton" type="button" onClick={this.getGameId} value="0">0</button><br /><br />
+            <button id="bttn2" className="gameButton" type="button" onClick={this.getGameId} value="1">1</button><br /><br />
+            <button id="bttn3" className="gameButton" type="button" onClick={this.getGameId} value="2">2</button><br /><br />
+            <button id="bttn4" className="gameButton" type="button" onClick={this.getGameId} value="3">3</button><br /><br />
           </div>
           <br />
         </div>
@@ -61,7 +51,6 @@ class Game extends Component {
     else {
       return (
         <div className="Game">
-
           <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
             integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
             crossOrigin="anonymous" />
@@ -69,12 +58,9 @@ class Game extends Component {
           <div className="exit">
             <button className="btn-large btn-danger" type="button"><a href="/Game">&nbsp; Exit &nbsp;</a></button>
           </div>
-          <div>
+          <div className="gameInterface">
             <Timer gameId={this.state.gameID} startCount="300" />
           </div>
-          {/* <div className="game-state">
-            <Puzzle gameId={this.state.gameID} />
-          </div> */}
           <br />
         </div>
       );
