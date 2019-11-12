@@ -1,6 +1,7 @@
 
 .footer-all {
-    bottom:0;
+    position: relative;
+    bottom: 0;
     background-color: black;
     box-sizing: border-box;
     width: 100%;
