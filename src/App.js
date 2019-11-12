@@ -59,16 +59,13 @@ class App extends Component {
           <SideDrawerMenu show={this.state.sideDrawerMenuOpen} />
           {backdrop}
         </div>
-        <div>
+        <div className = "body-page">
           <Router>
             <Switch>
-
-              
               <Route path='/Game' component={Game} />
               <Route path='/about' component={About} />
               <Route path='/contact' component={Contact} />
               <Route path='/' component={Home} />
-
             </Switch>
           </Router>
         </div>

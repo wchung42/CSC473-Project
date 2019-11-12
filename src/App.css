@@ -54,15 +54,13 @@
 }
   
 .card-img-top{
-    width: 50%;
-    height: 5%;
-  }
+  width: 50%;
+  height: 5%;
+}
 
-
-/* 
-Everything below this point is strictly for the game page
-The seperation is for if we want to move it to a different file
-
-*/
+.body-page {
+  position: relative;
+  min-height: 100vh;
+}
 
 
