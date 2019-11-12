@@ -79,7 +79,7 @@ class Game extends Component {
             <button className="btn-large btn-danger" type="button"><a href="/Game">&nbsp; Exit &nbsp;</a></button>
           </div>
           <div className = "synopsis">
-            <h1>loream ipsum</h1>
+            <h1>{games[this.state.gameID].Story}</h1>
           </div>
           <div className = "start">
             <button id = "start-btn" className = "btn-large btn-success" type = "button" onClick = {this.startGame}>&nbsp; Start &nbsp;</button>
