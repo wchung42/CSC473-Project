@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.css';
 import Navbar from './components/Navbar/Navbar';
 import SideDrawerMenu from './components/SideDrawerMenu/SideDrawerMenu';
 import Backdrop from './components/Backdrop/Backdrop';
-import 'bootstrap/dist/css/bootstrap.css';
 import Game from './components/Game/Game';
 import Home from './components/home';
 import Footer from './components/Footer/Footer'
@@ -62,6 +62,7 @@ class App extends Component {
         <div className = "body-page">
           <Router>
             <Switch>
+
               <Route path='/Game' component={Game} />
               <Route path='/about' component={About} />
               <Route path='/contact' component={Contact} />
