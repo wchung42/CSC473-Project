@@ -23,14 +23,14 @@ const Home = () => {
     );
 
   return (
-    <section>
+    <div className = "body-page">
       <header className="Welcome-Section">
       </header>
       <body className="Body-Section">
         <p className="popular-game"><strong>POPULAR GAMES</strong></p>
         <ol className="cards" >{listItems}</ol>
       </body>
-    </section>
+    </div>
   );
 }
 
