@@ -57,6 +57,7 @@ class Puzzle extends Component {
             console.log("Wrong Answer")
             if (document.getElementById("answer")) {
                 document.getElementById("answer").value = "";
+                document.getElementById("submitBttn").value = "";
             }
             if (document.getElementById("pound")) {
                 document.getElementById("pound").value = "";
