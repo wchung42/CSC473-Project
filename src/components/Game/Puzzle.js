@@ -130,7 +130,7 @@ class Puzzle extends Component {
                             {answerPage}
                             <p id="hint" className="questN" value=""></p>
                             <div>
-                                <button id="hintBttn" className="btn-large btn-warning " type="button" onClick={this.getHint}>
+                                <button id="hintBttn" className="btn-large  btn-success" type="button" onClick={this.getHint}>
                                     {games[this.state.index].Total_Hint - this.state.hintCount} Hint(s) Left</button>
                             </div>
                         </div>

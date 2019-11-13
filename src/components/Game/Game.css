@@ -10,7 +10,7 @@
   align-content: center;
   margin-top:10%;
   margin-left: 15%;
-  width: 70vw;
+  width: 30vw;
   height: 25vh;
 }
 
@@ -54,3 +54,56 @@
 .gameButton{
   font-size:250%
 }
+
+
+/* THIS IS FOR QUESTION DISPLAY */
+.imgG{
+  align-content: center;
+  margin-top:10%;
+  margin-left: 15%;
+  margin-right: 15%;
+  width: 60%;
+  height: 25vh;
+}
+
+/* THIS IS FOR NUMBER ANSWER STYLE */
+#numPad{
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  grid-gap: 10px;
+  width: 50%;
+  margin-left: 25%;
+  padding: 5px;
+  justify-items: space-evenly;
+}
+
+.number{
+  /* display: inline-block; */
+  padding: 10% 10%;
+  font-size:250%
+}
+.number:hover{
+  background-color: greenyellow;
+}
+
+
+/* THIS IS FOR TEXT BOX ANSWER */
+#textAnswer{
+  /* display: grid;
+  grid-template-columns: repeat(2,1fr);
+  grid-gap: 10px; */
+  width: 50%;
+  margin-top: 2%;
+  margin-left: 27.5%;
+  margin-right: 37.5%;
+  padding: 5px;
+}
+
+#answerBox{
+  width: 100%;
+}
+
+#submitBttn{
+  text-align: center;
+}
+
