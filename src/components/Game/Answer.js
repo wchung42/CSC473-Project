@@ -18,7 +18,7 @@ class Answer extends Component {
     }
     //this enter will get current value of the input and assign that value to submit button
     enterText() {
-        document.getElementById("submitBttn").value = document.getElementById("answer").value;
+        document.getElementById("submitBttn").value = document.getElementById("answerBox").value;
     }
 
     componentDidUpdate(prevProps) {

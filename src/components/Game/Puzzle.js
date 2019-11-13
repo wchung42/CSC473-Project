@@ -55,8 +55,8 @@ class Puzzle extends Component {
         //wrong answer => reset the current value of the pound button
         else {
             console.log("Wrong Answer")
-            if (document.getElementById("answer")) {
-                document.getElementById("answer").value = "";
+            if (document.getElementById("answerBox")) {
+                document.getElementById("answerBox").value = "";
                 document.getElementById("submitBttn").value = "";
             }
             if (document.getElementById("pound")) {
