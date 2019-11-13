@@ -1,4 +1,8 @@
 .navbar {
+<<<<<<< HEAD
+=======
+    position: relative;
+>>>>>>> fixed navbar bug
     background-color: black;
     top: 0;
     left: 0;
