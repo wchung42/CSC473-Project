@@ -81,7 +81,7 @@ describe("Timer component", () => {
     describe("clear interval at 00:00", () => {
         const wrapper = shallow(<Timer />);
         it("interval clears", () => {
-            let timer = jest.useFakeTimers();
+            let time = jest.useFakeTimers();
             wrapper.setState({
                 count: 0
             });
