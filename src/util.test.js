@@ -6,9 +6,10 @@ import ReactDOM from 'react-dom';
 import Puzzle from './components/Game/Puzzle'
 import Navbar from './components/Navbar/Navbar'
 import Footer from './components/Footer/Footer'
+import backdrop from './components/Backdrop/Backdrop'
 
 import { shallow, mount } from 'enzyme';
-import { isTSAnyKeyword } from '@babel/types';
+
 
 
 test('backdropClickHandler Testing',()=>{
@@ -42,6 +43,16 @@ test('footer Testing', () => {
   const footer= shallow(<Footer />);
 
   expect(footer.text()).toEqual('Home·Games·About·Faq·ContactEscape Team © 2019');
+  expect(footer.find('div.footer-info').length).toBe(1)
+
+  
+});
+
+test('Backdrop Testing', () => {
+
+  const Backdrop = shallow(<backdrop />);
+
+  expect(Backdrop.find('div.backdrop').length).toBe(0)
 
   
 });
