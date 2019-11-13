@@ -1,6 +1,6 @@
 [
     {
-        "Id": 1,
+        "Id": 0,
         "Title": "The Haunted Room",
         "Difficulty": 4,
         "Story": "Some spirits are strong and manifest in a ghost like form, most are weak and must live on in within a host. The host is usually an object. CCNY is known for having dead in the library due to an impossible engineering department. The Grove School of Engineering has caused this room to become filled with spirits trapped in objects, we need you to set them free!",
@@ -27,7 +27,7 @@
             "1": "number",
             "2": "text",
             "3": "text",
-            "4": "text",
+            "4": "number",
             "5": "text"
         },
         "Answers": {
@@ -46,7 +46,7 @@
         }
     },
     {
-        "Id": 2,
+        "Id": 1,
         "Title": "Harris Hall",
         "Difficulty": 2,
         "Story": "This is a very short story",
@@ -92,7 +92,7 @@
         }
     },
     {
-        "Id": 3,
+        "Id": 2,
         "Title": "Wingate Hall",
         "Difficulty": 3,
         "Story": "This is not a story",
@@ -138,7 +138,7 @@
         }
     },
     {
-        "Id": 4,
+        "Id": 3,
         "Title": "Marshak Hall",
         "Difficulty": 4,
         "Story": "This is a very short story",

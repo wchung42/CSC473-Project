@@ -1,0 +1,73 @@
+import React, { Component } from 'react';
+import games from './games.json';
+
+class Answer extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            gameIndex: this.props.id,
+            questionIndex: this.props.qId,
+            answer: ""
+        };
+        this.enterNum = this.enterNum.bind(this);
+        this.enterText = this.enterText.bind(this);
+    }
+    //this function will "set state for the answer" to save current value then change the current value of the pound button
+    enterNum(e) {
+        let buttonEntered = this.state.answer + e.currentTarget.value;
+        document.getElementById("pound").value = buttonEntered;
+        this.setState({
+            answer: buttonEntered
+        })
+    }
+    //this enter will get current value of the input and assign that value to submit button
+    enterText() {
+        let tempAnswer = document.getElementById("answer").value;
+        document.getElementById("submitBttn").value += tempAnswer;
+        console.log(tempAnswer)
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.qId !== this.props.qId) {
+            this.setState({
+                questionIndex: this.props.qId
+            })
+        }
+    }
+
+    render() {
+        if (games[this.state.gameIndex].Answer_Type[this.state.questionIndex] == "number") {
+            return (
+                // Construct Num Pad
+                <div key={this.props.qId} id="numPad">
+                    <button type="button" className="number" onClick={this.enterNum} value="7">7</button>
+                    <button type="button" className="number" onClick={this.enterNum} value="8">8</button>
+                    <button type="button" className="number" onClick={this.enterNum} value="9">9</button>
+
+                    <button type="button" className="number" onClick={this.enterNum} value="4">4</button>
+                    <button type="button" className="number" onClick={this.enterNum} value="5">5</button>
+                    <button type="button" className="number" onClick={this.enterNum} value="6">6</button>
+
+                    <button type="button" className="number" onClick={this.enterNum} value="1">1</button>
+                    <button type="button" className="number" onClick={this.enterNum} value="2">2</button>
+                    <button type="button" className="number" onClick={this.enterNum} value="3">3</button>
+
+                    <button type="button" className="zero" onClick={this.enterNum} value="0">0</button>
+                    <button type="button" id="pound" onClick={this.props.action} value="">#</button>
+                </div>
+            )
+        }
+        else {
+            return (
+                <div key={this.props.qId} id="answerBox">
+                    <input id="answer" type="text" className="text-center textbox" onChange={this.enterText} />
+                    <button id="submitBttn" className="btn-large  btn-success" type="button" onClick={this.props.action} value="">&nbsp; Submit &nbsp;</button>
+                </div>
+            )
+
+        }
+
+    }
+}
+
+export default Answer;
