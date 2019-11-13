@@ -59,13 +59,13 @@ class Game extends Component {
             crossOrigin="anonymous" />
           <br />
           <div className="exit">
-            <button className="btn-large btn-danger" type="button"><a href="http://localhost:3000/home">&nbsp; Exit &nbsp;</a></button>
+            <button className="btn-large btn-danger" type="button"><a href="/Game">&nbsp; Exit &nbsp;</a></button>
           </div>
           <div>
-            <button id="bttn1" className = "gameButton" type="button" onClick={this.getGameId} value="0">{games[0].Title}</button><br/><br/>
-            <button id="bttn2" className = "gameButton" type="button" onClick={this.getGameId} value="1">{games[1].Title}</button><br/><br/>
-            <button id="bttn3" className = "gameButton" type="button" onClick={this.getGameId} value="2">{games[2].Title}</button><br/><br/>
-            <button id="bttn4" className = "gameButton" type="button" onClick={this.getGameId} value="3">{games[3].Title}</button><br/><br/>
+            <button id="bttn1" className="gameButton" type="button" onClick={this.getGameId} value="0">{games[0].Title}</button><br /><br />
+            <button id="bttn2" className="gameButton" type="button" onClick={this.getGameId} value="1">{games[1].Title}</button><br /><br />
+            <button id="bttn3" className="gameButton" type="button" onClick={this.getGameId} value="2">{games[2].Title}</button><br /><br />
+            <button id="bttn4" className="gameButton" type="button" onClick={this.getGameId} value="3">{games[3].Title}</button><br /><br />
           </div>
           <br />
         </div>
@@ -74,24 +74,23 @@ class Game extends Component {
     // go to game synopsis page
     else if (this.state.gameReady && (this.state.gameSynopsis === 1) && (this.state.gameStart === 0)) {
       return (
-        <div className = "Game">
+        <div className="Game">
           <div className="exit">
             <button className="btn-large btn-danger" type="button"><a href="/Game">&nbsp; Exit &nbsp;</a></button>
           </div>
-          <div className = "synopsis">
-            <h1>loream ipsum</h1>
+          <div className="synopsis">
+            <h1>{games[this.state.gameID].Story}</h1>
           </div>
-          <div className = "start">
-            <button id = "start-btn" className = "btn-large btn-success" type = "button" onClick = {this.startGame}>&nbsp; Start &nbsp;</button>
+          <div className="start">
+            <button id="start-btn" className="btn-large btn-success" type="button" onClick={this.startGame}>&nbsp; Start &nbsp;</button>
           </div>
-           
+
         </div>
       )
     }
     else if (this.state.gameReady && (this.state.gameSynopsis === 0) && (this.state.gameStart === 1)) {
       return (
         <div className="Game">
-
           <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
             integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
             crossOrigin="anonymous" />
@@ -99,7 +98,7 @@ class Game extends Component {
           <div className="exit">
             <button className="btn-large btn-danger" type="button"><a href="/Game">&nbsp; Exit &nbsp;</a></button>
           </div>
-          <div>
+          <div className="gameInterface">
             <Timer gameId={this.state.gameID} startCount="300" />
           </div>
           <br />

@@ -1,0 +1,19 @@
+{
+    "local": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-csc473-project-local-201903-authRole",
+            "UnauthRoleArn": "arn:aws:iam::557127555613:role/amplify-csc473-project-local-201903-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::557127555613:role/amplify-csc473-project-local-201903-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "amplify-csc473-project-local-201903-deployment",
+            "UnauthRoleName": "amplify-csc473-project-local-201903-unauthRole",
+            "StackName": "amplify-csc473-project-local-201903",
+            "StackId": "arn:aws:cloudformation:us-east-1:557127555613:stack/amplify-csc473-project-local-201903/94f01bb0-05b3-11ea-957f-1217092af407"
+        },
+        "categories": {
+            "auth": {
+                "csc473project02fd9d5b": {}
+            }
+        }
+    }
+}
