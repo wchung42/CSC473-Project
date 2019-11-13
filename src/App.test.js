@@ -22,3 +22,4 @@ it('should render banner text correctly with given strings', () => {
   const component = shallow(<App list={strings} />);
   expect(component).toMatchSnapshot();
 });
+
