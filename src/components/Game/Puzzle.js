@@ -67,20 +67,20 @@ class Puzzle extends Component {
     getHint() {
         let localIndex = this.state.index;
         let localQuestionIndex = this.state.questionIndex;
-        let totalHint = games[localIndex].total_hint;
+        let totalHint = games[localIndex].Total_Hint;
         let hintCount = this.state.hintCount;
         let hintArea = document.getElementById("hint");
         let usedHint = this.state.usedHint;
         if (hintCount < totalHint && !usedHint) {
             hintCount += 1;
-            hintArea.innerText = games[localIndex].hint[localQuestionIndex];
+            hintArea.innerText = games[localIndex].Hint[localQuestionIndex];
             this.setState({
                 hintCount: hintCount,
                 usedHint: true
             })
         }
         else if (usedHint) {
-            hintArea.innerText = games[localIndex].hint[localQuestionIndex];
+            hintArea.innerText = games[localIndex].Hint[localQuestionIndex];
         }
         else {
             hintArea.innerText = "Sorry You've Run Out Of Hint! NOW USE YOUR DAMN BRAIN"
