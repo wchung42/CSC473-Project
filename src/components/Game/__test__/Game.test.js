@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Game from './../Game';
-import renderer from 'react-test-renderer';
+import Timer from './../Timer';
 import { shallow, mount } from 'enzyme';
 
 
@@ -58,6 +58,7 @@ describe("component renders different pages based on states", () => {
         });
         wrapper.update();
         expect(wrapper.find('div.gameInterface').length).toBe(1);
+        expect(wrapper.find(Timer).length).toBe(1);
     })
 })
 
