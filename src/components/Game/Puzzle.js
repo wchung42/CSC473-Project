@@ -36,7 +36,7 @@ class Puzzle extends Component {
         let answer = games[currentGameIndex].Answers[currentQuestionIndex];
 
         //if the answer is correct
-        if (userAnswer == answer) {
+        if (userAnswer.toLowerCase() == answer.toLowerCase()) {
             //else moving to the next question
             console.log("right answer");
             this.setState({
