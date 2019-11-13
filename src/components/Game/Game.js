@@ -61,7 +61,7 @@ class Game extends Component {
           <div className="exit">
             <button className="btn-large btn-danger" type="button"><a href="/Game">&nbsp; Exit &nbsp;</a></button>
           </div>
-          <div>
+          <div className = "game-list">
             <button id="bttn1" className="gameButton" type="button" onClick={this.getGameId} value="0">{games[0].Title}</button><br /><br />
             <button id="bttn2" className="gameButton" type="button" onClick={this.getGameId} value="1">{games[1].Title}</button><br /><br />
             <button id="bttn3" className="gameButton" type="button" onClick={this.getGameId} value="2">{games[2].Title}</button><br /><br />
