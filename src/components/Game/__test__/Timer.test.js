@@ -1,12 +1,12 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Timer from './../Timer';
-import {convertSeconds} from './../Timer'
+import Puzzle from './../Puzzle';
+import Endgame from './../Endgame';
 import { shallow, mount } from 'enzyme';
 
 // initial test
 describe("Timer component", () => {
-    it("renders", () => {
+    it("Time component renders", () => {
         const wrapper = shallow(<Timer />);
         expect(wrapper.exists()).toBe(true);
     })
@@ -49,5 +49,44 @@ describe("Timer component", () => {
         });
     });
 
+    // test renders when time up
+    describe("game screens", () => {
+        const wrapper = shallow(<Timer />);
+        it("renders lose screen at 00:00", () => {
+            wrapper.setState({
+                count: 0
+            });
+            expect(wrapper.find(Endgame).length).toBe(1);
+        });
+        it("renders puzzle game when time is still remaining", () => {
+            wrapper.setState({
+                count: 1
+            });
+            expect(wrapper.find(Puzzle).length).toBe(1);
+        })
+    });
+
+    // test decrement
+    describe("time counts down", () => {
+        const wrapper = shallow(<Timer />);  
+        it("decrements", () => {
+            let timer = jest.useFakeTimers();
+            wrapper.instance().componentDidMount();
+            wrapper.update();
+            expect(setInterval).toHaveBeenCalledTimes(1);
+        })
+    });
+
+    //test clear interval
+    describe("clear interval at 00:00", () => {
+        const wrapper = shallow(<Timer />);
+        it("interval clears", () => {
+            let timer = jest.useFakeTimers();
+            wrapper.setState({
+                count: 0
+            });
+            expect(clearInterval).toHaveBeenCalledWith(expect.any(Number));
+        })
+    })
 });
 
