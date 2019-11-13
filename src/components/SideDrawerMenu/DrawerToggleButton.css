@@ -2,11 +2,11 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    height: 2vh;
-    width: 1.5vh;
+    height: 2.5vh;
+    width: 2vh;
     background: transparent;
     border: none;
-    margin-right: 1vh;
+    margin-right: 1.5vh;
     margin-left: 1vh;
 }
 
@@ -15,8 +15,8 @@
 }
 
 .toggle-button-line {
-    width: 2vh;
-    height: 0.25vh;
+    width: 3vh;
+    height: 0.3vh;
     background: white;
 
 }

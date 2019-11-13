@@ -1,0 +1,20 @@
+{
+    "appName": "escape",
+    "roleName": "pinpointLambdaRolee96aff02",
+    "cloudWatchPolicyName": "cloudWatchPolicye96aff02",
+    "pinpointPolicyName": "pinpointPolicye96aff02",
+    "authPolicyName": "pinpoint_amplify_e96aff02",
+    "unauthPolicyName": "pinpoint_amplify_e96aff02",
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "authRoleArn": {
+        "Fn::GetAtt": [
+            "AuthRole",
+            "Arn"
+        ]
+    }
+}

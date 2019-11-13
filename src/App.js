@@ -1,21 +1,58 @@
 import React, { Component } from 'react';
-import games from './games.json';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.css';
 import Navbar from './components/Navbar/Navbar';
 import SideDrawerMenu from './components/SideDrawerMenu/SideDrawerMenu';
 import Backdrop from './components/Backdrop/Backdrop';
-import 'bootstrap/dist/css/bootstrap.css';
-// import sherapd from './images/sherapd0.jpg'
+import Game from './components/Game/Game';
+import Home from './components/home';
+import Footer from './components/Footer/Footer'
+import About from './components/About/About';
+import Contact from './components/Contact/Contact';
+import { Analytics, Auth } from 'aws-amplify';
+import Login from './components/Login/login';
+
+Analytics.configure({ disabled: true })
 
 class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      currentUser: null,
       latitude: null,
       longitude: null,
       sideDrawerMenuOpen: false
+
     }
   }
+
+  //Testing
+
+  componentDidMount() {
+    Analytics.startSession();
+    window.addEventListener('beforeunload', () => {
+        Analytics.stopSession();
+    })
+    Auth.currentAuthenticatedUser().then(user => {
+        this.updateCurrentUser(user)
+    });
+}
+
+updateCurrentUser = (user) => {
+    this.setState({
+        currentUser: user
+    })
+}
+
+onSignOut = async () => {
+    await Auth.signOut();
+    this.setState({
+        currentUser: null
+    })
+}
+
+  //Testing
 
   // toggle drawer button handler
   drawerToggleClickHandler = () => {
@@ -31,30 +68,7 @@ class App extends Component {
   // this state later will be written into a file in a backend so creator can generate new games without coding
 
   render = () => {
-    // console.log(games) 
-    let listItems = games
-      .filter(game => game.popular == true)
-      .map(item =>
-        <li className="bodyCard" key={item.id} >
-          <div className="card">
-            <img
-              key={item.id}
-              className="card-img-top"
-              src={require('./images/' + item.thumbnail)}
-              onMouseEnter={e => e.currentTarget.src = require('./images/' + item.id + "/1.jpg")}
-              onMouseOut={e => e.currentTarget.src = require('./images/' + item.thumbnail)} />
-            <div className="card-body">
-              <h5 className="card-title">
-                <strong>{item.Title} ({item.Difficulty}/5)</strong>
-              </h5>
-              <p className="card-text"> {item.Story}</p>
-              <a href="#" class="btn btn-primary">Play</a>
-            </div>
-          </div>
-        </li >
-      );
 
-    // handle side drawer 
     let backdrop;
     if (this.state.sideDrawerMenuOpen) {
       backdrop = <Backdrop click={this.backdropClickHandler} />
@@ -62,53 +76,36 @@ class App extends Component {
 
     return (
       <div className="App">
-        <meta name="viewport" content="600px"></meta>
-        <Navbar drawerClickHandler={this.drawerToggleClickHandler} />
-        <SideDrawerMenu show={this.state.sideDrawerMenuOpen} />
-        {backdrop}
 
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
           integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
-          crossorigin="anonymous" />
+          crossOrigin="anonymous" />
         <link rel="stylesheet" href="styles.css"></link>
-        <section className="middle">
-        <header className="Welcome-Section">
-        </header>
 
-        <body className="Body-Section">
-          <p className="popular-game"><strong>POPULAR GAMES</strong></p>
-          <ol className="cards" >{listItems}</ol>
-        </body>
-        </section>
+        <meta name="viewport" content="600px"></meta>
 
-        <footer className="footer-all">
-          <div className="footer-social">
+        <div>
+          <Navbar drawerClickHandler={this.drawerToggleClickHandler} />
 
-            <a href="#"><i className="fab fa-facebook"></i></a>
-            <a href="#"><i className="fab fa-twitter"></i></a>
-            <a href="#"><i className="fab fa-linkedin"></i></a>
-            <a href="#"><i className="fab fa-github"></i></a>
+          <SideDrawerMenu show={this.state.sideDrawerMenuOpen} />
+          {backdrop}
+        </div>
+        <div className="body-page">
+          <Router>
+            <Switch>
 
-          </div>
+              <Route path='/Game' component={Game} />
+              <Route path='/about' component={About} />
+              <Route path='/contact' component={Contact} />
+              <Route exact path="/login" 
+                        render = {() => <Login onLogin={this.updateCurrentUser} />}
+                    />
+              <Route path='/' component={Home} />
 
-          <div className="footer-info">
-
-            <p>
-              <a href="#">Home</a>
-              ·
-					<a href="#">Games</a>
-              ·
-					<a href="#">About</a>
-              ·
-					<a href="#">Faq</a>
-              ·
-					<a href="#">Contact</a>
-            </p>
-
-            <p><strong>Escape Team © 2019</strong></p>
-          </div>
-
-        </footer>
+            </Switch>
+          </Router>
+        </div>
+        <Footer />
       </div>
     );
   }

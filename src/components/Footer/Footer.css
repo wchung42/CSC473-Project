@@ -1,0 +1,36 @@
+
+.footer-all {
+    position: relative;
+    bottom: 0;
+    background-color: black;
+    box-sizing: border-box;
+    width: 100%;
+    font: normal 5vh sans-serif;
+    padding: 2vh;
+    text-align: center;
+}
+  
+.footer-social {
+margin: 0 auto 5%;
+}
+
+.footer-social a {
+display: inline-block;
+width: 10vw;
+font-size:80%;
+color: white;
+}
+
+.footer-info {
+font-size: 4vw;
+font-weight: bold;
+color: #ffffff;
+}
+.footer-info a{
+color:white;
+padding:2%;
+}
+
+.footer-all .footer-left, .footer-distributed .footer-right {
+text-align: center;
+}
