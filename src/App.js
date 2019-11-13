@@ -10,18 +10,49 @@ import Home from './components/home';
 import Footer from './components/Footer/Footer'
 import About from './components/About/About';
 import Contact from './components/Contact/Contact';
+import { Analytics, Auth } from 'aws-amplify';
+import Login from './components/Login/login';
 
+Analytics.configure({ disabled: true })
 
 class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      currentUser: null,
       latitude: null,
       longitude: null,
       sideDrawerMenuOpen: false
 
     }
   }
+
+  //Testing
+
+  componentDidMount() {
+    Analytics.startSession();
+    window.addEventListener('beforeunload', () => {
+        Analytics.stopSession();
+    })
+    Auth.currentAuthenticatedUser().then(user => {
+        this.updateCurrentUser(user)
+    });
+}
+
+updateCurrentUser = (user) => {
+    this.setState({
+        currentUser: user
+    })
+}
+
+onSignOut = async () => {
+    await Auth.signOut();
+    this.setState({
+        currentUser: null
+    })
+}
+
+  //Testing
 
   // toggle drawer button handler
   drawerToggleClickHandler = () => {
@@ -66,7 +97,11 @@ class App extends Component {
               <Route path='/Game' component={Game} />
               <Route path='/about' component={About} />
               <Route path='/contact' component={Contact} />
+              <Route exact path="/login" 
+                        render = {() => <Login onLogin={this.updateCurrentUser} />}
+                    />
               <Route path='/' component={Home} />
+
             </Switch>
           </Router>
         </div>
