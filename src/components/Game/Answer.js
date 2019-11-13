@@ -46,6 +46,7 @@ class Answer extends Component {
                     <button type="button" className="number" onClick={this.enterNum} value="2">2</button>
                     <button type="button" className="number" onClick={this.enterNum} value="3">3</button>
 
+
                     <button type="button" className="number" onClick={this.enterNum} value=".">.</button>
                     <button type="button" className="number" onClick={this.enterNum} value="0">0</button>
                     <button type="button" className="number" id="pound" onClick={this.props.action} value="">#</button>
