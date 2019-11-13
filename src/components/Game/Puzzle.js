@@ -141,7 +141,7 @@ class Puzzle extends Component {
                             {games[this.state.index].Game_Story[this.state.questionIndex].replace("\\n", "\n")}
                         </p>
                         <br /><br />
-                        <img className="imgG" src={games[this.state.index].images[this.state.imageIndex]} />
+                        <img className="imgG" src={games[this.state.index].Images[this.state.imageIndex]} />
                         <br /><br /><br />
                         <input id="answer" type="text" className="text-center textbox" />
                         <p id="hint" className="questN" value=""></p>
@@ -150,7 +150,7 @@ class Puzzle extends Component {
                             <p id="result" className="questN"></p>
 
                             <button id="hintBttn" className="btn-large btn-warning " type="button" onClick={this.getHint}>
-                                {games[this.state.index].total_hint - this.state.hintCount} Hint(s) Left</button>
+                                {games[this.state.index].Total_Hint - this.state.hintCount} Hint(s) Left</button>
                         </div>
                     </div>
                 </section>

@@ -1,60 +1,60 @@
 [
     {
-        "id": 1,
+        "Id": 1,
         "Title": "The Haunted Room",
         "Difficulty": 4,
         "Story": "Some spirits are strong and manifest in a ghost like form, most are weak and must live on in within a host. The host is usually an object. CCNY is known for having dead in the library due to an impossible engineering department. The Grove School of Engineering has caused this room to become filled with spirits trapped in objects, we need you to set them free!",
-        "tag": "#ccny, #shepard_hall",
-        "thumbnail": "https://i.ibb.co/sVKnY3R/74419834-2503997649921511-7175701397294284800-n.jpg",
-        "images": {
+        "Tag": "#ccny, #shepard_hall",
+        "Thumbnail": "https://i.ibb.co/sVKnY3R/74419834-2503997649921511-7175701397294284800-n.jpg",
+        "Images": {
             "1": "https://i.ibb.co/nn9n5HL/clock.jpg",
             "2": "https://picsum.photos/150/200?random=1",
             "3": "https://picsum.photos/150/200?random=2",
             "4": "https://picsum.photos/150/200?random=3",
             "5": "https://picsum.photos/150/200?random=4"
         },
-        "popular": true,
-        "total_questions": 5,
-        "total_hint": 2,
+        "Popular": true,
+        "Total_Questions": 5,
+        "Total_Hint": 2,
         "Game_Story": {
             "1": " Clock: You there, I need you to set me free, of all the things I could have been trapped in, I’ve been trapped in this clock counting all the seconds 94,670,777, 94,670,778 …. I’ve lost count again.\\n You need to free me, look at my small hand and big hand, and go to the respective row and column. The last 4 black numbers that sticks will free me.",
             "2": " ???: You’re freeing trapped spirits?!?!, LOOK OVER HERE, SAY MY NAME AND I WILL BE FREE. Nobody notices me until I’m pulled, once I'm pulled no one looks away.",
-            "3": " ???: ME NEXT!! ME NEXT!! A lot of people sit here to use the computers, you can tell which one I am by the unique symbol I have at the start of me. Besides the letters, what else is there?",
+            "3": " ???: ME NEXT!! ME NEXT!! A lot of people sit here to use the computers, you can tell which one I am by the unique symbol I have at the start of me. BesIdes the letters, what else is there?",
             "4": " ???: OH PLEASE HELP ME, I’M AFRIAD OF HEIGHTS AND HANGING OF THE CEILING, RELEASE ME BY TELLING HOW MANY LETTERS MY NAME HAS.",
             "5": " ???: in unison: We’re the last ones in the room, yet there’s so many of us, you couldn’t count us with all your fingers and toes, tell us what we are and we can finally be freed!"
         },
-        "answers": {
+        "Answers": {
             "1": "7880",
             "2": "DA-LITE",
             "3": "Key",
             "4": "4",
             "5": "Computers"
         },
-        "hint": {
+        "Hint": {
             "1": "The small hand is the row, the big hand is the column (ignore the red hand). The stick refers to something that sticks",
-            "2": "Near the computer, and on the other side of the room, A giant blank canvas",
+            "2": "Near the computer, and on the other sIde of the room, A giant blank canvas",
             "3": "On some of the tables, there's two initials and a symbol",
             "4": "Count how many letters are on the name of the only object hanging on the ceiling",
             "5": "The most reoccurring piece of tech in the room, almost everyone has one"
         }
     },
     {
-        "id": 2,
+        "Id": 2,
         "Title": "Harris Hall",
         "Difficulty": 2,
         "Story": "This is a very short story",
-        "tag": "#ccny, #harris_hall",
-        "thumbnail": "https://picsum.photos/200/300?random=1",
-        "images": {
+        "Tag": "#ccny, #harris_hall",
+        "Thumbnail": "https://picsum.photos/200/300?random=1",
+        "Images": {
             "1": "https://picsum.photos/150/200?random=1",
             "2": "https://picsum.photos/150/200?random=2",
             "3": "https://picsum.photos/150/200?random=3",
             "4": "https://picsum.photos/150/200?random=4",
             "5": "https://picsum.photos/150/200?random=5"
         },
-        "popular": true,
-        "total_questions": 5,
-        "total_hint": 2,
+        "Popular": true,
+        "Total_Questions": 5,
+        "Total_Hint": 2,
         "Game_Story": {
             "1": "What is 1 + 1?",
             "2": "What is 2 + 2?",
@@ -62,14 +62,14 @@
             "4": "What is 4 + 4",
             "5": "What is 5 + 5"
         },
-        "answers": {
+        "Answers": {
             "1": "2",
             "2": "4",
             "3": "6",
             "4": "8",
             "5": "10"
         },
-        "hint": {
+        "Hint": {
             "1": "use your damn calculator1",
             "2": "use your damn calculator2",
             "3": "use your damn calculator3",
@@ -78,22 +78,22 @@
         }
     },
     {
-        "id": 3,
+        "Id": 3,
         "Title": "Wingate Hall",
         "Difficulty": 3,
         "Story": "This is not a story",
-        "tag": "#ccny, #wingate_hall",
-        "thumbnail": "https://picsum.photos/200/300?random=1",
-        "images": {
+        "Tag": "#ccny, #wingate_hall",
+        "Thumbnail": "https://picsum.photos/200/300?random=1",
+        "Images": {
             "1": "https://picsum.photos/150/200?random=1",
             "2": "https://picsum.photos/150/200?random=2",
             "3": "https://picsum.photos/150/200?random=3",
             "4": "https://picsum.photos/150/200?random=4",
             "5": "https://picsum.photos/150/200?random=5"
         },
-        "popular": false,
-        "total_questions": 5,
-        "total_hint": 2,
+        "Popular": false,
+        "Total_Questions": 5,
+        "Total_Hint": 2,
         "Game_Story": {
             "1": "What is 1 + 1?",
             "2": "What is 2 + 2?",
@@ -101,14 +101,14 @@
             "4": "What is 4 + 4",
             "5": "What is 5 + 5"
         },
-        "answers": {
+        "Answers": {
             "1": "2",
             "2": "4",
             "3": "6",
             "4": "8",
             "5": "10"
         },
-        "hint": {
+        "Hint": {
             "1": "use your damn calculator1",
             "2": "use your damn calculator2",
             "3": "use your damn calculator3",
@@ -117,22 +117,22 @@
         }
     },
     {
-        "id": 4,
+        "Id": 4,
         "Title": "Marshak Hall",
         "Difficulty": 4,
         "Story": "This is a very short story",
-        "tag": "#ccny, #marshak_hall",
-        "thumbnail": "https://picsum.photos/200/300?random=1",
-        "images": {
+        "Tag": "#ccny, #marshak_hall",
+        "Thumbnail": "https://picsum.photos/200/300?random=1",
+        "Images": {
             "1": "https://picsum.photos/150/200?random=1",
             "2": "https://picsum.photos/150/200?random=2",
             "3": "https://picsum.photos/150/200?random=3",
             "4": "https://picsum.photos/150/200?random=4",
             "5": "https://picsum.photos/150/200?random=5"
         },
-        "popular": false,
-        "total_questions": 5,
-        "total_hint": 2,
+        "Popular": false,
+        "Total_Questions": 5,
+        "Total_Hint": 2,
         "Game_Story": {
             "1": "What is 1 + 1?",
             "2": "What is 2 + 2?",
@@ -140,14 +140,14 @@
             "4": "What is 4 + 4",
             "5": "What is 5 + 5"
         },
-        "answers": {
+        "Answers": {
             "1": "2",
             "2": "4",
             "3": "6",
             "4": "8",
             "5": "10"
         },
-        "hint": {
+        "Hint": {
             "1": "use your damn calculator1",
             "2": "use your damn calculator2",
             "3": "use your damn calculator3",
