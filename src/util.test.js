@@ -5,6 +5,7 @@ import renderer from 'react-test-renderer';
 import ReactDOM from 'react-dom';
 import Puzzle from './components/Game/Puzzle'
 import Navbar from './components/Navbar/Navbar'
+import Footer from './components/Footer/Footer'
 
 import { shallow, mount } from 'enzyme';
 import { isTSAnyKeyword } from '@babel/types';
@@ -28,10 +29,19 @@ test('drawerToggleClickHandler Testing',()=>{
 })
 
 test('navbar Testing', () => {
-  // Render a checkbox with label in the document
-  const nav= shallow(<Navbar labelOn="On" labelOff="Off" />);
+  
+  const nav= shallow(<Navbar  />);
 
   expect(nav.text()).toEqual('<drawerToggleButton />');
+
+  
+});
+
+test('footer Testing', () => {
+
+  const footer= shallow(<Footer />);
+
+  expect(footer.text()).toEqual('Home·Games·About·Faq·ContactEscape Team © 2019');
 
   
 });
