@@ -10,16 +10,5 @@ it('renders without crashing', () => {
   ReactDOM.unmountComponentAtNode(div);
 });
 
-describe('MyComponent', () => {
-  it('should render correctly in "debug" mode', () => {
-    const component = shallow(<App debug />);
-    expect(component).toMatchSnapshot();
-  });
-});
 
-it('should render banner text correctly with given strings', () => {
-  const strings = ['one', 'two'];
-  const component = shallow(<App list={strings} />);
-  expect(component).toMatchSnapshot();
-});
 
