@@ -18,9 +18,7 @@ class Answer extends Component {
     }
     //this enter will get current value of the input and assign that value to submit button
     enterText() {
-        let tempAnswer = document.getElementById("answer").value;
-        document.getElementById("submitBttn").value += tempAnswer;
-        console.log(tempAnswer)
+        document.getElementById("submitBttn").value = document.getElementById("answer").value;
     }
 
     componentDidUpdate(prevProps) {
