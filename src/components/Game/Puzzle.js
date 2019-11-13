@@ -32,9 +32,7 @@ class Puzzle extends Component {
         let userAnswer = e.target.value;
         console.log("userAnswer", userAnswer)
         let currentGameIndex = this.state.index;
-        console.log("Current Game Index", currentGameIndex)
         let currentQuestionIndex = this.state.questionIndex;
-        console.log("Current Question Index", currentQuestionIndex);
         let answer = games[currentGameIndex].Answers[currentQuestionIndex];
 
         //if the answer is correct
@@ -55,7 +53,15 @@ class Puzzle extends Component {
             }
         }
         //wrong answer => reset the current value of the pound button
-        else { e.target.value = ""; }
+        else {
+            console.log("Wrong Answer")
+            if (document.getElementById("answer")) {
+                document.getElementById("answer").value = "";
+            }
+            if (document.getElementById("pound")) {
+                document.getElementById("pound").value = "";
+            }
+        }
     }
 
     getHint() {

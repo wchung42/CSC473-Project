@@ -13,23 +13,13 @@ class riddleQuestion extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        console.log("Log from question.js")
-        console.log(prevProps.qId)
-        console.log(this.props.qId)
         if (prevProps.qId !== this.props.qId) {
-
             this.setState({
                 questionIndex: this.props.qId,
                 imageIndex: this.props.iId
             })
         }
     }
-
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     console.log(nextProps)
-    //     console.log(nextState)
-    //     return this.state.questionIndex != nextState.questionIndex;
-    // }
 
     render() {
         // choose what type of question to return in the future

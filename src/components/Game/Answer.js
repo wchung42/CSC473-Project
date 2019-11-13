@@ -7,18 +7,14 @@ class Answer extends Component {
         this.state = {
             gameIndex: this.props.id,
             questionIndex: this.props.qId,
-            answer: ""
         };
         this.enterNum = this.enterNum.bind(this);
         this.enterText = this.enterText.bind(this);
     }
-    //this function will "set state for the answer" to save current value then change the current value of the pound button
+    //this function will add value of button pressed to pound value
     enterNum(e) {
-        let buttonEntered = this.state.answer + e.currentTarget.value;
-        document.getElementById("pound").value = buttonEntered;
-        this.setState({
-            answer: buttonEntered
-        })
+        document.getElementById("pound").value += e.currentTarget.value;
+        console.log("pound value", document.getElementById("pound").value)
     }
     //this enter will get current value of the input and assign that value to submit button
     enterText() {
@@ -30,7 +26,7 @@ class Answer extends Component {
     componentDidUpdate(prevProps) {
         if (prevProps.qId !== this.props.qId) {
             this.setState({
-                questionIndex: this.props.qId
+                questionIndex: this.props.qId,  //update question index to re-render
             })
         }
     }
