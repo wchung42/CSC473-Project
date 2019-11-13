@@ -3,6 +3,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import games from './games.json';
 import './Game.css';
 import Endgame from './Endgame';
+import Answer from './Answer';
+import Question from './Question';
 
 class Puzzle extends Component {
     constructor(props) {
@@ -25,73 +27,60 @@ class Puzzle extends Component {
         this.getAnswer = this.getAnswer.bind(this);
         this.getHint = this.getHint.bind(this);
     }
+    //this function is to get answer from NUMBER TYPE
+    getAnswer(e) {
+        let userAnswer = e.target.value;
+        console.log("userAnswer", userAnswer)
+        let currentGameIndex = this.state.index;
+        let currentQuestionIndex = this.state.questionIndex;
+        let answer = games[currentGameIndex].Answers[currentQuestionIndex];
 
-    getAnswer() {
-        let localIndex = this.state.index;
-        let localQuestionIndex = this.state.questionIndex;
-        let qIndex = localQuestionIndex + 1;  //INDICATE THE NEXT QUESTION
-        let imgIndex = qIndex; // IMAGE INDEX 
-        let answer = games[localIndex].answers[localQuestionIndex];
-        let answerBox = document.getElementById("answer");
-        let userAnswer = answerBox.value.toLowerCase(); //USER ANSWER = VALUE OF ANSWER BOX
-
-        // console.log(answer);
-
-
-        if (userAnswer == answer.toLowerCase()) {
-            document.getElementById("result").innerText = "Correct";
-            answerBox.style.borderColor = "palegreen";
-            answerBox.value = "";
-            document.getElementById("hint").innerText = "";
+        //if the answer is correct
+        if (userAnswer == answer) {
+            //else moving to the next question
+            console.log("right answer");
             this.setState({
-                questionIndex: qIndex,
-                imageIndex: imgIndex,
+                questionIndex: currentQuestionIndex + 1,
+                imageIndex: currentQuestionIndex + 1,
                 usedHint: false
             })
-            // check if for more questions
-            if (localQuestionIndex == games[localIndex].total_questions) {
+            //if this is the last question then End game
+            if (currentQuestionIndex == games[currentGameIndex].Total_Questions) {
                 this.setState({
                     gameState: false,
                     win: true
-                })
-                console.log("End of game");
+                }); console.log("End of game");
             }
-            // console.log(this.state.questionIndex);
         }
+        //wrong answer => reset the current value of the pound button
         else {
-            answerBox.style.borderColor = "salmon";
-            document.getElementById("result").innerText = "Wrong";
-            answerBox.value = "";
-            // console.log(this.state.questionIndex);
-        }
-        if (qIndex > games[localIndex].total_questions) {
-            console.log("Submit button time out not necessary");
-        } else {
-            document.getElementById("submitBttn").disabled = true;
-            // document.getElementById("hintBttn").style.backgroundColor = "gray";
-            setTimeout(function () {
-                document.getElementById("submitBttn").disabled = false;
-            }, 2000)
+            console.log("Wrong Answer")
+            if (document.getElementById("answer")) {
+                document.getElementById("answer").value = "";
+            }
+            if (document.getElementById("pound")) {
+                document.getElementById("pound").value = "";
+            }
         }
     }
 
     getHint() {
         let localIndex = this.state.index;
         let localQuestionIndex = this.state.questionIndex;
-        let totalHint = games[localIndex].total_hint;
+        let totalHint = games[localIndex].Total_Hint;
         let hintCount = this.state.hintCount;
         let hintArea = document.getElementById("hint");
         let usedHint = this.state.usedHint;
         if (hintCount < totalHint && !usedHint) {
             hintCount += 1;
-            hintArea.innerText = games[localIndex].hint[localQuestionIndex];
+            hintArea.innerText = games[localIndex].Hint[localQuestionIndex];
             this.setState({
                 hintCount: hintCount,
                 usedHint: true
             })
         }
         else if (usedHint) {
-            hintArea.innerText = games[localIndex].hint[localQuestionIndex];
+            hintArea.innerText = games[localIndex].Hint[localQuestionIndex];
         }
         else {
             hintArea.innerText = "Sorry You've Run Out Of Hint! NOW USE YOUR DAMN BRAIN"
@@ -127,36 +116,29 @@ class Puzzle extends Component {
                 </div>
             )
         }
-        return (
-            <div className="game">
-                <section className="middle">
+        else {
+            let questionPage = <Question id={this.state.index} qId={this.state.questionIndex} iId={this.state.imageIndex} />;
+            let answerPage = <Answer id={this.state.index} qId={this.state.questionIndex} action={this.getAnswer} />;
+            return (
+                <div className="game">
+                    <section className="middle">
 
-                    <div className="text-center">
-                        <br />
-                        <h1 className="gameTitle">
-                            {games[this.state.index].Title} Challenge
-                        </h1>
-                        <br />
-                        <p className="text-center quest">
-                            {games[this.state.index].Game_Story[this.state.questionIndex].replace("\\n", "\n")}
-                        </p>
-                        <br /><br />
-                        <img className="imgG" src={games[this.state.index].Images[this.state.imageIndex]} />
-                        <br /><br /><br />
-                        <input id="answer" type="text" className="text-center textbox" />
-                        <p id="hint" className="questN" value=""></p>
-                        <div>
-                            <button id="submitBttn" className="btn-large  btn-success" type="button" onClick={this.getAnswer}>&nbsp; Submit &nbsp;</button>
-                            <p id="result" className="questN"></p>
-
-                            <button id="hintBttn" className="btn-large btn-warning " type="button" onClick={this.getHint}>
-                                {games[this.state.index].Total_Hint - this.state.hintCount} Hint(s) Left</button>
+                        <div className="text-center">
+                            {questionPage}
+                            <br /><br /><br />
+                            {answerPage}
+                            <p id="hint" className="questN" value=""></p>
+                            <div>
+                                <button id="hintBttn" className="btn-large btn-warning " type="button" onClick={this.getHint}>
+                                    {games[this.state.index].Total_Hint - this.state.hintCount} Hint(s) Left</button>
+                            </div>
                         </div>
-                    </div>
-                </section>
-            </div>
+                    </section>
+                </div>
 
-        )
+            )
+        }
+
     }
 
 
@@ -173,3 +155,55 @@ export default Puzzle;
 
   //   console.log(this.state.latitude, this.state.longitude)
   // }
+
+
+
+
+// getAnswer() {
+//     let localIndex = this.state.index;
+//     let localQuestionIndex = this.state.questionIndex;
+//     let qIndex = localQuestionIndex + 1;  //INDICATE THE NEXT QUESTION
+//     let imgIndex = qIndex; // IMAGE INDEX 
+//     let answer = games[localIndex].answers[localQuestionIndex];
+//     let answerBox = document.getElementById("answer");
+//     let userAnswer = answerBox.value.toLowerCase(); //USER ANSWER = VALUE OF ANSWER BOX
+
+//     // console.log(answer);
+
+//     //correct answer
+//     if (userAnswer == answer.toLowerCase()) {
+//         document.getElementById("result").innerText = "Correct";
+//         answerBox.style.borderColor = "palegreen";
+//         answerBox.value = "";
+//         document.getElementById("hint").innerText = "";
+//         this.setState({
+//             questionIndex: qIndex,
+//             imageIndex: imgIndex,
+//             usedHint: false
+//         })
+//         // check if for more questions
+//         if (localQuestionIndex == games[localIndex].total_questions) {
+//             this.setState({
+//                 gameState: false,
+//                 win: true
+//             })
+//             console.log("End of game");
+//         }
+//         // console.log(this.state.questionIndex);
+//     }
+//     else {//wrong answer
+//         answerBox.style.borderColor = "salmon";
+//         document.getElementById("result").innerText = "Wrong";
+//         answerBox.value = "";
+//         // console.log(this.state.questionIndex);
+//     }
+//     if (qIndex > games[localIndex].total_questions) {
+//         console.log("Submit button time out not necessary");
+//     } else {
+//         document.getElementById("submitBttn").disabled = true;
+//         // document.getElementById("hintBttn").style.backgroundColor = "gray";
+//         setTimeout(function () {
+//             document.getElementById("submitBttn").disabled = false;
+//         }, 2000)
+//     }
+// }
