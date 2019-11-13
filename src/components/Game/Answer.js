@@ -18,7 +18,7 @@ class Answer extends Component {
     }
     //this enter will get current value of the input and assign that value to submit button
     enterText() {
-        document.getElementById("submitBttn").value = document.getElementById("answer").value;
+        document.getElementById("submitBttn").value = document.getElementById("answerBox").value;
     }
 
     componentDidUpdate(prevProps) {
@@ -46,15 +46,17 @@ class Answer extends Component {
                     <button type="button" className="number" onClick={this.enterNum} value="2">2</button>
                     <button type="button" className="number" onClick={this.enterNum} value="3">3</button>
 
-                    <button type="button" className="zero" onClick={this.enterNum} value="0">0</button>
-                    <button type="button" id="pound" onClick={this.props.action} value="">#</button>
+                    <button type="button" className="number" onClick={this.enterNum} value=".">.</button>
+                    <button type="button" className="number" onClick={this.enterNum} value="0">0</button>
+                    <button type="button" className="number" id="pound" onClick={this.props.action} value="">#</button>
                 </div>
             )
         }
         else {
             return (
-                <div key={this.props.qId} id="answerBox">
-                    <input id="answer" type="text" className="text-center textbox" onChange={this.enterText} />
+                <div key={this.props.qId} id="textAnswer">
+                    <input id="answerBox" type="text" className="text-center textbox" onChange={this.enterText} />
+                    <br />
                     <button id="submitBttn" className="btn-large  btn-success" type="button" onClick={this.props.action} value="">&nbsp; Submit &nbsp;</button>
                 </div>
             )

@@ -55,8 +55,8 @@ class Puzzle extends Component {
         //wrong answer => reset the current value of the pound button
         else {
             console.log("Wrong Answer")
-            if (document.getElementById("answer")) {
-                document.getElementById("answer").value = "";
+            if (document.getElementById("answerBox")) {
+                document.getElementById("answerBox").value = "";
                 document.getElementById("submitBttn").value = "";
             }
             if (document.getElementById("pound")) {
@@ -130,7 +130,7 @@ class Puzzle extends Component {
                             {answerPage}
                             <p id="hint" className="questN" value=""></p>
                             <div>
-                                <button id="hintBttn" className="btn-large btn-warning " type="button" onClick={this.getHint}>
+                                <button id="hintBttn" className="btn-large  btn-success" type="button" onClick={this.getHint}>
                                     {games[this.state.index].Total_Hint - this.state.hintCount} Hint(s) Left</button>
                             </div>
                         </div>
