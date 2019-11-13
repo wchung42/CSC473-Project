@@ -23,6 +23,13 @@
             "4": " ???: OH PLEASE HELP ME, I’M AFRIAD OF HEIGHTS AND HANGING OF THE CEILING, RELEASE ME BY TELLING HOW MANY LETTERS MY NAME HAS.",
             "5": " ???: in unison: We’re the last ones in the room, yet there’s so many of us, you couldn’t count us with all your fingers and toes, tell us what we are and we can finally be freed!"
         },
+        "Answer_Type": {
+            "1": "number",
+            "2": "text",
+            "3": "text",
+            "4": "text",
+            "5": "text"
+        },
         "Answers": {
             "1": "7880",
             "2": "DA-LITE",
@@ -61,6 +68,13 @@
             "3": "What is 3 + 3",
             "4": "What is 4 + 4",
             "5": "What is 5 + 5"
+        },
+        "Answer_Type": {
+            "1": "number",
+            "2": "text",
+            "3": "text",
+            "4": "text",
+            "5": "text"
         },
         "Answers": {
             "1": "2",
@@ -101,6 +115,13 @@
             "4": "What is 4 + 4",
             "5": "What is 5 + 5"
         },
+        "Answer_Type": {
+            "1": "number",
+            "2": "text",
+            "3": "text",
+            "4": "text",
+            "5": "text"
+        },
         "Answers": {
             "1": "2",
             "2": "4",
@@ -139,6 +160,13 @@
             "3": "What is 3 + 3",
             "4": "What is 4 + 4",
             "5": "What is 5 + 5"
+        },
+        "Answer_Type": {
+            "1": "number",
+            "2": "text",
+            "3": "text",
+            "4": "text",
+            "5": "text"
         },
         "Answers": {
             "1": "2",

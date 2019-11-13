@@ -24,6 +24,39 @@ class Puzzle extends Component {
         }
         this.getAnswer = this.getAnswer.bind(this);
         this.getHint = this.getHint.bind(this);
+        this.getNumAnswer = this.getNumAnswer.bind(this);
+        this.getTextAnswer = this.getTextAnswer.bind(this);
+    }
+    //this function is to get answer from NUMBER TYPE
+    getNumAnswer(e) {
+        let currentGameIndex = this.state.index,
+            currentQuestionIndex = this.state.questionIndex,
+            imgIndex = currentGameIndex + 1,
+            answer = games[currentGameIndex].answers[currentQuestionIndex];
+
+        let userAnswer = e.target.value;
+        //if the answer is correct
+        if (userAnswer == answer) {
+            //else moving to the next question
+            this.setState({
+                questionIndex: currentGameIndex + 1,
+                imageIndex: imgIndex,
+                usedHint: false
+            })
+            //if this is the last question then End game
+            if (currentQuestionIndex == games[currentGameIndex].total_questions) {
+                this.setState({
+                    gameState: false,
+                    win: true
+                }); console.log("End of game");
+            }
+        }
+        //wrong answer => reset the current value of the pound button
+        else { e.target.value = ""; }
+    }
+
+    getTextAnswer(e) {
+
     }
 
     getAnswer() {
@@ -37,7 +70,7 @@ class Puzzle extends Component {
 
         // console.log(answer);
 
-
+        //correct answer
         if (userAnswer == answer.toLowerCase()) {
             document.getElementById("result").innerText = "Correct";
             answerBox.style.borderColor = "palegreen";
@@ -58,7 +91,7 @@ class Puzzle extends Component {
             }
             // console.log(this.state.questionIndex);
         }
-        else {
+        else {//wrong answer
             answerBox.style.borderColor = "salmon";
             document.getElementById("result").innerText = "Wrong";
             answerBox.value = "";
