@@ -55,6 +55,25 @@
   font-size:250%
 }
 
+/* THIS IS FOR GAME LIST */
+.game-list{
+  display: grid;
+  width: 50%;
+  margin-left: 6.5%;
+}
+
+/* .card{
+  height: 30vh;
+} */
+
+.card-img-top{
+  height: 30vh;
+}
+
+.card-text{
+  font-size: 200%;
+  text-align: left;
+}
 
 /* THIS IS FOR QUESTION DISPLAY */
 .imgG{

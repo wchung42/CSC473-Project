@@ -9,7 +9,6 @@ class gamePanel extends Component {
         }
     }
     render() {
-        console.log("Inside game Panel");
         return (
             <div className="card">
                 <img
@@ -18,9 +17,14 @@ class gamePanel extends Component {
                     src={games[this.state.gameId].Thumbnail} />
                 <div className="card-body">
                     <h5 className="card-title">
-                        <strong>{games[this.state.gameId].Title} ({games[this.state.gameId].Difficulty}/5)</strong>
+                        <strong>{games[this.state.gameId].Title}</strong>
                     </h5>
-                    <p className="card-text"> {games[this.state.gameId].Story}</p>
+                    <ul className="card-text">
+                        <li>Location:</li>
+                        <li>Capacity:</li>
+                        <li>Game Length:</li>
+                        <li>Difficulty: {games[this.state.gameId].Difficulty}/5</li>
+                    </ul>
                     <button id={"bttn" + this.state.gameId} className="btn btn-primary" type="button" onClick={this.props.func} value={this.state.gameId}>START</button>
                 </div>
             </div>
