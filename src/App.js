@@ -93,14 +93,14 @@ onSignOut = async () => {
         <div className="body-page">
           <Router>
             <Switch>
-
+              <Route path='/' exact component={Home} />
               <Route path='/Game' component={Game} />
               <Route path='/about' component={About} />
               <Route path='/contact' component={Contact} />
               <Route exact path="/login" 
                         render = {() => <Login onLogin={this.updateCurrentUser} />}
                     />
-              <Route path='/' component={Home} />
+              
 
             </Switch>
           </Router>
