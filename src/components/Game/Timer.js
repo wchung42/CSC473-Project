@@ -6,7 +6,6 @@ class Timer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            // gameId: this.props.gameId,
             count: 1,
             isPaused: false
         }

@@ -1,99 +1,142 @@
 [
     {
-        "id": 1,
+        "Id": 0,
         "Title": "The Haunted Room",
         "Difficulty": 4,
         "Story": "Some spirits are strong and manifest in a ghost like form, most are weak and must live on in within a host. The host is usually an object. CCNY is known for having dead in the library due to an impossible engineering department. The Grove School of Engineering has caused this room to become filled with spirits trapped in objects, we need you to set them free!",
-        "tag": "#ccny, #shepard_hall",
-        "thumbnail": "https://i.ibb.co/sVKnY3R/74419834-2503997649921511-7175701397294284800-n.jpg",
-        "images": {
+        "Tag": "#ccny, #shepard_hall",
+        "Thumbnail": "https://i.ibb.co/sVKnY3R/74419834-2503997649921511-7175701397294284800-n.jpg",
+        "Images": {
             "1": "https://i.ibb.co/nn9n5HL/clock.jpg",
             "2": "https://picsum.photos/150/200?random=1",
             "3": "https://picsum.photos/150/200?random=2",
             "4": "https://picsum.photos/150/200?random=3",
             "5": "https://picsum.photos/150/200?random=4"
         },
-        "popular": true,
-        "total_questions": 5,
-        "total_hint": 2,
+        "Popular": true,
+        "Total_Questions": 5,
+        "Total_Hint": 2,
         "Game_Story": {
-            "1": " Clock: You there, I need you to set me free, of all the things I could have been trapped in, I’ve been trapped in this clock counting all the seconds 94,670,777, 94,670,778 …. I’ve lost count again.\\n You need to free me, look at my small hand and big hand, and go to the respective row and column. The last 4 black numbers that sticks will free me.",
+            "1": " Clock: You there, I need you to set me free, of all the things I could have been trapped in, I’ve been trapped in this clock counting all the seconds 94,670,777, 94,670,778 …. I’ve lost count again. You need to free me, look at my small hand and big hand, and go to the respective row and column. The last 4 black numbers that sticks will free me.",
             "2": " ???: You’re freeing trapped spirits?!?!, LOOK OVER HERE, SAY MY NAME AND I WILL BE FREE. Nobody notices me until I’m pulled, once I'm pulled no one looks away.",
-            "3": " ???: ME NEXT!! ME NEXT!! A lot of people sit here to use the computers, you can tell which one I am by the unique symbol I have at the start of me. Besides the letters, what else is there?",
+            "3": " ???: ME NEXT!! ME NEXT!! A lot of people sit here to use the computers, you can tell which one I am by the unique symbol I have at the start of me. BesIdes the letters, what else is there?",
             "4": " ???: OH PLEASE HELP ME, I’M AFRIAD OF HEIGHTS AND HANGING OF THE CEILING, RELEASE ME BY TELLING HOW MANY LETTERS MY NAME HAS.",
             "5": " ???: in unison: We’re the last ones in the room, yet there’s so many of us, you couldn’t count us with all your fingers and toes, tell us what we are and we can finally be freed!"
         },
-        "answers": {
+        "Answer_Type": {
+            "1": "number",
+            "2": "text",
+            "3": "text",
+            "4": "number",
+            "5": "text"
+        },
+        "Answers": {
             "1": "7880",
             "2": "DA-LITE",
             "3": "Key",
             "4": "4",
             "5": "Computers"
         },
-        "hint": {
+        "Hint": {
             "1": "The small hand is the row, the big hand is the column (ignore the red hand). The stick refers to something that sticks",
-            "2": "Near the computer, and on the other side of the room, A giant blank canvas",
+            "2": "Near the computer, and on the other sIde of the room, A giant blank canvas",
             "3": "On some of the tables, there's two initials and a symbol",
             "4": "Count how many letters are on the name of the only object hanging on the ceiling",
             "5": "The most reoccurring piece of tech in the room, almost everyone has one"
         }
     },
     {
-        "id": 2,
-        "Title": "Harris Hall",
-        "Difficulty": 2,
-        "Story": "This is a very short story",
-        "tag": "#ccny, #harris_hall",
-        "thumbnail": "https://picsum.photos/200/300?random=1",
-        "images": {
-            "1": "https://picsum.photos/150/200?random=1",
-            "2": "https://picsum.photos/150/200?random=2",
-            "3": "https://picsum.photos/150/200?random=3",
-            "4": "https://picsum.photos/150/200?random=4",
-            "5": "https://picsum.photos/150/200?random=5"
+        "Id": 1,
+        "Title": "Freeing the Hero of the Angle",
+        "Difficulty": 3,
+        "Story": "The once general of the Civil War Alexander S. Webb, who received a Medal of Honor of his battle of Gettysburg is trapped. The general who was a president of CCNY was made into a statue where his soul is contained. General web is trapped in a time prison forever to watch time continue as he cannot move on himself. We need to free the hero from his prison by connecting his legacy to those who have already been freed.",
+        "Tag": "#ccny, #harris_hall",
+        "Thumbnail": "https://cdn.discordapp.com/attachments/629102063107964961/644893758793449494/image0.jpg",
+        "Images": {
+            "1": "https://cdn.discordapp.com/attachments/629102063107964961/644893758793449494/image0.jpg",
+            "2": "https://cdn.discordapp.com/attachments/629102063107964961/644893759263473696/image2.jpg",
+            "3": "https://media.discordapp.net/attachments/629102063107964961/644894179037544469/image0.jpg?width=901&height=676",
+            "4": "https://cdn.discordapp.com/attachments/629102063107964961/644893918231527434/image0.jpg",
+            "5": "http://4.bp.blogspot.com/-_uMA0I0WbzQ/VGbD6feEfnI/AAAAAAAAASI/-1mPv76qrao/s1600/BRAVO_Photo222.JPG",
+            "6": "https://upload.wikimedia.org/wikipedia/commons/4/46/Lisa_Staiano-Coico.jpg",
+            "7": "https://cdn.discordapp.com/attachments/629102063107964961/645319501780484106/presidents.jpg",
+            "8": "https://cdn.discordapp.com/attachments/629102063107964961/644893916415655946/image1.jpg",
+            "9": "https://cdn.discordapp.com/attachments/629102063107964961/644893758793449494/image0.jpg",
+            "10": "https://cdn.discordapp.com/attachments/629102063107964961/644893918823186458/image2.jpg",
+            "11": "https://media.discordapp.net/attachments/629102063107964961/644894177620131840/image1.jpg?width=507&height=676"
         },
-        "popular": true,
-        "total_questions": 5,
-        "total_hint": 2,
+        "Popular": true,
+        "Total_Questions": 11,
+        "Total_Hint": 3,
         "Game_Story": {
-            "1": "What is 1 + 1?",
-            "2": "What is 2 + 2?",
-            "3": "What is 3 + 3",
-            "4": "What is 4 + 4",
-            "5": "What is 5 + 5"
+            "1": "Alexander in his midlife crisis didn’t turn to younger women, and a fancy new car, instead in this year, he became part of City College’s history.",
+            "2": "The one thing that kills every man, moves forward but never back, even General Webb couldn’t escape it.",
+            "3": "Go to the Shepherd with no sheep as he holds the key to all and find the man who started it all. Only one thing is not the same as his arms, legs, and head.",
+            "4": "The man with the bronze nose looks to this man with indifference, because like him, he carried his legacy for many years.",
+            "5": "Even among the presidents, some could not remember when their predecessors were president, some would say no one knew what number president Gallagher was.",
+            "6": "For two years the president’s chair has been empty, ousted because of her betrayal this presidential number has been considered a disgrace to the legacy.",
+            "7": "Finley, Horace, Harleston, and Marshak are arguably so old, that no one could remember the order of these presidents.",
+            "8": "All these great men were inspired by philosophers, or those who carried the philosophy of the philosophers, usually no one knew of the man who embodied music.",
+            "9": "Following the sound of music, where even art resides, A man left a window that lets us see the sunset.",
+            "10": "The sunset takes us back to where it all started, where time protects, and where doctors lie. The Goblins across them reflect how many truly made a change.",
+            "11": "Legend has it that where the tallest tower stands, General Webb is trapped because of this building."
         },
-        "answers": {
-            "1": "2",
-            "2": "4",
-            "3": "6",
-            "4": "8",
-            "5": "10"
+        "Answer_Type": {
+            "1": "number",
+            "2": "text",
+            "3": "text",
+            "4": "text",
+            "5": "number",
+            "6": "number",
+            "7": "number",
+            "8": "text",
+            "9": "text",
+            "10": "number"
         },
-        "hint": {
+        "Answers": {
+            "1": "1869",
+            "2": "Time",
+            "3": "Cane",
+            "4": "Horace Webster",
+            "5": "7",
+            "6": "12",
+            "7": "1389",
+            "8": "Orphen",
+            "9": "Robert Bell",
+            "10": "3",
+            "11": "Compton & Goethals Hall"
+        },
+        "Hint": {
             "1": "use your damn calculator1",
             "2": "use your damn calculator2",
             "3": "use your damn calculator3",
             "4": "use your damn calculator4",
-            "5": "use your damn calculator5"
+            "5": "use your damn calculator5",
+            "6": "12",
+            "7": "1389",
+            "8": "Orphen",
+            "9": "Robert Bell",
+            "10": "3",
+            "11": "Compton & Goethals Hall"
         }
     },
     {
-        "id": 3,
+        "Id": 2,
         "Title": "Wingate Hall",
         "Difficulty": 3,
         "Story": "This is not a story",
-        "tag": "#ccny, #wingate_hall",
-        "thumbnail": "https://picsum.photos/200/300?random=1",
-        "images": {
+        "Tag": "#ccny, #wingate_hall",
+        "Thumbnail": "https://picsum.photos/200/300?random=1",
+        "Images": {
             "1": "https://picsum.photos/150/200?random=1",
             "2": "https://picsum.photos/150/200?random=2",
             "3": "https://picsum.photos/150/200?random=3",
             "4": "https://picsum.photos/150/200?random=4",
             "5": "https://picsum.photos/150/200?random=5"
         },
-        "popular": false,
-        "total_questions": 5,
-        "total_hint": 2,
+        "Popular": false,
+        "Total_Questions": 5,
+        "Total_Hint": 2,
         "Game_Story": {
             "1": "What is 1 + 1?",
             "2": "What is 2 + 2?",
@@ -101,14 +144,21 @@
             "4": "What is 4 + 4",
             "5": "What is 5 + 5"
         },
-        "answers": {
+        "Answer_Type": {
+            "1": "number",
+            "2": "text",
+            "3": "text",
+            "4": "text",
+            "5": "text"
+        },
+        "Answers": {
             "1": "2",
             "2": "4",
             "3": "6",
             "4": "8",
             "5": "10"
         },
-        "hint": {
+        "Hint": {
             "1": "use your damn calculator1",
             "2": "use your damn calculator2",
             "3": "use your damn calculator3",
@@ -117,22 +167,22 @@
         }
     },
     {
-        "id": 4,
+        "Id": 3,
         "Title": "Marshak Hall",
         "Difficulty": 4,
         "Story": "This is a very short story",
-        "tag": "#ccny, #marshak_hall",
-        "thumbnail": "https://picsum.photos/200/300?random=1",
-        "images": {
+        "Tag": "#ccny, #marshak_hall",
+        "Thumbnail": "https://picsum.photos/200/300?random=1",
+        "Images": {
             "1": "https://picsum.photos/150/200?random=1",
             "2": "https://picsum.photos/150/200?random=2",
             "3": "https://picsum.photos/150/200?random=3",
             "4": "https://picsum.photos/150/200?random=4",
             "5": "https://picsum.photos/150/200?random=5"
         },
-        "popular": false,
-        "total_questions": 5,
-        "total_hint": 2,
+        "Popular": false,
+        "Total_Questions": 5,
+        "Total_Hint": 2,
         "Game_Story": {
             "1": "What is 1 + 1?",
             "2": "What is 2 + 2?",
@@ -140,14 +190,21 @@
             "4": "What is 4 + 4",
             "5": "What is 5 + 5"
         },
-        "answers": {
+        "Answer_Type": {
+            "1": "number",
+            "2": "text",
+            "3": "text",
+            "4": "text",
+            "5": "text"
+        },
+        "Answers": {
             "1": "2",
             "2": "4",
             "3": "6",
             "4": "8",
             "5": "10"
         },
-        "hint": {
+        "Hint": {
             "1": "use your damn calculator1",
             "2": "use your damn calculator2",
             "3": "use your damn calculator3",

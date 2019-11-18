@@ -3,14 +3,14 @@ import games from './Game/games.json';
 
 const Home = () => {
   let listItems = games
-    .filter(game => game.popular == true)
+    .filter(game => game.Popular == true)
     .map(item =>
       <li className="bodyCard" key={item.id} >
         <div className="card">
           <img
-            key={item.id}
+            key={item.Id}
             className="card-img-top"
-            src={item.thumbnail} />
+            src={item.Thumbnail} />
           <div className="card-body">
             <h5 className="card-title">
               <strong>{item.Title} ({item.Difficulty}/5)</strong>
@@ -23,14 +23,14 @@ const Home = () => {
     );
 
   return (
-    <section>
+    <div className="body-page">
       <header className="Welcome-Section">
       </header>
       <div className="Body-Section">
         <p className="popular-game"><strong>POPULAR GAMES</strong></p>
         <ol className="cards" >{listItems}</ol>
-      </div>
-    </section>
+    </div>
+    </div>
   );
 }
 
