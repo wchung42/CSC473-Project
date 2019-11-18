@@ -62,9 +62,11 @@ class Game extends Component {
       return (
         <div className="Game">
           <br/>
-          <p>Click the button to get your coordinates.</p>
+          <p className ="Location">Click the button to get your coordinates.</p>
+    
+      <p className ="Location">{this.state.latitude} {this.state.longitude}</p>
 
-          <button onClick={this.position} className='Filter'>Location</button>
+          <button onClick={this.position} className='Location'>Location</button>
           <br/>
 
           <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
