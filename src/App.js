@@ -105,6 +105,7 @@ onSignOut = async () => {
             </Switch>
           </Router>
         </div>
+        
         <Footer />
       </div>
     );

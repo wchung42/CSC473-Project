@@ -1,5 +1,9 @@
 import React from 'react';
 import games from './Game/games.json';
+// testing purposes --- will be removed
+import Droppable from './DndQuestion/Droppable';
+import Draggable from './DndQuestion/Draggable';
+
 
 const Home = () => {
   let listItems = games
@@ -30,6 +34,20 @@ const Home = () => {
         <p className="popular-game"><strong>POPULAR GAMES</strong></p>
         <ol className="cards" >{listItems}</ol>
       </body>
+      {/* testing drag and drop */}
+      <div className = "flexbox">
+          <Droppable id = "initial" className = "drop-area">
+            <Draggable id = "item1" className = "drag-item" draggable = "true">
+              <p>Test card 1</p>
+            </Draggable>
+          </Droppable>
+
+          <Droppable id = "target" className = "drop-area">
+            <Draggable id = "item2" className = "drag-item" draggable = "true">
+              <p>Test card 2</p>
+            </Draggable>
+          </Droppable>
+        </div>
     </div>
   );
 }
