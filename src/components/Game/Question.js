@@ -7,16 +7,16 @@ class riddleQuestion extends Component {
         super(props)
         this.state = {
             gameIndex: this.props.id,
-            questionIndex: this.props.qId,
-            imageIndex: this.props.iId
+            questionIndex: this.props.questionId,
+            imageIndex: this.props.imageId
         }
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.qId !== this.props.qId) {
+        if (prevProps.questionId !== this.props.questionId) {
             this.setState({
-                questionIndex: this.props.qId,
-                imageIndex: this.props.iId
+                questionIndex: this.props.questionId,
+                imageIndex: this.props.imageId
             })
         }
     }
@@ -24,7 +24,7 @@ class riddleQuestion extends Component {
     render() {
         // choose what type of question to return in the future
         return (
-            <div key={this.props.qId} className="Question">
+            <div key={this.props.questionId} className="Question">
                 <h1 className="gameTitle">{games[this.state.gameIndex].Title} Challenge</h1>
                 <p className="text-center quest">
                     {games[this.state.gameIndex].Game_Story[this.state.questionIndex].replace("\\n", "\n")}

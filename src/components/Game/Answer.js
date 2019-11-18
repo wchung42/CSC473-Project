@@ -6,7 +6,7 @@ class Answer extends Component {
         super(props);
         this.state = {
             gameIndex: this.props.id,
-            questionIndex: this.props.qId,
+            questionIndex: this.props.questionId,
         };
         this.enterNum = this.enterNum.bind(this);
         this.enterText = this.enterText.bind(this);
@@ -22,9 +22,9 @@ class Answer extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.qId !== this.props.qId) {
+        if (prevProps.questionId !== this.props.questionId) {
             this.setState({
-                questionIndex: this.props.qId,  //update question index to re-render
+                questionIndex: this.props.questionId,  //update question index to re-render
             })
         }
     }
@@ -33,7 +33,7 @@ class Answer extends Component {
         if (games[this.state.gameIndex].Answer_Type[this.state.questionIndex] == "number") {
             return (
                 // Construct Num Pad
-                <div key={this.props.qId} id="numPad">
+                <div key={this.props.questionId} id="numPad">
                     <button type="button" className="number" onClick={this.enterNum} value="7">7</button>
                     <button type="button" className="number" onClick={this.enterNum} value="8">8</button>
                     <button type="button" className="number" onClick={this.enterNum} value="9">9</button>
@@ -55,7 +55,7 @@ class Answer extends Component {
         }
         else {
             return (
-                <div key={this.props.qId} id="textAnswer">
+                <div key={this.props.questionId} id="textAnswer">
                     <input id="answerBox" type="text" className="text-center textbox" onChange={this.enterText} />
                     <br />
                     <button id="submitBttn" className="btn-large  btn-success" type="button" onClick={this.props.action} value="">&nbsp; Submit &nbsp;</button>

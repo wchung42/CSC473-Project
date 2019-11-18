@@ -118,7 +118,7 @@ class Puzzle extends Component {
             )
         }
         else {
-            let questionPage = <Question id={this.state.index} qId={this.state.questionIndex} iId={this.state.imageIndex} />;
+            let questionPage = <Question id={this.state.index} questionId={this.state.questionIndex} imageId={this.state.imageIndex} />;
             let answerPage = <Answer id={this.state.index} qId={this.state.questionIndex} action={this.getAnswer} />;
             return (
                 <div className="game">
