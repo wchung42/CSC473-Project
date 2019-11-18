@@ -8,9 +8,46 @@ class OrderQuestion extends Component {
         super(props);
         this.state = initialData;
     }
+    
+    // reorder elements in row
+    // result object has draggableId, type, reason (drop or cancel), source and destination
+    onDragEnd = result => {
+        const { destination, source, draggableId } = result;
 
-    onDragEnd() {
-        // reorder elements in row
+        // handle if dragged out of dropzone
+        if ( !destination ) {
+            return;
+        }
+
+        if (
+            destination.droppableId === source.droppableId && destination.index === source.index
+        ) {
+            return;
+        }
+
+        const row = this.state.rows[source.droppableId];
+        const newImageIds = Array.from(row.imageIds);
+
+        // move images from old index to new index
+        newImageIds.splice(source.index, 1);
+        newImageIds.splice(destination.index, 0, draggableId);
+
+        const newRow = {
+            ...row,
+            imageIds: newImageIds,
+        };
+
+        const newState = {
+            ...this.state,
+            rows: {
+                ...this.state.rows,
+                [newRow.id]: newRow
+            },
+        };
+
+        // todo: need to match this new state with a correct state
+        this.setState(newState);
+
     }
 
     render() {
