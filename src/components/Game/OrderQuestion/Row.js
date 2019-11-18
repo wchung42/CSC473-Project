@@ -21,6 +21,24 @@ const ImageList = styled.div`
     display: flex;
 `;
 
+// component optimizes -- does not rerender all other items when a drag/drop event happens
+class InnerImageList extends Component {
+    // stops rendering of all dragitems together
+    shouldComponentUpdate(nextProps) {
+        if (nextProps.images === this.props.images) {
+            return false;
+        }
+        return true;
+    }
+    render() {
+        
+        return (
+             this.props.images.map((image, index)=> 
+            <DragImage key = { image.id } image = { image } index = { index }/>
+        ))
+    }
+}
+
 class Row extends Component {
     render() {
         return (
@@ -33,9 +51,7 @@ class Row extends Component {
                             ref = {provided.innerRef}
                             { ...provided.droppableProps }
                         >
-                            { this.props.images.map((image, index)=> 
-                                <DragImage key = { image.id } image = { image } index = { index }/>
-                            )}
+                            <InnerImageList images = { this.props.images } />
                             { provided.placeholder }
                         </ImageList>
                     )}    
