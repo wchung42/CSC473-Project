@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './Game.css';
 import Timer from './Timer';  // timer component that determines state of game
 import games from './games.json'; // get the game title
-
+import Panel from './gamePanel';
 
 class Game extends Component {
   constructor(props) {
@@ -74,11 +74,11 @@ class Game extends Component {
           <div className="exit">
             <button className="btn-large btn-danger" type="button"><a href="/Game">&nbsp; Exit &nbsp;</a></button>
           </div>
-          <div className = "game-list">
-            <button id="bttn1" className="gameButton" type="button" onClick={this.getGameId} value="0">{games[0].Title}</button><br /><br />
-            <button id="bttn2" className="gameButton" type="button" onClick={this.getGameId} value="1">{games[1].Title}</button><br /><br />
-            <button id="bttn3" className="gameButton" type="button" onClick={this.getGameId} value="2">{games[2].Title}</button><br /><br />
-            <button id="bttn4" className="gameButton" type="button" onClick={this.getGameId} value="3">{games[3].Title}</button><br /><br />
+          <div className="game-list">
+            <Panel gameId="0" func={this.getGameId} />
+            <Panel gameId="1" func={this.getGameId} />
+            <Panel gameId="2" func={this.getGameId} />
+            <Panel gameId="3" func={this.getGameId} />
           </div>
           <br />
         </div>
