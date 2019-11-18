@@ -1,5 +1,6 @@
 import React from 'react';
 import games from './Game/games.json';
+import DnDQuestion from './DndQuestion/DnDQuestion';
 
 const Home = () => {
   let listItems = games
@@ -30,6 +31,7 @@ const Home = () => {
         <p className="popular-game"><strong>POPULAR GAMES</strong></p>
         <ol className="cards" >{listItems}</ol>
       </body>
+      <DnDQuestion />
     </div>
   );
 }
