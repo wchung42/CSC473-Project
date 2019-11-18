@@ -8,14 +8,17 @@ const Container = styled.div`
     margin: 10px;
     border: 1px solid lightgrey;
     border-radius: 2px;
+
 `;
 
-const Title = styled.div`
+const Title = styled.h2`
     padding: 10px;
 `;
 
 const ImageList = styled.div`
+    margin: 0 auto;
     padding: 10px;
+    display: flex;
 `;
 
 class Row extends Component {
@@ -23,7 +26,7 @@ class Row extends Component {
         return (
             <Container>
                 <Title> { this.props.row.title }</Title>
-                <Droppable droppableId = { this.props.row.id }>
+                <Droppable droppableId = { this.props.row.id } direction = "horizontal">
                     {(provided) => (
                         <ImageList
                             // required droppable props --> added to component we want  to drop
