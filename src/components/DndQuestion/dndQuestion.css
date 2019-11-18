@@ -1,0 +1,30 @@
+.flexbox {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 500px;
+    height: 50vh;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.flexbox .drop-area {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+    background-color: #313131;
+    padding: 10px;
+}
+
+.flexbox .drop-area .card {
+    padding: 15px 25px;
+    background-color: white;
+    cursor: pointer;
+    margin-bottom: 15px;
+    width: 100%
+}
+
+.spacer {
+    width: 100px;
+}

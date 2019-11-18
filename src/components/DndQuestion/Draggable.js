@@ -8,7 +8,7 @@ function Draggable (props) {
 
         // set a timeout to show card while it is being dragged
         setTimeout(() => {
-            target.style.display = "none";
+            target.style.display = 'none';
         }, 0);
     }
 
@@ -18,7 +18,7 @@ function Draggable (props) {
     }
 
     return (
-        <div id = { props.id } className = { props.ClassName } draggable = { props.canDrag } onDragStart = { dragStart } onDragOver = { dragOver }>
+        <div id = { props.id } className = { props.className } canDrag = { props.canDrag } onDragStart = { dragStart } onDragOver = { dragOver }>
             { props.children }
         </div>
     )

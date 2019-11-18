@@ -6,8 +6,8 @@ function Droppable (props) {
         event.preventDefault();
 
         // get item data for draggable object
-        const itemId = event.dataTransfer.getData('itemId');
-        const card = document.getElementById(itemId);
+        const cardId = event.dataTransfer.getData('itemId');
+        const card = document.getElementById(cardId);
         card.style.display = 'block';
         event.target.appendChild(card);
     }
