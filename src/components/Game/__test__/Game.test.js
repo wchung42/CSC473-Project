@@ -4,6 +4,7 @@ import Game from './../Game';
 import Timer from './../Timer';
 import { shallow, mount } from 'enzyme';
 
+const puppeteer=require('puppeteer');
 
 // crash test
 it("renders without crashing", () => {
@@ -60,5 +61,27 @@ describe("component renders different pages based on states", () => {
         expect(wrapper.find('div.gameInterface').length).toBe(1);
         expect(wrapper.find(Timer).length).toBe(1);
     })
-})
+});
+
+test('testing location button ',async() => {
+
+    const browser = await puppeteer.launch({
+        headless: false,
+        slowMp:80,
+        args:['--window-size=1920,1080']
+    });
+    const page = await browser.newPage();
+    await page.goto('https://master.dlhem6nvy7qu4.amplifyapp.com/Game');
+    
+    await page.click('button.Location');
+        let location=await page.$eval('button.Location',(button)=>button.className)   
+        expect(location).toBe('Location');
+    
+
+    
+    
+  },20000);
+
+
+
 

@@ -84,7 +84,7 @@ onSignOut = async () => {
 
         <meta name="viewport" content="600px"></meta>
 
-        <div>
+        <div >
           <Navbar drawerClickHandler={this.drawerToggleClickHandler} />
 
           <SideDrawerMenu show={this.state.sideDrawerMenuOpen} />

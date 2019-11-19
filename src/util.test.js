@@ -9,6 +9,7 @@ import Footer from './components/Footer/Footer'
 import backdrop from './components/Backdrop/Backdrop'
 
 import { shallow, mount } from 'enzyme';
+import { async } from 'q';
 
 
 
@@ -54,5 +55,8 @@ test('Backdrop Testing', () => {
 
   expect(Backdrop.find('div.backdrop').length).toBe(0)
 
-  
+
 });
+
+
+
