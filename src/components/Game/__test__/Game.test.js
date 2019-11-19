@@ -82,11 +82,7 @@ test('testing location button ',async() => {
 
   test('testing exist button',async() => {
 
-    const browser = await puppeteer.launch({
-        headless: false,
-        slowMp:80,
-        args:['--window-size=1920,1080']
-    });
+    const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.goto('https://master.dlhem6nvy7qu4.amplifyapp.com/Game');
     
@@ -95,7 +91,25 @@ test('testing location button ',async() => {
         expect(exit).toBe('exit');
   
         await browser.close();
+  });
+
+  test('testing start game button',async() => {
+
+    const browser = await puppeteer.launch({
+        headless: false,
+        slowMp:80,
+        args:['--window-size=1920,1080']
+    });
+    const page = await browser.newPage();
+    await page.goto('https://master.dlhem6nvy7qu4.amplifyapp.com/Game');
+    
+    await page.hover('div.game-list')
+        let game=await page.$eval('div.game-list',(div)=>div.className)   
+        expect(game).toBe('1');
+  
+        await browser.close();
   },20000);
+
 
 
 
