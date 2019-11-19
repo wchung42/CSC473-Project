@@ -1,0 +1,11 @@
+{
+    "AppSyncApiName": "escapeapi",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": "false",
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authsrcbecaaab4",
+            "Outputs.UserPoolId"
+        ]
+    }
+}

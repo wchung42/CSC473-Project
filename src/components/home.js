@@ -30,7 +30,7 @@ const Home = () => {
       <div className="Body-Section">
         <p className="popular-game"><strong>POPULAR GAMES</strong></p>
         <ol className="cards" >{listItems}</ol>
-      </div>
+        </div>
     </div>
   );
 }

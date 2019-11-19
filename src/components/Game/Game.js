@@ -46,12 +46,20 @@ class Game extends Component {
          longitude: position.coords.longitude
        }), newState => console.log(newState))
 
-       if(this.state.longitude === null){
-     console.log(this.state.latitude, this.state.longitude);
-       }
-       else{
-        console.log(this.state.latitude, this.state.longitude);
-       }
+       console.log(this.state.latitude, this.state.longitude);
+       
+      //  var R = 6371e3; // metres
+      //  var φ1 = lat1.toRadians();
+      //  var φ2 = lat2.toRadians();
+      //  var Δφ = (lat2-lat1).toRadians();
+      //  var Δλ = (lon2-lon1).toRadians();
+
+      //  var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+      //         Math.cos(φ1) * Math.cos(φ2) *
+      //         Math.sin(Δλ/2) * Math.sin(Δλ/2);
+      //  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+      //  var d = R * c;
    }
 
   //Want to load the game in here based on the name

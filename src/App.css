@@ -40,6 +40,7 @@
   align-content: center;
   width: 80vw;
   margin-top: 2vh;
+  
   left: 5%;
 }
 
@@ -60,7 +61,6 @@
 
 .body-page {
   position: relative;
-  min-height: 100vh;
 }
 
 
