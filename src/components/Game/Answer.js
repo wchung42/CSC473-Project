@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import games from './games.json';
+import OrderQuestion from './OrderQuestion/OrderQuestion';
 
 class Answer extends Component {
     constructor(props) {
@@ -7,9 +8,11 @@ class Answer extends Component {
         this.state = {
             gameIndex: this.props.id,
             questionIndex: this.props.qId,
+            
         };
         this.enterNum = this.enterNum.bind(this);
         this.enterText = this.enterText.bind(this);
+        this.handleOrderAnswer = this.handleOrderAnswer.bind(this);
     }
     //this function will add value of button pressed to pound value
     enterNum(e) {
@@ -19,6 +22,14 @@ class Answer extends Component {
     //this enter will get current value of the input and assign that value to submit button
     enterText() {
         document.getElementById("submitBttn").value = document.getElementById("answerBox").value;
+    }
+
+    // index order of images will be assigned to submit button
+    handleOrderAnswer(order) {
+        // this.setState({
+        //     dragOrder: order
+        // })
+        document.getElementById("submitButtonOrder").value = order
     }
 
     componentDidUpdate(prevProps) {
@@ -50,6 +61,15 @@ class Answer extends Component {
                     <button type="button" className="number" onClick={this.enterNum} value=".">.</button>
                     <button type="button" className="number" onClick={this.enterNum} value="0">0</button>
                     <button type="button" className="number" id="pound" onClick={this.props.action} value="">#</button>
+                </div>
+            )
+        }
+        else if (games[this.state.gameIndex].Answer_Type[this.state.questionIndex] == "ordering") {
+            return (
+                <div>
+                    <OrderQuestion id = "1" handleOrderChange = {this.handleOrderAnswer}/>
+                    <br/>
+                    <button id="submitButtonOrder" className="btn-large  btn-success" type="button" onClick={this.props.action} value="">&nbsp; Submit &nbsp;</button>
                 </div>
             )
         }
