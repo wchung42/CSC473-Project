@@ -10,7 +10,8 @@ const Home = () => {
           <img
             key={item.Id}
             className="card-img-top"
-            src={item.Thumbnail} />
+            src={item.Thumbnail} 
+            alt = ''/>
           <div className="card-body">
             <h5 className="card-title">
               <strong>{item.Title} ({item.Difficulty}/5)</strong>
@@ -29,7 +30,7 @@ const Home = () => {
       <div className="Body-Section">
         <p className="popular-game"><strong>POPULAR GAMES</strong></p>
         <ol className="cards" >{listItems}</ol>
-    </div>
+      </div>
     </div>
   );
 }
