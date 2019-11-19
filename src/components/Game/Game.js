@@ -1,11 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, ReactDOM } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-// import getAnswer from './gameFunctions.js';
 import './Game.css';
 import Timer from './Timer';  // timer component that determines state of game
 import games from './games.json'; // get the game title
 import Panel from './gamePanel';
-
 
 class Game extends Component {
   constructor(props) {
@@ -20,6 +18,7 @@ class Game extends Component {
     };
     this.getGameId = this.getGameId.bind(this);
     this.startGame = this.startGame.bind(this);
+    // this.panelGenrator = this.panelGenrator.bind(this);
   }
 
   getGameId(ev) {
@@ -55,9 +54,22 @@ class Game extends Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.latitude !== this.props.latitude) {
+      this.setState({
+        latitude: this.props.latitude
+      })
+    }
+  }
   //Want to load the game in here based on the name
   render = () => {
-
+    let panelGenrator = () => {
+      let listItems = games
+        .map(item =>
+          <Panel gameId={item.Id} func={this.getGameId} />
+        )
+      return <ol className="cardsX" >{listItems}</ol>
+    }
     // go to game list page
     if (!this.state.gameReady && (this.state.gameSynopsis === 0) && (this.state.gameStart === 0)) {
       return (
@@ -78,11 +90,10 @@ class Game extends Component {
             <button className="btn-large btn-danger" type="button"><a href="/Game">&nbsp; Exit &nbsp;</a></button>
           </div>
           <div className="game-list">
-            <Panel gameId="0" func={this.getGameId} />
-            <Panel gameId="1" func={this.getGameId} />
-            <Panel gameId="2" func={this.getGameId} />
-            <Panel gameId="3" func={this.getGameId} />
+            <Panel func={this.getGameId} />
           </div>
+
+
           <br />
         </div>
       )
