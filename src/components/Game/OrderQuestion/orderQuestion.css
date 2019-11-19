@@ -1,0 +1,28 @@
+.Container{
+    border: 1px solid black;
+    border-radius: 2px;
+    padding: 10px;
+    margin: 0 auto;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+}
+
+.imagesContainer{
+    widows: 100%;
+    height: 100%;
+    margin: 10px;
+    border: 1px solid lightgrey;
+    border-radius: 2px;
+}
+
+.imagesList{    
+    widows: 100%;
+    height: 100%;
+    margin-left: 10%;
+    justify-items: space-evenly;
+    grid-gap: 10px;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-auto-flow: row dense;
+}
