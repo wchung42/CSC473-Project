@@ -86,7 +86,7 @@ class OrderQuestion extends Component {
                     // set state as current order
                     //console.log(this.state.order)
                     return (
-                        <div>
+                        <div className = "orderQuestion">
                             <Row key = { row.id } row = { row } images = { images } />
                             <button id = "submitButtonOrderTest" className = "btn-large btn-success" type = "button" onClick = { this.handleOrderChange } value = "">&nbsp; Verify Order &nbsp;</button>
                         </div>
