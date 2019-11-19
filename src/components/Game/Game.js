@@ -6,6 +6,7 @@ import Timer from './Timer';  // timer component that determines state of game
 import games from './games.json'; // get the game title
 import Panel from './gamePanel';
 
+
 class Game extends Component {
   constructor(props) {
     super(props)
@@ -41,18 +42,18 @@ class Game extends Component {
 
   position = async () => {
     await navigator.geolocation.getCurrentPosition(
-       position => this.setState({
+      position => this.setState({
         latitude: position.coords.latitude,
-         longitude: position.coords.longitude
-       }), newState => console.log(newState))
+        longitude: position.coords.longitude
+      }), newState => console.log(newState))
 
-       if(this.state.longitude === null){
-     console.log(this.state.latitude, this.state.longitude);
-       }
-       else{
-        console.log(this.state.latitude, this.state.longitude);
-       }
-   }
+    if (this.state.longitude === null) {
+      console.log(this.state.latitude, this.state.longitude);
+    }
+    else {
+      console.log(this.state.latitude, this.state.longitude);
+    }
+  }
 
   //Want to load the game in here based on the name
   render = () => {
@@ -61,13 +62,13 @@ class Game extends Component {
     if (!this.state.gameReady && (this.state.gameSynopsis === 0) && (this.state.gameStart === 0)) {
       return (
         <div className="Game">
-          <br/>
-          <p className ="Location">Click the button to get your coordinates.</p>
-    
-      <p className ="Location">{this.state.latitude} {this.state.longitude}</p>
+          <br />
+          <p className="Location">Click the button to get your coordinates.</p>
+
+          <p className="Location">{this.state.latitude} {this.state.longitude}</p>
 
           <button onClick={this.position} className='Location'>Location</button>
-          <br/>
+          <br />
 
           <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
             integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"

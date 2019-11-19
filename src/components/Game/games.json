@@ -94,25 +94,46 @@
             "10": "number",
             "11": "text"
         },
-        
         "DragDrop_Data": {
             "rows": {
                 "row-1": {
                     "id": "row-1",
                     "title": "Test row",
-                    "imageIds": ["2", "1", "3", "5", "4"]
+                    "imageIds": [
+                        "2",
+                        "1",
+                        "3",
+                        "5",
+                        "4"
+                    ]
                 }
             },
             "images": {
-                "1": { "id": "1", "url": "https://cdn.discordapp.com/attachments/629102063107964961/646214901349744640/Annotation_2019-11-19_000534.png"},
-                "2": { "id": "2", "url": "https://cdn.discordapp.com/attachments/629102063107964961/646214906458406922/Annotation_2019-11-19_000535.png"},
-                "3": { "id": "3", "url": "https://cdn.discordapp.com/attachments/629102063107964961/646214907234353162/Annotation_2019-11-19_000536.png"},
-                "4": { "id": "4", "url": "https://cdn.discordapp.com/attachments/629102063107964961/646214908941172790/Annotation_2019-11-19_000641.png"},
-                "5": { "id": "5", "url": "https://cdn.discordapp.com/attachments/629102063107964961/646214911625658368/Annotation_2019-11-19_000706.png"}
+                "1": {
+                    "id": "1",
+                    "url": "https://cdn.discordapp.com/attachments/629102063107964961/646214901349744640/Annotation_2019-11-19_000534.png"
+                },
+                "2": {
+                    "id": "2",
+                    "url": "https://cdn.discordapp.com/attachments/629102063107964961/646214906458406922/Annotation_2019-11-19_000535.png"
+                },
+                "3": {
+                    "id": "3",
+                    "url": "https://cdn.discordapp.com/attachments/629102063107964961/646214907234353162/Annotation_2019-11-19_000536.png"
+                },
+                "4": {
+                    "id": "4",
+                    "url": "https://cdn.discordapp.com/attachments/629102063107964961/646214908941172790/Annotation_2019-11-19_000641.png"
+                },
+                "5": {
+                    "id": "5",
+                    "url": "https://cdn.discordapp.com/attachments/629102063107964961/646214911625658368/Annotation_2019-11-19_000706.png"
+                }
             },
-            "rowOrder": ["row-1"]
+            "rowOrder": [
+                "row-1"
+            ]
         },
-
         "Answers": {
             "1": "1869",
             "2": "Time",
@@ -171,25 +192,46 @@
             "4": "text",
             "5": "text"
         },
-
         "DragDrop_Data": {
             "rows": {
                 "row-1": {
                     "id": "row-1",
                     "title": "Test row",
-                    "imageIds": ["2", "1", "3", "5", "4"]
+                    "imageIds": [
+                        "2",
+                        "1",
+                        "3",
+                        "5",
+                        "4"
+                    ]
                 }
             },
             "images": {
-                "1": { "id": "1", "url": "https://oyster.ignimgs.com/mediawiki/apis.ign.com/super-smash-bros-switch/a/a0/SmashKirbyThumb.jpg?width=325"},
-                "2": { "id": "2", "url": "https://oyster.ignimgs.com/mediawiki/apis.ign.com/super-smash-bros-switch/4/42/SmashFoxThumb.jpg?width=325"},
-                "3": { "id": "3", "url": "https://oyster.ignimgs.com/mediawiki/apis.ign.com/super-smash-bros-switch/e/ea/SmashPikachuThumb.jpg?width=325"},
-                "4": { "id": "4", "url": "https://oyster.ignimgs.com/mediawiki/apis.ign.com/super-smash-bros-switch/0/0a/SmashLuigiThumb.jpg?width=325"},
-                "5": { "id": "5", "url": "https://oyster.ignimgs.com/mediawiki/apis.ign.com/super-smash-bros-switch/5/5c/SmashYoshiThumb.jpg?width=325"}
+                "1": {
+                    "id": "1",
+                    "url": "https://oyster.ignimgs.com/mediawiki/apis.ign.com/super-smash-bros-switch/a/a0/SmashKirbyThumb.jpg?width=325"
+                },
+                "2": {
+                    "id": "2",
+                    "url": "https://oyster.ignimgs.com/mediawiki/apis.ign.com/super-smash-bros-switch/4/42/SmashFoxThumb.jpg?width=325"
+                },
+                "3": {
+                    "id": "3",
+                    "url": "https://oyster.ignimgs.com/mediawiki/apis.ign.com/super-smash-bros-switch/e/ea/SmashPikachuThumb.jpg?width=325"
+                },
+                "4": {
+                    "id": "4",
+                    "url": "https://oyster.ignimgs.com/mediawiki/apis.ign.com/super-smash-bros-switch/0/0a/SmashLuigiThumb.jpg?width=325"
+                },
+                "5": {
+                    "id": "5",
+                    "url": "https://oyster.ignimgs.com/mediawiki/apis.ign.com/super-smash-bros-switch/5/5c/SmashYoshiThumb.jpg?width=325"
+                }
             },
-            "rowOrder": ["row-1"]
+            "rowOrder": [
+                "row-1"
+            ]
         },
-
         "Answers": {
             "1": "2",
             "2": "4",
@@ -249,6 +291,122 @@
             "3": "use your damn calculator3",
             "4": "use your damn calculator4",
             "5": "use your damn calculator5"
+        }
+    },
+    {
+        "Id": 4,
+        "Title": "Hero of the Angle",
+        "Difficulty": 4,
+        "Story": "The once general of the Civil War Alexander S. Webb, who received a Medal of Honor of his battle of Gettysburg is trapped. The general who was a president of CCNY was made into a statue where his soul is contained. General web is trapped in a time prison forever to watch time continue as he cannot move on himself. We need to free the hero from his prison by connecting his legacy to those who have already been freed.",
+        "Tag": "#ccny, #harris_hall",
+        "Thumbnail": "https://cdn.discordapp.com/attachments/629102063107964961/644893758793449494/image0.jpg",
+        "Images": {
+            "1": "https://cdn.discordapp.com/attachments/629102063107964961/644893758793449494/image0.jpg",
+            "2": "https://cdn.discordapp.com/attachments/629102063107964961/644893759263473696/image2.jpg",
+            "3": "https://media.discordapp.net/attachments/629102063107964961/644894179037544469/image0.jpg?width=901&height=676",
+            "4": "https://cdn.discordapp.com/attachments/629102063107964961/644893918231527434/image0.jpg",
+            "5": "http://4.bp.blogspot.com/-_uMA0I0WbzQ/VGbD6feEfnI/AAAAAAAAASI/-1mPv76qrao/s1600/BRAVO_Photo222.JPG",
+            "6": "https://upload.wikimedia.org/wikipedia/commons/4/46/Lisa_Staiano-Coico.jpg",
+            "7": "https://cdn.discordapp.com/attachments/629102063107964961/645319501780484106/presidents.jpg",
+            "8": "https://cdn.discordapp.com/attachments/629102063107964961/644893916415655946/image1.jpg",
+            "9": "https://cdn.discordapp.com/attachments/629102063107964961/644893758793449494/image0.jpg",
+            "10": "https://cdn.discordapp.com/attachments/629102063107964961/644893918823186458/image2.jpg",
+            "11": "https://media.discordapp.net/attachments/629102063107964961/644894177620131840/image1.jpg?width=507&height=676"
+        },
+        "Popular": true,
+        "Total_Questions": 11,
+        "Total_Hint": 3,
+        "Game_Story": {
+            "1": "Alexander in his midlife crisis didn’t turn to younger women, and a fancy new car, instead in this year, he became part of City College’s history.",
+            "2": "The one thing that kills every man, moves forward but never back, even General Webb couldn’t escape it.",
+            "3": "Go to the Shepherd with no sheep as he holds the key to all and find the man who started it all. Only one thing is not the same as his arms, legs, and head.",
+            "4": "The man with the bronze nose looks to this man with indifference, because like him, he carried his legacy for many years.",
+            "5": "Even among the presidents, some could not remember when their predecessors were president, some would say no one knew what number president Gallagher was.",
+            "6": "For two years the president’s chair has been empty, ousted because of her betrayal this presidential number has been considered a disgrace to the legacy.",
+            "7": "Finley, Horace, Harleston, and Marshak are arguably so old, that no one could remember the order of these presidents.",
+            "8": "All these great men were inspired by philosophers, or those who carried the philosophy of the philosophers, usually no one knew of the man who embodied music.",
+            "9": "Following the sound of music, where even art resides, A man left a window that lets us see the sunset.",
+            "10": "The sunset takes us back to where it all started, where time protects, and where doctors lie. The Goblins across them reflect how many truly made a change.",
+            "11": "Legend has it that where the tallest tower stands, General Webb is trapped because of this building."
+        },
+        "Answer_Type": {
+            "1": "number",
+            "2": "text",
+            "3": "text",
+            "4": "text",
+            "5": "number",
+            "6": "number",
+            "7": "ordering",
+            "8": "text",
+            "9": "text",
+            "10": "number",
+            "11": "text"
+        },
+        "DragDrop_Data": {
+            "rows": {
+                "row-1": {
+                    "id": "row-1",
+                    "title": "Test row",
+                    "imageIds": [
+                        "2",
+                        "1",
+                        "3",
+                        "5",
+                        "4"
+                    ]
+                }
+            },
+            "images": {
+                "1": {
+                    "id": "1",
+                    "url": "https://cdn.discordapp.com/attachments/629102063107964961/646214901349744640/Annotation_2019-11-19_000534.png"
+                },
+                "2": {
+                    "id": "2",
+                    "url": "https://cdn.discordapp.com/attachments/629102063107964961/646214906458406922/Annotation_2019-11-19_000535.png"
+                },
+                "3": {
+                    "id": "3",
+                    "url": "https://cdn.discordapp.com/attachments/629102063107964961/646214907234353162/Annotation_2019-11-19_000536.png"
+                },
+                "4": {
+                    "id": "4",
+                    "url": "https://cdn.discordapp.com/attachments/629102063107964961/646214908941172790/Annotation_2019-11-19_000641.png"
+                },
+                "5": {
+                    "id": "5",
+                    "url": "https://cdn.discordapp.com/attachments/629102063107964961/646214911625658368/Annotation_2019-11-19_000706.png"
+                }
+            },
+            "rowOrder": [
+                "row-1"
+            ]
+        },
+        "Answers": {
+            "1": "1869",
+            "2": "Time",
+            "3": "Cane",
+            "4": "Horace Webster",
+            "5": "7",
+            "6": "12",
+            "7": "1,2,3,4,5",
+            "8": "Orphen",
+            "9": "Robert Bell",
+            "10": "3",
+            "11": "Compton & Goethals Hall"
+        },
+        "Hint": {
+            "1": "Look at when he joined City College",
+            "2": "Some would say gold couldn't escape his sight",
+            "3": "The only thing that's different from the rest of the statue",
+            "4": "Follow his sight, find the person",
+            "5": "What's the presidential number?",
+            "6": "Find the presidential number of the woman",
+            "7": "Order the given picture by their presidential order",
+            "8": "Out of the 3 philosophers, who's in the middle",
+            "9": "Who showed us the sunset",
+            "10": "Go to the building where time hangs",
+            "11": "Compton & Goethals Hall"
         }
     }
 ]
