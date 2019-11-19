@@ -14,6 +14,8 @@ class OrderQuestion extends Component {
     // reorder elements in row
     // result object has draggableId, type, reason (drop or cancel), source and destination
     onDragEnd = result => {
+        // print prev state for TESTING
+        //console.log("Prev state: " + this.state.rows['row-1'].imageIds)
         const { destination, source, draggableId } = result;
 
         // handle if dragged out of dropzone
@@ -47,24 +49,42 @@ class OrderQuestion extends Component {
             },
         };
 
+        
         // todo: need to match this new state with a correct state
         this.setState(newState);
+        setTimeout(function() {
 
+        }, 100);
+        
+        
+    }
+
+    //handle order change -- returns the order to the parent
+    handleOrderChange = () => {
+        let order = this.state.rows['row-1'].imageIds.toString();
+        console.log("TEST: " + order)
+        this.props.handleOrderChange(order)
     }
 
     render() {
 
         return (
             <DragDropContext onDragEnd = { this.onDragEnd }>
-                {this.state.rowOrder.map((rowId) => {
-                    // get row order
-                    const row = this.state.rows[rowId];
-                    // get order of the images in the row
-                    const images = row.imageIds.map(imageID => this.state.images[imageID]);
-                    return (
-                        <Row key = { row.id } row = { row } images = { images } />
-                    )
-                })}
+                <div onChange = { this.handleOrderChange }>
+                    {this.state.rowOrder.map((rowId) => {
+                        // get row order
+                        const row = this.state.rows[rowId];
+                        // get order of the images in the row
+                        const images = row.imageIds.map(imageID => this.state.images[imageID]);
+                        // print current state for TESTING
+                        //console.log("Current state: " + this.state.rows['row-1'].imageIds.toString())
+                        return (
+                            <Row key = { row.id } row = { row } images = { images } />
+                        )
+                    })} 
+                </div>
+                
+                
             </DragDropContext>
             
            
