@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import games from './games.json';
 import OrderQuestion from './OrderQuestion/OrderQuestion';
+import './Game.css';
 
 class Answer extends Component {
     constructor(props) {
@@ -69,7 +70,10 @@ class Answer extends Component {
                 <div>
                     <OrderQuestion id = "1" handleOrderChange = {this.handleOrderAnswer}/>
                     <br/>
-                    <button id="submitButtonOrder" className="btn-large  btn-success" type="button" onClick={this.props.action} value="">&nbsp; Submit &nbsp;</button>
+                    <div className = "submit">
+                       <button id="submitButtonOrder" className="btn-lg  btn-success" type="button" onClick={this.props.action} value="">&nbsp; Submit &nbsp;</button> 
+                    </div>
+                    
                 </div>
             )
         }
@@ -78,7 +82,10 @@ class Answer extends Component {
                 <div key={this.props.qId} id="textAnswer">
                     <input id="answerBox" type="text" className="text-center textbox" onChange={this.enterText} />
                     <br />
-                    <button id="submitBttn" className="btn-large  btn-success" type="button" onClick={this.props.action} value="">&nbsp; Submit &nbsp;</button>
+                    <div className = "submit">
+                       <button id="submitBttn" className="btn-lg  btn-success" type="button" onClick={this.props.action} value="">&nbsp; Submit &nbsp;</button> 
+                    </div>
+                    
                 </div>
             )
 
