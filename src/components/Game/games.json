@@ -88,11 +88,31 @@
             "4": "text",
             "5": "number",
             "6": "number",
-            "7": "number",
+            "7": "ordering",
             "8": "text",
             "9": "text",
-            "10": "number"
+            "10": "number",
+            "11": "text"
         },
+        
+        "DragDrop_Data": {
+            "rows": {
+                "row-1": {
+                    "id": "row-1",
+                    "title": "Test row",
+                    "imageIds": ["2", "1", "3", "5", "4"]
+                }
+            },
+            "images": {
+                "1": { "id": "1", "url": "https://oyster.ignimgs.com/mediawiki/apis.ign.com/super-smash-bros-switch/b/ba/SmashMarioThumb.jpg?width=325"},
+                "2": { "id": "2", "url": "https://oyster.ignimgs.com/mediawiki/apis.ign.com/super-smash-bros-switch/4/4c/SmashLinkThumb.jpg?width=325"},
+                "3": { "id": "3", "url": "https://oyster.ignimgs.com/mediawiki/apis.ign.com/super-smash-bros-switch/f/f0/SmashSamusThumb.jpg?width=325"},
+                "4": { "id": "4", "url": "https://oyster.ignimgs.com/mediawiki/apis.ign.com/super-smash-bros-switch/2/27/SmashDarkSamusThumb.jpg?width=325"},
+                "5": { "id": "5", "url": "https://oyster.ignimgs.com/mediawiki/apis.ign.com/super-smash-bros-switch/5/5c/SmashYoshiThumb.jpg?width=325"}
+            },
+            "rowOrder": ["row-1"]
+        },
+
         "Answers": {
             "1": "1869",
             "2": "Time",
@@ -151,6 +171,25 @@
             "4": "text",
             "5": "text"
         },
+
+        "DragDrop_Data": {
+            "rows": {
+                "row-1": {
+                    "id": "row-1",
+                    "title": "Test row",
+                    "imageIds": ["2", "1", "3", "5", "4"]
+                }
+            },
+            "images": {
+                "1": { "id": "1", "url": "https://oyster.ignimgs.com/mediawiki/apis.ign.com/super-smash-bros-switch/a/a0/SmashKirbyThumb.jpg?width=325"},
+                "2": { "id": "2", "url": "https://oyster.ignimgs.com/mediawiki/apis.ign.com/super-smash-bros-switch/4/42/SmashFoxThumb.jpg?width=325"},
+                "3": { "id": "3", "url": "https://oyster.ignimgs.com/mediawiki/apis.ign.com/super-smash-bros-switch/e/ea/SmashPikachuThumb.jpg?width=325"},
+                "4": { "id": "4", "url": "https://oyster.ignimgs.com/mediawiki/apis.ign.com/super-smash-bros-switch/0/0a/SmashLuigiThumb.jpg?width=325"},
+                "5": { "id": "5", "url": "https://oyster.ignimgs.com/mediawiki/apis.ign.com/super-smash-bros-switch/5/5c/SmashYoshiThumb.jpg?width=325"}
+            },
+            "rowOrder": ["row-1"]
+        },
+
         "Answers": {
             "1": "2",
             "2": "4",

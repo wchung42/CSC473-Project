@@ -33,7 +33,7 @@ const Home = () => {
         <ol className="cards" >{listItems}</ol>
     </div>
     {/* testinggggg */}
-    <OrderQuestion />
+    <OrderQuestion id = '2'/>
     </div>
   );
 }
