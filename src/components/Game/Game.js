@@ -96,7 +96,7 @@ class Game extends Component {
             crossOrigin="anonymous" />
           <br />
           <div className="exit">
-            <button className="btn-large btn-danger" type="button"><a href="/Game">&nbsp; Exit &nbsp;</a></button>
+            <button className="btn btn-lg btn-danger" type="button"><a href="/">&nbsp; Exit &nbsp;</a></button>
           </div>
           <div className="game-list">
             <Panel func={this.getGameId} />
@@ -112,13 +112,13 @@ class Game extends Component {
       return (
         <div className="Game">
           <div className="exit">
-            <button className="btn-large btn-danger" type="button"><a href="/Game">&nbsp; Exit &nbsp;</a></button>
+            <a href = "/Game" className="btn btn-lg btn-danger nounderline" type="button">&nbsp; Exit &nbsp;</a>
           </div>
           <div className="synopsis">
             <h1>{games[this.state.gameID].Story}</h1>
           </div>
           <div className="start">
-            <button id="start-btn" className="btn-large btn-success" type="button" onClick={this.startGame}>&nbsp; Start &nbsp;</button>
+            <button id="start-btn" className="btn btn-lg btn-success" type="button" onClick={this.startGame}>&nbsp; Start &nbsp;</button>
           </div>
 
         </div>
@@ -132,7 +132,7 @@ class Game extends Component {
             crossOrigin="anonymous" />
           <br />
           <div className="exit">
-            <button className="btn-large btn-danger" type="button"><a href="/Game">&nbsp; Exit &nbsp;</a></button>
+            <button className="btn-lg btn-danger" type="button"><a href="/Game">&nbsp; Exit &nbsp;</a></button>
           </div>
           <div className="gameInterface">
             <Timer gameId={this.state.gameID} startCount="300" />
