@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import initialData from './initial-data';
 import Row from './Row';
 import { DragDropContext } from 'react-beautiful-dnd';
+import games from '../games.json'
 
 class OrderQuestion extends Component {
     constructor(props) {
         super(props);
-        this.state = initialData;
+        this.state = games[this.props.id].DragDrop_Data
+        
     }
     
     // reorder elements in row
@@ -51,6 +53,7 @@ class OrderQuestion extends Component {
     }
 
     render() {
+
         return (
             <DragDropContext onDragEnd = { this.onDragEnd }>
                 {this.state.rowOrder.map((rowId) => {
