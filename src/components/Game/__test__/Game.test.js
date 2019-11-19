@@ -76,12 +76,26 @@ test('testing location button ',async() => {
     await page.click('button.Location');
         let location=await page.$eval('button.Location',(button)=>button.className)   
         expect(location).toBe('Location');
-    
-
-    
-    
+    await browser.close();
+        
   },20000);
 
+  test('testing exist button',async() => {
+
+    const browser = await puppeteer.launch({
+        headless: false,
+        slowMp:80,
+        args:['--window-size=1920,1080']
+    });
+    const page = await browser.newPage();
+    await page.goto('https://master.dlhem6nvy7qu4.amplifyapp.com/Game');
+    
+    await page.click('div.exit');
+        let exit=await page.$eval('div.exit',(div)=>div.className)   
+        expect(exit).toBe('exit');
+  
+        await browser.close();
+  },20000);
 
 
 
