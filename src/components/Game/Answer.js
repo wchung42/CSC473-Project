@@ -13,6 +13,7 @@ class Answer extends Component {
         };
         this.enterNum = this.enterNum.bind(this);
         this.enterText = this.enterText.bind(this);
+        this.handleOrderAnswer = this.handleOrderAnswer.bind(this);
     }
     //this function will add value of button pressed to pound value
     enterNum(e) {
@@ -26,7 +27,13 @@ class Answer extends Component {
 
     // index order of images will be assigned to submit button
     handleOrderAnswer(order) {
-        document.getElementById("submitButtonOrder").value = order
+        this.setState({
+            dragOrder: order
+        })
+        document.getElementById("submitButtonOrder").value = this.state.dragOrder
+    }
+    enterOrder() {
+
     }
 
     componentDidUpdate(prevProps) {
@@ -64,8 +71,8 @@ class Answer extends Component {
         else if (games[this.state.gameIndex].Answer_Type[this.state.questionIndex] == "ordering") {
             return (
                 <div>
-                    <OrderQuestion id = "1" handleOrderChange = { this.handleOrderAnswer }/>
-                    <button id = "submitButtonOrder" className = "btn-large btn-success" type = "button" onClick = { this.props.action } value = "">&nbsp; Submit &nbsp;</button>
+                    <OrderQuestion id = "1" handleOrderChange = {this.handleOrderAnswer}/>
+                    <button id="submitButtonOrder" className="btn-large  btn-success" type="button" onClick={this.props.action} value="">&nbsp; Submit &nbsp;</button>
                 </div>
             )
         }
