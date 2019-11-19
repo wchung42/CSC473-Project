@@ -104,11 +104,11 @@
                 }
             },
             "images": {
-                "1": { "id": "1", "url": "https://oyster.ignimgs.com/mediawiki/apis.ign.com/super-smash-bros-switch/b/ba/SmashMarioThumb.jpg?width=325"},
-                "2": { "id": "2", "url": "https://oyster.ignimgs.com/mediawiki/apis.ign.com/super-smash-bros-switch/4/4c/SmashLinkThumb.jpg?width=325"},
-                "3": { "id": "3", "url": "https://oyster.ignimgs.com/mediawiki/apis.ign.com/super-smash-bros-switch/f/f0/SmashSamusThumb.jpg?width=325"},
-                "4": { "id": "4", "url": "https://oyster.ignimgs.com/mediawiki/apis.ign.com/super-smash-bros-switch/2/27/SmashDarkSamusThumb.jpg?width=325"},
-                "5": { "id": "5", "url": "https://oyster.ignimgs.com/mediawiki/apis.ign.com/super-smash-bros-switch/5/5c/SmashYoshiThumb.jpg?width=325"}
+                "1": { "id": "1", "url": "https://cdn.discordapp.com/attachments/629102063107964961/646214901349744640/Annotation_2019-11-19_000534.png"},
+                "2": { "id": "2", "url": "https://cdn.discordapp.com/attachments/629102063107964961/646214906458406922/Annotation_2019-11-19_000535.png"},
+                "3": { "id": "3", "url": "https://cdn.discordapp.com/attachments/629102063107964961/646214907234353162/Annotation_2019-11-19_000536.png"},
+                "4": { "id": "4", "url": "https://cdn.discordapp.com/attachments/629102063107964961/646214908941172790/Annotation_2019-11-19_000641.png"},
+                "5": { "id": "5", "url": "https://cdn.discordapp.com/attachments/629102063107964961/646214911625658368/Annotation_2019-11-19_000706.png"}
             },
             "rowOrder": ["row-1"]
         },

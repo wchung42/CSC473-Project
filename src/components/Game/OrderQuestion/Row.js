@@ -43,7 +43,7 @@ class Row extends Component {
     render() {
         return (
             <Container>
-                <Title> { this.props.row.title }</Title>
+                
                 <Droppable droppableId = { this.props.row.id } direction = "horizontal">
                     {(provided) => (
                         <ImageList

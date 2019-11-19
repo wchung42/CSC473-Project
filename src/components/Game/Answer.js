@@ -8,8 +8,7 @@ class Answer extends Component {
         this.state = {
             gameIndex: this.props.id,
             questionIndex: this.props.qId,
-            // for ordering question only
-            dragOrder: ''
+            
         };
         this.enterNum = this.enterNum.bind(this);
         this.enterText = this.enterText.bind(this);
@@ -27,13 +26,10 @@ class Answer extends Component {
 
     // index order of images will be assigned to submit button
     handleOrderAnswer(order) {
-        this.setState({
-            dragOrder: order
-        })
-        document.getElementById("submitButtonOrder").value = this.state.dragOrder
-    }
-    enterOrder() {
-
+        // this.setState({
+        //     dragOrder: order
+        // })
+        document.getElementById("submitButtonOrder").value = order
     }
 
     componentDidUpdate(prevProps) {
@@ -72,6 +68,7 @@ class Answer extends Component {
             return (
                 <div>
                     <OrderQuestion id = "1" handleOrderChange = {this.handleOrderAnswer}/>
+                    <br/>
                     <button id="submitButtonOrder" className="btn-large  btn-success" type="button" onClick={this.props.action} value="">&nbsp; Submit &nbsp;</button>
                 </div>
             )
