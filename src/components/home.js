@@ -1,7 +1,5 @@
 import React from 'react';
 import games from './Game/games.json';
-// testingggg
-import OrderQuestion from './Game/OrderQuestion/OrderQuestion'
 
 const Home = () => {
   let listItems = games
@@ -31,9 +29,7 @@ const Home = () => {
       <div className="Body-Section">
         <p className="popular-game"><strong>POPULAR GAMES</strong></p>
         <ol className="cards" >{listItems}</ol>
-    </div>
-    {/* testinggggg */}
-    <OrderQuestion id = '2'/>
+      </div>
     </div>
   );
 }
