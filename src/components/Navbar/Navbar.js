@@ -1,17 +1,18 @@
 import React from 'react';
 import './Navbar.css';
 import DrawerToggleButton from '../SideDrawerMenu/DrawerToggleButton';
+import { Auth } from 'aws-amplify';
 
 const navbar = props => (
     <header className="navbar">
         <nav className="navigation">
             <div className="nav-logo"><a href="/"><img src={require("./escape.png")} alt="logo" /></a></div>
             <div className="space-btw-logo-items" />
-            {/* <div className="nav-items">
+             <div className="nav-items">
                 <ul>
-                    <li ><a href="#">Log in</a></li>
+                    <li></li>
                 </ul>
-            </div> */}
+            </div> 
             <div>
                 <DrawerToggleButton click={props.drawerClickHandler} />
             </div>
