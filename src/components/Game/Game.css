@@ -15,15 +15,28 @@
 }
 
 
-.btn-large{
+.btn-lg {
   font-size: 3vh;
-  
+  color: white;
 }
 
 .exit{
-  margin-left: 5%;
+  /* margin-top: 5%;
+  margin-left: 5%; */
+  margin: 2vh 2vh 2vh 2vh;
   text-align: left;
+
 }
+
+.exit a{
+  text-decoration: none; 
+  color: white;
+}
+
+.start {
+  margin: 2vh 2vh 2vh 2vh;
+}
+
 .hint{
   font-size:200%;
 }
@@ -68,6 +81,7 @@
 
 .card-img-top{
   height: 30vh;
+  width: 100%;
 }
 
 .card-text{
@@ -112,9 +126,10 @@
   grid-template-columns: repeat(2,1fr);
   grid-gap: 10px; */
   width: 50%;
-  margin-top: 2%;
+  /* margin-top: 2%;
   margin-left: 27.5%;
-  margin-right: 37.5%;
+  margin-right: 37.5%; */
+  margin: auto;
   padding: 5px;
 }
 
@@ -124,8 +139,18 @@
 
 #submitBttn{
   text-align: center;
+  margin: 1vh 1vh 0 1vh;
+}
+
+.submit {
+  width: 100%;
+  margin: auto;
 }
 
 .Location{
   font-size:200%;
+}
+
+#timer {
+  font-size: 5vh;
 }

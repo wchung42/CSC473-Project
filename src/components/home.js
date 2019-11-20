@@ -17,7 +17,7 @@ const Home = () => {
               <strong>{item.Title} ({item.Difficulty}/5)</strong>
             </h5>
             <p className="card-text"> {item.Story}</p>
-            <a href="#" className="btn btn-primary">Play</a>
+            <a href="#" className="btn btn-primary btn-lg">Play</a>
           </div>
         </div>
       </li >
@@ -30,7 +30,7 @@ const Home = () => {
       <div className="Body-Section">
         <p className="popular-game"><strong>POPULAR GAMES</strong></p>
         <ol className="cards" >{listItems}</ol>
-      </div>
+        </div>
     </div>
   );
 }

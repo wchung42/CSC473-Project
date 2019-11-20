@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import initialData from './initial-data';
 import Row from './Row';
 import { DragDropContext } from 'react-beautiful-dnd';
 import games from '../games.json'
@@ -14,7 +13,7 @@ class OrderQuestion extends Component {
 
         this.handleOrderChange = this.handleOrderChange.bind(this)
     }
-    
+
     // reorder elements in row
     // result object has draggableId, type, reason (drop or cancel), source and destination
     onDragEnd = result => {
@@ -23,7 +22,7 @@ class OrderQuestion extends Component {
         const { destination, source, draggableId } = result;
 
         // handle if dragged out of dropzone
-        if ( !destination ) {
+        if (!destination) {
             return;
         }
 
@@ -53,14 +52,14 @@ class OrderQuestion extends Component {
             },
         };
 
-        
+
         // todo: need to match this new state with a correct state
         this.setState({
             data: newState,
             order: newState.rows['row-1'].imageIds.toString()
         });
         //console.log(this.state.order)
-        
+
     }
 
     //handle order change -- returns the order to the parent
@@ -72,9 +71,9 @@ class OrderQuestion extends Component {
     }
 
     render() {
-        
+
         return (
-            <DragDropContext onDragEnd = { this.onDragEnd }>
+            <DragDropContext onDragEnd={this.onDragEnd}>
                 {this.state.data.rowOrder.map((rowId) => {
                     // get row order
                     const row = this.state.data.rows[rowId];
@@ -86,23 +85,23 @@ class OrderQuestion extends Component {
                     // set state as current order
                     //console.log(this.state.order)
                     return (
-                        <div className = "orderQuestion">
-                            <Row key = { row.id } row = { row } images = { images } />
-                            <button id = "submitButtonOrderTest" className = "btn-large btn-success" type = "button" onClick = { this.handleOrderChange } value = "">&nbsp; Verify Order &nbsp;</button>
+                        <div className="orderQuestion">
+                            <Row key={row.id} row={row} images={images} />
+                            <button id="submitButtonOrderTest" className="btn-large btn-success" type="button" onClick={this.handleOrderChange} value="">&nbsp; Verify Order &nbsp;</button>
                         </div>
-                        
-                        
+
+
                     )
-                })} 
-                
-                
+                })}
+
+
             </DragDropContext>
-            
-           
-        
+
+
+
         )
 
-        
+
     }
 }
 
