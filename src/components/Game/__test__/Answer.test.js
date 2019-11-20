@@ -60,4 +60,36 @@ describe("<Answer/> component", () => {
         })
     })
 
+    describe('<Answer /> interactions', () => {
+        let wrapper;
+        //beforeEach(() => {wrapper = shallow(<Answer />);})
+
+        it('pressing on numpad buttons should call enterNum', () => {
+            wrapper = shallow(<Answer id = {1} qId = {1} />)
+            const instance = wrapper.instance();
+            //jest.spyOn(document, 'getElementById').mockReturnValueOnce({value: 'pound'});
+            const spy = jest.spyOn(instance, "enterNum");
+            instance.forceUpdate();
+            // let button = wrapper.find('#num7');
+            // expect(button.length).toBe(1);
+            // button.simulate('click', { currentTarget: "" }, spy);
+            //expect(spy).toHaveBeenCalled();
+            let button;
+            for (let i = 0; i < 9; i++) {
+                jest.spyOn(document, 'getElementById').mockReturnValueOnce({value: 'pound'});
+                button = wrapper.find('#num' + i);
+                expect(button.length).toBe(1);
+                button.simulate('click', { currentTarget: i}, spy);
+                expect(spy).toHaveBeenCalled();
+            }
+            jest.spyOn(document, 'getElementById').mockReturnValueOnce({value: 'pound'});
+            
+            button = wrapper.find('#numDot');
+            expect(button.length).toBe(1);
+            button.simulate('click', { currentTarget: '.'}, spy);
+            expect(spy).toHaveBeenCalled();
+
+        })
+    })
+
 })
