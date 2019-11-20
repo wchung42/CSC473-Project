@@ -8,7 +8,7 @@ class DragImage extends Component {
         return (
             <Draggable draggableId={this.props.image.id} index={this.props.index}>
                 {(provided) => (
-                    <div className="Container"
+                    <div className="imageQuestion"
                         // necessary draggable props --> makes each item draggable
                         ref={provided.innerRef}
                         {...provided.draggableProps}
