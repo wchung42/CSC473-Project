@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import Game from './../Game';
 import Timer from './../Timer';
 import { shallow, mount } from 'enzyme';
+import renderer from 'react-test-renderer'
 
 
 describe("Game component testing", () => {
@@ -73,7 +74,7 @@ describe("Game component testing", () => {
             let button = wrapper.find('#bttn0');
             expect(button.length).toBe(1);
             button.simulate('click');
-            button = wrapper.find('button.btn-danger');
+            button = wrapper.find('a.btn-danger');
             expect(button.length).toBe(1);
             button.simulate('click');
             expect(wrapper.find('div.body-page'));
@@ -83,10 +84,19 @@ describe("Game component testing", () => {
             let button = wrapper.find('#bttn0');
             expect(button.length).toBe(1);
             button.simulate('click');
-            button = wrapper.find('button.btn-danger');
+            button = wrapper.find('a.btn-danger');
             expect(button.length).toBe(1);
             button.simulate('click');
             expect(wrapper.find('div.gameInterface'));
         })
     });
+
+    describe('snapshot testing', () => {
+        it('game list page matches the snapshot', () => {
+            const tree = renderer.create(<Game />).toJSON();
+            expect(tree).toMatchSnapshot();
+        });
+        
+    })
+    
 })
