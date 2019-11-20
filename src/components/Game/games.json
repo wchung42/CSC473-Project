@@ -1,7 +1,7 @@
 [
     {
         "Id": 0,
-        "Title": "The Haunted Room",
+        "Title": "The Curious Case of Room STC01",
         "Difficulty": 2,
         "Story": "Some spirits are strong and manifest in a ghost like form, most are weak and must live on in within a host. The host is usually an object. CCNY is known for having dead in the library due to an impossible engineering department. The Grove School of Engineering has caused this room to become filled with spirits trapped in objects, we need you to set them free!",
         "Tag": "#ccny, #shepard_hall",
@@ -324,13 +324,13 @@
             "11": "Legend has it that where the tallest tower stands, General Webb is trapped because of this building."
         },
         "Answer_Type": {
-            "1": "number",
+            "1": "ordering",
             "2": "text",
             "3": "text",
             "4": "text",
             "5": "number",
             "6": "number",
-            "7": "ordering",
+            "7": "text",
             "8": "text",
             "9": "text",
             "10": "number",

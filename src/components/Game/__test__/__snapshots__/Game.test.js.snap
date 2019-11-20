@@ -1,0 +1,273 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Game component testing snapshot testing game list page matches the snapshot 1`] = `
+<div
+  className="Game"
+>
+  <br />
+  <p
+    className="Location"
+  >
+    Click the button to get your coordinates.
+  </p>
+  <p
+    className="Location"
+  >
+     
+  </p>
+  <button
+    className="Location"
+    onClick={[Function]}
+  >
+    Location
+  </button>
+  <br />
+  <link
+    crossOrigin="anonymous"
+    href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+    integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+    rel="stylesheet"
+  />
+  <br />
+  <div
+    className="exit"
+  >
+    <button
+      className="btn btn-lg btn-danger"
+      type="button"
+    >
+      <a
+        href="/"
+      >
+          Exit  
+      </a>
+    </button>
+  </div>
+  <div
+    className="game-list"
+  >
+    <div
+      className="card"
+    >
+      <ul>
+        <li
+          className="card-body"
+        >
+          <img
+            alt=""
+            className="card-img-top"
+            src="https://i.ibb.co/sVKnY3R/74419834-2503997649921511-7175701397294284800-n.jpg"
+          />
+          <h5
+            className="card-title"
+          >
+            <strong>
+              The Curious Case of Room STC01
+            </strong>
+          </h5>
+          <ul
+            className="card-text"
+          >
+            <li>
+              Location:
+            </li>
+            <li>
+              Capacity:
+            </li>
+            <li>
+              Game Length:
+            </li>
+            <li>
+              Difficulty: 
+              2
+              /5
+            </li>
+          </ul>
+          <button
+            className="btn btn-lg btn-primary"
+            id="bttn0"
+            onClick={[Function]}
+            type="button"
+            value={0}
+          >
+            START
+          </button>
+        </li>
+        <li
+          className="card-body"
+        >
+          <img
+            alt=""
+            className="card-img-top"
+            src="https://cdn.discordapp.com/attachments/629102063107964961/644893758793449494/image0.jpg"
+          />
+          <h5
+            className="card-title"
+          >
+            <strong>
+              Hero of the Angle
+            </strong>
+          </h5>
+          <ul
+            className="card-text"
+          >
+            <li>
+              Location:
+            </li>
+            <li>
+              Capacity:
+            </li>
+            <li>
+              Game Length:
+            </li>
+            <li>
+              Difficulty: 
+              4
+              /5
+            </li>
+          </ul>
+          <button
+            className="btn btn-lg btn-primary"
+            id="bttn1"
+            onClick={[Function]}
+            type="button"
+            value={1}
+          >
+            START
+          </button>
+        </li>
+        <li
+          className="card-body"
+        >
+          <img
+            alt=""
+            className="card-img-top"
+            src="https://picsum.photos/200/300?random=1"
+          />
+          <h5
+            className="card-title"
+          >
+            <strong>
+              Wingate Hall
+            </strong>
+          </h5>
+          <ul
+            className="card-text"
+          >
+            <li>
+              Location:
+            </li>
+            <li>
+              Capacity:
+            </li>
+            <li>
+              Game Length:
+            </li>
+            <li>
+              Difficulty: 
+              3
+              /5
+            </li>
+          </ul>
+          <button
+            className="btn btn-lg btn-primary"
+            id="bttn2"
+            onClick={[Function]}
+            type="button"
+            value={2}
+          >
+            START
+          </button>
+        </li>
+        <li
+          className="card-body"
+        >
+          <img
+            alt=""
+            className="card-img-top"
+            src="https://picsum.photos/200/300?random=1"
+          />
+          <h5
+            className="card-title"
+          >
+            <strong>
+              Marshak Hall
+            </strong>
+          </h5>
+          <ul
+            className="card-text"
+          >
+            <li>
+              Location:
+            </li>
+            <li>
+              Capacity:
+            </li>
+            <li>
+              Game Length:
+            </li>
+            <li>
+              Difficulty: 
+              4
+              /5
+            </li>
+          </ul>
+          <button
+            className="btn btn-lg btn-primary"
+            id="bttn3"
+            onClick={[Function]}
+            type="button"
+            value={3}
+          >
+            START
+          </button>
+        </li>
+        <li
+          className="card-body"
+        >
+          <img
+            alt=""
+            className="card-img-top"
+            src="https://cdn.discordapp.com/attachments/629102063107964961/644893758793449494/image0.jpg"
+          />
+          <h5
+            className="card-title"
+          >
+            <strong>
+              Hero of the Angle
+            </strong>
+          </h5>
+          <ul
+            className="card-text"
+          >
+            <li>
+              Location:
+            </li>
+            <li>
+              Capacity:
+            </li>
+            <li>
+              Game Length:
+            </li>
+            <li>
+              Difficulty: 
+              4
+              /5
+            </li>
+          </ul>
+          <button
+            className="btn btn-lg btn-primary"
+            id="bttn4"
+            onClick={[Function]}
+            type="button"
+            value={4}
+          >
+            START
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <br />
+</div>
+`;
