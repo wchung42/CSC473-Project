@@ -5,7 +5,7 @@ import { Auth } from 'aws-amplify';
 
 const navbar = props => (
     <header >
-        <nav className="navigation" >
+        <nav className="navigation navbar" >
             <div className="nav-logo"><a href="/"><img src={require("./escape.png")} alt="logo" /></a></div>
             <div className="space-btw-logo-items" />
              <div className="nav-items">
