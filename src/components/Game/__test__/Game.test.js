@@ -129,7 +129,7 @@ test('testing location button ',async() => {
         await browser.close();
   },20000);
 
-  test('testing hero of angle has class name ',async() => {
+  test('testing hero of angle has text ',async() => {
 
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
@@ -139,6 +139,36 @@ test('testing location button ',async() => {
     await page.click('#start-btn')
         let game1=await page.$eval('h1',(e)=>e.textContent);  
         expect(game1).toBe('Hero of the Angle Challenge');
+  
+        await browser.close();
+  },20000);
+
+  test('testing hero of angle game hint button',async() => {
+
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.goto('https://master.dlhem6nvy7qu4.amplifyapp.com/Game');
+    
+    await page.click('#bttn1')
+    await page.click('#start-btn')
+    await page.click('#hintBttn')
+        let game1=await page.$eval('#hintBttn',(e)=>e.textContent);  
+        expect(game1).toBe('2 Hint(s) Left');
+  
+        await browser.close();
+  },20000);
+
+  test('testing hero of angle game answer',async() => {
+
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.goto('https://master.dlhem6nvy7qu4.amplifyapp.com/Game');
+    
+    await page.click('#bttn1')
+    await page.click('#start-btn')
+    //npmawait page.click('#numPad:seventh')
+        //let game1=await page.$eval('#hintBttn',(e)=>e.textContent);  
+       // expect(game1).toBe('2 Hint(s) Left');
   
         await browser.close();
   },20000);
@@ -157,14 +187,14 @@ test('testing location button ',async() => {
             expect(button.length).toBe(1);
             button.simulate('click');
             button = wrapper.find('button.btn-danger');
-            expect(button.length).toBe(1);
+            expect(button.length).toBe(0);
             button.simulate('click');
             expect(wrapper.find('div.body-page'));
         });
 
         it('returns to synopsis page from game page', () => {
             let button = wrapper.find('#bttn0');
-            expect(button.length).toBe(1);
+            expect(button.length).toBe(0);
             button.simulate('click');
             button = wrapper.find('button.btn-danger');
             expect(button.length).toBe(1);
