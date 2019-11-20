@@ -9,7 +9,8 @@ class gamePanel extends Component {
                     <img
                         key={item.Id}
                         className="card-img-top"
-                        src={item.Thumbnail} />
+                        src={item.Thumbnail} 
+                        alt = ''/>
                     <h5 className="card-title">
                         <strong>{item.Title}</strong>
                     </h5>
@@ -19,7 +20,7 @@ class gamePanel extends Component {
                         <li>Game Length:</li>
                         <li>Difficulty: {item.Difficulty}/5</li>
                     </ul>
-                    <button id={"bttn" + item.Id} className="btn btn-primary" type="button" onClick={this.props.func} value={item.Id}>START</button>
+                    <button id={"bttn" + item.Id} className="btn btn-lg btn-primary" type="button" onClick={this.props.func} value={item.Id}>START</button>
                 </li>
             );
         return (

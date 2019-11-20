@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import Game from './../Game';
 import Timer from './../Timer';
 import { shallow, mount } from 'enzyme';
+import renderer from 'react-test-renderer'
 
 const puppeteer=require('puppeteer');
 
@@ -158,48 +159,57 @@ test('testing location button ',async() => {
         await browser.close();
   },20000);
 
-  test('testing hero of angle game answer',async() => {
+//   test('testing hero of angle game answer',async() => {
 
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
-    await page.goto('https://master.dlhem6nvy7qu4.amplifyapp.com/Game');
+//     const browser = await puppeteer.launch();
+//     const page = await browser.newPage();
+//     await page.goto('https://master.dlhem6nvy7qu4.amplifyapp.com/Game');
     
-    await page.click('#bttn1')
-    await page.click('#start-btn')
-    //npmawait page.click('#numPad:seventh')
-        //let game1=await page.$eval('#hintBttn',(e)=>e.textContent);  
-       // expect(game1).toBe('2 Hint(s) Left');
+//     await page.click('#bttn1')
+//     await page.click('#start-btn')
+//     //npmawait page.click('#numPad:seventh')
+//         //let game1=await page.$eval('#hintBttn',(e)=>e.textContent);  
+//        // expect(game1).toBe('2 Hint(s) Left');
   
-        await browser.close();
-  },20000);
+//         await browser.close();
+//   },20000);
 
 
 
 
 
 
-    describe('go back from each page via exit button', () => {
-        let wrapper;
-        beforeEach(() => { wrapper = mount(<Game />); });
+  describe('go back from each page via exit button', () => {
+    let wrapper;
+    beforeEach(() => { wrapper = mount(<Game />); });
 
-        it('return to home page from synopsis', () => {
-            let button = wrapper.find('#bttn0');
-            expect(button.length).toBe(1);
-            button.simulate('click');
-            button = wrapper.find('button.btn-danger');
-            expect(button.length).toBe(0);
-            button.simulate('click');
-            expect(wrapper.find('div.body-page'));
-        });
-
-        it('returns to synopsis page from game page', () => {
-            let button = wrapper.find('#bttn0');
-            expect(button.length).toBe(0);
-            button.simulate('click');
-            button = wrapper.find('button.btn-danger');
-            expect(button.length).toBe(1);
-            button.simulate('click');
-            expect(wrapper.find('div.gameInterface'));
-        })
+    it('return to home page from synopsis', () => {
+        let button = wrapper.find('#bttn0');
+        expect(button.length).toBe(1);
+        button.simulate('click');
+        button = wrapper.find('a.btn-danger');
+        expect(button.length).toBe(1);
+        button.simulate('click');
+        expect(wrapper.find('div.body-page'));
     });
+
+    it('returns to synopsis page from game page', () => {
+        let button = wrapper.find('#bttn0');
+        expect(button.length).toBe(1);
+        button.simulate('click');
+        button = wrapper.find('a.btn-danger');
+        expect(button.length).toBe(1);
+        button.simulate('click');
+        expect(wrapper.find('div.gameInterface'));
+    })
+});
+
+// describe('snapshot testing', () => {
+//     it('game list page matches the snapshot', () => {
+//         const tree = renderer.create(<Game />).toJSON();
+//         expect(tree).toMatchSnapshot();
+//     });
+    
+// })
+
 })
