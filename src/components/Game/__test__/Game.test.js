@@ -130,18 +130,56 @@ test('testing location button ',async() => {
         await browser.close();
   },20000);
 
-  test('testing hero of angle has class name ',async() => {
+  test('testing hero of angle game',async() => {
 
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+        headless: false,
+        slowMo: 80,
+        args:['window-size = 1920,1080']
+    });
     const page = await browser.newPage();
     await page.goto('https://master.dlhem6nvy7qu4.amplifyapp.com/Game');
     
     await page.click('#bttn1')
     await page.click('#start-btn')
-        let game1=await page.$eval('h1',(e)=>e.textContent);  
-        expect(game1).toBe('Hero of the Angle Challenge');
-  
-        await browser.close();
+    let game1=await page.$eval('h1',(e)=>e.textContent);  
+    expect(game1).toBe('Hero of the Angle Challenge');
+
+    // testing the hero of the angle game
+    await page.click('button#num1');
+    await page.click('button#num8');
+    await page.click('button#num6');
+    await page.click('button#num9');
+    await page.click('button#pound');
+    let temp = await page.$eval('div#textAnswer', (div) => div.id);
+    expect(temp).toBe('textAnswer');
+    
+    await page.click('input#answerBox');
+    await page.type('input#answerBox', 'time');
+    await page.click('button#submitBttn');
+    temp = await page.$eval('div#textAnswer', (div) => div.id);
+    expect(temp).toBe('textAnswer');
+
+    await page.click('input#answerBox');
+    await page.type('input#answerBox', 'cane');
+    await page.click('button#submitBttn');
+    temp = await page.$eval('div#textAnswer', (div) => div.id);
+    expect(temp).toBe('textAnswer');
+
+    await page.click('input#answerBox');
+    await page.type('input#answerBox', 'horace webster');
+    await page.click('button#submitBttn');
+    temp = await page.$eval('div#numPad', (div) => div.id);
+    expect(temp).toBe('numPad');
+
+    await page.click('button#num7');
+    await page.click('button#pound');
+    
+    await page.click('button#num1');
+    await page.click('button#num2');
+    await page.click('button#pound');
+   
+    await browser.close();
   },20000);
 
 
