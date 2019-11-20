@@ -35,9 +35,14 @@ describe("<Answer/> component", () => {
             expect(wrapper.find('#textAnswer').length).toBe(1);
         })
 
-        it('text question should have 1 textfield', () => {
-            wrapper = shallow(<Answer id = {1} qId = {2}/>);
+        it('text question should render with 1 textfield', () => {
+            wrapper = shallow(<Answer id = {1} qId = {2} />);
             expect(wrapper.find('#textAnswer').length).toBe(1);
+        })
+
+        it('text question should render with 1 submit button', () => {
+            wrapper = shallow(<Answer id = {1} qId = {2} />);
+            expect(wrapper.find('#submitBttn').length).toBe(1);
         })
 
         it('ordering question renders drag and drop', () => {
@@ -45,9 +50,13 @@ describe("<Answer/> component", () => {
                 id: 1,
                 qId: 7
             }
-            
             wrapper = shallow(<Answer {...testProps} />);
             expect(wrapper.find(OrderQuestion).length).toBe(1);
+        })
+
+        it('ordering question renders with 1 submit button', () => {
+            wrapper = shallow(<Answer id = {1} qId = {7} />);
+            expect(wrapper.find('#submitButtonOrder').length).toBe(1);
         })
     })
 
