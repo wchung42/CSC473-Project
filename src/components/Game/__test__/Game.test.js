@@ -67,7 +67,7 @@ test('testing location button ',async() => {
 
     const browser = await puppeteer.launch({
         headless: false,
-        slowMp:80,
+        slowMo:180,
         args:['--window-size=1920,1080']
     });
     const page = await browser.newPage();
@@ -76,9 +76,9 @@ test('testing location button ',async() => {
     await page.click('button.Location');
         let location=await page.$eval('button.Location',(button)=>button.className)   
         expect(location).toBe('Location');
-    await browser.close();
-        
-  },20000);
+    
+        await browser.close(); 
+  },10000);
 
   test('testing exist button',async() => {
 
@@ -90,22 +90,36 @@ test('testing location button ',async() => {
         let exit=await page.$eval('div.exit',(div)=>div.className)   
         expect(exit).toBe('exit');
   
-        await browser.close();
-  });
+        
+  },20000);
 
-  test('testing start game button',async() => {
+  test('testing hover page get className',async() => {
 
-    const browser = await puppeteer.launch({
-        headless: false,
-        slowMp:80,
-        args:['--window-size=1920,1080']
-    });
+    const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.goto('https://master.dlhem6nvy7qu4.amplifyapp.com/Game');
     
     await page.hover('div.game-list')
         let game=await page.$eval('div.game-list',(div)=>div.className)   
-        expect(game).toBe('1');
+        expect(game).toBe('game-list');
+  
+       
+  },20000);
+
+  test('testing start game',async() => {
+
+    const browser = await puppeteer.launch({
+        headless: false,
+        slowMo:180,
+        args:['--window-size=1920,1080']
+    });
+    const page = await browser.newPage();
+    await page.goto('https://master.dlhem6nvy7qu4.amplifyapp.com/Game');
+    
+    await page.click('#bttn0')
+    await page.click('#start-btn')
+        let game=await page.$eval('#timer',(e)=>e.textContent);  
+        expect(game).toBe('05:00');
   
         await browser.close();
   },20000);
