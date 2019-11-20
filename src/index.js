@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import {BrowserRouter} from 'react-router-dom';
-import Game from './components/Game/Game';
+import Amplify from 'aws-amplify';
+import aws_exports from './aws-exports.js';
 
+Amplify.configure(aws_exports); 
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
