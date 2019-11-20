@@ -4,6 +4,7 @@ import Game from './../Game';
 import Timer from './../Timer';
 import { shallow, mount } from 'enzyme';
 
+const puppeteer=require('puppeteer');
 
 describe("Game component testing", () => {
     // crash test
@@ -64,6 +65,88 @@ describe("Game component testing", () => {
             expect(wrapper.find(Timer).length).toBe(1);
         })
     })
+
+
+
+test('testing location button ',async() => {
+
+    const browser = await puppeteer.launch({
+        headless: false,
+        slowMo:180,
+        args:['--window-size=1920,1080']
+    });
+    const page = await browser.newPage();
+    await page.goto('https://master.dlhem6nvy7qu4.amplifyapp.com/Game');
+    
+    await page.click('button.Location');
+        let location=await page.$eval('button.Location',(button)=>button.className)   
+        expect(location).toBe('Location');
+    
+        await browser.close(); 
+  },10000);
+
+  test('testing exist button',async() => {
+
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.goto('https://master.dlhem6nvy7qu4.amplifyapp.com/Game');
+    
+    await page.click('div.exit');
+        let exit=await page.$eval('div.exit',(div)=>div.className)   
+        expect(exit).toBe('exit');
+  
+        
+  },20000);
+
+  test('testing hover page get className',async() => {
+
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.goto('https://master.dlhem6nvy7qu4.amplifyapp.com/Game');
+    
+    await page.hover('div.game-list')
+        let game=await page.$eval('div.game-list',(div)=>div.className)   
+        expect(game).toBe('game-list');
+  
+       
+  },20000);
+
+  test('testing start game',async() => {
+
+    const browser = await puppeteer.launch({
+        headless: false,
+        slowMo:180,
+        args:['--window-size=1920,1080']
+    });
+    const page = await browser.newPage();
+    await page.goto('https://master.dlhem6nvy7qu4.amplifyapp.com/Game');
+    
+    await page.click('#bttn0')
+    await page.click('#start-btn')
+        let game=await page.$eval('#timer',(e)=>e.textContent);  
+        expect(game).toBe('05:00');
+  
+        await browser.close();
+  },20000);
+
+  test('testing hero of angle has class name ',async() => {
+
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.goto('https://master.dlhem6nvy7qu4.amplifyapp.com/Game');
+    
+    await page.click('#bttn1')
+    await page.click('#start-btn')
+        let game1=await page.$eval('h1',(e)=>e.textContent);  
+        expect(game1).toBe('Hero of the Angle Challenge');
+  
+        await browser.close();
+  },20000);
+
+
+
+
+
 
     describe('go back from each page via exit button', () => {
         let wrapper;
