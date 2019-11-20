@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import initialData from './initial-data';
 import Row from './Row';
 import { DragDropContext } from 'react-beautiful-dnd';
 import games from '../games.json'
