@@ -59,6 +59,7 @@
             "4": "https://cdn.discordapp.com/attachments/629102063107964961/644893918231527434/image0.jpg",
             "5": "http://4.bp.blogspot.com/-_uMA0I0WbzQ/VGbD6feEfnI/AAAAAAAAASI/-1mPv76qrao/s1600/BRAVO_Photo222.JPG",
             "6": "https://upload.wikimedia.org/wikipedia/commons/4/46/Lisa_Staiano-Coico.jpg",
+            "7": "https://cdn.discordapp.com/attachments/206777254104137729/646755321670533124/temp.png",
             "8": "https://cdn.discordapp.com/attachments/629102063107964961/644893916415655946/image1.jpg",
             "9": "https://cdn.discordapp.com/attachments/629102063107964961/644893918823186458/image2.jpg",
             "10": "https://www.ccny.cuny.edu/sites/default/files/styles/large/public/hall_header.jpg?itok=NoroQLLz",
@@ -161,7 +162,7 @@
         "Difficulty": 3,
         "Story": "This is not a story",
         "Tag": "#ccny, #wingate_hall",
-        "Thumbnail": "https://picsum.photos/200/300?random=1",
+        "Thumbnail": "https://picsum.photos/200/300?random=6",
         "Images": {
             "1": "https://picsum.photos/150/200?random=1",
             "2": "https://picsum.photos/150/200?random=2",
