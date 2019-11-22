@@ -15,6 +15,7 @@
 }
 
 .nav-logo a {
+    
     color: white;
     text-decoration: none;
     font-size: 3vh;
@@ -45,17 +46,4 @@
 
 .space-btw-logo-items {
     flex: 1;
-}
-
-.login li{
-    font-family: 'Helvetica';
-    color:white;
-    font-size:200%;
-}
-
-.userLOGOUT ul{
-   display: list-item;
-}
-.auth{
-    font-size: 300%;
 }

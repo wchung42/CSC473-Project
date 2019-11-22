@@ -13,7 +13,6 @@ import Contact from './components/Contact/Contact';
 import { Analytics, Auth } from 'aws-amplify';
 import Login from './components/Login/login';
 
-
 Analytics.configure({ disabled: true })
 
 class App extends Component {
@@ -27,6 +26,31 @@ class App extends Component {
 
     }
   }
+
+  //Testing
+
+  componentDidMount() {
+    Analytics.startSession();
+    window.addEventListener('beforeunload', () => {
+        Analytics.stopSession();
+    })
+    Auth.currentAuthenticatedUser().then(user => {
+        this.updateCurrentUser(user)
+    });
+}
+
+updateCurrentUser = (user) => {
+    this.setState({
+        currentUser: user
+    })
+}
+
+onSignOut = async () => {
+    await Auth.signOut();
+    this.setState({
+        currentUser: null
+    })
+}
 
   //Testing
 

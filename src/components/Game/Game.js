@@ -4,7 +4,6 @@ import './Game.css';
 import Timer from './Timer';  // timer component that determines state of game
 import games from './games.json'; // get the game title
 import Panel from './gamePanel';
-import { withAuthenticator } from 'aws-amplify-react';
 
 class Game extends Component {
   constructor(props) {
@@ -146,4 +145,4 @@ class Game extends Component {
 }
 
 
-export default withAuthenticator(Game);
+export default Game;
