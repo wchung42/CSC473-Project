@@ -5,7 +5,8 @@
     margin: 0 auto;
     background-color: white;
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
+    width: 100vw;
 }
 
 .imagesContainer{
@@ -17,12 +18,20 @@
 }
 
 .imagesList{    
-    widows: 100%;
+    width: 100%;
     height: 100%;
-    margin-left: 10%;
-    justify-items: space-evenly;
+    margin-left: auto;
+    /* justify-items: space-evenly;
     grid-gap: 10px;
     display: grid;
     grid-template-columns: repeat(2,1fr);
     grid-auto-flow: row dense;
+} */
+    display: flex;
+    flex: 1;
+    justify-content: center;
+}
+
+#submitButtonOrderVerify{
+    margin-top: 2vh;
 }

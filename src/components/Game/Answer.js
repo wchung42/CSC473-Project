@@ -70,11 +70,14 @@ class Answer extends Component {
         else if (games[this.state.gameIndex].Answer_Type[this.state.questionIndex] == "ordering") {
             return (
                 <div className = "answerSpace">
-                    <OrderQuestion id = "1" handleOrderChange = {this.handleOrderAnswer}/>
-                    <br/>
-                    <div className = "submit">
-                       <button id="submitButtonOrder" className="btn-lg  btn-success" type="button" onClick={this.props.action} value="">&nbsp; Submit &nbsp;</button> 
+                    <div id = "orderingAnswer">
+                        <OrderQuestion id = "1" handleOrderChange = {this.handleOrderAnswer}/>
+                        <br/>
+                        <div className = "submit">
+                            <button id="submitButtonOrder" className="btn-lg  btn-success" type="button" onClick={this.props.action} value="">&nbsp; Submit &nbsp;</button> 
+                        </div>
                     </div>
+                    
                     
                 </div>
             )
