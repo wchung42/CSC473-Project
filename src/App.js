@@ -27,32 +27,6 @@ class App extends Component {
     }
   }
 
-  //Testing
-
-  componentDidMount() {
-    Analytics.startSession();
-    window.addEventListener('beforeunload', () => {
-        Analytics.stopSession();
-    })
-    Auth.currentAuthenticatedUser().then(user => {
-        this.updateCurrentUser(user)
-    });
-}
-
-updateCurrentUser = (user) => {
-    this.setState({
-        currentUser: user
-    })
-}
-
-onSignOut = async () => {
-    await Auth.signOut();
-    this.setState({
-        currentUser: null
-    })
-}
-
-  //Testing
 
   // toggle drawer button handler
   drawerToggleClickHandler = () => {
