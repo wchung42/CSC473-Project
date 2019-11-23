@@ -87,7 +87,7 @@ class OrderQuestion extends Component {
                     return (
                         <div className="orderQuestion">
                             <Row key={row.id} row={row} images={images} />
-                            <button id="submitButtonOrderTest" className="btn-large btn-success" type="button" onClick={this.handleOrderChange} value="">&nbsp; Verify Order &nbsp;</button>
+                            <button id="submitButtonOrderVerify" className="btn btn-primary" type="button" onClick={this.handleOrderChange} value="">&nbsp; Verify Order &nbsp;</button>
                         </div>
 
 

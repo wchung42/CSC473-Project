@@ -142,7 +142,7 @@ exports[`Game component testing snapshot testing game list page matches the snap
           <img
             alt=""
             className="card-img-top"
-            src="https://picsum.photos/200/300?random=1"
+            src="https://picsum.photos/200/300?random=6"
           />
           <h5
             className="card-title"

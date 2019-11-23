@@ -84,7 +84,7 @@ test('testing location button ',async() => {
         expect(location).toBe('Location');
     
         await browser.close(); 
-  },10000);
+  },20000);
 
   test('testing exist button',async() => {
 
@@ -130,86 +130,94 @@ test('testing location button ',async() => {
         await browser.close();
   },20000);
 
-  test('testing hero of angle has text ',async() => {
+  test('testing hero of angle game',async() => {
 
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+        headless: false,
+        slowMo: 80,
+        args:['window-size = 1920,1080']
+    });
     const page = await browser.newPage();
     await page.goto('https://master.dlhem6nvy7qu4.amplifyapp.com/Game');
     
     await page.click('#bttn1')
     await page.click('#start-btn')
-        let game1=await page.$eval('h1',(e)=>e.textContent);  
-        expect(game1).toBe('Hero of the Angle Challenge');
-  
-        await browser.close();
-  },20000);
+    let game1=await page.$eval('h1',(e)=>e.textContent);  
+    expect(game1).toBe('Hero of the Angle Challenge');
 
-  test('testing hero of angle game hint button',async() => {
-
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
-    await page.goto('https://master.dlhem6nvy7qu4.amplifyapp.com/Game');
+    // testing the hero of the angle game
+    await page.click('button#num1');
+    await page.click('button#num8');
+    await page.click('button#num6');
+    await page.click('button#num9');
+    await page.click('button#pound');
+    let temp = await page.$eval('div#textAnswer', (div) => div.id);
+    expect(temp).toBe('textAnswer');
     
-    await page.click('#bttn1')
-    await page.click('#start-btn')
-    await page.click('#hintBttn')
-        let game1=await page.$eval('#hintBttn',(e)=>e.textContent);  
-        expect(game1).toBe('2 Hint(s) Left');
-  
-        await browser.close();
-  },20000);
+    await page.click('input#answerBox');
+    await page.type('input#answerBox', 'time');
+    await page.click('button#submitBttn');
+    temp = await page.$eval('div#textAnswer', (div) => div.id);
+    expect(temp).toBe('textAnswer');
 
-//   test('testing hero of angle game answer',async() => {
+    await page.click('input#answerBox');
+    await page.type('input#answerBox', 'cane');
+    await page.click('button#submitBttn');
+    temp = await page.$eval('div#textAnswer', (div) => div.id);
+    expect(temp).toBe('textAnswer');
 
-//     const browser = await puppeteer.launch();
-//     const page = await browser.newPage();
-//     await page.goto('https://master.dlhem6nvy7qu4.amplifyapp.com/Game');
+    await page.click('input#answerBox');
+    await page.type('input#answerBox', 'horace webster');
+    await page.click('button#submitBttn');
+    temp = await page.$eval('div#numPad', (div) => div.id);
+    expect(temp).toBe('numPad');
+
+    await page.click('button#num7');
+    await page.click('button#pound');
     
-//     await page.click('#bttn1')
-//     await page.click('#start-btn')
-//     //npmawait page.click('#numPad:seventh')
-//         //let game1=await page.$eval('#hintBttn',(e)=>e.textContent);  
-//        // expect(game1).toBe('2 Hint(s) Left');
-  
-//         await browser.close();
-//   },20000);
+    await page.click('button#num1');
+    await page.click('button#num2');
+    await page.click('button#pound');
+   
+    await browser.close();
+  },30000);
 
 
 
 
 
 
-  describe('go back from each page via exit button', () => {
-    let wrapper;
-    beforeEach(() => { wrapper = mount(<Game />); });
+    describe('go back from each page via exit button', () => {
+        let wrapper;
+        beforeEach(() => { wrapper = mount(<Game />); });
 
-    it('return to home page from synopsis', () => {
-        let button = wrapper.find('#bttn0');
-        expect(button.length).toBe(1);
-        button.simulate('click');
-        button = wrapper.find('a.btn-danger');
-        expect(button.length).toBe(1);
-        button.simulate('click');
-        expect(wrapper.find('div.body-page'));
+        it('return to home page from synopsis', () => {
+            let button = wrapper.find('#bttn0');
+            expect(button.length).toBe(1);
+            button.simulate('click');
+            button = wrapper.find('a.btn-danger');
+            expect(button.length).toBe(1);
+            button.simulate('click');
+            expect(wrapper.find('div.body-page'));
+        });
+
+        it('returns to synopsis page from game page', () => {
+            let button = wrapper.find('#bttn0');
+            expect(button.length).toBe(1);
+            button.simulate('click');
+            button = wrapper.find('a.btn-danger');
+            expect(button.length).toBe(1);
+            button.simulate('click');
+            expect(wrapper.find('div.gameInterface'));
+        })
     });
 
-    it('returns to synopsis page from game page', () => {
-        let button = wrapper.find('#bttn0');
-        expect(button.length).toBe(1);
-        button.simulate('click');
-        button = wrapper.find('a.btn-danger');
-        expect(button.length).toBe(1);
-        button.simulate('click');
-        expect(wrapper.find('div.gameInterface'));
+    describe('snapshot testing', () => {
+        it('game list page matches the snapshot', () => {
+            const tree = renderer.create(<Game />).toJSON();
+            expect(tree).toMatchSnapshot();
+        });
+        
     })
-});
-
-// describe('snapshot testing', () => {
-//     it('game list page matches the snapshot', () => {
-//         const tree = renderer.create(<Game />).toJSON();
-//         expect(tree).toMatchSnapshot();
-//     });
     
-// })
-
 })
