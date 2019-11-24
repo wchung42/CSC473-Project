@@ -1,38 +1,46 @@
-import React from 'react';
+import React, { Component } from 'react';
 import games from './Game/games.json';
+import { Connect } from 'aws-amplify-react';
+import { graphqlOperation } from 'aws-amplify';
 
-const Home = () => {
-  let listItems = games
-    .filter(game => game.Popular == true)
-    .map(item =>
-      <li className="bodyCard" key={item.id} >
-        <div className="card">
-          <img
-            key={item.Id}
-            className="card-img-top"
-            src={item.Thumbnail} 
-            alt = ''/>
-          <div className="card-body">
-            <h5 className="card-title">
-              <strong>{item.Title} ({item.Difficulty}/5)</strong>
-            </h5>
-            <p className="card-text"> {item.Story}</p>
-            <a href="#" className="btn btn-primary btn-lg">Play</a>
-          </div>
-        </div>
-      </li >
+//declare query to listGame
+const listGames = `query listGames{
+  listGames(limit: 5){
+    items{
+      id
+      Title
+      Location
+      Difficulty
+      Story
+      Questions
+      Answer
+    }
+  }
+}`
+
+class gamesList extends React.Component {
+  gameInfo() {
+    return this.props.games.map(game =>
+      <li key={game.id}>
+        {game.Title}
+      </li>);
+  }
+}
+
+class Home extends React.Component {
+  render() {
+    console.log("Home Executed")
+    return (
+      <Connect query={graphqlOperation(listGames)}>
+        {({ data, loading, errors }) => {
+          if (loading) { return <div>Loading...</div>; }
+          if (!data.listGames) console.log("Error!");
+          console.log(data.listGames.items.map(game => console.log(game.id + game.Title)));
+          // return <gamesList games={data.listGames.items} />;
+        }}
+      </Connect>
     );
-
-  return (
-    <div className="body-page">
-      <header className="Welcome-Section">
-      </header>
-      
-        <p className="popular-game"><strong>POPULAR GAMES</strong></p>
-        <ol className="cards" >{listItems}</ol>
-        
-    </div>
-  );
+  }
 }
 
 export default Home;
