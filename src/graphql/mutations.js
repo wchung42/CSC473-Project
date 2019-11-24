@@ -14,11 +14,14 @@ export const createGame = `mutation CreateGame($input: CreateGameInput!) {
     Total_Questions
     Total_Hints
     Questions
+    AtQuestion
     QuestionVisualAid
     Hints
     GeoLocation
     AnswerType
-    Answer
+    Answers
+    Rating
+    Review
     AidStuffs
   }
 }
@@ -36,11 +39,14 @@ export const updateGame = `mutation UpdateGame($input: UpdateGameInput!) {
     Total_Questions
     Total_Hints
     Questions
+    AtQuestion
     QuestionVisualAid
     Hints
     GeoLocation
     AnswerType
-    Answer
+    Answers
+    Rating
+    Review
     AidStuffs
   }
 }
@@ -58,11 +64,14 @@ export const deleteGame = `mutation DeleteGame($input: DeleteGameInput!) {
     Total_Questions
     Total_Hints
     Questions
+    AtQuestion
     QuestionVisualAid
     Hints
     GeoLocation
     AnswerType
-    Answer
+    Answers
+    Rating
+    Review
     AidStuffs
   }
 }

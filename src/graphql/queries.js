@@ -14,11 +14,14 @@ export const getGame = `query GetGame($id: ID!) {
     Total_Questions
     Total_Hints
     Questions
+    AtQuestion
     QuestionVisualAid
     Hints
     GeoLocation
     AnswerType
-    Answer
+    Answers
+    Rating
+    Review
     AidStuffs
   }
 }
@@ -41,11 +44,14 @@ export const listGames = `query ListGames(
       Total_Questions
       Total_Hints
       Questions
+      AtQuestion
       QuestionVisualAid
       Hints
       GeoLocation
       AnswerType
-      Answer
+      Answers
+      Rating
+      Review
       AidStuffs
     }
     nextToken

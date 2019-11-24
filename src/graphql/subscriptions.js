@@ -14,11 +14,14 @@ export const onCreateGame = `subscription OnCreateGame {
     Total_Questions
     Total_Hints
     Questions
+    AtQuestion
     QuestionVisualAid
     Hints
     GeoLocation
     AnswerType
-    Answer
+    Answers
+    Rating
+    Review
     AidStuffs
   }
 }
@@ -36,11 +39,14 @@ export const onUpdateGame = `subscription OnUpdateGame {
     Total_Questions
     Total_Hints
     Questions
+    AtQuestion
     QuestionVisualAid
     Hints
     GeoLocation
     AnswerType
-    Answer
+    Answers
+    Rating
+    Review
     AidStuffs
   }
 }
@@ -58,11 +64,14 @@ export const onDeleteGame = `subscription OnDeleteGame {
     Total_Questions
     Total_Hints
     Questions
+    AtQuestion
     QuestionVisualAid
     Hints
     GeoLocation
     AnswerType
-    Answer
+    Answers
+    Rating
+    Review
     AidStuffs
   }
 }

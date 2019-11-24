@@ -1,6 +1,6 @@
 {
 	"auth": {
-		"escape66d35cd1": {
+		"escape25b08a03": {
 			"service": "Cognito",
 			"providerPlugin": "awscloudformation",
 			"dependsOn": []
@@ -16,7 +16,7 @@
 					"defaultAuthentication": {
 						"authenticationType": "AMAZON_COGNITO_USER_POOLS",
 						"userPoolConfig": {
-							"userPoolId": "authescape66d35cd1"
+							"userPoolId": "authescape25b08a03"
 						}
 					}
 				}
