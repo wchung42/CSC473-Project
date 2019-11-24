@@ -58,6 +58,13 @@ class Puzzle extends Component {
         else {
             console.log("Wrong Answer")
             if (document.getElementById("answerBox")) {
+                // visual cue for wrong answer in text box
+                document.getElementById('answerBox').style.border = "medium solid #FF0000";
+                
+                setTimeout(function () {
+                    document.getElementById('answerBox').style.border = "thin solid #000000";
+                }, 750)
+
                 document.getElementById("answerBox").value = "";
                 document.getElementById("submitBttn").value = "";
             }
