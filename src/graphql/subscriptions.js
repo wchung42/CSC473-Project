@@ -1,27 +1,69 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateTodo = `subscription OnCreateTodo {
-  onCreateTodo {
+export const onCreateGame = `subscription OnCreateGame {
+  onCreateGame {
     id
-    name
-    description
+    Title
+    Thumbnail
+    Location
+    Difficulty
+    Capacity
+    Story
+    Players
+    Total_Questions
+    Total_Hints
+    Questions
+    QuestionVisualAid
+    Hints
+    GeoLocation
+    AnswerType
+    Answer
+    AidStuffs
   }
 }
 `;
-export const onUpdateTodo = `subscription OnUpdateTodo {
-  onUpdateTodo {
+export const onUpdateGame = `subscription OnUpdateGame {
+  onUpdateGame {
     id
-    name
-    description
+    Title
+    Thumbnail
+    Location
+    Difficulty
+    Capacity
+    Story
+    Players
+    Total_Questions
+    Total_Hints
+    Questions
+    QuestionVisualAid
+    Hints
+    GeoLocation
+    AnswerType
+    Answer
+    AidStuffs
   }
 }
 `;
-export const onDeleteTodo = `subscription OnDeleteTodo {
-  onDeleteTodo {
+export const onDeleteGame = `subscription OnDeleteGame {
+  onDeleteGame {
     id
-    name
-    description
+    Title
+    Thumbnail
+    Location
+    Difficulty
+    Capacity
+    Story
+    Players
+    Total_Questions
+    Total_Hints
+    Questions
+    QuestionVisualAid
+    Hints
+    GeoLocation
+    AnswerType
+    Answer
+    AidStuffs
   }
 }
 `;

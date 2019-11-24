@@ -1,0 +1,19 @@
+type Game @model {
+  id: ID!
+  Title: String!
+  Thumbnail: String!
+  Location: String!
+  Difficulty: Int!
+  Capacity: Int!
+  Story: String!
+  Players(limit: Int = Capacity): [String]!
+  Total_Questions(limit: Int = 15): Int!
+  Total_Hints(limit: Int = 5): Int!
+  Questions(limit: Int = Total_Questions): [String]!
+  QuestionVisualAid(limit: Int = Total_Questions): [String]
+  Hints(limit: Int = Total_Questions): [String]!
+  GeoLocation(limit: Int = Total_Questions):[String]
+  AnswerType(limit: Int = Total_Questions):[String]!
+  Answer(limit: Int = Total_Questions):[String]!
+  AidStuffs: [String]
+}

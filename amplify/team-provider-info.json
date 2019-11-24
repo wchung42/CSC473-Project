@@ -1,18 +1,18 @@
 {
-    "escape": {
+    "dev": {
         "awscloudformation": {
-            "AuthRoleName": "amplify-csc473-project-escape-203921-authRole",
-            "UnauthRoleArn": "arn:aws:iam::557127555613:role/amplify-csc473-project-escape-203921-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::557127555613:role/amplify-csc473-project-escape-203921-authRole",
+            "AuthRoleName": "amplify-escape-dev-123529-authRole",
+            "UnauthRoleArn": "arn:aws:iam::557127555613:role/amplify-escape-dev-123529-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::557127555613:role/amplify-escape-dev-123529-authRole",
             "Region": "us-east-1",
-            "DeploymentBucketName": "amplify-csc473-project-escape-203921-deployment",
-            "UnauthRoleName": "amplify-csc473-project-escape-203921-unauthRole",
-            "StackName": "amplify-csc473-project-escape-203921",
-            "StackId": "arn:aws:cloudformation:us-east-1:557127555613:stack/amplify-csc473-project-escape-203921/9330a640-0b36-11ea-a8cd-12dc156c2e93"
+            "DeploymentBucketName": "amplify-escape-dev-123529-deployment",
+            "UnauthRoleName": "amplify-escape-dev-123529-unauthRole",
+            "StackName": "amplify-escape-dev-123529",
+            "StackId": "arn:aws:cloudformation:us-east-1:557127555613:stack/amplify-escape-dev-123529/ce9d4d20-0ee0-11ea-97d1-122d883fe268"
         },
         "categories": {
             "auth": {
-                "csc473projectd528c630": {}
+                "escape66d35cd1": {}
             }
         }
     }
