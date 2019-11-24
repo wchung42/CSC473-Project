@@ -1,46 +1,53 @@
 import React, { Component } from 'react';
-import games from './Game/games.json';
+// import games from './Game/games.json';
 import { Connect } from 'aws-amplify-react';
 import { graphqlOperation } from 'aws-amplify';
 
-//declare query to listGame
-const listGames = `query listGames{
-  listGames(limit: 5){
-    items{
-      id
-      Title
-      Location
-      Difficulty
-      Story
-      Questions
-      Answer
-    }
+//declare query to listGames
+const listGames = `query listGames {
+  listGames(limit: 9999) {
+      items {
+        id
+        Title
+        Location
+        Difficulty
+        Story
+        Questions
+        Answers
+      }
   }
-}`
+}`;
 
-class gamesList extends React.Component {
-  gameInfo() {
+class GamesList extends React.Component {
+  gameItems() {
+    console.log("Here", this.props.games);
     return this.props.games.map(game =>
       <li key={game.id}>
         {game.Title}
-      </li>);
+      </li>)
+  }
+
+  render() {
+    return (
+      <ul>
+        {this.gameItems()}
+      </ul>
+    )
   }
 }
 
-class Home extends React.Component {
+class home extends React.Component {
   render() {
-    console.log("Home Executed")
     return (
       <Connect query={graphqlOperation(listGames)}>
         {({ data, loading, errors }) => {
           if (loading) { return <div>Loading...</div>; }
-          if (!data.listGames) console.log("Error!");
-          console.log(data.listGames.items.map(game => console.log(game.id + game.Title)));
-          // return <gamesList games={data.listGames.items} />;
+          if (errors) console.log(errors);
+          console.log(data.listGames);
+          return <GamesList games={data.listGames.items} />
         }}
       </Connect>
     );
   }
 }
-
-export default Home;
+export default home;
