@@ -63,6 +63,14 @@ class Puzzle extends Component {
             }
             if (document.getElementById("pound")) {
                 document.getElementById("pound").value = "";
+
+                // visual cue for wrong answer in numpad
+                document.getElementById('pound').style.background = '#FF0000';
+                setTimeout(function () {
+                    document.getElementById('pound').style.background = '#DDDDDD';
+                }, 750);
+                
+               
             }
         }
     }
