@@ -39,6 +39,8 @@ class Puzzle extends Component {
         if (userAnswer.toLowerCase() == answer.toLowerCase()) {
             //else moving to the next question
             console.log("right answer");
+            // clear hint space when moving to next question
+            document.getElementById('hint').innerText = '';
             this.setState({
                 questionIndex: currentQuestionIndex + 1,
                 imageIndex: currentQuestionIndex + 1,
