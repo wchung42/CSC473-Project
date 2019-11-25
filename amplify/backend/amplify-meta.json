@@ -20,7 +20,7 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/amplify-escape-dev-83940-deployment/amplify-cfn-templates/auth/escape591c9385-cloudformation-template.yml",
 				"logicalId": "authescape591c9385"
 			},
-			"lastPushTimeStamp": "2019-11-25T13:50:22.497Z",
+			"lastPushTimeStamp": "2019-11-25T19:22:08.545Z",
 			"output": {
 				"AppClientSecret": "193hn1aaforkvr2f5eu51r9c49uq00tikdqclrkmgf6mmsk8d63s",
 				"UserPoolId": "us-east-1_yfPb0LPx5",
@@ -54,8 +54,8 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/amplify-escape-dev-83940-deployment/amplify-cfn-templates/api/cloudformation-template.json",
 				"logicalId": "apiescape"
 			},
-			"lastPushTimeStamp": "2019-11-25T13:50:23.268Z",
-			"lastPushDirHash": "ZOcLRgUNhLBHSUBnU0V3msIjg9E="
+			"lastPushTimeStamp": "2019-11-25T19:22:10.656Z",
+			"lastPushDirHash": "r5+4ND7GleYGy4tO4fD0+w7Xn+o="
 		}
 	}
 }

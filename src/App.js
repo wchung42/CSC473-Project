@@ -26,6 +26,7 @@ const ListGames = `query ListGames {
         Title
         Location
         Difficulty
+        TimeLimit
         Story
         Questions
         Answers
@@ -35,18 +36,37 @@ const ListGames = `query ListGames {
 
 class GamesList extends React.Component {
   gameItems() {
-    console.log("Here", this.props.games);
     return this.props.games.map(game =>
-      <li key={game.id}>
-        {game.Title}
-      </li>)
+      <ul>
+        <li key={game.id}>
+          {game.Title}
+        </li>
+
+        <li key={game.id}>
+          {game.Location}
+        </li>
+
+        <li key={game.id}>
+          {game.Difficulty}
+        </li>
+
+        <li key={game.id}>
+          {game.Story}
+        </li>
+
+        <li key={game.id}>
+          {game.TimeLimit}
+        </li >
+      </ul>
+
+    )
   }
 
   render() {
     return (
-      <ul>
+      <div>
         {this.gameItems()}
-      </ul>
+      </div>
     )
   }
 }
@@ -104,12 +124,12 @@ class App extends Component {
           {backdrop}
         </div>
         <div className="body-page">
-          <Connect query={graphqlOperation(queries.listGames)}>
-            {(response) => {
-              if (response.loading) { console.log("Loading"); return <div>Loading...</div>; }
-              if (response.errors) console.log(response.errors);
-              console.log(response.data);
-              // return <GamesList games={response.listGames} />
+          <Connect query={graphqlOperation(ListGames)}>
+            {({ data, loading, errors }) => {
+              if (loading) { return <div>Loading...</div>; }
+              if (errors) console.log(errors);
+              console.log(data.listGames);
+              return <GamesList games={data.listGames.items} />
             }}
           </Connect>
           <Router>

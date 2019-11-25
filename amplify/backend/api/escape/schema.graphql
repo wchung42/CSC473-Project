@@ -6,6 +6,7 @@ type Game @model {
   Difficulty: Int!		#Difficult of the game (rated by admins)
   Capacity: Int!		#Number of people allow to participate
   Story: String!		#Story of the game
+  TimeLimit: String!    #Time allowed to play game
   Players(limit: Int = Capacity): [String]!						#List of Players who are currently in this game
   Total_Questions(limit: Int = 15): Int!						#Number of Questions
   Total_Hints(limit: Int = 5): Int!								#Number of Hints player allowed to use
