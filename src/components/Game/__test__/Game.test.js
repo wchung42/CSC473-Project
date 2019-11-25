@@ -67,22 +67,27 @@ describe("Game component testing", () => {
         })
     })
 
+    describe('puppeteer testing', () => {
+        test('testing location button ',async() => {
 
-
-test('testing location button ',async() => {
-
-    const browser = await puppeteer.launch({
-        headless: false,
-        slowMo:180,
-        args:['--window-size=1920,1080']
-    });
-    const page = await browser.newPage();
-    await page.goto('https://master.dlhem6nvy7qu4.amplifyapp.com/Game');
+            const browser = await puppeteer.launch({
+                headless: false,
+                slowMo:180,
+                args:['--window-size=1920,1080']
+            });
+            const page = await browser.newPage();
+            await page.goto('https://master.dlhem6nvy7qu4.amplifyapp.com/Game');
+            
+            await page.click('button.Location');
+                let location=await page.$eval('button.Location',(button)=>button.className)   
+                expect(location).toBe('Location');
+            
+                await browser.close(); 
+        },10000);
     
-    await page.click('button.Location');
-        let location=await page.$eval('button.Location',(button)=>button.className)   
-        expect(location).toBe('Location');
+        test('testing exist button',async() => {
     
+<<<<<<< HEAD
         await browser.close(); 
   },20000);
 
@@ -91,90 +96,66 @@ test('testing location button ',async() => {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.goto('https://master.dlhem6nvy7qu4.amplifyapp.com/Game');
-    
-    await page.click('div.exit');
-        let exit=await page.$eval('div.exit',(div)=>div.className)   
-        expect(exit).toBe('exit');
-  
+=======
+            const browser = await puppeteer.launch();
+            const page = await browser.newPage();
+            await page.goto('https://master.dlhem6nvy7qu4.amplifyapp.com/Game');
+            
+            await page.click('div.exit');
+                let exit=await page.$eval('div.exit',(div)=>div.className)   
+                expect(exit).toBe('exit');
         
-  },20000);
-
-  test('testing hover page get className',async() => {
-
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
-    await page.goto('https://master.dlhem6nvy7qu4.amplifyapp.com/Game');
+                
+        },20000);
     
-    await page.hover('div.game-list')
-        let game=await page.$eval('div.game-list',(div)=>div.className)   
-        expect(game).toBe('game-list');
-  
-       
-  },20000);
-
-  test('testing start game',async() => {
-
-    const browser = await puppeteer.launch({
-        headless: false,
-        slowMo:180,
-        args:['--window-size=1920,1080']
-    });
-    const page = await browser.newPage();
-    await page.goto('https://master.dlhem6nvy7qu4.amplifyapp.com/Game');
+        test('testing hover page get className',async() => {
+>>>>>>> 07e97373abf6d3345434947930dec86318189975
     
-    await page.click('#bttn0')
-    await page.click('#start-btn')
-        let game=await page.$eval('#timer',(e)=>e.textContent);  
-        expect(game).toBe('05:00');
-  
-        await browser.close();
-  },20000);
-
-  test('testing hero of angle game',async() => {
-
-    const browser = await puppeteer.launch({
-        headless: false,
-        slowMo: 80,
-        args:['window-size = 1920,1080']
-    });
-    const page = await browser.newPage();
-    await page.goto('https://master.dlhem6nvy7qu4.amplifyapp.com/Game');
+            const browser = await puppeteer.launch();
+            const page = await browser.newPage();
+            await page.goto('https://master.dlhem6nvy7qu4.amplifyapp.com/Game');
+            
+            await page.hover('div.game-list')
+                let game=await page.$eval('div.game-list',(div)=>div.className)   
+                expect(game).toBe('game-list');
+        
+            
+        },20000);
     
-    await page.click('#bttn1')
-    await page.click('#start-btn')
-    let game1=await page.$eval('h1',(e)=>e.textContent);  
-    expect(game1).toBe('Hero of the Angle Challenge');
-
-    // testing the hero of the angle game
-    await page.click('button#num1');
-    await page.click('button#num8');
-    await page.click('button#num6');
-    await page.click('button#num9');
-    await page.click('button#pound');
-    let temp = await page.$eval('div#textAnswer', (div) => div.id);
-    expect(temp).toBe('textAnswer');
+        test('testing start game',async() => {
     
-    await page.click('input#answerBox');
-    await page.type('input#answerBox', 'time');
-    await page.click('button#submitBttn');
-    temp = await page.$eval('div#textAnswer', (div) => div.id);
-    expect(temp).toBe('textAnswer');
-
-    await page.click('input#answerBox');
-    await page.type('input#answerBox', 'cane');
-    await page.click('button#submitBttn');
-    temp = await page.$eval('div#textAnswer', (div) => div.id);
-    expect(temp).toBe('textAnswer');
-
-    await page.click('input#answerBox');
-    await page.type('input#answerBox', 'horace webster');
-    await page.click('button#submitBttn');
-    temp = await page.$eval('div#numPad', (div) => div.id);
-    expect(temp).toBe('numPad');
-
-    await page.click('button#num7');
-    await page.click('button#pound');
+            const browser = await puppeteer.launch({
+                headless: false,
+                slowMo:180,
+                args:['--window-size=1920,1080']
+            });
+            const page = await browser.newPage();
+            await page.goto('https://master.dlhem6nvy7qu4.amplifyapp.com/Game');
+            
+            await page.click('#bttn0')
+            await page.click('#start-btn')
+                let game=await page.$eval('#timer',(e)=>e.textContent);  
+                expect(game).toBe('05:00');
+        
+                await browser.close();
+        },20000);
     
+        test('testing hero of angle game',async() => {
+    
+            const browser = await puppeteer.launch({
+                headless: false,
+                slowMo: 80,
+                args:['window-size = 1920,1080']
+            });
+            const page = await browser.newPage();
+            await page.goto('https://master.dlhem6nvy7qu4.amplifyapp.com/Game');
+            
+            await page.click('#bttn1')
+            await page.click('#start-btn')
+            let game1=await page.$eval('h1',(e)=>e.textContent);  
+            expect(game1).toBe('Hero of the Angle Challenge');
+    
+<<<<<<< HEAD
     await page.click('button#num1');
     await page.click('button#num2');
     await page.click('button#pound');
@@ -186,6 +167,45 @@ test('testing location button ',async() => {
 
 
 
+=======
+            // testing the hero of the angle game
+            await page.click('button#num1');
+            await page.click('button#num8');
+            await page.click('button#num6');
+            await page.click('button#num9');
+            await page.click('button#pound');
+            let temp = await page.$eval('div#textAnswer', (div) => div.id);
+            expect(temp).toBe('textAnswer');
+            
+            await page.click('input#answerBox');
+            await page.type('input#answerBox', 'time');
+            await page.click('button#submitBttn');
+            temp = await page.$eval('div#textAnswer', (div) => div.id);
+            expect(temp).toBe('textAnswer');
+    
+            await page.click('input#answerBox');
+            await page.type('input#answerBox', 'cane');
+            await page.click('button#submitBttn');
+            temp = await page.$eval('div#textAnswer', (div) => div.id);
+            expect(temp).toBe('textAnswer');
+    
+            await page.click('input#answerBox');
+            await page.type('input#answerBox', 'horace webster');
+            await page.click('button#submitBttn');
+            temp = await page.$eval('div#numPad', (div) => div.id);
+            expect(temp).toBe('numPad');
+    
+            await page.click('button#num7');
+            await page.click('button#pound');
+            
+            await page.click('button#num1');
+            await page.click('button#num2');
+            await page.click('button#pound');
+        
+            await browser.close();
+        },20000);
+    })
+>>>>>>> 07e97373abf6d3345434947930dec86318189975
 
     describe('go back from each page via exit button', () => {
         let wrapper;

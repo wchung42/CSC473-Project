@@ -39,6 +39,8 @@ class Puzzle extends Component {
         if (userAnswer.toLowerCase() == answer.toLowerCase()) {
             //else moving to the next question
             console.log("right answer");
+            // clear hint space when moving to next question
+            document.getElementById('hint').innerText = '';
             this.setState({
                 questionIndex: currentQuestionIndex + 1,
                 imageIndex: currentQuestionIndex + 1,
@@ -56,11 +58,26 @@ class Puzzle extends Component {
         else {
             console.log("Wrong Answer")
             if (document.getElementById("answerBox")) {
+                // visual cue for wrong answer in text box
+                document.getElementById('answerBox').style.border = "medium solid #FF0000";
+                
+                setTimeout(function () {
+                    document.getElementById('answerBox').style.border = "thin solid #000000";
+                }, 750)
+
                 document.getElementById("answerBox").value = "";
                 document.getElementById("submitBttn").value = "";
             }
             if (document.getElementById("pound")) {
                 document.getElementById("pound").value = "";
+
+                // visual cue for wrong answer in numpad
+                document.getElementById('pound').style.background = '#FF0000';
+                setTimeout(function () {
+                    document.getElementById('pound').style.background = '#DDDDDD';
+                }, 750);
+                
+               
             }
         }
     }

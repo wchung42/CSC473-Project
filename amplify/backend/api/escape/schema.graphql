@@ -1,5 +1,5 @@
 type Game @model {
-  id: ID!				#ID of game	
+  id: ID!			#ID of game	
   Title: String!		#Title of game
   Thumbnail: String!	#Link to thumnail image
   Location: String!		#Location this game takes place

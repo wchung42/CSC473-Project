@@ -10,8 +10,48 @@ import Home from './components/home';
 import Footer from './components/Footer/Footer'
 import About from './components/About/About';
 import Contact from './components/Contact/Contact';
-import { Analytics, Auth } from 'aws-amplify';
+import Amplify, { Analytics, API, Auth, graphqlOperation, Storage } from 'aws-amplify';
+//backend stuffs START HERE
 
+import aws_config from './aws-exports';
+import { Connect } from 'aws-amplify-react';
+import * as queries from './graphql/queries';
+import * as mutations from './graphql/mutations';
+
+Amplify.configure(aws_config);
+const ListGames = `query ListGames {
+  listGames {
+      items {
+        id
+        Title
+        Location
+        Difficulty
+        Story
+        Questions
+        Answers
+      }
+  }
+}`;
+
+class GamesList extends React.Component {
+  gameItems() {
+    console.log("Here", this.props.games);
+    return this.props.games.map(game =>
+      <li key={game.id}>
+        {game.Title}
+      </li>)
+  }
+
+  render() {
+    return (
+      <ul>
+        {this.gameItems()}
+      </ul>
+    )
+  }
+}
+
+//END HERE
 Analytics.configure({ disabled: true })
 
 class App extends Component {
@@ -64,14 +104,22 @@ class App extends Component {
           {backdrop}
         </div>
         <div className="body-page">
+          <Connect query={graphqlOperation(queries.listGames)}>
+            {(response) => {
+              if (response.loading) { console.log("Loading"); return <div>Loading...</div>; }
+              if (response.errors) console.log(response.errors);
+              console.log(response.data);
+              // return <GamesList games={response.listGames} />
+            }}
+          </Connect>
           <Router>
             <Switch>
-            
+
               <Route path='/Game' component={Game} />
               <Route path='/about' component={About} />
               <Route path='/contact' component={Contact} />
               <Route path='/' component={Home} />
-              
+
 
             </Switch>
           </Router>
