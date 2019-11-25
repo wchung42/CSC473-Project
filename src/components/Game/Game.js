@@ -98,7 +98,7 @@ class Game extends Component {
       // calculate distance to target
       dist = getDistanceFromLatLonInKm(userCoords.latitude, userCoords.longitude, target.latitude, target.longitude);
       console.log('Distance: ' + dist)
-      if (dist <= 0.2) {
+      if (dist <= 0.01) {
         console.log('You are here!');
         // stop watching
         navigator.geolocation.clearWatch(current)
