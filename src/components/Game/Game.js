@@ -109,6 +109,7 @@ class Game extends Component {
           gameStart: 1
         })
       } else {
+        document.getElementById('notAtLocationIndicator').innerText = 'You are not at the starting location of the game.';
         console.log('Not here yet');
       }
     }
@@ -223,6 +224,9 @@ class Game extends Component {
           </div>
           <div className="start">
             <button id="start-btn" className="btn btn-lg btn-success" type="button" onClick={this.startGame}>&nbsp; Start &nbsp;</button>
+          </div>
+          <div id = "notAtLocationIndicator">
+            <p></p>
           </div>
 
         </div>
