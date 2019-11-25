@@ -1,0 +1,180 @@
+type Game {
+  id: ID!
+  Title: String!
+  Thumbnail: String!
+  Location: String!
+  Difficulty: Int!
+  Capacity: Int!
+  Story: String!
+  Players(limit: Int = Capacity): [String]!
+  Total_Questions(limit: Int = 15): Int!
+  Total_Hints(limit: Int = 5): Int!
+  Questions(limit: Int = Total_Questions): [String]!
+  AtQuestion(limit: Int = Total_Questions): Int
+  QuestionVisualAid(limit: Int = Total_Questions): [String]
+  Hints(limit: Int = Total_Questions): [String]!
+  GeoLocation(limit: Int = Total_Questions): [String]
+  AnswerType(limit: Int = Total_Questions): [String]!
+  Answers(limit: Int = Total_Questions): [String]!
+  Rating(limit: Int = 5): Int
+  Review: String
+  AidStuffs: [String]
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+type ModelGameConnection {
+  items: [Game]
+  nextToken: String
+}
+
+input ModelStringFilterInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+}
+
+input ModelIDFilterInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+}
+
+input ModelIntFilterInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  contains: Int
+  notContains: Int
+  between: [Int]
+}
+
+input ModelFloatFilterInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  contains: Float
+  notContains: Float
+  between: [Float]
+}
+
+input ModelBooleanFilterInput {
+  ne: Boolean
+  eq: Boolean
+}
+
+input ModelGameFilterInput {
+  id: ModelIDFilterInput
+  Title: ModelStringFilterInput
+  Thumbnail: ModelStringFilterInput
+  Location: ModelStringFilterInput
+  Difficulty: ModelIntFilterInput
+  Capacity: ModelIntFilterInput
+  Story: ModelStringFilterInput
+  Players: ModelStringFilterInput
+  Total_Questions: ModelIntFilterInput
+  Total_Hints: ModelIntFilterInput
+  Questions: ModelStringFilterInput
+  AtQuestion: ModelIntFilterInput
+  QuestionVisualAid: ModelStringFilterInput
+  Hints: ModelStringFilterInput
+  GeoLocation: ModelStringFilterInput
+  AnswerType: ModelStringFilterInput
+  Answers: ModelStringFilterInput
+  Rating: ModelIntFilterInput
+  Review: ModelStringFilterInput
+  AidStuffs: ModelStringFilterInput
+  and: [ModelGameFilterInput]
+  or: [ModelGameFilterInput]
+  not: ModelGameFilterInput
+}
+
+type Query {
+  getGame(id: ID!): Game
+  listGames(filter: ModelGameFilterInput, limit: Int, nextToken: String): ModelGameConnection
+}
+
+input CreateGameInput {
+  id: ID
+  Title: String!
+  Thumbnail: String!
+  Location: String!
+  Difficulty: Int!
+  Capacity: Int!
+  Story: String!
+  Players: [String]!
+  Total_Questions: Int!
+  Total_Hints: Int!
+  Questions: [String]!
+  AtQuestion: Int
+  QuestionVisualAid: [String]
+  Hints: [String]!
+  GeoLocation: [String]
+  AnswerType: [String]!
+  Answers: [String]!
+  Rating: Int
+  Review: String
+  AidStuffs: [String]
+}
+
+input UpdateGameInput {
+  id: ID!
+  Title: String
+  Thumbnail: String
+  Location: String
+  Difficulty: Int
+  Capacity: Int
+  Story: String
+  Players: [String]
+  Total_Questions: Int
+  Total_Hints: Int
+  Questions: [String]
+  AtQuestion: Int
+  QuestionVisualAid: [String]
+  Hints: [String]
+  GeoLocation: [String]
+  AnswerType: [String]
+  Answers: [String]
+  Rating: Int
+  Review: String
+  AidStuffs: [String]
+}
+
+input DeleteGameInput {
+  id: ID
+}
+
+type Mutation {
+  createGame(input: CreateGameInput!): Game
+  updateGame(input: UpdateGameInput!): Game
+  deleteGame(input: DeleteGameInput!): Game
+}
+
+type Subscription {
+  onCreateGame: Game @aws_subscribe(mutations: ["createGame"])
+  onUpdateGame: Game @aws_subscribe(mutations: ["updateGame"])
+  onDeleteGame: Game @aws_subscribe(mutations: ["deleteGame"])
+}
