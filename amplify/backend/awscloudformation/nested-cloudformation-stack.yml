@@ -68,15 +68,15 @@
 				}
 			}
 		},
-		"authescapea852aaed": {
+		"authescape591c9385": {
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
-				"TemplateURL": "https://s3.amazonaws.com/amplify-escape-dev-164154-deployment/amplify-cfn-templates/auth/escapea852aaed-cloudformation-template.yml",
+				"TemplateURL": "https://s3.amazonaws.com/amplify-escape-dev-83940-deployment/amplify-cfn-templates/auth/escape591c9385-cloudformation-template.yml",
 				"Parameters": {
-					"identityPoolName": "escapea852aaed_identitypool_a852aaed",
+					"identityPoolName": "escape591c9385_identitypool_591c9385",
 					"allowUnauthenticatedIdentities": false,
-					"resourceNameTruncated": "escapea852aaed",
-					"userPoolName": "escapea852aaed_userpool_a852aaed",
+					"resourceNameTruncated": "escape591c9385",
+					"userPoolName": "escape591c9385_userpool_591c9385",
 					"autoVerifiedAttributes": "email",
 					"mfaConfiguration": "OFF",
 					"mfaTypes": "SMS Text Message",
@@ -92,9 +92,9 @@
 					"userpoolClientRefreshTokenValidity": 30,
 					"userpoolClientWriteAttributes": "email",
 					"userpoolClientReadAttributes": "email",
-					"userpoolClientLambdaRole": "escapea852aaed_userpoolclient_lambda_role",
+					"userpoolClientLambdaRole": "escape591c9385_userpoolclient_lambda_role",
 					"userpoolClientSetAttributes": false,
-					"resourceName": "escapea852aaed",
+					"resourceName": "escape591c9385",
 					"authSelections": "identityPoolAndUserPool",
 					"authRoleArn": {
 						"Fn::GetAtt": [
@@ -118,7 +118,7 @@
 		"apiescape": {
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
-				"TemplateURL": "https://s3.amazonaws.com/amplify-escape-dev-164154-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+				"TemplateURL": "https://s3.amazonaws.com/amplify-escape-dev-83940-deployment/amplify-cfn-templates/api/cloudformation-template.json",
 				"Parameters": {
 					"CreateAPIKey": 0,
 					"AppSyncApiName": "escape",
@@ -126,12 +126,12 @@
 					"DynamoDBEnableServerSideEncryption": "false",
 					"AuthCognitoUserPoolId": {
 						"Fn::GetAtt": [
-							"authescapea852aaed",
+							"authescape591c9385",
 							"Outputs.UserPoolId"
 						]
 					},
-					"S3DeploymentBucket": "amplify-escape-dev-164154-deployment",
-					"S3DeploymentRootKey": "amplify-appsync-files/ed7472a4f338a2fa3553a3806db163578ac7bb74",
+					"S3DeploymentBucket": "amplify-escape-dev-83940-deployment",
+					"S3DeploymentRootKey": "amplify-appsync-files/bd642f426fadf42968262118e06826df40125f42",
 					"env": "dev"
 				}
 			}
@@ -140,7 +140,7 @@
 			"DependsOn": [
 				"AuthRole",
 				"UnauthRole",
-				"authescapea852aaed"
+				"authescape591c9385"
 			],
 			"Type": "AWS::Lambda::Function",
 			"Properties": {
@@ -223,7 +223,7 @@
 				},
 				"idpId": {
 					"Fn::GetAtt": [
-						"authescapea852aaed",
+						"authescape591c9385",
 						"Outputs.IdentityPoolId"
 					]
 				},

@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
-// import games from './Game/games.json';
 import { Connect } from 'aws-amplify-react';
 import { graphqlOperation } from 'aws-amplify';
+import Amplify from 'aws-amplify';
+import aws_exports from '../aws-exports';
 
+Amplify.configure(aws_exports);
+console.log(aws_exports)
 //declare query to listGames
-const listGames = `query listGames {
+const ListGames = `query listGames {
   listGames(limit: 9999) {
       items {
         id
@@ -39,14 +42,17 @@ class GamesList extends React.Component {
 class home extends React.Component {
   render() {
     return (
-      <Connect query={graphqlOperation(listGames)}>
-        {({ data, loading, errors }) => {
-          if (loading) { return <div>Loading...</div>; }
-          if (errors) console.log(errors);
-          console.log(data.listGames);
-          return <GamesList games={data.listGames.items} />
-        }}
-      </Connect>
+      // <Connect query={graphqlOperation(ListGames)}>
+      //   {({ data, loading, errors }) => {
+      //     if (loading) { return <div>Loading...</div>; }
+      //     if (errors) console.log(errors);
+      //     console.log(data.listGames);
+      //     return <GamesList games={data.listGames.items} />
+      //   }}
+      // </Connect>
+      <div>
+        <h1>Hello World</h1>
+      </div>
     );
   }
 }

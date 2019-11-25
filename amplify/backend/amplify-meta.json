@@ -1,36 +1,36 @@
 {
 	"providers": {
 		"awscloudformation": {
-			"AuthRoleName": "amplify-escape-dev-164154-authRole",
-			"UnauthRoleArn": "arn:aws:iam::557127555613:role/amplify-escape-dev-164154-unauthRole",
-			"AuthRoleArn": "arn:aws:iam::557127555613:role/amplify-escape-dev-164154-authRole",
+			"AuthRoleName": "amplify-escape-dev-83940-authRole",
+			"UnauthRoleArn": "arn:aws:iam::557127555613:role/amplify-escape-dev-83940-unauthRole",
+			"AuthRoleArn": "arn:aws:iam::557127555613:role/amplify-escape-dev-83940-authRole",
 			"Region": "us-east-1",
-			"DeploymentBucketName": "amplify-escape-dev-164154-deployment",
-			"UnauthRoleName": "amplify-escape-dev-164154-unauthRole",
-			"StackName": "amplify-escape-dev-164154",
-			"StackId": "arn:aws:cloudformation:us-east-1:557127555613:stack/amplify-escape-dev-164154/3aef20d0-0f03-11ea-9f15-0ea6b7109c22"
+			"DeploymentBucketName": "amplify-escape-dev-83940-deployment",
+			"UnauthRoleName": "amplify-escape-dev-83940-unauthRole",
+			"StackName": "amplify-escape-dev-83940",
+			"StackId": "arn:aws:cloudformation:us-east-1:557127555613:stack/amplify-escape-dev-83940/0820b980-0f89-11ea-82ad-0a39c55408a9"
 		}
 	},
 	"auth": {
-		"escapea852aaed": {
+		"escape591c9385": {
 			"service": "Cognito",
 			"providerPlugin": "awscloudformation",
 			"dependsOn": [],
 			"providerMetadata": {
-				"s3TemplateURL": "https://s3.amazonaws.com/amplify-escape-dev-164154-deployment/amplify-cfn-templates/auth/escapea852aaed-cloudformation-template.yml",
-				"logicalId": "authescapea852aaed"
+				"s3TemplateURL": "https://s3.amazonaws.com/amplify-escape-dev-83940-deployment/amplify-cfn-templates/auth/escape591c9385-cloudformation-template.yml",
+				"logicalId": "authescape591c9385"
 			},
-			"lastPushTimeStamp": "2019-11-24T21:51:47.920Z",
+			"lastPushTimeStamp": "2019-11-25T13:50:22.497Z",
 			"output": {
-				"AppClientSecret": "s2k0dav5s75mi5pb2r8rmnm96noden3c6fc84kgl74hlabtl0rg",
-				"UserPoolId": "us-east-1_xVwarzjuL",
-				"AppClientIDWeb": "28uvvji2ts3g1pmh1nmfhel34r",
-				"AppClientID": "4nvah6pbeh0mjoodirrk555hmr",
-				"IdentityPoolId": "us-east-1:0be40321-fbd2-47e2-b8e5-9ec423b7fc18",
-				"IdentityPoolName": "escapea852aaed_identitypool_a852aaed__dev",
-				"UserPoolName": "escapea852aaed_userpool_a852aaed"
+				"AppClientSecret": "193hn1aaforkvr2f5eu51r9c49uq00tikdqclrkmgf6mmsk8d63s",
+				"UserPoolId": "us-east-1_yfPb0LPx5",
+				"AppClientIDWeb": "76e6ls5rqn08h2ho6nifdnaeto",
+				"AppClientID": "akc3385po61p88g1393nposfr",
+				"IdentityPoolId": "us-east-1:c44b7a0d-e90a-4237-81b5-0f07491a2a02",
+				"IdentityPoolName": "escape591c9385_identitypool_591c9385__dev",
+				"UserPoolName": "escape591c9385_userpool_591c9385"
 			},
-			"lastPushDirHash": "W0xydQYXUjI6qNz0iktoQZiNv2c="
+			"lastPushDirHash": "PxPtcJdcByn7QbCJQCPVAFS829c="
 		}
 	},
 	"api": {
@@ -43,19 +43,19 @@
 					"defaultAuthentication": {
 						"authenticationType": "AMAZON_COGNITO_USER_POOLS",
 						"userPoolConfig": {
-							"userPoolId": "authescapea852aaed"
+							"userPoolId": "authescape591c9385"
 						}
 					}
 				},
-				"GraphQLAPIIdOutput": "fzisubqsmfgqtcb2heyo33rimq",
-				"GraphQLAPIEndpointOutput": "https://4eet4ctjyrf3znhqf2he6imkh4.appsync-api.us-east-1.amazonaws.com/graphql"
+				"GraphQLAPIIdOutput": "2dzsvqhkynfktcda6wvnfqsaoi",
+				"GraphQLAPIEndpointOutput": "https://kc2ms7t5l5hkbc5mqiy5edn5qa.appsync-api.us-east-1.amazonaws.com/graphql"
 			},
 			"providerMetadata": {
-				"s3TemplateURL": "https://s3.amazonaws.com/amplify-escape-dev-164154-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+				"s3TemplateURL": "https://s3.amazonaws.com/amplify-escape-dev-83940-deployment/amplify-cfn-templates/api/cloudformation-template.json",
 				"logicalId": "apiescape"
 			},
-			"lastPushTimeStamp": "2019-11-24T21:51:48.989Z",
-			"lastPushDirHash": "qNX4GiSj288piUDKZF6hx5jGhh8="
+			"lastPushTimeStamp": "2019-11-25T13:50:23.268Z",
+			"lastPushDirHash": "ZOcLRgUNhLBHSUBnU0V3msIjg9E="
 		}
 	}
 }
