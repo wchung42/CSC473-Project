@@ -1,145 +1,58 @@
-export const getUser = `query GetUser($id: ID!) {
-  getUser(id: $id) {
+/* eslint-disable */
+// this is an auto generated file. This will be overwritten
+
+export const getGame = `query GetGame($id: ID!) {
+  getGame(id: $id) {
     id
-    username
-    email
-    scores {
-      items {
-        id
-        name
-        createdAt
-        updatedAt
-        status
-      }
-      nextToken
-    }
+    Title
+    Thumbnail
+    Location
+    Difficulty
+    Capacity
+    Story
+    Players
+    Total_Questions
+    Total_Hints
+    Questions
+    AtQuestion
+    QuestionVisualAid
+    Hints
+    GeoLocation
+    AnswerType
+    Answers
+    Rating
+    Review
+    AidStuffs
   }
 }
 `;
-export const listUsers = `query ListUsers(
-  $filter: ModelUserFilterInput
+export const listGames = `query ListGames(
+  $filter: ModelGameFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listGames(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      username
-      email
-      scores {
-        nextToken
-      }
-    }
-    nextToken
-  }
-}
-`;
-export const getScore = `query GetScore($id: ID!) {
-  getScore(id: $id) {
-    id
-    name
-    notes {
-      items {
-        number
-        dot
-        doubleDot
-        line
-        doubleLine
-        curve
-        row
-        column
-      }
-      nextToken
-    }
-    user {
-      id
-      username
-      email
-      scores {
-        nextToken
-      }
-    }
-    createdAt
-    updatedAt
-    status
-  }
-}
-`;
-export const listScores = `query ListScores(
-  $filter: ModelScoreFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listScores(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      name
-      notes {
-        nextToken
-      }
-      user {
-        id
-        username
-        email
-      }
-      createdAt
-      updatedAt
-      status
-    }
-    nextToken
-  }
-}
-`;
-export const getNote = `query GetNote($id: ID!) {
-  getNote(id: $id) {
-    number
-    dot
-    doubleDot
-    line
-    doubleLine
-    curve
-    row
-    column
-    score {
-      id
-      name
-      notes {
-        nextToken
-      }
-      user {
-        id
-        username
-        email
-      }
-      createdAt
-      updatedAt
-      status
-    }
-  }
-}
-`;
-export const listNotes = `query ListNotes(
-  $filter: ModelNoteFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listNotes(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      number
-      dot
-      doubleDot
-      line
-      doubleLine
-      curve
-      row
-      column
-      score {
-        id
-        name
-        createdAt
-        updatedAt
-        status
-      }
+      Title
+      Thumbnail
+      Location
+      Difficulty
+      Capacity
+      Story
+      Players
+      Total_Questions
+      Total_Hints
+      Questions
+      AtQuestion
+      QuestionVisualAid
+      Hints
+      GeoLocation
+      AnswerType
+      Answers
+      Rating
+      Review
+      AidStuffs
     }
     nextToken
   }

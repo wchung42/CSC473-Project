@@ -1,38 +1,53 @@
-import React from 'react';
-import games from './Game/games.json';
+import React, { Component } from 'react';
+// import games from './Game/games.json';
+import { Connect } from 'aws-amplify-react';
+import { graphqlOperation } from 'aws-amplify';
 
-const Home = () => {
-  let listItems = games
-    .filter(game => game.Popular == true)
-    .map(item =>
-      <li className="bodyCard" key={item.id} >
-        <div className="card">
-          <img
-            key={item.Id}
-            className="card-img-top"
-            src={item.Thumbnail} 
-            alt = ''/>
-          <div className="card-body">
-            <h5 className="card-title">
-              <strong>{item.Title} ({item.Difficulty}/5)</strong>
-            </h5>
-            <p className="card-text"> {item.Story}</p>
-            <a href="#" className="btn btn-primary btn-lg">Play</a>
-          </div>
-        </div>
-      </li >
-    );
+//declare query to listGames
+const listGames = `query listGames {
+  listGames(limit: 9999) {
+      items {
+        id
+        Title
+        Location
+        Difficulty
+        Story
+        Questions
+        Answers
+      }
+  }
+}`;
 
-  return (
-    <div className="body-page">
-      <header className="Welcome-Section">
-      </header>
-      
-        <p className="popular-game"><strong>POPULAR GAMES</strong></p>
-        <ol className="cards" >{listItems}</ol>
-        
-    </div>
-  );
+class GamesList extends React.Component {
+  gameItems() {
+    console.log("Here", this.props.games);
+    return this.props.games.map(game =>
+      <li key={game.id}>
+        {game.Title}
+      </li>)
+  }
+
+  render() {
+    return (
+      <ul>
+        {this.gameItems()}
+      </ul>
+    )
+  }
 }
 
-export default Home;
+class home extends React.Component {
+  render() {
+    return (
+      <Connect query={graphqlOperation(listGames)}>
+        {({ data, loading, errors }) => {
+          if (loading) { return <div>Loading...</div>; }
+          if (errors) console.log(errors);
+          console.log(data.listGames);
+          return <GamesList games={data.listGames.items} />
+        }}
+      </Connect>
+    );
+  }
+}
+export default home;

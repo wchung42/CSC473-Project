@@ -1,231 +1,78 @@
-export const createUser = `mutation CreateUser($input: CreateUserInput!) {
-  createUser(input: $input) {
+/* eslint-disable */
+// this is an auto generated file. This will be overwritten
+
+export const createGame = `mutation CreateGame($input: CreateGameInput!) {
+  createGame(input: $input) {
     id
-    username
-    email
-    scores {
-      items {
-        id
-        name
-        createdAt
-        updatedAt
-        status
-      }
-      nextToken
-    }
+    Title
+    Thumbnail
+    Location
+    Difficulty
+    Capacity
+    Story
+    Players
+    Total_Questions
+    Total_Hints
+    Questions
+    AtQuestion
+    QuestionVisualAid
+    Hints
+    GeoLocation
+    AnswerType
+    Answers
+    Rating
+    Review
+    AidStuffs
   }
 }
 `;
-export const updateUser = `mutation UpdateUser($input: UpdateUserInput!) {
-  updateUser(input: $input) {
+export const updateGame = `mutation UpdateGame($input: UpdateGameInput!) {
+  updateGame(input: $input) {
     id
-    username
-    email
-    scores {
-      items {
-        id
-        name
-        createdAt
-        updatedAt
-        status
-      }
-      nextToken
-    }
+    Title
+    Thumbnail
+    Location
+    Difficulty
+    Capacity
+    Story
+    Players
+    Total_Questions
+    Total_Hints
+    Questions
+    AtQuestion
+    QuestionVisualAid
+    Hints
+    GeoLocation
+    AnswerType
+    Answers
+    Rating
+    Review
+    AidStuffs
   }
 }
 `;
-export const deleteUser = `mutation DeleteUser($input: DeleteUserInput!) {
-  deleteUser(input: $input) {
+export const deleteGame = `mutation DeleteGame($input: DeleteGameInput!) {
+  deleteGame(input: $input) {
     id
-    username
-    email
-    scores {
-      items {
-        id
-        name
-        createdAt
-        updatedAt
-        status
-      }
-      nextToken
-    }
-  }
-}
-`;
-export const createScore = `mutation CreateScore($input: CreateScoreInput!) {
-  createScore(input: $input) {
-    id
-    name
-    notes {
-      items {
-        number
-        dot
-        doubleDot
-        line
-        doubleLine
-        curve
-        row
-        column
-      }
-      nextToken
-    }
-    user {
-      id
-      username
-      email
-      scores {
-        nextToken
-      }
-    }
-    createdAt
-    updatedAt
-    status
-  }
-}
-`;
-export const updateScore = `mutation UpdateScore($input: UpdateScoreInput!) {
-  updateScore(input: $input) {
-    id
-    name
-    notes {
-      items {
-        number
-        dot
-        doubleDot
-        line
-        doubleLine
-        curve
-        row
-        column
-      }
-      nextToken
-    }
-    user {
-      id
-      username
-      email
-      scores {
-        nextToken
-      }
-    }
-    createdAt
-    updatedAt
-    status
-  }
-}
-`;
-export const deleteScore = `mutation DeleteScore($input: DeleteScoreInput!) {
-  deleteScore(input: $input) {
-    id
-    name
-    notes {
-      items {
-        number
-        dot
-        doubleDot
-        line
-        doubleLine
-        curve
-        row
-        column
-      }
-      nextToken
-    }
-    user {
-      id
-      username
-      email
-      scores {
-        nextToken
-      }
-    }
-    createdAt
-    updatedAt
-    status
-  }
-}
-`;
-export const createNote = `mutation CreateNote($input: CreateNoteInput!) {
-  createNote(input: $input) {
-    number
-    dot
-    doubleDot
-    line
-    doubleLine
-    curve
-    row
-    column
-    score {
-      id
-      name
-      notes {
-        nextToken
-      }
-      user {
-        id
-        username
-        email
-      }
-      createdAt
-      updatedAt
-      status
-    }
-  }
-}
-`;
-export const updateNote = `mutation UpdateNote($input: UpdateNoteInput!) {
-  updateNote(input: $input) {
-    number
-    dot
-    doubleDot
-    line
-    doubleLine
-    curve
-    row
-    column
-    score {
-      id
-      name
-      notes {
-        nextToken
-      }
-      user {
-        id
-        username
-        email
-      }
-      createdAt
-      updatedAt
-      status
-    }
-  }
-}
-`;
-export const deleteNote = `mutation DeleteNote($input: DeleteNoteInput!) {
-  deleteNote(input: $input) {
-    number
-    dot
-    doubleDot
-    line
-    doubleLine
-    curve
-    row
-    column
-    score {
-      id
-      name
-      notes {
-        nextToken
-      }
-      user {
-        id
-        username
-        email
-      }
-      createdAt
-      updatedAt
-      status
-    }
+    Title
+    Thumbnail
+    Location
+    Difficulty
+    Capacity
+    Story
+    Players
+    Total_Questions
+    Total_Hints
+    Questions
+    AtQuestion
+    QuestionVisualAid
+    Hints
+    GeoLocation
+    AnswerType
+    Answers
+    Rating
+    Review
+    AidStuffs
   }
 }
 `;
