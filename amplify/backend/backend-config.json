@@ -1,13 +1,13 @@
 {
 	"auth": {
-		"csc473projectd528c630": {
+		"escapea852aaed": {
 			"service": "Cognito",
 			"providerPlugin": "awscloudformation",
 			"dependsOn": []
 		}
 	},
 	"api": {
-		"escapeapi": {
+		"escape": {
 			"service": "AppSync",
 			"providerPlugin": "awscloudformation",
 			"output": {
@@ -16,7 +16,7 @@
 					"defaultAuthentication": {
 						"authenticationType": "AMAZON_COGNITO_USER_POOLS",
 						"userPoolConfig": {
-							"userPoolId": "authcsc473projectd528c630"
+							"userPoolId": "authescapea852aaed"
 						}
 					}
 				}
