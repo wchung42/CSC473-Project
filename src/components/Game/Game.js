@@ -4,7 +4,56 @@ import './Game.css';
 import Timer from './Timer';  // timer component that determines state of game
 import games from './games.json'; // get the game title
 import Panel from './gamePanel';
-import { withAuthenticator } from 'aws-amplify-react';
+import { withAuthenticator, Connect } from 'aws-amplify-react';
+import Amplify, { Analytics, API, Auth, graphqlOperation, Storage } from 'aws-amplify';
+
+const ListGames = `query ListGames {
+  listGames {
+      items {
+        id
+        Title
+        Location
+        Difficulty
+        TimeLimit
+        Story
+        Questions
+        Answers
+      }
+  }
+}`;
+
+class GamesList extends React.Component {
+  gameItems() {
+    return this.props.games.map(game =>
+      <ul>
+        <li key={game.id}>
+          {game.Title}
+        </li>
+        <li key={game.id}>
+          {game.Location}
+        </li>
+        <li key={game.id}>
+          {game.Difficulty}
+        </li>
+        <li key={game.id}>
+          {game.Story}
+        </li>
+        <li key={game.id}>
+          {game.TimeLimit}
+        </li >
+      </ul>
+
+    )
+  }
+
+  render() {
+    return (
+      <div>
+        {this.gameItems()}
+      </div>
+    )
+  }
+}
 
 class Game extends Component {
   constructor(props) {
@@ -47,21 +96,21 @@ class Game extends Component {
         longitude: position.coords.longitude
       }), newState => console.log(newState))
 
-       console.log(this.state.latitude, this.state.longitude);
-       
-      //  var R = 6371e3; // metres
-      //  var φ1 = lat1.toRadians();
-      //  var φ2 = lat2.toRadians();
-      //  var Δφ = (lat2-lat1).toRadians();
-      //  var Δλ = (lon2-lon1).toRadians();
+    console.log(this.state.latitude, this.state.longitude);
 
-      //  var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
-      //         Math.cos(φ1) * Math.cos(φ2) *
-      //         Math.sin(Δλ/2) * Math.sin(Δλ/2);
-      //  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    //  var R = 6371e3; // metres
+    //  var φ1 = lat1.toRadians();
+    //  var φ2 = lat2.toRadians();
+    //  var Δφ = (lat2-lat1).toRadians();
+    //  var Δλ = (lon2-lon1).toRadians();
 
-      //  var d = R * c;
-   }
+    //  var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+    //         Math.cos(φ1) * Math.cos(φ2) *
+    //         Math.sin(Δλ/2) * Math.sin(Δλ/2);
+    //  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+    //  var d = R * c;
+  }
 
 
   componentDidUpdate(prevProps) {
@@ -83,7 +132,16 @@ class Game extends Component {
     // go to game list page
     if (!this.state.gameReady && (this.state.gameSynopsis === 0) && (this.state.gameStart === 0)) {
       return (
+
         <div className="Game">
+          <Connect query={graphqlOperation(ListGames)}>
+            {({ data, loading, errors }) => {
+              if (loading) { return <div>Loading...</div>; }
+              if (errors) console.log(errors);
+              console.log(data.listGames);
+              return <GamesList games={data.listGames.items} />
+            }}
+          </Connect>
           <br />
           <p className="Location">Click the button to get your coordinates.</p>
 
@@ -113,7 +171,7 @@ class Game extends Component {
       return (
         <div className="Game">
           <div className="exit">
-            <a href = "/Game" className="btn btn-lg btn-danger nounderline" type="button">&nbsp; Exit &nbsp;</a>
+            <a href="/Game" className="btn btn-lg btn-danger nounderline" type="button">&nbsp; Exit &nbsp;</a>
           </div>
           <div className="synopsis">
             <h1>{games[this.state.gameID].Story}</h1>
