@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-// import games from './games.json';
+import games from './games.json';
 import './Game.css';
 import Endgame from './Endgame';
 import Answer from './Answer';
@@ -167,7 +167,8 @@ class Puzzle extends Component {
             return (
                 <div className="game">
                     <section className="middle">
-                    <progress className = 'prog' value = {this.state.questionIndex} max = {games[this.state.index].Total_Questions}/>
+                    <br/><br/>
+                    <progress className = 'prog' value = {this.state.atQuestion} max = {games[this.state.index].Total_Questions}/>
                     <br/><br/>
                         <div className="text-center">
                             <h1>{this.props.gTitle} Challenge</h1>
