@@ -71,6 +71,7 @@ class Puzzle extends Component {
                 document.getElementById("answerBox").value = "";
                 document.getElementById("submitBttn").value = "";
             }
+            if (document.getElementById("pound")) { document.getElementById("pound").value = ""; }
         }
         //wrong answer => reset the current value of the pound button
         else {
@@ -134,9 +135,9 @@ class Puzzle extends Component {
             }, 2000)
         }
     }
-    
+
     // start acquiring player location when component mounts
-    
+
     // when state changes, check to see if the game has ended
     // stop timer when game is completed
     componentDidUpdate() {
@@ -167,8 +168,8 @@ class Puzzle extends Component {
             return (
                 <div className="game">
                     <section className="middle">
-                    <progress className = 'prog' value = {this.state.questionIndex} max = {games[this.state.index].Total_Questions}/>
-                    <br/><br/>
+                        <progress className='prog' value={this.state.atQuestion} max={this.state.totalQuestions} />
+                        <br /><br />
                         <div className="text-center">
                             <h1>{this.props.gTitle} Challenge</h1>
                             {questionPage}

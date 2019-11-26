@@ -130,7 +130,7 @@ class Game extends Component {
     // watch current location
     let current, target, dist;
     let currentState = this;
-    
+
     function success(position) {
       let userCoords = position.coords;
       console.log(`latitude: ${userCoords.latitude} | longitude: ${userCoords.longitude}`)
@@ -138,7 +138,7 @@ class Game extends Component {
       dist = getDistanceFromLatLonInKm(userCoords.latitude, userCoords.longitude, target.latitude, target.longitude);
       console.log('Distance: ' + dist)
       // player must be within 10 meters of starting point for game to begin
-      if (dist <= 0.09) {
+      if (dist >= 0.09) {
         console.log('You are here!');
         // stop watching player location
         navigator.geolocation.clearWatch(current)
@@ -158,15 +158,15 @@ class Game extends Component {
     function error(err) {
       console.warn('Error(' + err.code + '): ' + err.message);
     }
-    
+
     // this is just a test location for now -- in front of webb statue
     target = {
       latitude: 40.820583,
       longitude: -73.949105
     }
-    
+
     // start watching
-    current = navigator.geolocation.watchPosition(success, error, {enableHighAccuracy: true});
+    current = navigator.geolocation.watchPosition(success, error, { enableHighAccuracy: true });
   }
 
 
@@ -234,7 +234,7 @@ class Game extends Component {
           <div className="start">
             <button id="start-btn" className="btn btn-lg btn-success" type="button" onClick={this.startGame}>&nbsp; Start &nbsp;</button>
           </div>
-          <div id = "notAtLocationIndicator">
+          <div id="notAtLocationIndicator">
             <p></p>
           </div>
 
