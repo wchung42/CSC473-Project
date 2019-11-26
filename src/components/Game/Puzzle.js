@@ -113,7 +113,9 @@ class Puzzle extends Component {
             }, 2000)
         }
     }
-
+    
+    // start acquiring player location when component mounts
+    
     // when state changes, check to see if the game has ended
     // stop timer when game is completed
     componentDidUpdate() {
