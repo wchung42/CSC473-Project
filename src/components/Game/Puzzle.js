@@ -29,6 +29,8 @@ class Puzzle extends Component {
             usedHint: false,
             latitude: null,
             longitude: null,
+            // 0 when player not at location; 1 when player is
+            atLocation: 0,
             // game ends when last question is completed
             gameState: true,
             win: false,
