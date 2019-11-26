@@ -92,6 +92,7 @@ class Game extends Component {
     this.getGameId = this.getGameId.bind(this);
     // this.updateGameInfo = this.updateGameInfo.bind(this);
     this.startGame = this.startGame.bind(this);
+    this.getPosition = this.getPosition.bind(this);
     // this.panelGenrator = this.panelGenrator.bind(this);
   }
   // updateGameInfo(Games)
@@ -129,26 +130,33 @@ class Game extends Component {
       gameSynopsis: 0,
       gameStart: 1
     })
+    console.log("Game Id is", this.state.gameID)
+    console.log("Total Hint of this game: ", this.state.gameHints)
+    console.log(this.state.gameLocation)
   }
-
-  position = async () => {
-    await navigator.geolocation.getCurrentPosition(
-      position => this.setState({
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude
-      }), newState => console.log(newState))
-
-    console.log(this.state.latitude, this.state.longitude);
-  }
-
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.gameTotalHints !== this.props.gameTotalHints) {
-      this.setState({
-        latitude: this.props.latitude
+  getPosition() {
+    const success = async (pos) => {
+      await this.setState({
+        longitude: pos.coords.latitude,
+        latitude: pos.coords.longitude
       })
+      console.log("Inside", this.state.latitude, this.state.longitude);
     }
+    const error = (err) => {
+      console.warn(`ERROR(${err.code}): ${err.message}`);
+    }
+    navigator.geolocation.getCurrentPosition(success, error);
+    console.log("Outside", this.state.latitude, this.state.longitude);
   }
+
+
+  // componentDidUpdate(prevProps) {
+  //   if (prevProps.latitude !== this.props.latitude) {
+  //     this.setState({
+  //       latitude: this.props.latitude
+  //     })
+  //   }
+  // }
   //This will load list of games in the database (from __games__ )
   render = () => {
     // id, thumbnail, title,location, capacity, timelimite, difficulty
@@ -186,7 +194,7 @@ class Game extends Component {
 
           <p className="Location">{this.state.latitude} {this.state.longitude}</p>
 
-          <button onClick={this.position} className='Location'>Location</button>
+          <button onClick={this.getPosition} className='Location'>Location</button>
           <br />
 
           <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
