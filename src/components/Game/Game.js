@@ -120,8 +120,8 @@ class Game extends Component {
       gameSynopsis: 1
     })
     console.log("Game Id is", this.state.gameID)
-    console.log("Total Hint of this game: ", this.state.gameHints)
-    console.log(this.state.gameLocation)
+    console.log("hints of this game: ", this.state.gameHints)
+    console.log("questions of this game: ", this.state.gameQuestions)
   }
 
   startGame() {
@@ -130,10 +130,8 @@ class Game extends Component {
       gameSynopsis: 0,
       gameStart: 1
     })
-    console.log("Game Id is", this.state.gameID)
-    console.log("Total Hint of this game: ", this.state.gameHints)
-    console.log(this.state.gameLocation)
   }
+
   getPosition() {
     const success = async (pos) => {
       await this.setState({
@@ -142,39 +140,14 @@ class Game extends Component {
       })
       console.log("Inside", this.state.latitude, this.state.longitude);
     }
-    const error = (err) => {
-      console.warn(`ERROR(${err.code}): ${err.message}`);
-    }
+    const error = (err) => { console.warn(`ERROR(${err.code}): ${err.message}`); }
     navigator.geolocation.getCurrentPosition(success, error);
-    console.log("Outside", this.state.latitude, this.state.longitude);
   }
 
-
-  // componentDidUpdate(prevProps) {
-  //   if (prevProps.latitude !== this.props.latitude) {
-  //     this.setState({
-  //       latitude: this.props.latitude
-  //     })
-  //   }
-  // }
   //This will load list of games in the database (from __games__ )
   render = () => {
     // id, thumbnail, title,location, capacity, timelimite, difficulty
-    let panelGenrator = () => {
-      let listItems = games
-        .map(item =>
-          <Panel
-            Id={item.Id}
-            Thumbnail={item.Thumbnail}
-            Title={item.Title}
-            Difficulty={3}
-            Location={"CCNY"}
-            Capacity={"10"}
-            TimeLimit={"3000"}
-            func={this.getGameId} />)
-      console.log(games)
-      return <ol className="cardsX" >{listItems}</ol>
-    }
+
     // go to game list page
     if (!this.state.gameReady && (this.state.gameSynopsis === 0) && (this.state.gameStart === 0)) {
       return (
@@ -211,7 +184,7 @@ class Game extends Component {
         </div>
       )
     }
-    // go to game synopsis page
+    // Display game Story
     else if (this.state.gameReady && (this.state.gameSynopsis === 1) && (this.state.gameStart === 0)) {
       return (
         <div className="Game">
@@ -239,7 +212,22 @@ class Game extends Component {
             <button className="btn-lg btn-danger" type="button"><a href="/Game">&nbsp; Exit &nbsp;</a></button>
           </div>
           <div className="gameInterface">
-            <Timer gameId={this.state.gameID} startCount="300" />
+            <Timer
+              Id={this.state.gameID}
+              Title={this.state.gameTitle}
+              Thumbnail={this.state.Thumbnail}
+              Location={this.state.gameLocation}
+              Difficulty={this.state.Difficulty}
+              Story={this.state.Story}
+              TotalQuestions={this.state.TotalQuestions}
+              TotalHints={this.state.TotalHints}
+              Questions={this.state.Questions}
+              QuestionVisualAids={this.state.QuestionVisualAids}
+              Hints={this.state.Hints}
+              AnswerType={this.state.AnswerType}
+              Answers={this.state.Answers}
+              GeoLocation={this.state.GeoLocation}
+              startCount={this.state.gameTimeLimt} />
           </div>
           <br />
         </div>
