@@ -44,6 +44,7 @@ class Puzzle extends Component {
         console.log("hints", this.state.hints)
         console.log("current Questions Index", this.state.atQuestion)
         console.log('List of Answer', this.state.answers)
+        console.log('Answer Type List: ', this.state.answerType)
         // let currentGameIndex = this.state.index;
         // let currentQuestionIndex = this.state.atQuestion;
         let answer = this.state.answers[this.state.atQuestion];
@@ -64,6 +65,11 @@ class Puzzle extends Component {
                     gameState: false,
                     win: true
                 }); console.log("End of game");
+            }
+            //reset value of submit buttons
+            if (document.getElementById("answerBox")) {
+                document.getElementById("answerBox").value = "";
+                document.getElementById("submitBttn").value = "";
             }
         }
         //wrong answer => reset the current value of the pound button
@@ -154,14 +160,14 @@ class Puzzle extends Component {
                 qContent={this.state.questions[this.state.atQuestion]}
                 qAid={this.state.questionVisualAid[this.state.atQuestion]} />;
             let answerPage = <Answer
-                id={this.state.index}
-                qId={this.state.atQuestion}
+                answerType={this.state.answerType[this.state.atQuestion]}
                 action={this.getAnswer} />;
             return (
                 <div className="game">
                     <section className="middle">
 
                         <div className="text-center">
+                            <h1>{this.props.gTitle} Challenge</h1>
                             {questionPage}
                             <br /><br /><br />
                             {answerPage}

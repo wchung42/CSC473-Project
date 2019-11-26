@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
-import games from './games.json';
 import OrderQuestion from './OrderQuestion/OrderQuestion';
 import './Game.css';
 //AtQuestions + AnswerType to render 
 class Answer extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            gameIndex: this.props.id,
-            questionIndex: this.props.qId,
-
-        };
         this.enterNum = this.enterNum.bind(this);
         this.enterText = this.enterText.bind(this);
         this.handleOrderAnswer = this.handleOrderAnswer.bind(this);
@@ -27,22 +21,11 @@ class Answer extends Component {
 
     // index order of images will be assigned to submit button
     handleOrderAnswer(order) {
-        // this.setState({
-        //     dragOrder: order
-        // })
         document.getElementById("submitButtonOrder").value = order
     }
 
-    componentDidUpdate(prevProps) {
-        if (prevProps.qId !== this.props.qId) {
-            this.setState({
-                questionIndex: this.props.qId,  //update question index to re-render
-            })
-        }
-    }
-
     render() {
-        if (games[this.state.gameIndex].Answer_Type[this.state.questionIndex] == "number") {
+        if (this.props.answerType == "number") {
             return (
                 // Construct Num Pad
                 <div className="answerSpace">
@@ -67,7 +50,7 @@ class Answer extends Component {
                 </div>
             )
         }
-        else if (games[this.state.gameIndex].Answer_Type[this.state.questionIndex] == "ordering") {
+        else if (this.props.answerType == "ordering") {
             return (
                 <div className="answerSpace">
                     <div id="orderingAnswer">

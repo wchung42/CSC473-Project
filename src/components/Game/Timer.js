@@ -53,7 +53,7 @@ class Timer extends Component {
                         gAnswerType={this.props.gameAnswerType}
                         gAnswers={this.props.gameAnswers}
                         gGeoLocation={this.props.gameGeoLocation}
-                        gHandler={this.gameHandler} />
+                        gameHandler={this.gameHandler} />
                 </div>
             )
         }
