@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Endgame from './Endgame';
 import Puzzle from './Puzzle';
 import './Game.css'
-
+//props this file needs to operate: Time limit
 class Timer extends Component {
     constructor(props) {
         super(props);
@@ -35,7 +35,7 @@ class Timer extends Component {
         } else {
             return (
                 <div id="time">
-                    <p id = "timer"><strong>{this.convertSeconds(count)}</strong></p>
+                    <p id="timer"><strong>{this.convertSeconds(count)}</strong></p>
                     <Puzzle gameId={this.props.gameId} gameHandler={this.gameHandler} />
                 </div>
             )

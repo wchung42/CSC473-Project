@@ -7,78 +7,120 @@ import Panel from './gamePanel';
 import { withAuthenticator, Connect } from 'aws-amplify-react';
 import Amplify, { Analytics, API, Auth, graphqlOperation, Storage } from 'aws-amplify';
 
+//each time the user press Play => mutationUpdate players
 const ListGames = `query ListGames {
-  listGames {
-      items {
-        id
-        Title
-        Location
-        Difficulty
-        TimeLimit
-        Story
-        Questions
-        Answers
-      }
+  listGames{
+    items{
+      id
+      Title
+      Thumbnail
+      Location
+      Difficulty
+      Story
+      TimeLimit
+      Total_Questions
+      Total_Hints
+      Questions
+      QuestionVisualAid
+      Hints
+      AnswerType
+      Answers  
+      GeoLocation      
+    }
   }
 }`;
 
-class GamesList extends React.Component {
-  gameItems() {
-    return this.props.games.map(game =>
-      <ul>
-        <li key={game.id}>
-          {game.Title}
-        </li>
-        <li key={game.id}>
-          {game.Location}
-        </li>
-        <li key={game.id}>
-          {game.Difficulty}
-        </li>
-        <li key={game.id}>
-          {game.Story}
-        </li>
-        <li key={game.id}>
-          {game.TimeLimit}
-        </li >
-      </ul>
+// class GamesList extends React.Component {
+//   gameItems() {
+//     return this.props.games.map(game =>
+//       <ul>
+//         <li key={game.id}>
+//           {game.Title}
+//           <br />
+//           {game.Story}
+//           <br />
+//           {game.GeoLocation[0]}
+//           <br />
+//           {game.GeoLocation[1]}
+//           <br />
+//           Question 1:{game.Questions[0]}
+//           <br />
+//           Question 2: {game.Questions[1]}
+//           <br />
+//           Question 3: {game.Questions[2]}
+//         </li>
+//       </ul>
 
-    )
-  }
+//     )
+//   }
 
-  render() {
-    return (
-      <div>
-        {this.gameItems()}
-      </div>
-    )
-  }
-}
+//   render() {
+//     return (
+//       <div>
+//         {this.gameItems()}
+//       </div>
+//     )
+//   }
+// }
 
 class Game extends Component {
   constructor(props) {
     super(props)
     this.state = {
       gameID: 0,
-      gameReady: false,
+      gameTitle: "",
+      gameThumbnail: "#",
+      gameLocation: "CCNY",
+      gameDifficulty: 3,
+      gameStory: "",
+      gameCapacity: "",
+      gameTimeLimt: "",
+      gameTotalQuestions: "",
+      gameTotalHints: "",
+      gameQuestions: "",
+      gameQuestionVisualAids: "",
+      gameHints: "",
+      gameAnswerType: "",
+      gameAnswers: "",
+      gameGeoLocation: "",
       latitude: null,
       longitude: null,
+      gameReady: false,
       gameSynopsis: 0, // 0: don't display game synopsis ; 1: display synopsis
       gameStart: 0 // 0: start button clicked, start game ; 1: stay on synopsis page
     };
     this.getGameId = this.getGameId.bind(this);
+    // this.updateGameInfo = this.updateGameInfo.bind(this);
     this.startGame = this.startGame.bind(this);
     // this.panelGenrator = this.panelGenrator.bind(this);
   }
-
+  // updateGameInfo(Games)
+  //onclick will getGameId and then edit all states in the DB
   getGameId(ev) {
     console.log(ev.currentTarget.value)
+    let id = ev.currentTarget.value
     this.setState({
-      gameID: ev.currentTarget.value,
+      gameID: id,
+      gameTitle: games[id].Title,
+      gameThumbnail: games[id].Thumbnail,
+      gameLocation: "CCNY",
+      gameDifficulty: games[id].Difficulty,
+      gameStory: games[id].Story,
+      gameTimeLimt: "1800",
+      gameTotalQuestions: games[id].Total_Questions,
+      gameTotalHints: games[id].Total_Hint,
+      gameQuestions: games[id].Game_Story,
+      gameQuestionVisualAids: games[id].Images,
+      gameHints: games[id].Hint,
+      gameAnswerType: games[id].Answer_Type,
+      gameAnswers: games[id].Answers,
+      gameGeoLocation: "",
       gameReady: true,
       gameSynopsis: 1
-    }, console.log(this.state.gameID))
+    })
     console.log(this.state.gameID)
+    console.log(this.state.gameHints)
+    console.log(this.state.gameLocation)
   }
 
   startGame() {
@@ -97,19 +139,6 @@ class Game extends Component {
       }), newState => console.log(newState))
 
     console.log(this.state.latitude, this.state.longitude);
-
-    //  var R = 6371e3; // metres
-    //  var φ1 = lat1.toRadians();
-    //  var φ2 = lat2.toRadians();
-    //  var Δφ = (lat2-lat1).toRadians();
-    //  var Δλ = (lon2-lon1).toRadians();
-
-    //  var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
-    //         Math.cos(φ1) * Math.cos(φ2) *
-    //         Math.sin(Δλ/2) * Math.sin(Δλ/2);
-    //  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-
-    //  var d = R * c;
   }
 
 
@@ -120,13 +149,22 @@ class Game extends Component {
       })
     }
   }
-  //Want to load the game in here based on the name
+  //This will load list of games in the database (from __games__ )
   render = () => {
+    // id, thumbnail, title,location, capacity, timelimite, difficulty
     let panelGenrator = () => {
       let listItems = games
         .map(item =>
-          <Panel gameId={item.Id} func={this.getGameId} />
-        )
+          <Panel
+            Id={item.Id}
+            Thumbnail={item.Thumbnail}
+            Title={item.Title}
+            Difficulty={3}
+            Location={"CCNY"}
+            Capacity={"10"}
+            TimeLimit={"3000"}
+            func={this.getGameId} />)
+      console.log(games)
       return <ol className="cardsX" >{listItems}</ol>
     }
     // go to game list page
@@ -134,14 +172,15 @@ class Game extends Component {
       return (
 
         <div className="Game">
-          <Connect query={graphqlOperation(ListGames)}>
+          {/* <Connect query={graphqlOperation(ListGames)}>
             {({ data, loading, errors }) => {
               if (loading) { return <div>Loading...</div>; }
               if (errors) console.log(errors);
               console.log(data.listGames);
+
               return <GamesList games={data.listGames.items} />
             }}
-          </Connect>
+          </Connect> */}
           <br />
           <p className="Location">Click the button to get your coordinates.</p>
 
@@ -158,7 +197,7 @@ class Game extends Component {
             <button className="btn btn-lg btn-danger" type="button"><a href="/">&nbsp; Exit &nbsp;</a></button>
           </div>
           <div className="game-list">
-            <Panel func={this.getGameId} />
+            <Panel games={games} func={this.getGameId} />
           </div>
 
 
@@ -204,4 +243,5 @@ class Game extends Component {
 }
 
 
-export default withAuthenticator(Game);
+// export default withAuthenticator(Game);
+export default Game;

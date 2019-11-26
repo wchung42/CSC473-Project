@@ -5,7 +5,10 @@ import './Game.css';
 import Endgame from './Endgame';
 import Answer from './Answer';
 import Question from './Question';
-
+//props this file needs to run: Id, TotalQuestion, TotalHints, AtQuestion, Questions, AnswerType, Answers, Hints, Long, Lad, TimeLimit
+//Each time answers is right => mutation Update AtQuestion 
+//When the game ends it will reset players pool => mutation updateGame(players: "")
+//Rework Hint component a little bit
 class Puzzle extends Component {
     constructor(props) {
         super(props)
@@ -60,7 +63,7 @@ class Puzzle extends Component {
             if (document.getElementById("answerBox")) {
                 // visual cue for wrong answer in text box
                 document.getElementById('answerBox').style.border = "medium solid #FF0000";
-                
+
                 setTimeout(function () {
                     document.getElementById('answerBox').style.border = "thin solid #000000";
                 }, 750)
@@ -76,8 +79,8 @@ class Puzzle extends Component {
                 setTimeout(function () {
                     document.getElementById('pound').style.background = '#DDDDDD';
                 }, 750);
-                
-               
+
+
             }
         }
     }
@@ -146,7 +149,7 @@ class Puzzle extends Component {
                             <br /><br /><br />
                             {answerPage}
                             <p id="hint" className="questN" value=""></p>
-                            <div className = "hint">
+                            <div className="hint">
                                 <button id="hintBttn" className="btn-lg btn-warning" type="button" onClick={this.getHint}>
                                     {games[this.state.index].Total_Hint - this.state.hintCount} Hint(s) Left</button>
                             </div>
@@ -163,65 +166,3 @@ class Puzzle extends Component {
 }
 
 export default Puzzle;
-
-  // position = async () => {
-  //   await navigator.geolocation.getCurrentPosition(
-  //     position => this.setState({
-  //       latitude: position.coords.latitude,
-  //       longitude: position.coords.longitude
-  //     }), newState => console.log(newState))
-
-  //   console.log(this.state.latitude, this.state.longitude)
-  // }
-
-
-
-
-// getAnswer() {
-//     let localIndex = this.state.index;
-//     let localQuestionIndex = this.state.questionIndex;
-//     let qIndex = localQuestionIndex + 1;  //INDICATE THE NEXT QUESTION
-//     let imgIndex = qIndex; // IMAGE INDEX 
-//     let answer = games[localIndex].answers[localQuestionIndex];
-//     let answerBox = document.getElementById("answer");
-//     let userAnswer = answerBox.value.toLowerCase(); //USER ANSWER = VALUE OF ANSWER BOX
-
-//     // console.log(answer);
-
-//     //correct answer
-//     if (userAnswer == answer.toLowerCase()) {
-//         document.getElementById("result").innerText = "Correct";
-//         answerBox.style.borderColor = "palegreen";
-//         answerBox.value = "";
-//         document.getElementById("hint").innerText = "";
-//         this.setState({
-//             questionIndex: qIndex,
-//             imageIndex: imgIndex,
-//             usedHint: false
-//         })
-//         // check if for more questions
-//         if (localQuestionIndex == games[localIndex].total_questions) {
-//             this.setState({
-//                 gameState: false,
-//                 win: true
-//             })
-//             console.log("End of game");
-//         }
-//         // console.log(this.state.questionIndex);
-//     }
-//     else {//wrong answer
-//         answerBox.style.borderColor = "salmon";
-//         document.getElementById("result").innerText = "Wrong";
-//         answerBox.value = "";
-//         // console.log(this.state.questionIndex);
-//     }
-//     if (qIndex > games[localIndex].total_questions) {
-//         console.log("Submit button time out not necessary");
-//     } else {
-//         document.getElementById("submitBttn").disabled = true;
-//         // document.getElementById("hintBttn").style.backgroundColor = "gray";
-//         setTimeout(function () {
-//             document.getElementById("submitBttn").disabled = false;
-//         }, 2000)
-//     }
-// }

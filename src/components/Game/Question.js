@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import games from './games.json';
 import 'bootstrap/dist/css/bootstrap.css';
-
+//props this file needs to render: 
+// Questions + AtQuestion + QuestionVisual Aid to render the question
 class riddleQuestion extends Component {
     constructor(props) {
         super(props)
