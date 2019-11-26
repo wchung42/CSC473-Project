@@ -9,6 +9,8 @@ import Question from './Question';
 //Each time answers is right => mutation Update AtQuestion 
 //When the game ends it will reset players pool => mutation updateGame(players: "")
 //Rework Hint component a little bit
+import getDistanceFromLatLonInKm from './util.js' // distance function
+
 class Puzzle extends Component {
     constructor(props) {
         super(props)
@@ -27,6 +29,8 @@ class Puzzle extends Component {
             usedHint: false,
             latitude: null,
             longitude: null,
+            // 0 when player not at location; 1 when player is
+            atLocation: 0,
             // game ends when last question is completed
             gameState: true,
             win: false,
@@ -55,9 +59,10 @@ class Puzzle extends Component {
             console.log("right answer");
             // clear hint space when moving to next question
             document.getElementById('hint').innerText = '';
-            await this.setState({
+            this.setState({
                 atQuestion: this.state.atQuestion + 1,
-                usedHint: false
+                usedHint: false,
+                atLocation: 0
             })
             //if this is the last question then End game
             if (this.state.atQuestion == this.state.totalQuestions) {
@@ -136,7 +141,50 @@ class Puzzle extends Component {
     }
     
     // start acquiring player location when component mounts
+    // componentDidMount() {
+    //     // watch current location
+    //     let current, target, dist;
+    //     let currentState = this;
+        
+    //     function success(position) {
+    //         let userCoords = position.coords;
+    //         console.log(`latitude: ${userCoords.latitude} | longitude: ${userCoords.longitude}`)
+            
+    //         // calculate distance to target
+    //         dist = getDistanceFromLatLonInKm(userCoords.latitude, userCoords.longitude, target.latitude, target.longitude);
+    //         console.log('Distance to question: ' + dist)
+    //         console.log('target lat: ' + target.latitude)
+
+    //         // player must be within 20 meters of location for answer to appear
+    //         if (dist <= 0.02) {
+    //             console.log('You can now answer the question!');
+    //             // stop watching player location
+    //             navigator.geolocation.clearWatch(current)
+    //             // allow question
+    //             currentState.setState({
+    //                 atLocation: 1
+    //             });
+    //         } else {
+    //             //document.getElementById('notAtLocationIndicator').innerText = 'You are not at the starting location of the game.';
+                
+    //         }
+    //     }
+
+    //     // error callback
+    //     function error(err) {
+    //     console.warn('Error(' + err.code + '): ' + err.message);
+    //     }
     
+    //     // this is just a test location for now -- in front of webb statue
+    //     target = {
+    //         latitude: games[this.state.index].Locations[this.state.questionIndex].lat,
+    //         longitude: games[this.state.index].Locations[this.state.questionIndex].long
+    //     }
+        
+    //     // start watching
+    //     current = navigator.geolocation.watchPosition(success, error, {enableHighAccuracy: true});
+    // }
+
     // when state changes, check to see if the game has ended
     // stop timer when game is completed
     componentDidUpdate() {
@@ -144,9 +192,53 @@ class Puzzle extends Component {
             this.setState({ timeStopper: 1 })
             this.props.gameHandler();
         }
+
+        // check location upon component update
+        let current, target, dist;
+        let currentState = this;
+        
+        function success(position) {
+            let userCoords = position.coords;
+            console.log(`latitude: ${userCoords.latitude} | longitude: ${userCoords.longitude}`)
+            
+            // calculate distance to target
+            dist = getDistanceFromLatLonInKm(userCoords.latitude, userCoords.longitude, target.latitude, target.longitude);
+            console.log('Distance: ' + dist)
+
+            // player must be within 20 meters of location for answer to appear
+            if (dist <= 0.02) {
+                console.log('You are here!');
+                // stop watching player location
+                navigator.geolocation.clearWatch(current)
+                // allow question
+                currentState.setState({
+                    atLocation: 1
+                });
+            }
+        }
+
+        // error callback
+        function error(err) {
+        console.warn('Error(' + err.code + '): ' + err.message);
+        }
+    
+        // this is just a test location for now -- in front of webb statue
+        target = {
+            latitude: games[this.state.index].Locations[this.state.questionIndex].lat,
+            longitude: games[this.state.index].Locations[this.state.questionIndex].long
+        }
+        
+        // start watching
+        current = navigator.geolocation.watchPosition(success, error, {enableHighAccuracy: true});
     }
 
     render() {
+        let questionPage = <Question
+            qContent={this.state.questions[this.state.atQuestion]}
+            qAid={this.state.questionVisualAid[this.state.atQuestion]} />;
+        let answerPage = <Answer
+            answerType={this.state.answerType[this.state.atQuestion]}
+            action={this.getAnswer} />;
         // game states - playing or end game
         if (!this.state.gameState) {
             const winPage = <Endgame outcome={this.state.win} />;
@@ -156,18 +248,37 @@ class Puzzle extends Component {
                     {winPage}
                 </div>
             )
+        } 
+        // if not at location, only the question appears
+        else if (this.state.gameState && this.state.atLocation == 0) {
+            //let questionPage = <Question id={this.state.index} qId={this.state.questionIndex} iId={this.state.imageIndex} />;
+            return (
+                <div className = "game">
+                    <section className = "middle">
+                        <div className = "text-center">
+                            { questionPage }
+                        </div>
+                    </section>
+                </div>
+            )
         }
-        else {
-            let questionPage = <Question
-                qContent={this.state.questions[this.state.atQuestion]}
-                qAid={this.state.questionVisualAid[this.state.atQuestion]} />;
-            let answerPage = <Answer
-                answerType={this.state.answerType[this.state.atQuestion]}
-                action={this.getAnswer} />;
+        //else {
+            // let questionPage = <Question
+            //     qContent={this.state.questions[this.state.atQuestion]}
+            //     qAid={this.state.questionVisualAid[this.state.atQuestion]} />;
+            // let answerPage = <Answer
+            //     answerType={this.state.answerType[this.state.atQuestion]}
+            //     action={this.getAnswer} />;
+        // show answer submission component
+        else if (this.state.gameState && this.state.atLocation == 1) {
+            // let questionPage = <Question id={this.state.index} qId={this.state.questionIndex} iId={this.state.imageIndex} />;
+            // let answerPage = <Answer id={this.state.index} qId={this.state.questionIndex} action={this.getAnswer} />;
             return (
                 <div className="game">
                     <section className="middle">
+            
                     <br/><br/>
+
                     <progress className = 'prog' value = {this.state.atQuestion} max = {games[this.state.index].Total_Questions}/>
                     <br/><br/>
                         <div className="text-center">
