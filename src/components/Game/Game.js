@@ -213,20 +213,20 @@ class Game extends Component {
           </div>
           <div className="gameInterface">
             <Timer
-              Id={this.state.gameID}
-              Title={this.state.gameTitle}
-              Thumbnail={this.state.Thumbnail}
-              Location={this.state.gameLocation}
-              Difficulty={this.state.Difficulty}
-              Story={this.state.Story}
-              TotalQuestions={this.state.TotalQuestions}
-              TotalHints={this.state.TotalHints}
-              Questions={this.state.Questions}
-              QuestionVisualAids={this.state.QuestionVisualAids}
-              Hints={this.state.Hints}
-              AnswerType={this.state.AnswerType}
-              Answers={this.state.Answers}
-              GeoLocation={this.state.GeoLocation}
+              gameID={this.state.gameID}
+              gameTitle={this.state.gameTitle}
+              gameThumbnail={this.state.gameThumbnail}
+              gameLocation={this.state.gameLocation}
+              gameDifficulty={this.state.gameDifficulty}
+              gameStory={this.state.gameStory}
+              gameTotalQuestions={this.state.gameTotalQuestions}
+              gameTotalHints={this.state.gameTotalHints}
+              gameQuestions={this.state.gameQuestions}
+              gameQuestionVisualAids={this.state.gameQuestionVisualAids}
+              gameHints={this.state.gameHints}
+              gameAnswerType={this.state.gameAnswerType}
+              gameAnswers={this.state.gameAnswers}
+              gameGeoLocation={this.state.gameGeoLocation}
               startCount={this.state.gameTimeLimt} />
           </div>
           <br />

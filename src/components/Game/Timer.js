@@ -36,7 +36,22 @@ class Timer extends Component {
             return (
                 <div id="time">
                     <p id="timer"><strong>{this.convertSeconds(count)}</strong></p>
-                    <Puzzle gameId={this.props.gameId} gameHandler={this.gameHandler} />
+                    <Puzzle
+                        gameID={this.props.gameID}
+                        gameTitle={this.props.gameTitle}
+                        gameThumbnail={this.props.gameThumbnail}
+                        gameLocation={this.props.gameLocation}
+                        gameDifficulty={this.props.gameDifficulty}
+                        gameStory={this.props.gameStory}
+                        gameTotalQuestions={this.props.gameTotalQuestions}
+                        gameTotalHints={this.props.gameTotalHints}
+                        gameQuestions={this.props.gameQuestions}
+                        gameQuestionVisualAids={this.props.gameQuestionVisualAids}
+                        gameHints={this.props.gameHints}
+                        gameAnswerType={this.props.gameAnswerType}
+                        gameAnswers={this.props.gameAnswers}
+                        gameGeoLocation={this.props.gameGeoLocation}
+                        gameHandler={this.gameHandler} />
                 </div>
             )
         }
