@@ -134,7 +134,9 @@ class Puzzle extends Component {
             }, 2000)
         }
     }
-
+    
+    // start acquiring player location when component mounts
+    
     // when state changes, check to see if the game has ended
     // stop timer when game is completed
     componentDidUpdate() {
@@ -165,7 +167,8 @@ class Puzzle extends Component {
             return (
                 <div className="game">
                     <section className="middle">
-
+                    <progress className = 'prog' value = {this.state.questionIndex} max = {games[this.state.index].Total_Questions}/>
+                    <br/><br/>
                         <div className="text-center">
                             <h1>{this.props.gTitle} Challenge</h1>
                             {questionPage}

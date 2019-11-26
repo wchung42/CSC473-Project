@@ -6,6 +6,7 @@ import games from './games.json'; // get the game title
 import Panel from './gamePanel';
 import { withAuthenticator, Connect } from 'aws-amplify-react';
 import Amplify, { Analytics, API, Auth, graphqlOperation, Storage } from 'aws-amplify';
+import { getCurrentLocation, getDistanceFromLatLonInKm } from './util.js'; // import geolocation helper functions
 
 //each time the user press Play => mutationUpdate players
 const ListGames = `query ListGames {
@@ -93,6 +94,7 @@ class Game extends Component {
     this.getGameId = this.getGameId.bind(this);
     this.startGame = this.startGame.bind(this);
     this.getPosition = this.getPosition.bind(this);
+
   }
   // updateGameInfo(Games)
   //onclick will getGameId and then edit all states
@@ -125,12 +127,48 @@ class Game extends Component {
   }
 
   startGame() {
-    console.log('starting game');
-    this.setState({
-      gameSynopsis: 0,
-      gameStart: 1
-    })
+    // watch current location
+    let current, target, dist;
+    let currentState = this;
+    
+    function success(position) {
+      let userCoords = position.coords;
+      console.log(`latitude: ${userCoords.latitude} | longitude: ${userCoords.longitude}`)
+      // calculate distance to target
+      dist = getDistanceFromLatLonInKm(userCoords.latitude, userCoords.longitude, target.latitude, target.longitude);
+      console.log('Distance: ' + dist)
+      // player must be within 10 meters of starting point for game to begin
+      if (dist <= 0.09) {
+        console.log('You are here!');
+        // stop watching player location
+        navigator.geolocation.clearWatch(current)
+        // testtt
+        console.log('starting game');
+        currentState.setState({
+          gameSynopsis: 0,
+          gameStart: 1
+        })
+      } else {
+        document.getElementById('notAtLocationIndicator').innerText = 'You are not at the starting location of the game.';
+        console.log('Not here yet');
+      }
+    }
+
+    // error callback
+    function error(err) {
+      console.warn('Error(' + err.code + '): ' + err.message);
+    }
+    
+    // this is just a test location for now -- in front of webb statue
+    target = {
+      latitude: 40.820583,
+      longitude: -73.949105
+    }
+    
+    // start watching
+    current = navigator.geolocation.watchPosition(success, error, {enableHighAccuracy: true});
   }
+
 
   getPosition() {
     const success = async (pos) => {
@@ -196,6 +234,9 @@ class Game extends Component {
           <div className="start">
             <button id="start-btn" className="btn btn-lg btn-success" type="button" onClick={this.startGame}>&nbsp; Start &nbsp;</button>
           </div>
+          <div id = "notAtLocationIndicator">
+            <p></p>
+          </div>
 
         </div>
       )
@@ -237,5 +278,7 @@ class Game extends Component {
 }
 
 
+
 // export default withAuthenticator(Game);
 export default Game;
+
