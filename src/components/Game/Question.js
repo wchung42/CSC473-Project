@@ -8,16 +8,14 @@ class riddleQuestion extends Component {
         super(props)
         this.state = {
             gameIndex: this.props.id,
-            questionIndex: this.props.qId,
-            imageIndex: this.props.iId
+            questionIndex: this.props.qId
         }
     }
 
     componentDidUpdate(prevProps) {
         if (prevProps.qId !== this.props.qId) {
             this.setState({
-                questionIndex: this.props.qId,
-                imageIndex: this.props.iId
+                questionIndex: this.props.qId
             })
         }
     }
@@ -28,9 +26,9 @@ class riddleQuestion extends Component {
             <div key={this.props.qId} className="Question">
                 <h1 className="gameTitle">{games[this.state.gameIndex].Title} Challenge</h1>
                 <p className="text-center quest">
-                    {games[this.state.gameIndex].Game_Story[this.state.questionIndex].replace("\\n", "\n")}
+                    {games[this.state.gameIndex].Game_Story[this.state.questionIndex]}
                 </p>
-                <img className="imgG" src={games[this.state.gameIndex].Images[this.state.imageIndex]} />
+                <img className="imgG" src={games[this.state.gameIndex].Images[this.state.questionIndex]} />
             </div>
         )
     }

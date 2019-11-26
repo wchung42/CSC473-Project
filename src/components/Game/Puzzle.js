@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-import games from './games.json';
+// import games from './games.json';
 import './Game.css';
 import Endgame from './Endgame';
 import Answer from './Answer';
@@ -13,10 +13,17 @@ class Puzzle extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            index: this.props.gameId,
-            questionIndex: 1,
+            index: this.props.gID,
+            totalQuestions: this.props.gTotalQuestions,
+            totalHints: this.props.gTotalHints,
+            atQuestion: this.props.gAtQuestion,
+            questions: this.props.gQuestions,
+            questionVisualAid: this.props.gQuestionVisualAids,
+            answerType: this.props.gAnswerType,
+            answers: this.props.gAnswers,
+            hints: this.props.gHints,
+            geoLocation: this.props.gGeoLocation,
             // image change
-            imageIndex: 1,
             hintCount: 0,
             usedHint: false,
             latitude: null,
@@ -31,26 +38,29 @@ class Puzzle extends Component {
         this.getHint = this.getHint.bind(this);
     }
     //this function is to get answer from NUMBER TYPE
-    getAnswer(e) {
-        let userAnswer = e.target.value;
+    async getAnswer(e) {
+        let userAnswer = e.target.value.toString();
         console.log("userAnswer", userAnswer)
-        let currentGameIndex = this.state.index;
-        let currentQuestionIndex = this.state.questionIndex;
-        let answer = games[currentGameIndex].Answers[currentQuestionIndex];
-
+        console.log("current Index", this.state.index)
+        console.log("hints", this.state.hints)
+        console.log("current Questions Index", this.state.atQuestion)
+        console.log('List of Answer', this.state.answers)
+        // let currentGameIndex = this.state.index;
+        // let currentQuestionIndex = this.state.atQuestion;
+        let answer = this.state.answers[this.state.atQuestion];
+        console.log(answer)
         //if the answer is correct
         if (userAnswer.toLowerCase() == answer.toLowerCase()) {
             //else moving to the next question
             console.log("right answer");
             // clear hint space when moving to next question
             document.getElementById('hint').innerText = '';
-            this.setState({
-                questionIndex: currentQuestionIndex + 1,
-                imageIndex: currentQuestionIndex + 1,
+            await this.setState({
+                atQuestion: this.state.atQuestion + 1,
                 usedHint: false
             })
             //if this is the last question then End game
-            if (currentQuestionIndex == games[currentGameIndex].Total_Questions) {
+            if (this.state.atQuestion == this.state.totalQuestions) {
                 this.setState({
                     gameState: false,
                     win: true
@@ -87,7 +97,7 @@ class Puzzle extends Component {
 
     getHint() {
         let localIndex = this.state.index;
-        let localQuestionIndex = this.state.questionIndex;
+        let localQuestionIndex = this.state.atQuestion;
         let totalHint = games[localIndex].Total_Hint;
         let hintCount = this.state.hintCount;
         let hintArea = document.getElementById("hint");
@@ -138,8 +148,8 @@ class Puzzle extends Component {
             )
         }
         else {
-            let questionPage = <Question id={this.state.index} qId={this.state.questionIndex} iId={this.state.imageIndex} />;
-            let answerPage = <Answer id={this.state.index} qId={this.state.questionIndex} action={this.getAnswer} />;
+            let questionPage = <Question id={this.state.index} qId={this.state.atQuestion} iId={this.state.atQuestion} />;
+            let answerPage = <Answer id={this.state.index} qId={this.state.atQuestion} action={this.getAnswer} />;
             return (
                 <div className="game">
                     <section className="middle">

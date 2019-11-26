@@ -77,6 +77,7 @@ class Game extends Component {
       gameTimeLimt: "",
       gameTotalQuestions: "",
       gameTotalHints: "",
+      gameAtQuestion: 1,
       gameQuestions: "",
       gameQuestionVisualAids: "",
       gameHints: "",
@@ -90,13 +91,11 @@ class Game extends Component {
       gameStart: 0 // 0: start button clicked, start game ; 1: stay on synopsis page
     };
     this.getGameId = this.getGameId.bind(this);
-    // this.updateGameInfo = this.updateGameInfo.bind(this);
     this.startGame = this.startGame.bind(this);
     this.getPosition = this.getPosition.bind(this);
-    // this.panelGenrator = this.panelGenrator.bind(this);
   }
   // updateGameInfo(Games)
-  //onclick will getGameId and then edit all states in the DB
+  //onclick will getGameId and then edit all states
   async getGameId(ev) {
     console.log(ev.currentTarget.value)
     let id = ev.currentTarget.value
@@ -120,6 +119,7 @@ class Game extends Component {
       gameSynopsis: 1
     })
     console.log("Game Id is", this.state.gameID)
+    console.log("At Question: ", this.state.gameAtQuestion)
     console.log("hints of this game: ", this.state.gameHints)
     console.log("questions of this game: ", this.state.gameQuestions)
   }
@@ -147,7 +147,6 @@ class Game extends Component {
   //This will load list of games in the database (from __games__ )
   render = () => {
     // id, thumbnail, title,location, capacity, timelimite, difficulty
-
     // go to game list page
     if (!this.state.gameReady && (this.state.gameSynopsis === 0) && (this.state.gameStart === 0)) {
       return (
@@ -221,6 +220,7 @@ class Game extends Component {
               gameStory={this.state.gameStory}
               gameTotalQuestions={this.state.gameTotalQuestions}
               gameTotalHints={this.state.gameTotalHints}
+              gameAtQuestion={this.state.gameAtQuestion}
               gameQuestions={this.state.gameQuestions}
               gameQuestionVisualAids={this.state.gameQuestionVisualAids}
               gameHints={this.state.gameHints}
