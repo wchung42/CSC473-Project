@@ -104,8 +104,8 @@
         "Title": "Hero of the Angle",
         "Difficulty": 4,
         "Starting_Location": {
-            "latitude": 40.820583,
-            "longitude": -73.949105
+            "latitude": 40.8812713,
+            "longitude": -73.8301322
         },
         "Story": "The once general of the Civil War Alexander S. Webb, who received a Medal of Honor for his battle of Gettysburg, is trapped. The general who was a president of CCNY was made into a statue where his soul is contained. General webb is trapped in a prison forever to watch time continue as he cannot move on himself. We need to free the hero from his prison by connecting his legacy to those who have already been freed.",
         "Tag": "#ccny, #harris_hall",
@@ -214,8 +214,8 @@
         },
         "Locations": {
             "1": {
-                "lat": 40.820583,
-                "long": -73.949105
+                "lat": 40.820571,
+                "long": -73.949104
             },
             "2": {
                 "lat": 40.820583,
@@ -226,7 +226,7 @@
                 "long": -73.948574
             },
             "4": {
-                "lat": 	40.820772,
+                "lat": 40.820772,
                 "long": -73.948758
             },
             "5": {
