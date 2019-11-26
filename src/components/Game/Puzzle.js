@@ -27,6 +27,8 @@ class Puzzle extends Component {
             usedHint: false,
             latitude: null,
             longitude: null,
+            // 0 when player not at location; 1 when player is
+            atLocation: 0,
             // game ends when last question is completed
             gameState: true,
             win: false,
@@ -136,7 +138,7 @@ class Puzzle extends Component {
     }
     
     // start acquiring player location when component mounts
-    
+
     // when state changes, check to see if the game has ended
     // stop timer when game is completed
     componentDidUpdate() {
