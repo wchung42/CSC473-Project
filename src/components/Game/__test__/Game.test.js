@@ -84,7 +84,7 @@ const puppeteer=require('puppeteer');
         },10000);
 
 
-        })
+        
 
         test('testing login user name ',async() => {
 
@@ -96,9 +96,9 @@ const puppeteer=require('puppeteer');
             
             await page.click('button.login');
             await page.click('input.Input__input___3e_bf');
-            await page.type('input.Input__input___3e_bf','admin');
+            await page.type('input.Input__input___3e_bf','admin12345');
             await page.click('[type=password]');
-            await page.type('[type=password]','#admin123')
+            await page.type('[type=password]','admin12345')
             await page.click('button.Button__button___vS7Mv');
             await page.click('button.toggle-button');
             
@@ -115,7 +115,7 @@ const puppeteer=require('puppeteer');
 
             const browser = await puppeteer.launch({
                 headless: false,
-                slowMo:80,
+                slowMo:50,
                 args:['--window-size=1920,1080']
                });
             const page = await browser.newPage();
@@ -123,71 +123,108 @@ const puppeteer=require('puppeteer');
             
             await page.click('button.login');
             await page.click('input.Input__input___3e_bf');
-            await page.type('input.Input__input___3e_bf','admin');
+            await page.type('input.Input__input___3e_bf','admin12345');
             await page.click('[type=password]');
-            await page.type('[type=password]','#admin123')
+            await page.type('[type=password]','admin12345')
             await page.click('button.Button__button___vS7Mv');
             await page.click('button.toggle-button');
             await page.click('div.toggle-button-line');
+            await page.waitForSelector('[href="/Game"]');
             await page.click('[href="/Game"]');
-            await page.click('div.Game')
+            await page.waitForSelector('button.Location');
             await page.click('button.Location');
-            let location=await page.$eval('button.Location',(button)=>button.className)   
-            expect(location).toBe('Location');
-            
-            
-            //let name=await page.$eval('li',(e)=>e.textContent) 
-            //expect(name).toBe('admin');
-
+            const location=await page.$eval('button.Location',(button)=>button.className)   
+            expect(location).toBe('Location');   
                 
             
             await browser.close(); 
+        },30000);
+    
+    
+        test('testing exist button',async() => {
+    
+            const browser = await puppeteer.launch({
+                headless: false,
+                slowMo:50,
+                args:['--window-size=1920,1080']
+            });
+            const page = await browser.newPage();
+            await page.goto('https://master.dlhem6nvy7qu4.amplifyapp.com');
+            await page.click('button.login');
+            await page.click('input.Input__input___3e_bf');
+            await page.type('input.Input__input___3e_bf','admin12345');
+            await page.click('[type=password]');
+            await page.type('[type=password]','admin12345')
+            await page.click('button.Button__button___vS7Mv');
+            await page.click('button.toggle-button');
+            await page.click('div.toggle-button-line');
+            await page.waitForSelector('[href="/Game"]');
+            await page.click('[href="/Game"]');
+            await page.waitForSelector('div.exit');
+            await page.click('div.exit');
+                const exit=await page.$eval('div.exit',(div)=>div.className)   
+                expect(exit).toBe('exit');
+        
+                await browser.close();  
+        },30000);
+    
+        test('testing hover page get className',async() => {
+    
+            const browser = await puppeteer.launch({
+                headless: false,
+                slowMo:80,
+                args:['--window-size=1920,1080']
+            });
+            
+            const page = await browser.newPage();
+            await page.goto('https://master.dlhem6nvy7qu4.amplifyapp.com');
+            
+            await page.click('button.login');
+            await page.click('input.Input__input___3e_bf');
+            await page.type('input.Input__input___3e_bf','admin12345');
+            await page.click('[type=password]');
+            await page.type('[type=password]','admin12345')
+            await page.click('button.Button__button___vS7Mv');
+            await page.click('button.toggle-button');
+            await page.click('div.toggle-button-line');
+            await page.waitForSelector('[href="/Game"]');
+            await page.click('[href="/Game"]');
+            await page.waitForSelector('div.game-list');
+            await page.hover('div.game-list')
+                const game=await page.$eval('div.game-list',(div)=>div.className)   
+                expect(game).toBe('game-list');
+        
+                await browser.close();  
+            
         },20000);
-    
-    
-        // test('testing exist button',async() => {
-    
-        //     const browser = await puppeteer.launch();
-        //     const page = await browser.newPage();
-        //     await page.goto('https://master.dlhem6nvy7qu4.amplifyapp.com/Game');
-            
-        //     await page.click('div.exit');
-        //         let exit=await page.$eval('div.exit',(div)=>div.className)   
-        //         expect(exit).toBe('exit');
-        
-                
-        // },20000);
-    
-        // test('testing hover page get className',async() => {
-    
-        //     const browser = await puppeteer.launch();
-        //     const page = await browser.newPage();
-        //     await page.goto('https://master.dlhem6nvy7qu4.amplifyapp.com/Game');
-            
-        //     await page.hover('div.game-list')
-        //         let game=await page.$eval('div.game-list',(div)=>div.className)   
-        //         expect(game).toBe('game-list');
-        
-            
-        // },20000);
     
         // test('testing start game',async() => {
     
         //     const browser = await puppeteer.launch({
         //         headless: false,
-        //         slowMo:180,
+        //         slowMo:150,
         //         args:['--window-size=1920,1080']
         //     });
         //     const page = await browser.newPage();
-        //     await page.goto('https://master.dlhem6nvy7qu4.amplifyapp.com/Game');
+        //     await page.goto('https://master.dlhem6nvy7qu4.amplifyapp.com');
+        //     await page.click('button.login');
+        //     await page.click('input.Input__input___3e_bf');
+        //     await page.type('input.Input__input___3e_bf','admin12345');
+        //     await page.click('[type=password]');
+        //     await page.type('[type=password]','admin12345')
+        //     await page.click('button.Button__button___vS7Mv');
+        //     await page.click('button.toggle-button');
+        //     await page.click('div.toggle-button-line');
+        //     await page.click('[href="/Game"]');
+        //     await page.waitForSelector('button#bttn0');
+        //     await page.click('button#bttn0');
+        //     await page.click('#start-btn');
             
-        //     await page.click('#bttn0')
-        //     await page.click('#start-btn')
-        //         let game=await page.$eval('#timer',(e)=>e.textContent);  
+        //         const game=await page.$eval('#timer',(e)=>e.textContent);  
         //         expect(game).toBe('05:00');
         
         //         await browser.close();
-        // },20000);
+        // },40000);
     
         // test('testing hero of angle game',async() => {
     
@@ -196,8 +233,17 @@ const puppeteer=require('puppeteer');
         //         slowMo: 80,
         //         args:['window-size = 1920,1080']
         //     });
-        //     const page = await browser.newPage();
-        //     await page.goto('https://master.dlhem6nvy7qu4.amplifyapp.com/Game');
+        //    const page = await browser.newPage();
+        //     await page.goto('https://master.dlhem6nvy7qu4.amplifyapp.com');
+        //     await page.click('button.login');
+        //     await page.click('input.Input__input___3e_bf');
+        //     await page.type('input.Input__input___3e_bf','admin12345');
+        //     await page.click('[type=password]');
+        //     await page.type('[type=password]','admin12345')
+        //     await page.click('button.Button__button___vS7Mv');
+        //     await page.click('button.toggle-button');
+        //     await page.click('div.toggle-button-line');
+        //     await page.click('[href="/Game"]');
             
         //     await page.click('#bttn1')
         //     await page.click('#start-btn')
@@ -275,3 +321,4 @@ const puppeteer=require('puppeteer');
         
     // })
     
+    })
