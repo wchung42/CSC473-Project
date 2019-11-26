@@ -6,7 +6,7 @@ import games from './games.json'; // get the game title
 import Panel from './gamePanel';
 import { withAuthenticator, Connect } from 'aws-amplify-react';
 import Amplify, { Analytics, API, Auth, graphqlOperation, Storage } from 'aws-amplify';
-import getDistanceFromLatLonInKm from './util.js';
+import { getCurrentLocation, getDistanceFromLatLonInKm } from './util.js'; // import geolocation helper functions
 
 const ListGames = `query ListGames {
   listGames {
@@ -56,9 +56,6 @@ class GamesList extends React.Component {
   }
 }
 
-// import location functions from util.js
-
-
 class Game extends Component {
   constructor(props) {
     super(props)
@@ -72,8 +69,6 @@ class Game extends Component {
     };
     this.getGameId = this.getGameId.bind(this);
     this.startGame = this.startGame.bind(this);
-    // this.panelGenrator = this.panelGenrator.bind(this);
-    //this.getDistanceFromLatLonInKm = this.getDistanceFromLatLonInKm.bind(this);
     
   }
 
@@ -98,9 +93,10 @@ class Game extends Component {
       // calculate distance to target
       dist = getDistanceFromLatLonInKm(userCoords.latitude, userCoords.longitude, target.latitude, target.longitude);
       console.log('Distance: ' + dist)
-      if (dist <= 0.2) {
+      // player must be within 10 meters of starting point for game to begin
+      if (dist <= 0.01) {
         console.log('You are here!');
-        // stop watching
+        // stop watching player location
         navigator.geolocation.clearWatch(current)
         // testtt
         console.log('starting game');
@@ -119,44 +115,26 @@ class Game extends Component {
       console.warn('Error(' + err.code + '): ' + err.message);
     }
     
+    // this is just a test location for now -- in front of webb statue
     target = {
-      latitude: 40.820662,
-      longitude: -73.948743
+      latitude: 40.820583,
+      longitude: -73.949105
     }
     
+    // start watching
     current = navigator.geolocation.watchPosition(success, error, {enableHighAccuracy: true});
-    // if within certain distance
-    
-
-    // else keep watching
   }
 
-  // position = async () => {
-  //   // await navigator.geolocation.getCurrentPosition(
-  //   //   position => this.setState({
-  //   //     latitude: position.coords.latitude,
-  //   //     longitude: position.coords.longitude
-  //   //   }), newState => console.log(newState))
+  position = async () => {
+    await navigator.geolocation.getCurrentPosition(
+      position => this.setState({
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude
+      }), newState => console.log(newState))
 
-  //   //    console.log(this.state.latitude, this.state.longitude);
+       console.log(this.state.latitude, this.state.longitude);
        
-  //     //  var R = 6371e3; // metres
-  //     //  var φ1 = lat1.toRadians();
-  //     //  var φ2 = lat2.toRadians();
-  //     //  var Δφ = (lat2-lat1).toRadians();
-  //     //  var Δλ = (lon2-lon1).toRadians();
-
-  //     //  var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
-  //     //         Math.cos(φ1) * Math.cos(φ2) *
-  //     //         Math.sin(Δλ/2) * Math.sin(Δλ/2);
-  //     //  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-
-  //     //  var d = R * c;
-
-  //     const [lat, lng] = await Promise.all([getCurrentLocation()]);
-      
-      
-  //  }
+   }
 
 
   componentDidUpdate(prevProps) {

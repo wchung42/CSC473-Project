@@ -5,7 +5,7 @@
 */
 
 // get current coordinates
-const getCurrentLocation = () => {
+export function getCurrentLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(position => {
             const lat = position.coords.latitude;
@@ -21,7 +21,7 @@ const getCurrentLocation = () => {
 // watching position
 
 // calculate distance between two coordinate points
-function getDistanceFromLatLonInKm(lat1, lng1, lat2, lng2) {
+export function getDistanceFromLatLonInKm(lat1, lng1, lat2, lng2) {
     var radius = 6371; // Radius of the earth in km
     var degreesLat = deg2rad(lat2-lat1);  // deg2rad below
     var degreesLng = deg2rad(lng2-lng1); 
@@ -36,5 +36,3 @@ function getDistanceFromLatLonInKm(lat1, lng1, lat2, lng2) {
 function deg2rad(deg) {
     return deg * (Math.PI/180)
 }
-
-export default getDistanceFromLatLonInKm;
