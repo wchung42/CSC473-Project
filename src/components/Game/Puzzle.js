@@ -142,7 +142,8 @@ class Puzzle extends Component {
             return (
                 <div className="game">
                     <section className="middle">
-
+                    <progress className = 'prog' value = {this.state.questionIndex} max = {games[this.state.index].Total_Questions}/>
+                    <br/><br/>
                         <div className="text-center">
                             {questionPage}
                             <br /><br /><br />
