@@ -271,3 +271,27 @@ exports[`Game component testing snapshot testing game list page matches the snap
   <br />
 </div>
 `;
+
+exports[`snapshot testing game list page matches the snapshot 1`] = `
+<div
+  className="Section__container___3YYTG"
+  style={Object {}}
+>
+  <div
+    className="Form__formContainer___1GA3x"
+    style={Object {}}
+  >
+    <div
+      className="Form__formSection___1PPvW"
+      style={Object {}}
+    >
+      <div
+        className="Section__sectionBody___ihqqd"
+        style={Object {}}
+      >
+        Loading...
+      </div>
+    </div>
+  </div>
+</div>
+`;
