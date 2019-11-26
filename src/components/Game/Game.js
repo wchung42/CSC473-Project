@@ -138,7 +138,7 @@ class Game extends Component {
         })
       } else {
         document.getElementById('notAtLocationIndicator').innerText = 'You are not at the starting location of the game.';
-        console.log('Not here yet');
+        
       }
     }
 
@@ -149,8 +149,8 @@ class Game extends Component {
 
     // this is just a test location for now -- in front of webb statue
     target = {
-      latitude: 40.820583,
-      longitude: -73.949105
+      latitude: games[this.state.gameID].Starting_Location.latitude,
+      longitude: games[this.state.gameID].Starting_Location.longitude
     }
 
     // start watching
