@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-// import games from './games.json';
+import games from './games.json';
 import './Game.css';
 import Endgame from './Endgame';
 import Answer from './Answer';
@@ -60,8 +60,7 @@ class Puzzle extends Component {
             // clear hint space when moving to next question
             document.getElementById('hint').innerText = '';
             this.setState({
-                questionIndex: currentQuestionIndex + 1,
-                imageIndex: currentQuestionIndex + 1,
+                atQuestion: this.state.atQuestion + 1,
                 usedHint: false,
                 atLocation: 0
             })
@@ -277,7 +276,7 @@ class Puzzle extends Component {
             return (
                 <div className="game">
                     <section className="middle">
-                    <progress className = 'prog' value = {this.state.questionIndex} max = {games[this.state.index].Total_Questions}/>
+                    <progress className = 'prog' value = {this.state.atQuestion} max = {games[this.state.index].Total_Questions}/>
                     <br/><br/>
                         <div className="text-center">
                             <h1>{this.props.gTitle} Challenge</h1>

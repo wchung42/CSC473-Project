@@ -252,8 +252,6 @@ class Game extends Component {
             <button className="btn-lg btn-danger" type="button"><a href="/Game">&nbsp; Exit &nbsp;</a></button>
           </div>
           <div className="gameInterface">
-<<<<<<< HEAD
-<<<<<<< HEAD
             <Timer
               gameID={this.state.gameID}
               gameTitle={this.state.gameTitle}
@@ -271,12 +269,8 @@ class Game extends Component {
               gameAnswers={this.state.gameAnswers}
               gameGeoLocation={this.state.gameGeoLocation}
               startCount={this.state.gameTimeLimt} />
-=======
             <Timer gameId={this.state.gameID} startCount="600" />
->>>>>>> answer space only appears when destination is reached
-=======
-            <Timer gameId={this.state.gameID} startCount="1800" />
->>>>>>> testing parameters for first game
+
           </div>
           <br />
         </div>
