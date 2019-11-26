@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Endgame from './Endgame';
 import Puzzle from './Puzzle';
 import './Game.css'
-
+//props this file needs to operate: Time limit
 class Timer extends Component {
     constructor(props) {
         super(props);
@@ -33,10 +33,27 @@ class Timer extends Component {
             return <Endgame outcome={false} />;
 
         } else {
+            console.log("Inside Timer: ", this.props.gameAtQuestion)
             return (
                 <div id="time">
-                    <p id = "timer"><strong>{this.convertSeconds(count)}</strong></p>
-                    <Puzzle gameId={this.props.gameId} gameHandler={this.gameHandler} />
+                    <p id="timer"><strong>{this.convertSeconds(count)}</strong></p>
+                    <Puzzle
+                        gID={this.props.gameID}
+                        gTitle={this.props.gameTitle}
+                        // gameThumbnail={this.props.gameThumbnail}
+                        // gameLocation={this.props.gameLocation}
+                        // gameDifficulty={this.props.gameDifficulty}
+                        // gameStory={this.props.gameStory}
+                        gTotalQuestions={this.props.gameTotalQuestions}
+                        gTotalHints={this.props.gameTotalHints}
+                        gAtQuestion={this.props.gameAtQuestion}
+                        gQuestions={this.props.gameQuestions}
+                        gQuestionVisualAids={this.props.gameQuestionVisualAids}
+                        gHints={this.props.gameHints}
+                        gAnswerType={this.props.gameAnswerType}
+                        gAnswers={this.props.gameAnswers}
+                        gGeoLocation={this.props.gameGeoLocation}
+                        gameHandler={this.gameHandler} />
                 </div>
             )
         }
