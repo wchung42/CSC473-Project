@@ -96,10 +96,10 @@ class Game extends Component {
   }
   // updateGameInfo(Games)
   //onclick will getGameId and then edit all states in the DB
-  getGameId(ev) {
+  async getGameId(ev) {
     console.log(ev.currentTarget.value)
     let id = ev.currentTarget.value
-    this.setState({
+    await this.setState({
       gameID: id,
       gameTitle: games[id].Title,
       gameThumbnail: games[id].Thumbnail,
@@ -118,8 +118,8 @@ class Game extends Component {
       gameReady: true,
       gameSynopsis: 1
     })
-    console.log(this.state.gameID)
-    console.log(this.state.gameHints)
+    console.log("Game Id is", this.state.gameID)
+    console.log("Total Hint of this game: ", this.state.gameHints)
     console.log(this.state.gameLocation)
   }
 
@@ -143,7 +143,7 @@ class Game extends Component {
 
 
   componentDidUpdate(prevProps) {
-    if (prevProps.latitude !== this.props.latitude) {
+    if (prevProps.gameTotalHints !== this.props.gameTotalHints) {
       this.setState({
         latitude: this.props.latitude
       })
@@ -199,8 +199,6 @@ class Game extends Component {
           <div className="game-list">
             <Panel games={games} func={this.getGameId} />
           </div>
-
-
           <br />
         </div>
       )
