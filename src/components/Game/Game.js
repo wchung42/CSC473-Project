@@ -253,6 +253,7 @@ class Game extends Component {
           </div>
           <div className="gameInterface">
 <<<<<<< HEAD
+<<<<<<< HEAD
             <Timer
               gameID={this.state.gameID}
               gameTitle={this.state.gameTitle}
@@ -273,6 +274,9 @@ class Game extends Component {
 =======
             <Timer gameId={this.state.gameID} startCount="600" />
 >>>>>>> answer space only appears when destination is reached
+=======
+            <Timer gameId={this.state.gameID} startCount="1800" />
+>>>>>>> testing parameters for first game
           </div>
           <br />
         </div>
