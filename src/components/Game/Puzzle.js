@@ -276,6 +276,9 @@ class Puzzle extends Component {
             return (
                 <div className="game">
                     <section className="middle">
+            
+                    <br/><br/>
+
                     <progress className = 'prog' value = {this.state.atQuestion} max = {games[this.state.index].Total_Questions}/>
                     <br/><br/>
                         <div className="text-center">

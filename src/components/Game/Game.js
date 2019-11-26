@@ -139,6 +139,7 @@ class Game extends Component {
       console.log('Distance: ' + dist)
       // player must be within 50 meters of starting point for game to begin
       if (dist <= 0.05) {
+
         console.log('You are here!');
         // stop watching player location
         navigator.geolocation.clearWatch(current)
@@ -272,6 +273,7 @@ class Game extends Component {
             <Timer gameId={this.state.gameID} startCount="600" />
 
           </div>
+          <br/>
           <br />
         </div>
       );
