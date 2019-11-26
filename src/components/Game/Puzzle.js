@@ -150,8 +150,13 @@ class Puzzle extends Component {
             )
         }
         else {
-            let questionPage = <Question id={this.state.index} qId={this.state.atQuestion} iId={this.state.atQuestion} />;
-            let answerPage = <Answer id={this.state.index} qId={this.state.atQuestion} action={this.getAnswer} />;
+            let questionPage = <Question
+                qContent={this.state.questions[this.state.atQuestion]}
+                qAid={this.state.questionVisualAid[this.state.atQuestion]} />;
+            let answerPage = <Answer
+                id={this.state.index}
+                qId={this.state.atQuestion}
+                action={this.getAnswer} />;
             return (
                 <div className="game">
                     <section className="middle">
