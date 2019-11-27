@@ -6,7 +6,7 @@ class gamePanel extends Component {
             .map(item =>
                 <li className="card-body" key={item.Id} >
                     <img
-                        key={item.Id}
+                        key={item.id}
                         className="card-img-top"
                         src={item.Thumbnail}
                         alt='' />
@@ -19,7 +19,7 @@ class gamePanel extends Component {
                         <li>Game Length:</li>
                         <li>Difficulty: {item.Difficulty}/5</li>
                     </ul>
-                    <button id={"bttn" + item.Id} className="btn btn-lg btn-primary" type="button" onClick={this.props.func} value={item.Id}>START</button>
+                    <button id={"bttn" + item.id} className="btn btn-lg btn-primary" type="button" onClick={this.props.func} value={item.id}>START</button>
                 </li>
             );
         return (

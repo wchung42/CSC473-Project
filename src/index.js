@@ -5,10 +5,8 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import Amplify from 'aws-amplify';
 import aws_exports from './aws-exports.js';
-import 'react-mdl/extra/material.css';
-import 'react-mdl/extra/material.js';
 
-Amplify.configure(aws_exports); 
+Amplify.configure(aws_exports);
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

@@ -25,7 +25,7 @@ class Answer extends Component {
     }
 
     render() {
-        if (this.props.answerType == "number") {
+        if (this.props.answerType == "Number") {
             return (
                 // Construct Num Pad
                 <div className="answerSpace">

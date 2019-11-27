@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-// import games from './games.json';
 import './Game.css';
 import Endgame from './Endgame';
 import Answer from './Answer';
 import Question from './Question';
+import Amplify, { API, graphqlOperation } from 'aws-amplify';
+import * as mutations from '../../graphql/mutations';
 //props this file needs to run: Id, TotalQuestion, TotalHints, AtQuestion, Questions, AnswerType, Answers, Hints, Long, Lad, TimeLimit
 //Each time answers is right => mutation Update AtQuestion 
 //When the game ends it will reset players pool => mutation updateGame(players: "")
 //Rework Hint component a little bit
+
 class Puzzle extends Component {
     constructor(props) {
         super(props)
@@ -16,7 +18,7 @@ class Puzzle extends Component {
             index: this.props.gID,
             totalQuestions: this.props.gTotalQuestions,
             totalHints: this.props.gTotalHints,
-            atQuestion: this.props.gAtQuestion,
+            atQuestion: parseInt(this.props.gAtQuestion),
             questions: this.props.gQuestions,
             questionVisualAid: this.props.gQuestionVisualAids,
             answerType: this.props.gAnswerType,
@@ -65,12 +67,30 @@ class Puzzle extends Component {
                     gameState: false,
                     win: true
                 }); console.log("End of game");
+                const nQuestion = {
+                    id: this.props.gID,
+                    AtQuestion: 0
+                }
+                const nextQuestion = await API.graphql(graphqlOperation(mutations.updateGame, { input: nQuestion }));
+                console.log("Next Question: ", nextQuestion);
+            } else {
+                if (document.getElementById("answerBox")) {
+                    document.getElementById("answerBox").value = "";
+                    document.getElementById("submitBttn").value = "";
+                }
+                if (document.getElementById("pound")) { document.getElementById("pound").value = ""; }
+
+                const nQuestion = {
+                    id: this.props.gID,
+                    AtQuestion: this.props.gAtQuestion + 1
+                }
+                const nextQuestion = await API.graphql(graphqlOperation(mutations.updateGame, { input: nQuestion }));
+                console.log("Next Question: ", nextQuestion);
+                console.log("this state index: ", this.state.index)
+                console.log("Currently At Question: ", this.state.atQuestion)
             }
             //reset value of submit buttons
-            if (document.getElementById("answerBox")) {
-                document.getElementById("answerBox").value = "";
-                document.getElementById("submitBttn").value = "";
-            }
+
         }
         //wrong answer => reset the current value of the pound button
         else {
@@ -134,9 +154,9 @@ class Puzzle extends Component {
             }, 2000)
         }
     }
-    
+
     // start acquiring player location when component mounts
-    
+
     // when state changes, check to see if the game has ended
     // stop timer when game is completed
     componentDidUpdate() {
@@ -167,8 +187,8 @@ class Puzzle extends Component {
             return (
                 <div className="game">
                     <section className="middle">
-                    <progress className = 'prog' value = {this.state.questionIndex} max = {games[this.state.index].Total_Questions}/>
-                    <br/><br/>
+                        <progress className='prog' value={this.state.atQuestion} max={this.state.totalQuestions} />
+                        <br /><br />
                         <div className="text-center">
                             <h1>{this.props.gTitle} Challenge</h1>
                             {questionPage}

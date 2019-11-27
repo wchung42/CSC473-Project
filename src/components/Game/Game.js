@@ -5,8 +5,11 @@ import Timer from './Timer';  // timer component that determines state of game
 import games from './games.json'; // get the game title
 import Panel from './gamePanel';
 import { withAuthenticator, Connect } from 'aws-amplify-react';
+// import * as queries from '../../graphql/queries.js';
 import Amplify, { Analytics, API, Auth, graphqlOperation, Storage } from 'aws-amplify';
+import gql from 'graphql-tag';
 import { getCurrentLocation, getDistanceFromLatLonInKm } from './util.js'; // import geolocation helper functions
+import { ConsoleLogger } from '@aws-amplify/core';
 
 //each time the user press Play => mutationUpdate players
 const ListGames = `query ListGames {
@@ -22,6 +25,7 @@ const ListGames = `query ListGames {
       Total_Questions
       Total_Hints
       Questions
+      AtQuestion
       QuestionVisualAid
       Hints
       AnswerType
@@ -31,43 +35,11 @@ const ListGames = `query ListGames {
   }
 }`;
 
-// class GamesList extends React.Component {
-//   gameItems() {
-//     return this.props.games.map(game =>
-//       <ul>
-//         <li key={game.id}>
-//           {game.Title}
-//           <br />
-//           {game.Story}
-//           <br />
-//           {game.GeoLocation[0]}
-//           <br />
-//           {game.GeoLocation[1]}
-//           <br />
-//           Question 1:{game.Questions[0]}
-//           <br />
-//           Question 2: {game.Questions[1]}
-//           <br />
-//           Question 3: {game.Questions[2]}
-//         </li>
-//       </ul>
-
-//     )
-//   }
-
-//   render() {
-//     return (
-//       <div>
-//         {this.gameItems()}
-//       </div>
-//     )
-//   }
-// }
-
 class Game extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      games: [],
       gameID: 0,
       gameTitle: "",
       gameThumbnail: "#",
@@ -78,13 +50,13 @@ class Game extends Component {
       gameTimeLimt: "",
       gameTotalQuestions: "",
       gameTotalHints: "",
-      gameAtQuestion: 1,
-      gameQuestions: "",
-      gameQuestionVisualAids: "",
-      gameHints: "",
-      gameAnswerType: "",
-      gameAnswers: "",
-      gameGeoLocation: "",
+      gameAtQuestion: "",
+      gameQuestions: [],
+      gameQuestionVisualAids: [],
+      gameHints: [],
+      gameAnswerType: [],
+      gameAnswers: [],
+      gameGeoLocation: [],
       latitude: null,
       longitude: null,
       gameReady: false,
@@ -94,43 +66,59 @@ class Game extends Component {
     this.getGameId = this.getGameId.bind(this);
     this.startGame = this.startGame.bind(this);
     this.getPosition = this.getPosition.bind(this);
-
   }
   // updateGameInfo(Games)
   //onclick will getGameId and then edit all states
+  async componentDidMount() {
+    try {
+      const apiData = await API.graphql(graphqlOperation(ListGames));
+      const gamesTest = apiData.data.listGames.items;
+      this.setState({ games: gamesTest.reverse() });
+    } catch (error) { console.log(error) }
+  }
+
   async getGameId(ev) {
-    console.log(ev.currentTarget.value)
+
     let id = ev.currentTarget.value
     await this.setState({
       gameID: id,
-      gameTitle: games[id].Title,
-      gameThumbnail: games[id].Thumbnail,
+    })
+    await this.setState({
+      gameTitle: this.state.games[id].Title,
+      gameThumbnail: this.state.games[id].Thumbnail,
       gameLocation: "CCNY",
-      gameDifficulty: games[id].Difficulty,
-      gameStory: games[id].Story,
+      gameDifficulty: this.state.games[id].Difficulty,
+      gameStory: this.state.games[id].Story,
       gameTimeLimt: "1800",
-      gameTotalQuestions: games[id].Total_Questions,
-      gameTotalHints: games[id].Total_Hint,
-      gameQuestions: games[id].Game_Story,
-      gameQuestionVisualAids: games[id].Images,
-      gameHints: games[id].Hint,
-      gameAnswerType: games[id].Answer_Type,
-      gameAnswers: games[id].Answers,
+      gameTotalQuestions: this.state.games[id].Total_Questions,
+      gameTotalHints: this.state.games[id].Total_Hints,
+      gameQuestions: this.state.games[id].Questions,
+      gameAtQuestion: this.state.games[id].AtQuestion,
+      gameQuestionVisualAids: this.state.games[id].QuestionVisualAid,
+      gameHints: this.state.games[id].Hints,
+      gameAnswerType: this.state.games[id].AnswerType,
+      gameAnswers: this.state.games[id].Answers,
       gameGeoLocation: "",
       gameReady: true,
       gameSynopsis: 1
     })
+    console.log("Games0: ", this.state.games[0])
+    console.log("Games0 Question: ", this.state.games[0].Questions)
+    console.log("Games1: ", this.state.games[1])
+    console.log("Id got back from user is: ", id)
     console.log("Game Id is", this.state.gameID)
+    console.log("Game Title: ", this.state.gameTitle)
     console.log("At Question: ", this.state.gameAtQuestion)
     console.log("hints of this game: ", this.state.gameHints)
     console.log("questions of this game: ", this.state.gameQuestions)
+    console.log("Answers of this games: ", this.state.gameAnswers)
   }
 
   startGame() {
     // watch current location
     let current, target, dist;
     let currentState = this;
-    
+
     function success(position) {
       let userCoords = position.coords;
       console.log(`latitude: ${userCoords.latitude} | longitude: ${userCoords.longitude}`)
@@ -138,7 +126,7 @@ class Game extends Component {
       dist = getDistanceFromLatLonInKm(userCoords.latitude, userCoords.longitude, target.latitude, target.longitude);
       console.log('Distance: ' + dist)
       // player must be within 10 meters of starting point for game to begin
-      if (dist <= 0.09) {
+      if (dist >= 0.09) {
         console.log('You are here!');
         // stop watching player location
         navigator.geolocation.clearWatch(current)
@@ -158,15 +146,15 @@ class Game extends Component {
     function error(err) {
       console.warn('Error(' + err.code + '): ' + err.message);
     }
-    
+
     // this is just a test location for now -- in front of webb statue
     target = {
       latitude: 40.820583,
       longitude: -73.949105
     }
-    
+
     // start watching
-    current = navigator.geolocation.watchPosition(success, error, {enableHighAccuracy: true});
+    current = navigator.geolocation.watchPosition(success, error, { enableHighAccuracy: true });
   }
 
 
@@ -215,7 +203,7 @@ class Game extends Component {
             <button className="btn btn-lg btn-danger" type="button"><a href="/">&nbsp; Exit &nbsp;</a></button>
           </div>
           <div className="game-list">
-            <Panel games={games} func={this.getGameId} />
+            <Panel games={this.state.games} func={this.getGameId} />
           </div>
           <br />
         </div>
@@ -229,12 +217,12 @@ class Game extends Component {
             <a href="/Game" className="btn btn-lg btn-danger nounderline" type="button">&nbsp; Exit &nbsp;</a>
           </div>
           <div className="synopsis">
-            <h1>{games[this.state.gameID].Story}</h1>
+            <h1>{this.state.games[this.state.gameID].Story}</h1>
           </div>
           <div className="start">
             <button id="start-btn" className="btn btn-lg btn-success" type="button" onClick={this.startGame}>&nbsp; Start &nbsp;</button>
           </div>
-          <div id = "notAtLocationIndicator">
+          <div id="notAtLocationIndicator">
             <p></p>
           </div>
 
