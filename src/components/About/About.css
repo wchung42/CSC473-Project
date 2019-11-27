@@ -1,8 +1,27 @@
-.a-image{
-    
-    align-content: center;
-    margin-top:10%;
-    margin-left: 15%;
-    width: 70vw;
-    height: 40vh;
+
+
+#bg{
+
+    position: fixed;
+    top:0;
+    left: 0;
+    z-index: -1;
+  }
+
+  h1{
+    font-size:6em;
+    color: white;
+    line-height: 0.8em;
+    text-align: left;
+  }
+  h1 span{
+    color: red;
+  }
+
+  hr{
+    margin: 40px 0;
+    border-top:none;
+  }
+  p{
+    color:white;
   }

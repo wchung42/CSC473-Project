@@ -38,6 +38,7 @@ class home extends React.Component {
                 -start the game                  
               </li>
               
+              
             </ul>
           </section>
         
