@@ -2,7 +2,7 @@ import React, { Component, ReactDOM } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import './Game.css';
 import Timer from './Timer';  // timer component that determines state of game
-// import games from './games.json'; // get the game title
+import games from './games.json'; // get the game title
 import Panel from './gamePanel';
 import { withAuthenticator, Connect } from 'aws-amplify-react';
 // import * as queries from '../../graphql/queries.js';
