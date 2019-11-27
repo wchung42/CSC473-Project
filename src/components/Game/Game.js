@@ -5,8 +5,11 @@ import Timer from './Timer';  // timer component that determines state of game
 import games from './games.json'; // get the game title
 import Panel from './gamePanel';
 import { withAuthenticator, Connect } from 'aws-amplify-react';
+// import * as queries from '../../graphql/queries.js';
 import Amplify, { Analytics, API, Auth, graphqlOperation, Storage } from 'aws-amplify';
+import gql from 'graphql-tag';
 import { getCurrentLocation, getDistanceFromLatLonInKm } from './util.js'; // import geolocation helper functions
+import { ConsoleLogger } from '@aws-amplify/core';
 
 //each time the user press Play => mutationUpdate players
 const ListGames = `query ListGames {
@@ -30,6 +33,8 @@ const ListGames = `query ListGames {
     }
   }
 }`;
+
+
 
 // class GamesList extends React.Component {
 //   gameItems() {
@@ -68,6 +73,7 @@ class Game extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      games: [],
       gameID: 0,
       gameTitle: "",
       gameThumbnail: "#",
@@ -94,28 +100,35 @@ class Game extends Component {
     this.getGameId = this.getGameId.bind(this);
     this.startGame = this.startGame.bind(this);
     this.getPosition = this.getPosition.bind(this);
-
   }
   // updateGameInfo(Games)
   //onclick will getGameId and then edit all states
+  async componentDidMount() {
+    try {
+      const apiData = await API.graphql(graphqlOperation(ListGames));
+      const gamesTest = apiData.data.listGames.items;
+      this.setState({ games: gamesTest });
+    } catch (error) { }
+  }
+
   async getGameId(ev) {
     console.log(ev.currentTarget.value)
     let id = ev.currentTarget.value
     await this.setState({
       gameID: id,
-      gameTitle: games[id].Title,
-      gameThumbnail: games[id].Thumbnail,
+      gameTitle: this.state.games[id].Title,
+      gameThumbnail: this.state.games[id].Thumbnail,
       gameLocation: "CCNY",
-      gameDifficulty: games[id].Difficulty,
-      gameStory: games[id].Story,
+      gameDifficulty: this.state.games[id].Difficulty,
+      gameStory: this.state.games[id].Story,
       gameTimeLimt: "1800",
-      gameTotalQuestions: games[id].Total_Questions,
-      gameTotalHints: games[id].Total_Hint,
-      gameQuestions: games[id].Game_Story,
-      gameQuestionVisualAids: games[id].Images,
-      gameHints: games[id].Hint,
-      gameAnswerType: games[id].Answer_Type,
-      gameAnswers: games[id].Answers,
+      gameTotalQuestions: this.state.games[id].Total_Questions,
+      gameTotalHints: this.state.games[id].Total_Hint,
+      gameQuestions: this.state.games[id].Game_Story,
+      gameQuestionVisualAids: this.state.games[id].Images,
+      gameHints: this.state.games[id].Hint,
+      gameAnswerType: this.state.games[id].Answer_Type,
+      gameAnswers: this.state.games[id].Answers,
       gameGeoLocation: "",
       gameReady: true,
       gameSynopsis: 1
@@ -215,7 +228,7 @@ class Game extends Component {
             <button className="btn btn-lg btn-danger" type="button"><a href="/">&nbsp; Exit &nbsp;</a></button>
           </div>
           <div className="game-list">
-            <Panel games={games} func={this.getGameId} />
+            <Panel games={this.state.games} func={this.getGameId} />
           </div>
           <br />
         </div>
