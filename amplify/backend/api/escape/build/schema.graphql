@@ -8,6 +8,7 @@ type Game {
   Story: String!
   TimeLimit: String!
   Players(limit: Int = Capacity): [String]!
+  Finished: Boolean!
   Total_Questions(limit: Int = 15): Int!
   Total_Hints(limit: Int = 5): Int!
   Questions(limit: Int = Total_Questions): [String]!
@@ -97,6 +98,7 @@ input ModelGameFilterInput {
   Story: ModelStringFilterInput
   TimeLimit: ModelStringFilterInput
   Players: ModelStringFilterInput
+  Finished: ModelBooleanFilterInput
   Total_Questions: ModelIntFilterInput
   Total_Hints: ModelIntFilterInput
   Questions: ModelStringFilterInput
@@ -129,6 +131,7 @@ input CreateGameInput {
   Story: String!
   TimeLimit: String!
   Players: [String]!
+  Finished: Boolean!
   Total_Questions: Int!
   Total_Hints: Int!
   Questions: [String]!
@@ -153,6 +156,7 @@ input UpdateGameInput {
   Story: String
   TimeLimit: String
   Players: [String]
+  Finished: Boolean
   Total_Questions: Int
   Total_Hints: Int
   Questions: [String]

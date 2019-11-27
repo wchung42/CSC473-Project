@@ -8,6 +8,7 @@ import { withAuthenticator, Connect } from 'aws-amplify-react';
 import * as subscriptions from '../../graphql/subscriptions';
 import Amplify, { Analytics, API, Auth, graphqlOperation, Storage } from 'aws-amplify';
 import gql from 'graphql-tag';
+import * as mutations from '../../graphql/mutations';
 import { getCurrentLocation, getDistanceFromLatLonInKm } from './util.js'; // import geolocation helper functions
 import { ConsoleLogger } from '@aws-amplify/core';
 
@@ -24,6 +25,7 @@ const ListGames = `query ListGames {
       TimeLimit
       Total_Questions
       Total_Hints
+      Finished
       Questions
       AtQuestion
       QuestionVisualAid
@@ -48,6 +50,7 @@ class Game extends Component {
       gameStory: "",
       gameCapacity: "",
       gameTimeLimt: "",
+      gameFinished: false,
       gameTotalQuestions: "",
       gameTotalHints: "",
       gameAtQuestion: "",
@@ -81,7 +84,8 @@ class Game extends Component {
         next: (gameData) => {
           console.log("SUBSCRIPTION DATA", gameData.value.data.onUpdateGame.AtQuestion);
           this.setState({
-            gameAtQuestion: gameData.value.data.onUpdateGame.AtQuestion
+            gameAtQuestion: gameData.value.data.onUpdateGame.AtQuestion,
+            gameFinished: gameData.value.data.onUpdateGame.Finished
           })
           console.log("new atquestion:", this.state.gameAtQuestion)
         }
@@ -104,6 +108,7 @@ class Game extends Component {
       gameDifficulty: this.state.games[id].Difficulty,
       gameStory: this.state.games[id].Story,
       gameTimeLimt: "1800",
+      gameFinished: this.state.games[id].Finished,
       gameTotalQuestions: this.state.games[id].Total_Questions,
       gameTotalHints: this.state.games[id].Total_Hints,
       gameQuestions: this.state.games[id].Questions,
@@ -116,6 +121,11 @@ class Game extends Component {
       gameReady: true,
       gameSynopsis: 1
     })
+    const nQuestion = {
+      id: this.state.gameID,
+      Finished: false
+    }
+    const nextQuestion = await API.graphql(graphqlOperation(mutations.updateGame, { input: nQuestion }));
     console.log("Games0: ", this.state.games[0])
     console.log("Games0 Question: ", this.state.games[0].Questions)
     console.log("Games1: ", this.state.games[1])
@@ -232,6 +242,7 @@ class Game extends Component {
         </div>
       )
     }
+    //run the game
     else if (this.state.gameReady && (this.state.gameSynopsis === 0) && (this.state.gameStart === 1)) {
       return (
         <div className="Game">
@@ -251,6 +262,7 @@ class Game extends Component {
               gameLocation={this.state.gameLocation}
               gameDifficulty={this.state.gameDifficulty}
               gameStory={this.state.gameStory}
+              gameFinished={this.state.gameFinished}
               gameTotalQuestions={this.state.gameTotalQuestions}
               gameTotalHints={this.state.gameTotalHints}
               gameAtQuestion={this.state.gameAtQuestion}

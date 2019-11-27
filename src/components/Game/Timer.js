@@ -8,7 +8,7 @@ class Timer extends Component {
         super(props);
         this.state = {
             count: 1,
-            isPaused: false
+            isPaused: this.props.gameFinished
         }
         this.gameHandler = this.gameHandler.bind(this);
     }
@@ -27,35 +27,47 @@ class Timer extends Component {
 
     render() {
         const { count } = this.state;
-
+        //time out
         if (this.state.count == 0) {
             clearInterval(this.myInterval);
             return <Endgame outcome={false} />;
-
+            //not time out and win the game
         } else {
-            console.log("Inside Timer: ", this.props.gameAtQuestion)
-            return (
-                <div id="time">
-                    <p id="timer"><strong>{this.convertSeconds(count)}</strong></p>
-                    <Puzzle
-                        gID={this.props.gameID}
-                        gTitle={this.props.gameTitle}
-                        // gameThumbnail={this.props.gameThumbnail}
-                        // gameLocation={this.props.gameLocation}
-                        // gameDifficulty={this.props.gameDifficulty}
-                        // gameStory={this.props.gameStory}
-                        gTotalQuestions={this.props.gameTotalQuestions}
-                        gTotalHints={this.props.gameTotalHints}
-                        gAtQuestion={this.props.gameAtQuestion}
-                        gQuestions={this.props.gameQuestions}
-                        gQuestionVisualAids={this.props.gameQuestionVisualAids}
-                        gHints={this.props.gameHints}
-                        gAnswerType={this.props.gameAnswerType}
-                        gAnswers={this.props.gameAnswers}
-                        gGeoLocation={this.props.gameGeoLocation}
-                        gameHandler={this.gameHandler} />
-                </div>
-            )
+            if (this.state.isPaused) {
+                const winPage = <Endgame outcome={this.state.isPaused} />;
+                return (
+                    <div>
+                        {/* display win page when game is completed before timer hits 0 */}
+                        {winPage}
+                    </div>
+                )
+            }
+            else {
+                return (
+                    <div id="time">
+                        <p id="timer"><strong>{this.convertSeconds(count)}</strong></p>
+                        <Puzzle
+                            gID={this.props.gameID}
+                            gTitle={this.props.gameTitle}
+                            // gameThumbnail={this.props.gameThumbnail}
+                            // gameLocation={this.props.gameLocation}
+                            // gameDifficulty={this.props.gameDifficulty}
+                            // gameStory={this.props.gameStory}
+                            gTotalQuestions={this.props.gameTotalQuestions}
+                            gTotalHints={this.props.gameTotalHints}
+                            gAtQuestion={this.props.gameAtQuestion}
+                            gQuestions={this.props.gameQuestions}
+                            gQuestionVisualAids={this.props.gameQuestionVisualAids}
+                            gHints={this.props.gameHints}
+                            gAnswerType={this.props.gameAnswerType}
+                            gAnswers={this.props.gameAnswers}
+                            gGeoLocation={this.props.gameGeoLocation}
+                        // gameHandler={this.gameHandler} 
+                        />
+                    </div>
+                )
+            }
+
         }
 
     }
