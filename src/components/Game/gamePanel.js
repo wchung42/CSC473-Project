@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 
+
 class gamePanel extends Component {
+    
     render() {
+        const gameCardListStyle = {
+            'list-style-type': 'none'
+        }
+
         let listItems = this.props.games
             .map(item =>
                 <li className="card-body" key={item.Id} >
@@ -22,9 +28,9 @@ class gamePanel extends Component {
                     <button id={"bttn" + item.id} className="btn btn-lg btn-primary" type="button" onClick={this.props.func} value={item.id}>START</button>
                 </li>
             );
-        return (
-            <div className="card">
-                <ul>{listItems}</ul>
+        return ( 
+            <div className="card">     
+                <ul style = { gameCardListStyle }>{listItems}</ul>
             </div>
         )
     }

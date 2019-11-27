@@ -10,6 +10,9 @@ import * as mutations from '../../graphql/mutations';
 //Each time answers is right => mutation Update AtQuestion 
 //When the game ends it will reset players pool => mutation updateGame(players: "")
 //Rework Hint component a little bit
+import getDistanceFromLatLonInKm from './util.js' // distance function
+// still need this lat and long
+import games from './games.json'
 
 class Puzzle extends Component {
     constructor(props) {
@@ -29,6 +32,8 @@ class Puzzle extends Component {
             usedHint: false,
             latitude: null,
             longitude: null,
+            // 0 when player not at location; 1 when player is
+            atLocation: 0,
             // game ends when last question is completed
             gameState: true,
             win: false,
@@ -59,7 +64,8 @@ class Puzzle extends Component {
             document.getElementById('hint').innerText = '';
             await this.setState({
                 atQuestion: this.state.atQuestion + 1,
-                usedHint: false
+                usedHint: false,
+                atLocation: 0
             })
             //if this is the last question then End game
             if (this.state.atQuestion == this.state.totalQuestions) {
@@ -156,6 +162,49 @@ class Puzzle extends Component {
     }
 
     // start acquiring player location when component mounts
+    // componentDidMount() {
+    //     // watch current location
+    //     let current, target, dist;
+    //     let currentState = this;
+        
+    //     function success(position) {
+    //         let userCoords = position.coords;
+    //         console.log(`latitude: ${userCoords.latitude} | longitude: ${userCoords.longitude}`)
+            
+    //         // calculate distance to target
+    //         dist = getDistanceFromLatLonInKm(userCoords.latitude, userCoords.longitude, target.latitude, target.longitude);
+    //         console.log('Distance to question: ' + dist)
+    //         console.log('target lat: ' + target.latitude)
+
+    //         // player must be within 20 meters of location for answer to appear
+    //         if (dist <= 0.02) {
+    //             console.log('You can now answer the question!');
+    //             // stop watching player location
+    //             navigator.geolocation.clearWatch(current)
+    //             // allow question
+    //             currentState.setState({
+    //                 atLocation: 1
+    //             });
+    //         } else {
+    //             //document.getElementById('notAtLocationIndicator').innerText = 'You are not at the starting location of the game.';
+                
+    //         }
+    //     }
+
+    //     // error callback
+    //     function error(err) {
+    //     console.warn('Error(' + err.code + '): ' + err.message);
+    //     }
+    
+    //     // this is just a test location for now -- in front of webb statue
+    //     target = {
+    //         latitude: games[this.state.index].Locations[this.state.questionIndex].lat,
+    //         longitude: games[this.state.index].Locations[this.state.questionIndex].long
+    //     }
+        
+    //     // start watching
+    //     current = navigator.geolocation.watchPosition(success, error, {enableHighAccuracy: true});
+    // }
 
     // when state changes, check to see if the game has ended
     // stop timer when game is completed
@@ -164,9 +213,53 @@ class Puzzle extends Component {
             this.setState({ timeStopper: 1 })
             this.props.gameHandler();
         }
+
+        // check location upon component update
+        let current, target, dist;
+        let currentState = this;
+        
+        function success(position) {
+            let userCoords = position.coords;
+            console.log(`latitude: ${userCoords.latitude} | longitude: ${userCoords.longitude}`)
+            
+            // calculate distance to target
+            dist = getDistanceFromLatLonInKm(userCoords.latitude, userCoords.longitude, target.latitude, target.longitude);
+            console.log('Distance: ' + dist)
+
+            // player must be within 20 meters of location for answer to appear
+            if (dist <= 0.03) {
+                console.log('You are here!');
+                // stop watching player location
+                navigator.geolocation.clearWatch(current)
+                // allow question
+                currentState.setState({
+                    atLocation: 1
+                });
+            }
+        }
+
+        // error callback
+        function error(err) {
+        console.warn('Error(' + err.code + '): ' + err.message);
+        }
+    
+        // TAKEN FROM THE JSON FILE FOR NOW
+        target = {
+            latitude: games[this.state.index].Locations[this.state.atQuestion + 1].lat,
+            longitude: games[this.state.index].Locations[this.state.atQuestion + 1].long
+        }
+        
+        // start watching
+        current = navigator.geolocation.watchPosition(success, error, {enableHighAccuracy: true});
     }
 
     render() {
+        let questionPage = <Question
+            qContent={this.state.questions[this.state.atQuestion]}
+            qAid={this.state.questionVisualAid[this.state.atQuestion]} />;
+        let answerPage = <Answer
+            answerType={this.state.answerType[this.state.atQuestion]}
+            action={this.getAnswer} />;
         // game states - playing or end game
         if (!this.state.gameState) {
             const winPage = <Endgame outcome={this.state.win} />;
@@ -176,35 +269,45 @@ class Puzzle extends Component {
                     {winPage}
                 </div>
             )
-        }
-        else {
-            let questionPage = <Question
-                qContent={this.state.questions[this.state.atQuestion]}
-                qAid={this.state.questionVisualAid[this.state.atQuestion]} />;
-            let answerPage = <Answer
-                answerType={this.state.answerType[this.state.atQuestion]}
-                action={this.getAnswer} />;
+        } 
+        // if not at location, only the question appears
+        else if (this.state.gameState && this.state.atLocation == 0) {
             return (
-                <div className="game">
-                    <section className="middle">
-                        <progress className='prog' value={this.state.atQuestion} max={this.state.totalQuestions} />
-                        <br /><br />
-                        <div className="text-center">
-                            <h1>{this.props.gTitle} Challenge</h1>
-                            {questionPage}
+                <div className = "game">
+                    <section className = "middle">
+                        <progress className = 'prog' value = {this.state.atQuestion} max = {this.state.totalQuestions}/>
+                        <br/><br/>
+                        <div className = "text-center">
+                            { questionPage }
+                        </div>
+                    </section>
+                </div>
+            )
+        }
+        else if (this.state.gameState && this.state.atLocation == 1) {
+           
+            return (
+                <div>
+                    <section className = "middle">
+                        <progress className = 'prog' value = {this.state.atQuestion} max = {this.state.totalQuestions}/>
+                        <br/><br/>
+                        <div className = "text-center">
+                            { questionPage }
                             <br /><br /><br />
                             {answerPage}
                             <p id="hint" className="questN" value=""></p>
                             <div className="hint">
                                 <button id="hintBttn" className="btn-lg btn-warning" type="button" onClick={this.getHint}>
-                                    {this.state.totalHints - this.state.hintCount} Hint(s) Left</button>
+                                {this.state.totalHints - this.state.hintCount} Hint(s) Left</button>
                             </div>
                         </div>
                     </section>
+                       
                 </div>
 
             )
         }
+            
 
     }
 

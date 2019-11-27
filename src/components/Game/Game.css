@@ -75,9 +75,9 @@
   margin-left: 6.5%;
 }
 
-/* .card{
-  height: 30vh;
-} */
+.card{
+  list-style-type: none;
+}
 
 .card-img-top{
   height: 30vh;
