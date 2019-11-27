@@ -160,8 +160,10 @@ class Game extends Component {
       // calculate distance to target
       dist = getDistanceFromLatLonInKm(userCoords.latitude, userCoords.longitude, target.latitude, target.longitude);
       console.log('Distance: ' + dist)
-      // player must be within 10 meters of starting point for game to begin
-      if (dist >= 0.09) {
+
+      // player must be within 50 meters of starting point for game to begin
+      if (dist <= 0.05) {
+
         console.log('You are here!');
         // stop watching player location
         navigator.geolocation.clearWatch(current)
@@ -173,7 +175,7 @@ class Game extends Component {
         })
       } else {
         document.getElementById('notAtLocationIndicator').innerText = 'You are not at the starting location of the game.';
-        console.log('Not here yet');
+        
       }
     }
 
@@ -184,8 +186,8 @@ class Game extends Component {
 
     // this is just a test location for now -- in front of webb statue
     target = {
-      latitude: 40.820583,
-      longitude: -73.949105
+      latitude: games[this.state.gameID].Starting_Location.latitude,
+      longitude: games[this.state.gameID].Starting_Location.longitude
     }
 
     // start watching
@@ -292,7 +294,10 @@ class Game extends Component {
               gameAnswers={this.state.gameAnswers}
               gameGeoLocation={this.state.gameGeoLocation}
               startCount={this.state.gameTimeLimt} />
+            <Timer gameId={this.state.gameID} startCount="600" />
+
           </div>
+          <br/>
           <br />
         </div>
       );
