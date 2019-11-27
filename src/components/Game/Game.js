@@ -138,6 +138,7 @@ class Game extends Component {
         })
       } else {
         document.getElementById('notAtLocationIndicator').innerText = 'You are not at the starting location of the game.';
+        console.log('not there yet');
         
       }
     }
