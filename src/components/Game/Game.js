@@ -5,7 +5,7 @@ import Timer from './Timer';  // timer component that determines state of game
 // import games from './games.json'; // get the game title
 import Panel from './gamePanel';
 import { withAuthenticator, Connect } from 'aws-amplify-react';
-// import * as queries from '../../graphql/queries.js';
+import * as subscriptions from '../../graphql/subscriptions';
 import Amplify, { Analytics, API, Auth, graphqlOperation, Storage } from 'aws-amplify';
 import gql from 'graphql-tag';
 import { getCurrentLocation, getDistanceFromLatLonInKm } from './util.js'; // import geolocation helper functions
@@ -66,24 +66,38 @@ class Game extends Component {
     this.getGameId = this.getGameId.bind(this);
     this.startGame = this.startGame.bind(this);
     this.getPosition = this.getPosition.bind(this);
+    this.gameUpdateSubscriptions = null;
   }
-  // updateGameInfo(Games)
-  //onclick will getGameId and then edit all states
+  //retrieve infomation from DB
   async componentDidMount() {
     try {
       const apiData = await API.graphql(graphqlOperation(ListGames));
       const gamesTest = apiData.data.listGames.items;
       this.setState({ games: gamesTest.reverse() });
     } catch (error) { console.log(error) }
+
+    try {
+      this.gameUpdateSubscriptions = await API.graphql(graphqlOperation(subscriptions.onUpdateGame, { id: this.state.gameID })).subscribe({
+        next: (gameData) => {
+          console.log("SUBSCRIPTION DATA", gameData.value.data.onUpdateGame.AtQuestion);
+          this.setState({
+            gameAtQuestion: gameData.value.data.onUpdateGame.AtQuestion
+          })
+          console.log("new atquestion:", this.state.gameAtQuestion)
+        }
+
+      });
+    } catch (errorOfSub) { console.log(errorOfSub) }
+
   }
 
-  async getGameId(ev) {
 
+
+  //onclick will getGameId and then edit all states
+  async getGameId(ev) {
     let id = ev.currentTarget.value
     await this.setState({
       gameID: id,
-    })
-    await this.setState({
       gameTitle: this.state.games[id].Title,
       gameThumbnail: this.state.games[id].Thumbnail,
       gameLocation: "CCNY",
@@ -157,7 +171,6 @@ class Game extends Component {
     current = navigator.geolocation.watchPosition(success, error, { enableHighAccuracy: true });
   }
 
-
   getPosition() {
     const success = async (pos) => {
       await this.setState({
@@ -178,16 +191,6 @@ class Game extends Component {
       return (
 
         <div className="Game">
-          {/* <Connect query={graphqlOperation(ListGames)}>
-            {({ data, loading, errors }) => {
-              if (loading) { return <div>Loading...</div>; }
-              if (errors) console.log(errors);
-              console.log(data.listGames);
-
-              return <GamesList games={data.listGames.items} />
-            }}
-          </Connect> */}
-          <br />
           <p className="Location">Click the button to get your coordinates.</p>
 
           <p className="Location">{this.state.latitude} {this.state.longitude}</p>
@@ -241,6 +244,7 @@ class Game extends Component {
           </div>
           <div className="gameInterface">
             <Timer
+              key={this.state.gameAtQuestion}
               gameID={this.state.gameID}
               gameTitle={this.state.gameTitle}
               gameThumbnail={this.state.gameThumbnail}
