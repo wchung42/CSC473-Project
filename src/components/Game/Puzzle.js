@@ -227,7 +227,7 @@ class Puzzle extends Component {
             console.log('Distance: ' + dist)
 
             // player must be within 20 meters of location for answer to appear
-            if (dist >= 0.03) {
+            if (dist <= 0.03) {
                 console.log('You are here!');
                 // stop watching player location
                 navigator.geolocation.clearWatch(current)
