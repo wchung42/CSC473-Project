@@ -8,19 +8,8 @@ import React, { Component } from 'react';
 class home extends React.Component {
   render() {
     return (
-      // <Connect query={graphqlOperation(ListGames)}>
-      //   {({ data, loading, errors }) => {
-      //     if (loading) { return <div>Loading...</div>; }
-      //     if (errors) console.log(errors);
-      //     console.log(data.listGames);
-      //     return <GamesList games={data.listGames.items} />
-      //   }}
-      // </Connect>
-      <div className = "home">
-        <div className = "title">
-          <h1>Hello World</h1>
-        </div>
-        
+      <div>
+        <h1>Hello World</h1>
       </div>
     );
   }

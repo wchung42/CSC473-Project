@@ -27,7 +27,7 @@ const footer = () => (
 					<a href="/Contact">Contact</a>
             </p>
 
-            <p>Escape Team © 2019</p>
+            <p><strong>Escape Team © 2019</strong></p>
           </div>
 
         </footer>
