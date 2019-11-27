@@ -16,7 +16,7 @@ class Puzzle extends Component {
             index: this.props.gID,
             totalQuestions: this.props.gTotalQuestions,
             totalHints: this.props.gTotalHints,
-            atQuestion: this.props.gAtQuestion,
+            atQuestion: parseInt(this.props.gAtQuestion),
             questions: this.props.gQuestions,
             questionVisualAid: this.props.gQuestionVisualAids,
             answerType: this.props.gAnswerType,

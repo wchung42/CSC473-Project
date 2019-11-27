@@ -2,7 +2,7 @@ import React, { Component, ReactDOM } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import './Game.css';
 import Timer from './Timer';  // timer component that determines state of game
-import games from './games.json'; // get the game title
+// import games from './games.json'; // get the game title
 import Panel from './gamePanel';
 import { withAuthenticator, Connect } from 'aws-amplify-react';
 // import * as queries from '../../graphql/queries.js';
@@ -25,6 +25,7 @@ const ListGames = `query ListGames {
       Total_Questions
       Total_Hints
       Questions
+      AtQuestion
       QuestionVisualAid
       Hints
       AnswerType
@@ -84,13 +85,13 @@ class Game extends Component {
       gameTimeLimt: "",
       gameTotalQuestions: "",
       gameTotalHints: "",
-      gameAtQuestion: 1,
-      gameQuestions: "",
-      gameQuestionVisualAids: "",
-      gameHints: "",
-      gameAnswerType: "",
-      gameAnswers: "",
-      gameGeoLocation: "",
+      gameAtQuestion: "",
+      gameQuestions: [],
+      gameQuestionVisualAids: [],
+      gameHints: [],
+      gameAnswerType: [],
+      gameAnswers: [],
+      gameGeoLocation: [],
       latitude: null,
       longitude: null,
       gameReady: false,
@@ -112,10 +113,12 @@ class Game extends Component {
   }
 
   async getGameId(ev) {
-    console.log(ev.currentTarget.value)
+
     let id = ev.currentTarget.value
     await this.setState({
       gameID: id,
+    })
+    await this.setState({
       gameTitle: this.state.games[id].Title,
       gameThumbnail: this.state.games[id].Thumbnail,
       gameLocation: "CCNY",
@@ -123,20 +126,27 @@ class Game extends Component {
       gameStory: this.state.games[id].Story,
       gameTimeLimt: "1800",
       gameTotalQuestions: this.state.games[id].Total_Questions,
-      gameTotalHints: this.state.games[id].Total_Hint,
-      gameQuestions: this.state.games[id].Game_Story,
-      gameQuestionVisualAids: this.state.games[id].Images,
-      gameHints: this.state.games[id].Hint,
-      gameAnswerType: this.state.games[id].Answer_Type,
+      gameTotalHints: this.state.games[id].Total_Hints,
+      gameQuestions: this.state.games[id].Questions,
+      gameAtQuestion: this.state.games[id].AtQuestion,
+      gameQuestionVisualAids: this.state.games[id].QuestionVisualAid,
+      gameHints: this.state.games[id].Hints,
+      gameAnswerType: this.state.games[id].AnswerType,
       gameAnswers: this.state.games[id].Answers,
       gameGeoLocation: "",
       gameReady: true,
       gameSynopsis: 1
     })
+    console.log("Games1: ", this.state.games[0])
+    console.log("Games1 Question: ", this.state.games[0].Questions)
+    console.log("Games2: ", this.state.games[1])
+    console.log("Id got back from user is: ", id)
     console.log("Game Id is", this.state.gameID)
+    console.log("Game Title: ", this.state.gameTitle)
     console.log("At Question: ", this.state.gameAtQuestion)
     console.log("hints of this game: ", this.state.gameHints)
     console.log("questions of this game: ", this.state.gameQuestions)
+    console.log("Answers of this games: ", this.state.gameAnswers)
   }
 
   startGame() {
@@ -242,7 +252,7 @@ class Game extends Component {
             <a href="/Game" className="btn btn-lg btn-danger nounderline" type="button">&nbsp; Exit &nbsp;</a>
           </div>
           <div className="synopsis">
-            <h1>{games[this.state.gameID].Story}</h1>
+            <h1>{this.state.games[this.state.gameID].Story}</h1>
           </div>
           <div className="start">
             <button id="start-btn" className="btn btn-lg btn-success" type="button" onClick={this.startGame}>&nbsp; Start &nbsp;</button>
