@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './Endgame.css';
 import 'bootstrap/dist/css/bootstrap.css';
+//props this file needs:
+// id, AtQuestion,Players
 
 class Endgame extends Component {
 

@@ -18,7 +18,7 @@ class Puzzle extends Component {
             index: this.props.gID,
             totalQuestions: this.props.gTotalQuestions,
             totalHints: this.props.gTotalHints,
-            atQuestion: this.props.gAtQuestion,
+            atQuestion: parseInt(this.props.gAtQuestion),
             questions: this.props.gQuestions,
             questionVisualAid: this.props.gQuestionVisualAids,
             answerType: this.props.gAnswerType,
@@ -76,6 +76,7 @@ class Puzzle extends Component {
                 document.getElementById("answerBox").value = "";
                 document.getElementById("submitBttn").value = "";
             }
+            if (document.getElementById("pound")) { document.getElementById("pound").value = ""; }
         }
         //wrong answer => reset the current value of the pound button
         else {
@@ -139,52 +140,9 @@ class Puzzle extends Component {
             }, 2000)
         }
     }
-    
+
     // start acquiring player location when component mounts
-    // componentDidMount() {
-    //     // watch current location
-    //     let current, target, dist;
-    //     let currentState = this;
-        
-    //     function success(position) {
-    //         let userCoords = position.coords;
-    //         console.log(`latitude: ${userCoords.latitude} | longitude: ${userCoords.longitude}`)
-            
-    //         // calculate distance to target
-    //         dist = getDistanceFromLatLonInKm(userCoords.latitude, userCoords.longitude, target.latitude, target.longitude);
-    //         console.log('Distance to question: ' + dist)
-    //         console.log('target lat: ' + target.latitude)
-
-    //         // player must be within 20 meters of location for answer to appear
-    //         if (dist <= 0.02) {
-    //             console.log('You can now answer the question!');
-    //             // stop watching player location
-    //             navigator.geolocation.clearWatch(current)
-    //             // allow question
-    //             currentState.setState({
-    //                 atLocation: 1
-    //             });
-    //         } else {
-    //             //document.getElementById('notAtLocationIndicator').innerText = 'You are not at the starting location of the game.';
-                
-    //         }
-    //     }
-
-    //     // error callback
-    //     function error(err) {
-    //     console.warn('Error(' + err.code + '): ' + err.message);
-    //     }
-    
-    //     // this is just a test location for now -- in front of webb statue
-    //     target = {
-    //         latitude: games[this.state.index].Locations[this.state.questionIndex].lat,
-    //         longitude: games[this.state.index].Locations[this.state.questionIndex].long
-    //     }
-        
-    //     // start watching
-    //     current = navigator.geolocation.watchPosition(success, error, {enableHighAccuracy: true});
-    // }
-
+  
     // when state changes, check to see if the game has ended
     // stop timer when game is completed
     componentDidUpdate() {
@@ -281,6 +239,7 @@ class Puzzle extends Component {
 
                     <progress className = 'prog' value = {this.state.atQuestion} max = {games[this.state.index].Total_Questions}/>
                     <br/><br/>
+
                         <div className="text-center">
                             <h1>{this.props.gTitle} Challenge</h1>
                             {questionPage}
