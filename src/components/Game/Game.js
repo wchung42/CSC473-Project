@@ -149,8 +149,8 @@ class Game extends Component {
 
     // this is just a test location for now -- in front of webb statue
     target = {
-      latitude: games[this.state.gameID].Starting_Location.latitude,
-      longitude: games[this.state.gameID].Starting_Location.longitude
+      latitude: 40.820583,
+      longitude: -73.949105
     }
 
     // start watching

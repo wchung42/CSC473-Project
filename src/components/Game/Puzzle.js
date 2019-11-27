@@ -227,7 +227,7 @@ class Puzzle extends Component {
             console.log('Distance: ' + dist)
 
             // player must be within 20 meters of location for answer to appear
-            if (dist <= 0.02) {
+            if (dist >= 0.03) {
                 console.log('You are here!');
                 // stop watching player location
                 navigator.geolocation.clearWatch(current)
@@ -243,10 +243,10 @@ class Puzzle extends Component {
         console.warn('Error(' + err.code + '): ' + err.message);
         }
     
-        // this is just a test location for now -- in front of webb statue
+        // TAKEN FROM THE JSON FILE FOR NOW
         target = {
-            latitude: games[this.state.index].Locations[this.state.questionIndex].lat,
-            longitude: games[this.state.index].Locations[this.state.questionIndex].long
+            latitude: games[this.state.index].Locations[this.state.atQuestion + 1].lat,
+            longitude: games[this.state.index].Locations[this.state.atQuestion + 1].long
         }
         
         // start watching
@@ -275,6 +275,8 @@ class Puzzle extends Component {
             return (
                 <div className = "game">
                     <section className = "middle">
+                        <progress className = 'prog' value = {this.state.atQuestion} max = {this.state.totalQuestions}/>
+                        <br/><br/>
                         <div className = "text-center">
                             { questionPage }
                         </div>
@@ -286,13 +288,21 @@ class Puzzle extends Component {
            
             return (
                 <div>
-                    <br /><br /><br />
-                    {answerPage}
-                    <p id="hint" className="questN" value=""></p>
-                    <div className="hint">
-                        <button id="hintBttn" className="btn-lg btn-warning" type="button" onClick={this.getHint}>
-                        {this.state.totalHints - this.state.hintCount} Hint(s) Left</button>
-                    </div>
+                    <section className = "middle">
+                        <progress className = 'prog' value = {this.state.atQuestion} max = {this.state.totalQuestions}/>
+                        <br/><br/>
+                        <div className = "text-center">
+                            { questionPage }
+                            <br /><br /><br />
+                            {answerPage}
+                            <p id="hint" className="questN" value=""></p>
+                            <div className="hint">
+                                <button id="hintBttn" className="btn-lg btn-warning" type="button" onClick={this.getHint}>
+                                {this.state.totalHints - this.state.hintCount} Hint(s) Left</button>
+                            </div>
+                        </div>
+                    </section>
+                       
                 </div>
 
             )
