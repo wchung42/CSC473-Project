@@ -10,6 +10,7 @@ export const onCreateGame = `subscription OnCreateGame {
     Difficulty
     Capacity
     Story
+    TimeLimit
     Players
     Total_Questions
     Total_Hints
@@ -35,6 +36,7 @@ export const onUpdateGame = `subscription OnUpdateGame {
     Difficulty
     Capacity
     Story
+    TimeLimit
     Players
     Total_Questions
     Total_Hints
@@ -60,6 +62,7 @@ export const onDeleteGame = `subscription OnDeleteGame {
     Difficulty
     Capacity
     Story
+    TimeLimit
     Players
     Total_Questions
     Total_Hints

@@ -19,37 +19,9 @@ import * as queries from './graphql/queries';
 import * as mutations from './graphql/mutations';
 
 Amplify.configure(aws_config);
-const ListGames = `query ListGames {
-  listGames {
-      items {
-        id
-        Title
-        Location
-        Difficulty
-        Story
-        Questions
-        Answers
-      }
-  }
-}`;
 
-class GamesList extends React.Component {
-  gameItems() {
-    console.log("Here", this.props.games);
-    return this.props.games.map(game =>
-      <li key={game.id}>
-        {game.Title}
-      </li>)
-  }
 
-  render() {
-    return (
-      <ul>
-        {this.gameItems()}
-      </ul>
-    )
-  }
-}
+
 
 //END HERE
 Analytics.configure({ disabled: true })
@@ -104,14 +76,7 @@ class App extends Component {
           {backdrop}
         </div>
         <div className="body-page">
-          <Connect query={graphqlOperation(queries.listGames)}>
-            {(response) => {
-              if (response.loading) { console.log("Loading"); return <div>Loading...</div>; }
-              if (response.errors) console.log(response.errors);
-              console.log(response.data);
-              // return <GamesList games={response.listGames} />
-            }}
-          </Connect>
+
           <Router>
             <Switch>
 

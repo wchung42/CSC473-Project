@@ -1,19 +1,28 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-import games from './games.json';
+// import games from './games.json';
 import './Game.css';
 import Endgame from './Endgame';
 import Answer from './Answer';
 import Question from './Question';
-
+//props this file needs to run: Id, TotalQuestion, TotalHints, AtQuestion, Questions, AnswerType, Answers, Hints, Long, Lad, TimeLimit
+//Each time answers is right => mutation Update AtQuestion 
+//When the game ends it will reset players pool => mutation updateGame(players: "")
+//Rework Hint component a little bit
 class Puzzle extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            index: this.props.gameId,
-            questionIndex: 1,
-            // image change
-            imageIndex: 1,
+            index: this.props.gID,
+            totalQuestions: this.props.gTotalQuestions,
+            totalHints: this.props.gTotalHints,
+            atQuestion: this.props.gAtQuestion,
+            questions: this.props.gQuestions,
+            questionVisualAid: this.props.gQuestionVisualAids,
+            answerType: this.props.gAnswerType,
+            answers: this.props.gAnswers,
+            hints: this.props.gHints,
+            geoLocation: this.props.gGeoLocation,
             hintCount: 0,
             usedHint: false,
             latitude: null,
@@ -28,30 +37,39 @@ class Puzzle extends Component {
         this.getHint = this.getHint.bind(this);
     }
     //this function is to get answer from NUMBER TYPE
-    getAnswer(e) {
-        let userAnswer = e.target.value;
+    async getAnswer(e) {
+        let userAnswer = e.target.value.toString();
         console.log("userAnswer", userAnswer)
-        let currentGameIndex = this.state.index;
-        let currentQuestionIndex = this.state.questionIndex;
-        let answer = games[currentGameIndex].Answers[currentQuestionIndex];
-
+        console.log("current Index", this.state.index)
+        console.log("hints", this.state.hints)
+        console.log("current Questions Index", this.state.atQuestion)
+        console.log('List of Answer', this.state.answers)
+        console.log('Answer Type List: ', this.state.answerType)
+        // let currentGameIndex = this.state.index;
+        // let currentQuestionIndex = this.state.atQuestion;
+        let answer = this.state.answers[this.state.atQuestion];
+        console.log(answer)
         //if the answer is correct
         if (userAnswer.toLowerCase() == answer.toLowerCase()) {
-            //else moving to the next question
+            //moving to the next question
             console.log("right answer");
             // clear hint space when moving to next question
             document.getElementById('hint').innerText = '';
-            this.setState({
-                questionIndex: currentQuestionIndex + 1,
-                imageIndex: currentQuestionIndex + 1,
+            await this.setState({
+                atQuestion: this.state.atQuestion + 1,
                 usedHint: false
             })
             //if this is the last question then End game
-            if (currentQuestionIndex == games[currentGameIndex].Total_Questions) {
-                this.setState({
+            if (this.state.atQuestion == this.state.totalQuestions) {
+                await this.setState({
                     gameState: false,
                     win: true
                 }); console.log("End of game");
+            }
+            //reset value of submit buttons
+            if (document.getElementById("answerBox")) {
+                document.getElementById("answerBox").value = "";
+                document.getElementById("submitBttn").value = "";
             }
         }
         //wrong answer => reset the current value of the pound button
@@ -60,7 +78,7 @@ class Puzzle extends Component {
             if (document.getElementById("answerBox")) {
                 // visual cue for wrong answer in text box
                 document.getElementById('answerBox').style.border = "medium solid #FF0000";
-                
+
                 setTimeout(function () {
                     document.getElementById('answerBox').style.border = "thin solid #000000";
                 }, 750)
@@ -76,34 +94,37 @@ class Puzzle extends Component {
                 setTimeout(function () {
                     document.getElementById('pound').style.background = '#DDDDDD';
                 }, 750);
-                
-               
+
+
             }
         }
     }
 
     getHint() {
-        let localIndex = this.state.index;
-        let localQuestionIndex = this.state.questionIndex;
-        let totalHint = games[localIndex].Total_Hint;
+        let questionIndex = this.state.atQuestion;
+        let totalHint = this.state.totalHints;
         let hintCount = this.state.hintCount;
         let hintArea = document.getElementById("hint");
         let usedHint = this.state.usedHint;
+        //Display hint and increment hint count
         if (hintCount < totalHint && !usedHint) {
             hintCount += 1;
-            hintArea.innerText = games[localIndex].Hint[localQuestionIndex];
+            hintArea.innerText = this.state.hints[questionIndex];
             this.setState({
                 hintCount: hintCount,
                 usedHint: true
             })
         }
+        //when the player press the hint button more than once for same question
         else if (usedHint) {
-            hintArea.innerText = games[localIndex].Hint[localQuestionIndex];
+            hintArea.innerText = this.state.hints[questionIndex];
         }
+        //when the users run out of hint
         else {
             hintArea.innerText = "Sorry You've Run Out Of Hint! NOW USE YOUR DAMN BRAIN"
         }
-        if (localQuestionIndex + 1 > games[localIndex].total_questions) {
+        //Timeout to prevent spamming
+        if (questionIndex + 1 > this.state.totalQuestions) {
             console.log("Hint button timeout not necessary");
         } else {
             document.getElementById("hintBttn").disabled = true;
@@ -113,7 +134,9 @@ class Puzzle extends Component {
             }, 2000)
         }
     }
-
+    
+    // start acquiring player location when component mounts
+    
     // when state changes, check to see if the game has ended
     // stop timer when game is completed
     componentDidUpdate() {
@@ -135,20 +158,26 @@ class Puzzle extends Component {
             )
         }
         else {
-            let questionPage = <Question id={this.state.index} qId={this.state.questionIndex} iId={this.state.imageIndex} />;
-            let answerPage = <Answer id={this.state.index} qId={this.state.questionIndex} action={this.getAnswer} />;
+            let questionPage = <Question
+                qContent={this.state.questions[this.state.atQuestion]}
+                qAid={this.state.questionVisualAid[this.state.atQuestion]} />;
+            let answerPage = <Answer
+                answerType={this.state.answerType[this.state.atQuestion]}
+                action={this.getAnswer} />;
             return (
                 <div className="game">
                     <section className="middle">
-
+                    <progress className = 'prog' value = {this.state.questionIndex} max = {games[this.state.index].Total_Questions}/>
+                    <br/><br/>
                         <div className="text-center">
+                            <h1>{this.props.gTitle} Challenge</h1>
                             {questionPage}
                             <br /><br /><br />
                             {answerPage}
                             <p id="hint" className="questN" value=""></p>
-                            <div className = "hint">
+                            <div className="hint">
                                 <button id="hintBttn" className="btn-lg btn-warning" type="button" onClick={this.getHint}>
-                                    {games[this.state.index].Total_Hint - this.state.hintCount} Hint(s) Left</button>
+                                    {this.state.totalHints - this.state.hintCount} Hint(s) Left</button>
                             </div>
                         </div>
                     </section>
@@ -163,65 +192,3 @@ class Puzzle extends Component {
 }
 
 export default Puzzle;
-
-  // position = async () => {
-  //   await navigator.geolocation.getCurrentPosition(
-  //     position => this.setState({
-  //       latitude: position.coords.latitude,
-  //       longitude: position.coords.longitude
-  //     }), newState => console.log(newState))
-
-  //   console.log(this.state.latitude, this.state.longitude)
-  // }
-
-
-
-
-// getAnswer() {
-//     let localIndex = this.state.index;
-//     let localQuestionIndex = this.state.questionIndex;
-//     let qIndex = localQuestionIndex + 1;  //INDICATE THE NEXT QUESTION
-//     let imgIndex = qIndex; // IMAGE INDEX 
-//     let answer = games[localIndex].answers[localQuestionIndex];
-//     let answerBox = document.getElementById("answer");
-//     let userAnswer = answerBox.value.toLowerCase(); //USER ANSWER = VALUE OF ANSWER BOX
-
-//     // console.log(answer);
-
-//     //correct answer
-//     if (userAnswer == answer.toLowerCase()) {
-//         document.getElementById("result").innerText = "Correct";
-//         answerBox.style.borderColor = "palegreen";
-//         answerBox.value = "";
-//         document.getElementById("hint").innerText = "";
-//         this.setState({
-//             questionIndex: qIndex,
-//             imageIndex: imgIndex,
-//             usedHint: false
-//         })
-//         // check if for more questions
-//         if (localQuestionIndex == games[localIndex].total_questions) {
-//             this.setState({
-//                 gameState: false,
-//                 win: true
-//             })
-//             console.log("End of game");
-//         }
-//         // console.log(this.state.questionIndex);
-//     }
-//     else {//wrong answer
-//         answerBox.style.borderColor = "salmon";
-//         document.getElementById("result").innerText = "Wrong";
-//         answerBox.value = "";
-//         // console.log(this.state.questionIndex);
-//     }
-//     if (qIndex > games[localIndex].total_questions) {
-//         console.log("Submit button time out not necessary");
-//     } else {
-//         document.getElementById("submitBttn").disabled = true;
-//         // document.getElementById("hintBttn").style.backgroundColor = "gray";
-//         setTimeout(function () {
-//             document.getElementById("submitBttn").disabled = false;
-//         }, 2000)
-//     }
-// }

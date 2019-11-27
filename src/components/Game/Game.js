@@ -4,92 +4,207 @@ import './Game.css';
 import Timer from './Timer';  // timer component that determines state of game
 import games from './games.json'; // get the game title
 import Panel from './gamePanel';
-import { withAuthenticator } from 'aws-amplify-react';
+import { withAuthenticator, Connect } from 'aws-amplify-react';
+import Amplify, { Analytics, API, Auth, graphqlOperation, Storage } from 'aws-amplify';
+import { getCurrentLocation, getDistanceFromLatLonInKm } from './util.js'; // import geolocation helper functions
+
+//each time the user press Play => mutationUpdate players
+const ListGames = `query ListGames {
+  listGames{
+    items{
+      id
+      Title
+      Thumbnail
+      Location
+      Difficulty
+      Story
+      TimeLimit
+      Total_Questions
+      Total_Hints
+      Questions
+      QuestionVisualAid
+      Hints
+      AnswerType
+      Answers  
+      GeoLocation      
+    }
+  }
+}`;
+
+// class GamesList extends React.Component {
+//   gameItems() {
+//     return this.props.games.map(game =>
+//       <ul>
+//         <li key={game.id}>
+//           {game.Title}
+//           <br />
+//           {game.Story}
+//           <br />
+//           {game.GeoLocation[0]}
+//           <br />
+//           {game.GeoLocation[1]}
+//           <br />
+//           Question 1:{game.Questions[0]}
+//           <br />
+//           Question 2: {game.Questions[1]}
+//           <br />
+//           Question 3: {game.Questions[2]}
+//         </li>
+//       </ul>
+
+//     )
+//   }
+
+//   render() {
+//     return (
+//       <div>
+//         {this.gameItems()}
+//       </div>
+//     )
+//   }
+// }
 
 class Game extends Component {
   constructor(props) {
     super(props)
     this.state = {
       gameID: 0,
-      gameReady: false,
+      gameTitle: "",
+      gameThumbnail: "#",
+      gameLocation: "CCNY",
+      gameDifficulty: 3,
+      gameStory: "",
+      gameCapacity: "",
+      gameTimeLimt: "",
+      gameTotalQuestions: "",
+      gameTotalHints: "",
+      gameAtQuestion: 1,
+      gameQuestions: "",
+      gameQuestionVisualAids: "",
+      gameHints: "",
+      gameAnswerType: "",
+      gameAnswers: "",
+      gameGeoLocation: "",
       latitude: null,
       longitude: null,
+      gameReady: false,
       gameSynopsis: 0, // 0: don't display game synopsis ; 1: display synopsis
       gameStart: 0 // 0: start button clicked, start game ; 1: stay on synopsis page
     };
     this.getGameId = this.getGameId.bind(this);
     this.startGame = this.startGame.bind(this);
-    // this.panelGenrator = this.panelGenrator.bind(this);
-  }
+    this.getPosition = this.getPosition.bind(this);
 
-  getGameId(ev) {
+  }
+  // updateGameInfo(Games)
+  //onclick will getGameId and then edit all states
+  async getGameId(ev) {
     console.log(ev.currentTarget.value)
-    this.setState({
-      gameID: ev.currentTarget.value,
+    let id = ev.currentTarget.value
+    await this.setState({
+      gameID: id,
+      gameTitle: games[id].Title,
+      gameThumbnail: games[id].Thumbnail,
+      gameLocation: "CCNY",
+      gameDifficulty: games[id].Difficulty,
+      gameStory: games[id].Story,
+      gameTimeLimt: "1800",
+      gameTotalQuestions: games[id].Total_Questions,
+      gameTotalHints: games[id].Total_Hint,
+      gameQuestions: games[id].Game_Story,
+      gameQuestionVisualAids: games[id].Images,
+      gameHints: games[id].Hint,
+      gameAnswerType: games[id].Answer_Type,
+      gameAnswers: games[id].Answers,
+      gameGeoLocation: "",
       gameReady: true,
       gameSynopsis: 1
-    }, console.log(this.state.gameID))
-    console.log(this.state.gameID)
+    })
+    console.log("Game Id is", this.state.gameID)
+    console.log("At Question: ", this.state.gameAtQuestion)
+    console.log("hints of this game: ", this.state.gameHints)
+    console.log("questions of this game: ", this.state.gameQuestions)
   }
 
   startGame() {
-    console.log('starting game');
-    this.setState({
-      gameSynopsis: 0,
-      gameStart: 1
-    })
+    // watch current location
+    let current, target, dist;
+    let currentState = this;
+    
+    function success(position) {
+      let userCoords = position.coords;
+      console.log(`latitude: ${userCoords.latitude} | longitude: ${userCoords.longitude}`)
+      // calculate distance to target
+      dist = getDistanceFromLatLonInKm(userCoords.latitude, userCoords.longitude, target.latitude, target.longitude);
+      console.log('Distance: ' + dist)
+      // player must be within 10 meters of starting point for game to begin
+      if (dist <= 0.09) {
+        console.log('You are here!');
+        // stop watching player location
+        navigator.geolocation.clearWatch(current)
+        // testtt
+        console.log('starting game');
+        currentState.setState({
+          gameSynopsis: 0,
+          gameStart: 1
+        })
+      } else {
+        document.getElementById('notAtLocationIndicator').innerText = 'You are not at the starting location of the game.';
+        console.log('Not here yet');
+      }
+    }
+
+    // error callback
+    function error(err) {
+      console.warn('Error(' + err.code + '): ' + err.message);
+    }
+    
+    // this is just a test location for now -- in front of webb statue
+    target = {
+      latitude: 40.820583,
+      longitude: -73.949105
+    }
+    
+    // start watching
+    current = navigator.geolocation.watchPosition(success, error, {enableHighAccuracy: true});
   }
 
-  position = async () => {
-    await navigator.geolocation.getCurrentPosition(
-      position => this.setState({
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude
-      }), newState => console.log(newState))
 
-       console.log(this.state.latitude, this.state.longitude);
-       
-      //  var R = 6371e3; // metres
-      //  var φ1 = lat1.toRadians();
-      //  var φ2 = lat2.toRadians();
-      //  var Δφ = (lat2-lat1).toRadians();
-      //  var Δλ = (lon2-lon1).toRadians();
-
-      //  var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
-      //         Math.cos(φ1) * Math.cos(φ2) *
-      //         Math.sin(Δλ/2) * Math.sin(Δλ/2);
-      //  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-
-      //  var d = R * c;
-   }
-
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.latitude !== this.props.latitude) {
-      this.setState({
-        latitude: this.props.latitude
+  getPosition() {
+    const success = async (pos) => {
+      await this.setState({
+        longitude: pos.coords.latitude,
+        latitude: pos.coords.longitude
       })
+      console.log("Inside", this.state.latitude, this.state.longitude);
     }
+    const error = (err) => { console.warn(`ERROR(${err.code}): ${err.message}`); }
+    navigator.geolocation.getCurrentPosition(success, error);
   }
-  //Want to load the game in here based on the name
+
+  //This will load list of games in the database (from __games__ )
   render = () => {
-    let panelGenrator = () => {
-      let listItems = games
-        .map(item =>
-          <Panel gameId={item.Id} func={this.getGameId} />
-        )
-      return <ol className="cardsX" >{listItems}</ol>
-    }
+    // id, thumbnail, title,location, capacity, timelimite, difficulty
     // go to game list page
     if (!this.state.gameReady && (this.state.gameSynopsis === 0) && (this.state.gameStart === 0)) {
       return (
+
         <div className="Game">
+          {/* <Connect query={graphqlOperation(ListGames)}>
+            {({ data, loading, errors }) => {
+              if (loading) { return <div>Loading...</div>; }
+              if (errors) console.log(errors);
+              console.log(data.listGames);
+
+              return <GamesList games={data.listGames.items} />
+            }}
+          </Connect> */}
           <br />
           <p className="Location">Click the button to get your coordinates.</p>
 
           <p className="Location">{this.state.latitude} {this.state.longitude}</p>
 
-          <button onClick={this.position} className='Location'>Location</button>
+          <button onClick={this.getPosition} className='Location'>Location</button>
           <br />
 
           <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
@@ -100,26 +215,27 @@ class Game extends Component {
             <button className="btn btn-lg btn-danger" type="button"><a href="/">&nbsp; Exit &nbsp;</a></button>
           </div>
           <div className="game-list">
-            <Panel func={this.getGameId} />
+            <Panel games={games} func={this.getGameId} />
           </div>
-
-
           <br />
         </div>
       )
     }
-    // go to game synopsis page
+    // Display game Story
     else if (this.state.gameReady && (this.state.gameSynopsis === 1) && (this.state.gameStart === 0)) {
       return (
         <div className="Game">
           <div className="exit">
-            <a href = "/Game" className="btn btn-lg btn-danger nounderline" type="button">&nbsp; Exit &nbsp;</a>
+            <a href="/Game" className="btn btn-lg btn-danger nounderline" type="button">&nbsp; Exit &nbsp;</a>
           </div>
           <div className="synopsis">
             <h1>{games[this.state.gameID].Story}</h1>
           </div>
           <div className="start">
             <button id="start-btn" className="btn btn-lg btn-success" type="button" onClick={this.startGame}>&nbsp; Start &nbsp;</button>
+          </div>
+          <div id = "notAtLocationIndicator">
+            <p></p>
           </div>
 
         </div>
@@ -136,7 +252,23 @@ class Game extends Component {
             <button className="btn-lg btn-danger" type="button"><a href="/Game">&nbsp; Exit &nbsp;</a></button>
           </div>
           <div className="gameInterface">
-            <Timer gameId={this.state.gameID} startCount="300" />
+            <Timer
+              gameID={this.state.gameID}
+              gameTitle={this.state.gameTitle}
+              gameThumbnail={this.state.gameThumbnail}
+              gameLocation={this.state.gameLocation}
+              gameDifficulty={this.state.gameDifficulty}
+              gameStory={this.state.gameStory}
+              gameTotalQuestions={this.state.gameTotalQuestions}
+              gameTotalHints={this.state.gameTotalHints}
+              gameAtQuestion={this.state.gameAtQuestion}
+              gameQuestions={this.state.gameQuestions}
+              gameQuestionVisualAids={this.state.gameQuestionVisualAids}
+              gameHints={this.state.gameHints}
+              gameAnswerType={this.state.gameAnswerType}
+              gameAnswers={this.state.gameAnswers}
+              gameGeoLocation={this.state.gameGeoLocation}
+              startCount={this.state.gameTimeLimt} />
           </div>
           <br />
         </div>
@@ -146,4 +278,7 @@ class Game extends Component {
 }
 
 
-export default withAuthenticator(Game);
+
+// export default withAuthenticator(Game);
+export default Game;
+

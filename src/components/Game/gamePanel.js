@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
-import games from './games.json';
 
 class gamePanel extends Component {
     render() {
-        let listItems = games
+        let listItems = this.props.games
             .map(item =>
                 <li className="card-body" key={item.Id} >
                     <img
                         key={item.Id}
                         className="card-img-top"
-                        src={item.Thumbnail} 
-                        alt = ''/>
+                        src={item.Thumbnail}
+                        alt='' />
                     <h5 className="card-title">
                         <strong>{item.Title}</strong>
                     </h5>
@@ -32,3 +31,6 @@ class gamePanel extends Component {
 
 }
 export default gamePanel;
+
+//Props this file needs to run:
+// id, thumbnail, title,location, capacity, timelimite, difficulty

@@ -10,6 +10,7 @@ export const createGame = `mutation CreateGame($input: CreateGameInput!) {
     Difficulty
     Capacity
     Story
+    TimeLimit
     Players
     Total_Questions
     Total_Hints
@@ -35,6 +36,7 @@ export const updateGame = `mutation UpdateGame($input: UpdateGameInput!) {
     Difficulty
     Capacity
     Story
+    TimeLimit
     Players
     Total_Questions
     Total_Hints
@@ -60,6 +62,7 @@ export const deleteGame = `mutation DeleteGame($input: DeleteGameInput!) {
     Difficulty
     Capacity
     Story
+    TimeLimit
     Players
     Total_Questions
     Total_Hints

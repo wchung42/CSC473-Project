@@ -154,3 +154,8 @@
 #timer {
   font-size: 5vh;
 }
+.prog{
+  width: 75%;
+  padding-bottom: 4vh;
+  white: red;
+}
