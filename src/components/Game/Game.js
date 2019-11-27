@@ -35,41 +35,6 @@ const ListGames = `query ListGames {
   }
 }`;
 
-
-
-// class GamesList extends React.Component {
-//   gameItems() {
-//     return this.props.games.map(game =>
-//       <ul>
-//         <li key={game.id}>
-//           {game.Title}
-//           <br />
-//           {game.Story}
-//           <br />
-//           {game.GeoLocation[0]}
-//           <br />
-//           {game.GeoLocation[1]}
-//           <br />
-//           Question 1:{game.Questions[0]}
-//           <br />
-//           Question 2: {game.Questions[1]}
-//           <br />
-//           Question 3: {game.Questions[2]}
-//         </li>
-//       </ul>
-
-//     )
-//   }
-
-//   render() {
-//     return (
-//       <div>
-//         {this.gameItems()}
-//       </div>
-//     )
-//   }
-// }
-
 class Game extends Component {
   constructor(props) {
     super(props)
@@ -108,7 +73,7 @@ class Game extends Component {
     try {
       const apiData = await API.graphql(graphqlOperation(ListGames));
       const gamesTest = apiData.data.listGames.items;
-      this.setState({ games: gamesTest });
+      this.setState({ games: gamesTest.reverse() });
     } catch (error) { console.log(error) }
   }
 
@@ -137,9 +102,9 @@ class Game extends Component {
       gameReady: true,
       gameSynopsis: 1
     })
-    console.log("Games1: ", this.state.games[0])
-    console.log("Games1 Question: ", this.state.games[0].Questions)
-    console.log("Games2: ", this.state.games[1])
+    console.log("Games0: ", this.state.games[0])
+    console.log("Games0 Question: ", this.state.games[0].Questions)
+    console.log("Games1: ", this.state.games[1])
     console.log("Id got back from user is: ", id)
     console.log("Game Id is", this.state.gameID)
     console.log("Game Title: ", this.state.gameTitle)
