@@ -75,8 +75,10 @@ class Puzzle extends Component {
                 }); console.log("End of game");
                 const nQuestion = {
                     id: this.props.gID,
-                    AtQuestion: 0
+                    AtQuestion: 0,
+                    Finished: true
                 }
+                //update the database when the answer is correct
                 const nextQuestion = await API.graphql(graphqlOperation(mutations.updateGame, { input: nQuestion }));
                 console.log("Next Question: ", nextQuestion);
             } else {
@@ -211,7 +213,7 @@ class Puzzle extends Component {
     componentDidUpdate() {
         if (this.state.win && this.state.timeStopper === 0) {
             this.setState({ timeStopper: 1 })
-            this.props.gameHandler();
+            // this.props.gameHandler();
         }
 
         // check location upon component update
@@ -261,53 +263,33 @@ class Puzzle extends Component {
             answerType={this.state.answerType[this.state.atQuestion]}
             action={this.getAnswer} />;
         // game states - playing or end game
-        if (!this.state.gameState) {
-            const winPage = <Endgame outcome={this.state.win} />;
-            return (
-                <div>
-                    {/* display win page when game is completed before timer hits 0 */}
-                    {winPage}
-                </div>
-            )
-        } 
-        // if not at location, only the question appears
-        else if (this.state.gameState && this.state.atLocation == 0) {
-            return (
-                <div className = "game">
-                    <section className = "middle">
-                        <progress className = 'prog' value = {this.state.atQuestion} max = {this.state.totalQuestions}/>
-                        <br/><br/>
-                        <div className = "text-center">
-                            { questionPage }
-                        </div>
-                    </section>
-                </div>
-            )
-        }
-        else if (this.state.gameState && this.state.atLocation == 1) {
-           
-            return (
-                <div>
-                    <section className = "middle">
-                        <progress className = 'prog' value = {this.state.atQuestion} max = {this.state.totalQuestions}/>
-                        <br/><br/>
-                        <div className = "text-center">
-                            { questionPage }
-                            <br /><br /><br />
-                            {answerPage}
-                            <p id="hint" className="questN" value=""></p>
-                            <div className="hint">
-                                <button id="hintBttn" className="btn-lg btn-warning" type="button" onClick={this.getHint}>
-                                {this.state.totalHints - this.state.hintCount} Hint(s) Left</button>
-                            </div>
-                        </div>
-                    </section>
-                       
-                </div>
-
-            )
-        }
             
+        let questionPage = <Question
+            qContent={this.state.questions[this.state.atQuestion]}
+            qAid={this.state.questionVisualAid[this.state.atQuestion]} />;
+        let answerPage = <Answer
+            answerType={this.state.answerType[this.state.atQuestion]}
+            action={this.getAnswer} />;
+        return (
+            <div className="game">
+                <section className="middle">
+                    <progress className='prog' value={this.state.atQuestion} max={this.state.totalQuestions} />
+                    <br /><br />
+                    <div className="text-center">
+                        <h1>{this.props.gTitle} Challenge</h1>
+                        {questionPage}
+                        <br /><br /><br />
+                        {answerPage}
+                        <p id="hint" className="questN" value=""></p>
+                        <div className="hint">
+                            <button id="hintBttn" className="btn-lg btn-warning" type="button" onClick={this.getHint}>
+                                {this.state.totalHints - this.state.hintCount} Hint(s) Left</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+        )
 
     }
 

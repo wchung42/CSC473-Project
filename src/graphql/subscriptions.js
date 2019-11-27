@@ -12,6 +12,7 @@ export const onCreateGame = `subscription OnCreateGame {
     Story
     TimeLimit
     Players
+    Finished
     Total_Questions
     Total_Hints
     Questions
@@ -38,6 +39,7 @@ export const onUpdateGame = `subscription OnUpdateGame {
     Story
     TimeLimit
     Players
+    Finished
     Total_Questions
     Total_Hints
     Questions
@@ -64,6 +66,7 @@ export const onDeleteGame = `subscription OnDeleteGame {
     Story
     TimeLimit
     Players
+    Finished
     Total_Questions
     Total_Hints
     Questions

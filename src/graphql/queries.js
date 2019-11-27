@@ -12,6 +12,7 @@ export const getGame = `query GetGame($id: ID!) {
     Story
     TimeLimit
     Players
+    Finished
     Total_Questions
     Total_Hints
     Questions
@@ -43,6 +44,7 @@ export const listGames = `query ListGames(
       Story
       TimeLimit
       Players
+      Finished
       Total_Questions
       Total_Hints
       Questions

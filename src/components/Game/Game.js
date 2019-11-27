@@ -5,9 +5,10 @@ import Timer from './Timer';  // timer component that determines state of game
 import games from './games.json'; // get the game title
 import Panel from './gamePanel';
 import { withAuthenticator, Connect } from 'aws-amplify-react';
-// import * as queries from '../../graphql/queries.js';
+import * as subscriptions from '../../graphql/subscriptions';
 import Amplify, { Analytics, API, Auth, graphqlOperation, Storage } from 'aws-amplify';
 import gql from 'graphql-tag';
+import * as mutations from '../../graphql/mutations';
 import { getCurrentLocation, getDistanceFromLatLonInKm } from './util.js'; // import geolocation helper functions
 import { ConsoleLogger } from '@aws-amplify/core';
 
@@ -24,6 +25,7 @@ const ListGames = `query ListGames {
       TimeLimit
       Total_Questions
       Total_Hints
+      Finished
       Questions
       AtQuestion
       QuestionVisualAid
@@ -48,6 +50,7 @@ class Game extends Component {
       gameStory: "",
       gameCapacity: "",
       gameTimeLimt: "",
+      gameFinished: false,
       gameTotalQuestions: "",
       gameTotalHints: "",
       gameAtQuestion: "",
@@ -66,30 +69,46 @@ class Game extends Component {
     this.getGameId = this.getGameId.bind(this);
     this.startGame = this.startGame.bind(this);
     this.getPosition = this.getPosition.bind(this);
+    this.gameUpdateSubscriptions = null;
   }
-  // updateGameInfo(Games)
-  //onclick will getGameId and then edit all states
+  //retrieve infomation from DB
   async componentDidMount() {
     try {
       const apiData = await API.graphql(graphqlOperation(ListGames));
       const gamesTest = apiData.data.listGames.items;
       this.setState({ games: gamesTest.reverse() });
     } catch (error) { console.log(error) }
+
+    try {
+      this.gameUpdateSubscriptions = await API.graphql(graphqlOperation(subscriptions.onUpdateGame, { id: this.state.gameID })).subscribe({
+        next: (gameData) => {
+          console.log("SUBSCRIPTION DATA", gameData.value.data.onUpdateGame.AtQuestion);
+          this.setState({
+            gameAtQuestion: gameData.value.data.onUpdateGame.AtQuestion,
+            gameFinished: gameData.value.data.onUpdateGame.Finished
+          })
+          console.log("new atquestion:", this.state.gameAtQuestion)
+        }
+
+      });
+    } catch (errorOfSub) { console.log(errorOfSub) }
+
   }
 
-  async getGameId(ev) {
 
+
+  //onclick will getGameId and then edit all states
+  async getGameId(ev) {
     let id = ev.currentTarget.value
     await this.setState({
       gameID: id,
-    })
-    await this.setState({
       gameTitle: this.state.games[id].Title,
       gameThumbnail: this.state.games[id].Thumbnail,
       gameLocation: "CCNY",
       gameDifficulty: this.state.games[id].Difficulty,
       gameStory: this.state.games[id].Story,
       gameTimeLimt: "1800",
+      gameFinished: this.state.games[id].Finished,
       gameTotalQuestions: this.state.games[id].Total_Questions,
       gameTotalHints: this.state.games[id].Total_Hints,
       gameQuestions: this.state.games[id].Questions,
@@ -102,6 +121,11 @@ class Game extends Component {
       gameReady: true,
       gameSynopsis: 1
     })
+    const nQuestion = {
+      id: this.state.gameID,
+      Finished: false
+    }
+    const nextQuestion = await API.graphql(graphqlOperation(mutations.updateGame, { input: nQuestion }));
     console.log("Games0: ", this.state.games[0])
     console.log("Games0 Question: ", this.state.games[0].Questions)
     console.log("Games1: ", this.state.games[1])
@@ -158,7 +182,6 @@ class Game extends Component {
     current = navigator.geolocation.watchPosition(success, error, { enableHighAccuracy: true });
   }
 
-
   getPosition() {
     const success = async (pos) => {
       await this.setState({
@@ -179,16 +202,6 @@ class Game extends Component {
       return (
 
         <div className="Game">
-          {/* <Connect query={graphqlOperation(ListGames)}>
-            {({ data, loading, errors }) => {
-              if (loading) { return <div>Loading...</div>; }
-              if (errors) console.log(errors);
-              console.log(data.listGames);
-
-              return <GamesList games={data.listGames.items} />
-            }}
-          </Connect> */}
-          <br />
           <p className="Location">Click the button to get your coordinates.</p>
 
           <p className="Location">{this.state.latitude} {this.state.longitude}</p>
@@ -230,6 +243,7 @@ class Game extends Component {
         </div>
       )
     }
+    //run the game
     else if (this.state.gameReady && (this.state.gameSynopsis === 0) && (this.state.gameStart === 1)) {
       return (
         <div className="Game">
@@ -242,12 +256,14 @@ class Game extends Component {
           </div>
           <div className="gameInterface">
             <Timer
+              key={this.state.gameAtQuestion}
               gameID={this.state.gameID}
               gameTitle={this.state.gameTitle}
               gameThumbnail={this.state.gameThumbnail}
               gameLocation={this.state.gameLocation}
               gameDifficulty={this.state.gameDifficulty}
               gameStory={this.state.gameStory}
+              gameFinished={this.state.gameFinished}
               gameTotalQuestions={this.state.gameTotalQuestions}
               gameTotalHints={this.state.gameTotalHints}
               gameAtQuestion={this.state.gameAtQuestion}
