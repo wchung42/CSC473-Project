@@ -67,22 +67,30 @@ class Puzzle extends Component {
                     gameState: false,
                     win: true
                 }); console.log("End of game");
+                const nQuestion = {
+                    id: this.props.gID,
+                    AtQuestion: 0
+                }
+                const nextQuestion = await API.graphql(graphqlOperation(mutations.updateGame, { input: nQuestion }));
+                console.log("Next Question: ", nextQuestion);
+            } else {
+                if (document.getElementById("answerBox")) {
+                    document.getElementById("answerBox").value = "";
+                    document.getElementById("submitBttn").value = "";
+                }
+                if (document.getElementById("pound")) { document.getElementById("pound").value = ""; }
+
+                const nQuestion = {
+                    id: this.props.gID,
+                    AtQuestion: this.props.gAtQuestion + 1
+                }
+                const nextQuestion = await API.graphql(graphqlOperation(mutations.updateGame, { input: nQuestion }));
+                console.log("Next Question: ", nextQuestion);
+                console.log("this state index: ", this.state.index)
+                console.log("Currently At Question: ", this.state.atQuestion)
             }
             //reset value of submit buttons
-            if (document.getElementById("answerBox")) {
-                document.getElementById("answerBox").value = "";
-                document.getElementById("submitBttn").value = "";
-            }
-            if (document.getElementById("pound")) { document.getElementById("pound").value = ""; }
 
-            const nQuestion = {
-                id: this.props.gID,
-                AtQuestion: this.props.gAtQuestion + 1
-            }
-            const nextQuestion = await API.graphql(graphqlOperation(mutations.updateGame, { input: nQuestion }));
-            console.log("Next Question: ", nextQuestion);
-            console.log("this state index: ", this.state.index)
-            console.log("Currently At Question: ", this.state.atQuestion)
         }
         //wrong answer => reset the current value of the pound button
         else {
