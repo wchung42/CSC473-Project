@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-// import games from './games.json';
 import './Game.css';
 import Endgame from './Endgame';
 import Answer from './Answer';
 import Question from './Question';
+import Amplify, { API, graphqlOperation } from 'aws-amplify';
+import * as mutations from '../../graphql/mutations';
 //props this file needs to run: Id, TotalQuestion, TotalHints, AtQuestion, Questions, AnswerType, Answers, Hints, Long, Lad, TimeLimit
 //Each time answers is right => mutation Update AtQuestion 
 //When the game ends it will reset players pool => mutation updateGame(players: "")
 //Rework Hint component a little bit
+
 class Puzzle extends Component {
     constructor(props) {
         super(props)
@@ -72,6 +74,15 @@ class Puzzle extends Component {
                 document.getElementById("submitBttn").value = "";
             }
             if (document.getElementById("pound")) { document.getElementById("pound").value = ""; }
+
+            const nQuestion = {
+                id: this.props.gID,
+                AtQuestion: this.props.gAtQuestion + 1
+            }
+            const nextQuestion = await API.graphql(graphqlOperation(mutations.updateGame, { input: nQuestion }));
+            console.log("Next Question: ", nextQuestion);
+            console.log("this state index: ", this.state.index)
+            console.log("Currently At Question: ", this.state.atQuestion)
         }
         //wrong answer => reset the current value of the pound button
         else {

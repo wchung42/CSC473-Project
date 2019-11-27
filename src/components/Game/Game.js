@@ -109,7 +109,7 @@ class Game extends Component {
       const apiData = await API.graphql(graphqlOperation(ListGames));
       const gamesTest = apiData.data.listGames.items;
       this.setState({ games: gamesTest });
-    } catch (error) { }
+    } catch (error) { console.log(error) }
   }
 
   async getGameId(ev) {
