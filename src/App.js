@@ -6,7 +6,7 @@ import Navbar from './components/Navbar/Navbar';
 import SideDrawerMenu from './components/SideDrawerMenu/SideDrawerMenu';
 import Backdrop from './components/Backdrop/Backdrop';
 import Game from './components/Game/Game';
-import Home from './components/home';
+import Home from './components/home/home';
 import Footer from './components/Footer/Footer'
 import About from './components/About/About';
 import Contact from './components/Contact/Contact';

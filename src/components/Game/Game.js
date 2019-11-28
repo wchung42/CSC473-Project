@@ -2,7 +2,7 @@ import React, { Component, ReactDOM } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import './Game.css';
 import Timer from './Timer';  // timer component that determines state of game
-// import games from './games.json'; // get the game title
+import games from './games.json'; // get the game title
 import Panel from './gamePanel';
 import { withAuthenticator, Connect } from 'aws-amplify-react';
 import * as subscriptions from '../../graphql/subscriptions';
@@ -150,7 +150,7 @@ class Game extends Component {
       dist = getDistanceFromLatLonInKm(userCoords.latitude, userCoords.longitude, target.latitude, target.longitude);
       console.log('Distance: ' + dist)
       // player must be within 10 meters of starting point for game to begin
-      if (dist >= 0.09) {
+      if (dist <= 0.09) {
         console.log('You are here!');
         // stop watching player location
         navigator.geolocation.clearWatch(current)
@@ -162,7 +162,8 @@ class Game extends Component {
         })
       } else {
         document.getElementById('notAtLocationIndicator').innerText = 'You are not at the starting location of the game.';
-        console.log('Not here yet');
+        console.log('not there yet');
+        
       }
     }
 

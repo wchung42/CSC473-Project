@@ -3,6 +3,10 @@
         "Id": 0,
         "Title": "The Curious Case of Room STC01",
         "Difficulty": 2,
+        "Starting_Location": {
+            "latitude": 40.819849,
+            "longitude": -73.950563
+        },
         "Story": "Some spirits are strong and manifest in a ghost like form, most are weak and must live on in within a host. The host is usually an object. CCNY is known for having dead in the library due to an impossible engineering department. The Grove School of Engineering has caused this room to become filled with spirits trapped in objects, we need you to set them free!",
         "Tag": "#ccny, #shepard_hall",
         "Thumbnail": "https://i.ibb.co/sVKnY3R/74419834-2503997649921511-7175701397294284800-n.jpg",
@@ -93,12 +97,34 @@
             "13": "",
             "14": "",
             "15": ""
+        },
+        "Locations": {
+            "1": {
+                "lat": 40.820583,
+                "long": -73.949105
+            },
+            "2": {
+                "lat": 40.820583,
+                "long": -73.949105
+            },
+            "3": {
+                "lat": 40.820583,
+                "long": -73.949105
+            },
+            "4": {
+                "lat": 40.820583,
+                "long": -73.949105
+            }
         }
     },
     {
         "Id": 1,
         "Title": "Hero of the Angle",
         "Difficulty": 4,
+        "Starting_Location": {
+            "latitude": 40.8812713,
+            "longitude": -73.8301322
+        },
         "Story": "The once general of the Civil War Alexander S. Webb, who received a Medal of Honor for his battle of Gettysburg, is trapped. The general who was a president of CCNY was made into a statue where his soul is contained. General webb is trapped in a prison forever to watch time continue as he cannot move on himself. We need to free the hero from his prison by connecting his legacy to those who have already been freed.",
         "Tag": "#ccny, #harris_hall",
         "Thumbnail": "https://cdn.discordapp.com/attachments/629102063107964961/644893758793449494/image0.jpg",
@@ -203,6 +229,52 @@
             "9": "Who showed us the sunset",
             "10": "Go to the building where time hangs",
             "11": "Compton & Goethals Hall"
+        },
+        "Locations": {
+            "1": {
+                "lat": 40.820571,
+                "long": -73.949104
+            },
+            "2": {
+                "lat": 40.820583,
+                "long": -73.949105
+            },
+            "3": {
+                "lat": 40.820789,
+                "long": -73.948574
+            },
+            "4": {
+                "lat": 40.820772,
+                "long": -73.948758
+            },
+            "5": {
+                "lat": 40.820772,
+                "long": -73.948758
+            },
+            "6": {
+                "lat": 40.820772,
+                "long": -73.948758
+            },
+            "7": {
+                "lat": 40.820772,
+                "long": -73.948758
+            },
+            "8": {
+                "lat": 40.820901,
+                "long": -73.948055
+            },
+            "9": {
+                "lat": 40.820408,
+                "long": -73.947974
+            },
+            "10": {
+                "lat": 40.820893,
+                "long": -73.949929
+            },
+            "11": {
+                "lat": 40.82147,
+                "long": -73.949437
+            }
         }
     },
     {

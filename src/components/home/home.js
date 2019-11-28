@@ -1,0 +1,48 @@
+import React, { Component } from 'react';
+import './home.css';
+// Amplify.configure(aws_exports);
+// console.log(aws_exports)
+//declare query to listGames
+
+
+class home extends React.Component {
+  render() {
+    return (
+      <div className='landing'>
+        <img className="hp-image"src={require("./hp.jpg")} alt="logo" />
+        <div className='banner-text'>
+        
+        <h1 >Wellcome To Our Website</h1>
+        
+        </div>
+        
+        
+        <section id='intro'>
+          <h3 id='headline'>Introduction</h3>
+            <ul>
+              <li>
+                <strong>Goal</strong>
+                <br/>
+                 -players cooperatively discover clues, solve puzzles, and accomplish tasks in games in order to know more about our school's history in a limited amount of time'
+              </li>
+              <li>
+              <strong>Feature</strong>
+              <br/>
+                -players play with games according to their geolocation
+              </li>
+              <li>
+                <strong>Step</strong>
+                <br/>
+                -sign up  
+                <br/>                               
+                -start the game                  
+              </li>
+              
+            </ul>
+          </section>
+        
+      </div>
+    );
+  }
+}
+export default home;
