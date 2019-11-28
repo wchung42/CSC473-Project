@@ -263,13 +263,6 @@ class Puzzle extends Component {
             answerType={this.state.answerType[this.state.atQuestion]}
             action={this.getAnswer} />;
         // game states - playing or end game
-            
-        let questionPage = <Question
-            qContent={this.state.questions[this.state.atQuestion]}
-            qAid={this.state.questionVisualAid[this.state.atQuestion]} />;
-        let answerPage = <Answer
-            answerType={this.state.answerType[this.state.atQuestion]}
-            action={this.getAnswer} />;
         return (
             <div className="game">
                 <section className="middle">
