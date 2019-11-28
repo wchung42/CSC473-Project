@@ -1,13 +1,13 @@
 {
 	"auth": {
-		"escape591c9385": {
+		"escapereb9360bb": {
 			"service": "Cognito",
 			"providerPlugin": "awscloudformation",
 			"dependsOn": []
 		}
 	},
 	"api": {
-		"escape": {
+		"escaper": {
 			"service": "AppSync",
 			"providerPlugin": "awscloudformation",
 			"output": {
@@ -16,7 +16,7 @@
 					"defaultAuthentication": {
 						"authenticationType": "AMAZON_COGNITO_USER_POOLS",
 						"userPoolConfig": {
-							"userPoolId": "authescape591c9385"
+							"userPoolId": "authescapereb9360bb"
 						}
 					}
 				}

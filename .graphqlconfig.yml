@@ -1,8 +1,8 @@
 projects:
-  escape:
+  escaper:
     schemaPath: src/graphql/schema.json
     includes:
-      - src/graphql/**/*.js
+      - ''
     excludes:
       - ./amplify/**
     extensions:
