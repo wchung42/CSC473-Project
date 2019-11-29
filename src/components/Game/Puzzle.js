@@ -89,7 +89,7 @@ class Puzzle extends Component {
                 if (document.getElementById("pound")) { document.getElementById("pound").value = ""; }
 
                 const nQuestion = {
-                    id: this.props.gID,
+                    id: this.state.index,
                     AtQuestion: this.props.gAtQuestion + 1
                 }
                 const nextQuestion = await API.graphql(graphqlOperation(mutations.updateGame, { input: nQuestion }));

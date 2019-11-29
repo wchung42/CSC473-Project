@@ -83,11 +83,16 @@ class Game extends Component {
       this.gameUpdateSubscriptions = await API.graphql(graphqlOperation(subscriptions.onUpdateGame, { id: this.state.gameID })).subscribe({
         next: (gameData) => {
           console.log("SUBSCRIPTION DATA", gameData.value.data.onUpdateGame.AtQuestion);
-          this.setState({
-            gameAtQuestion: gameData.value.data.onUpdateGame.AtQuestion,
-            gameFinished: gameData.value.data.onUpdateGame.Finished
-          })
-          console.log("new atquestion:", this.state.gameAtQuestion)
+          if (gameData.value.data.onUpdateGame.id == this.state.gameID) {
+            this.setState({
+              gameAtQuestion: gameData.value.data.onUpdateGame.AtQuestion,
+              gameFinished: gameData.value.data.onUpdateGame.Finished
+            })
+            console.log("new atquestion:", this.state.gameAtQuestion)
+          }
+          else {
+            console.log("Game", gameData.value.data.onUpdateGame.id, " updated")
+          }
         }
 
       });
@@ -284,6 +289,6 @@ class Game extends Component {
 
 
 
-// export default withAuthenticator(Game);
-export default Game;
+export default withAuthenticator(Game);
+// export default Game;
 
