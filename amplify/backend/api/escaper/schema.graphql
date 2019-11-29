@@ -11,14 +11,21 @@ type Game @model {
   Finished: Boolean!              #true = win / false = not finished the game
   Total_Questions(limit: Int = 15): Int!						#Number of Questions
   Total_Hints(limit: Int = 5): Int!								#Number of Hints player allowed to use
-  Questions(limit: Int = Total_Questions): [String]!			#List of Questions
-  AtQuestion(limit: Int = Total_Questions): Int					#Number to Indicate what question they are at
-  QuestionVisualAid(limit: Int = Total_Questions): [String]		#Image to aid answering the question
-  Hints(limit: Int = Total_Questions): [String]!				#Hint for each question
-  GeoLocation(limit: Int = Total_Questions):[String]			#GeoLocation to unlock the question
-  AnswerType(limit: Int = Total_Questions):[String]!			#Type of form for user to enter answer		
-  Answers(limit: Int = Total_Questions):[String]!				#List of Answers
+  Question: [Question]!  @connection(name:"GamePlay")
   Rating(limit: Int = 5):Int									#Rating user leave when finish the game
   Review: String												#Review user leave when finish the game
   AidStuffs: [String]											#Aid stuffs for different type of answer
+}
+# define Question model/object
+type Question @model{
+  id: ID!       #ID of question
+  game: Game  @connection(name:"GamePlay")      #What game this question belongs to
+  Instruction: String!                        #To indicate how the player can unlock the question
+  QuestionGeo: [String]!                      #GeoLocation to unlock the question
+  Question: String!                           #Question user have to answer
+  QuestionAid: [String]                       #Image to aid answering the question
+  AnswerType: String!                         #Type of answer used to render the way user input answer
+  Answer: [String]!                           #Answer user have to guess right
+  AnswerAid: [String]                         #For special type of answer
+  Hint: String!                               #When they don't know the answer
 }
