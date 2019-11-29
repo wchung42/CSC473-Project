@@ -83,11 +83,16 @@ class Game extends Component {
       this.gameUpdateSubscriptions = await API.graphql(graphqlOperation(subscriptions.onUpdateGame, { id: this.state.gameID })).subscribe({
         next: (gameData) => {
           console.log("SUBSCRIPTION DATA", gameData.value.data.onUpdateGame.AtQuestion);
-          this.setState({
-            gameAtQuestion: gameData.value.data.onUpdateGame.AtQuestion,
-            gameFinished: gameData.value.data.onUpdateGame.Finished
-          })
-          console.log("new atquestion:", this.state.gameAtQuestion)
+          if (gameData.value.data.onUpdateGame.id == this.state.gameID) {
+            this.setState({
+              gameAtQuestion: gameData.value.data.onUpdateGame.AtQuestion,
+              gameFinished: gameData.value.data.onUpdateGame.Finished
+            })
+            console.log("new atquestion:", this.state.gameAtQuestion)
+          }
+          else {
+            console.log("Game", gameData.value.data.onUpdateGame.id, " updated")
+          }
         }
 
       });
@@ -150,7 +155,7 @@ class Game extends Component {
       dist = getDistanceFromLatLonInKm(userCoords.latitude, userCoords.longitude, target.latitude, target.longitude);
       console.log('Distance: ' + dist)
       // player must be within 10 meters of starting point for game to begin
-      if (dist <= 0.09) {
+      if (dist >= 0.09) {
         console.log('You are here!');
         // stop watching player location
         navigator.geolocation.clearWatch(current)
@@ -163,7 +168,7 @@ class Game extends Component {
       } else {
         document.getElementById('notAtLocationIndicator').innerText = 'You are not at the starting location of the game.';
         console.log('not there yet');
-        
+
       }
     }
 
@@ -284,6 +289,6 @@ class Game extends Component {
 
 
 
-// export default withAuthenticator(Game);
-export default Game;
+export default withAuthenticator(Game);
+// export default Game;
 

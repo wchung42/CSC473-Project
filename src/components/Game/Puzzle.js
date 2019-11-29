@@ -89,7 +89,7 @@ class Puzzle extends Component {
                 if (document.getElementById("pound")) { document.getElementById("pound").value = ""; }
 
                 const nQuestion = {
-                    id: this.props.gID,
+                    id: this.state.index,
                     AtQuestion: this.props.gAtQuestion + 1
                 }
                 const nextQuestion = await API.graphql(graphqlOperation(mutations.updateGame, { input: nQuestion }));
@@ -168,11 +168,11 @@ class Puzzle extends Component {
     //     // watch current location
     //     let current, target, dist;
     //     let currentState = this;
-        
+
     //     function success(position) {
     //         let userCoords = position.coords;
     //         console.log(`latitude: ${userCoords.latitude} | longitude: ${userCoords.longitude}`)
-            
+
     //         // calculate distance to target
     //         dist = getDistanceFromLatLonInKm(userCoords.latitude, userCoords.longitude, target.latitude, target.longitude);
     //         console.log('Distance to question: ' + dist)
@@ -189,7 +189,7 @@ class Puzzle extends Component {
     //             });
     //         } else {
     //             //document.getElementById('notAtLocationIndicator').innerText = 'You are not at the starting location of the game.';
-                
+
     //         }
     //     }
 
@@ -197,13 +197,13 @@ class Puzzle extends Component {
     //     function error(err) {
     //     console.warn('Error(' + err.code + '): ' + err.message);
     //     }
-    
+
     //     // this is just a test location for now -- in front of webb statue
     //     target = {
     //         latitude: games[this.state.index].Locations[this.state.questionIndex].lat,
     //         longitude: games[this.state.index].Locations[this.state.questionIndex].long
     //     }
-        
+
     //     // start watching
     //     current = navigator.geolocation.watchPosition(success, error, {enableHighAccuracy: true});
     // }
@@ -219,11 +219,11 @@ class Puzzle extends Component {
         // check location upon component update
         let current, target, dist;
         let currentState = this;
-        
+
         function success(position) {
             let userCoords = position.coords;
             console.log(`latitude: ${userCoords.latitude} | longitude: ${userCoords.longitude}`)
-            
+
             // calculate distance to target
             dist = getDistanceFromLatLonInKm(userCoords.latitude, userCoords.longitude, target.latitude, target.longitude);
             console.log('Distance: ' + dist)
@@ -242,27 +242,30 @@ class Puzzle extends Component {
 
         // error callback
         function error(err) {
-        console.warn('Error(' + err.code + '): ' + err.message);
+            console.warn('Error(' + err.code + '): ' + err.message);
         }
-    
+
         // TAKEN FROM THE JSON FILE FOR NOW
         target = {
             latitude: games[this.state.index].Locations[this.state.atQuestion + 1].lat,
             longitude: games[this.state.index].Locations[this.state.atQuestion + 1].long
         }
-        
+
         // start watching
-        current = navigator.geolocation.watchPosition(success, error, {enableHighAccuracy: true});
+        current = navigator.geolocation.watchPosition(success, error, { enableHighAccuracy: true });
     }
 
     render() {
+        // game states - playing or end game
+
+
         let questionPage = <Question
             qContent={this.state.questions[this.state.atQuestion]}
             qAid={this.state.questionVisualAid[this.state.atQuestion]} />;
         let answerPage = <Answer
             answerType={this.state.answerType[this.state.atQuestion]}
             action={this.getAnswer} />;
-        // game states - playing or end game
+            
         return (
             <div className="game">
                 <section className="middle">
