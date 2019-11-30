@@ -10,28 +10,33 @@ export const createGame = `mutation CreateGame($input: CreateGameInput!) {
     Difficulty
     Capacity
     Story
-    TimeLimit
+    Time_Limit
+    Geo_Location
     Players
     Finished
     Total_Questions
     Total_Hints
-    Question {
+    At_Question
+    Questions {
       items {
         id
         Instruction
-        QuestionGeo
+        Question_Geo
         Question
-        QuestionAid
-        AnswerType
+        Question_Aid
+        Answer_Type
         Answer
-        AnswerAid
+        Answer_Aid0
+        Answer_Aid1
+        Answer_Aid2
+        Answer_Aid3
         Hint
       }
       nextToken
     }
     Rating
     Review
-    AidStuffs
+    Aid_Stuffs
   }
 }
 `;
@@ -44,28 +49,33 @@ export const updateGame = `mutation UpdateGame($input: UpdateGameInput!) {
     Difficulty
     Capacity
     Story
-    TimeLimit
+    Time_Limit
+    Geo_Location
     Players
     Finished
     Total_Questions
     Total_Hints
-    Question {
+    At_Question
+    Questions {
       items {
         id
         Instruction
-        QuestionGeo
+        Question_Geo
         Question
-        QuestionAid
-        AnswerType
+        Question_Aid
+        Answer_Type
         Answer
-        AnswerAid
+        Answer_Aid0
+        Answer_Aid1
+        Answer_Aid2
+        Answer_Aid3
         Hint
       }
       nextToken
     }
     Rating
     Review
-    AidStuffs
+    Aid_Stuffs
   }
 }
 `;
@@ -78,28 +88,33 @@ export const deleteGame = `mutation DeleteGame($input: DeleteGameInput!) {
     Difficulty
     Capacity
     Story
-    TimeLimit
+    Time_Limit
+    Geo_Location
     Players
     Finished
     Total_Questions
     Total_Hints
-    Question {
+    At_Question
+    Questions {
       items {
         id
         Instruction
-        QuestionGeo
+        Question_Geo
         Question
-        QuestionAid
-        AnswerType
+        Question_Aid
+        Answer_Type
         Answer
-        AnswerAid
+        Answer_Aid0
+        Answer_Aid1
+        Answer_Aid2
+        Answer_Aid3
         Hint
       }
       nextToken
     }
     Rating
     Review
-    AidStuffs
+    Aid_Stuffs
   }
 }
 `;
@@ -114,25 +129,30 @@ export const createQuestion = `mutation CreateQuestion($input: CreateQuestionInp
       Difficulty
       Capacity
       Story
-      TimeLimit
+      Time_Limit
+      Geo_Location
       Players
       Finished
       Total_Questions
       Total_Hints
-      Question {
+      At_Question
+      Questions {
         nextToken
       }
       Rating
       Review
-      AidStuffs
+      Aid_Stuffs
     }
     Instruction
-    QuestionGeo
+    Question_Geo
     Question
-    QuestionAid
-    AnswerType
+    Question_Aid
+    Answer_Type
     Answer
-    AnswerAid
+    Answer_Aid0
+    Answer_Aid1
+    Answer_Aid2
+    Answer_Aid3
     Hint
   }
 }
@@ -148,25 +168,30 @@ export const updateQuestion = `mutation UpdateQuestion($input: UpdateQuestionInp
       Difficulty
       Capacity
       Story
-      TimeLimit
+      Time_Limit
+      Geo_Location
       Players
       Finished
       Total_Questions
       Total_Hints
-      Question {
+      At_Question
+      Questions {
         nextToken
       }
       Rating
       Review
-      AidStuffs
+      Aid_Stuffs
     }
     Instruction
-    QuestionGeo
+    Question_Geo
     Question
-    QuestionAid
-    AnswerType
+    Question_Aid
+    Answer_Type
     Answer
-    AnswerAid
+    Answer_Aid0
+    Answer_Aid1
+    Answer_Aid2
+    Answer_Aid3
     Hint
   }
 }
@@ -182,25 +207,30 @@ export const deleteQuestion = `mutation DeleteQuestion($input: DeleteQuestionInp
       Difficulty
       Capacity
       Story
-      TimeLimit
+      Time_Limit
+      Geo_Location
       Players
       Finished
       Total_Questions
       Total_Hints
-      Question {
+      At_Question
+      Questions {
         nextToken
       }
       Rating
       Review
-      AidStuffs
+      Aid_Stuffs
     }
     Instruction
-    QuestionGeo
+    Question_Geo
     Question
-    QuestionAid
-    AnswerType
+    Question_Aid
+    Answer_Type
     Answer
-    AnswerAid
+    Answer_Aid0
+    Answer_Aid1
+    Answer_Aid2
+    Answer_Aid3
     Hint
   }
 }
