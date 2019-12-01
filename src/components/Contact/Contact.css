@@ -1,11 +1,10 @@
-
 .container{
     min-height: 100vh;
     max-width: 100%;
     background-color: black;
     font-family: 'Courier New', Courier, monospace;
     color: white;
-    /* display: flexbox; */
+    background-image: url(../home/home-background.jpg);
 }
 
 #heading-title h1 {

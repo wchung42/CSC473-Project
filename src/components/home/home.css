@@ -1,9 +1,11 @@
 .landing{
-background: #bdc3c7;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to bottom, #2c3e50, #bdc3c7);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to bottom, #2c3e50, #bdc3c7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-position: relative;
-min-height: 100vh;
+    /* background: #bdc3c7; 
+    background: -webkit-linear-gradient(to bottom, #2c3e50, #bdc3c7); 
+    background: linear-gradient(to bottom, #2c3e50, #bdc3c7); */
+    background-image: url('home-background.jpg');
+    position: relative;
+    min-height: 100vh;
+    text-align: center;
 }
 .banner-text{
     background-color: black;
@@ -37,7 +39,7 @@ min-height: 100vh;
     size: 50px;
 }
 
- .hp-image{
+.hp-image{
     width: 100%;
 
 } 
@@ -48,19 +50,55 @@ min-height: 100vh;
     text-decoration: underline;
 }
 
+#intro {
+    text-align: center;
+    color: white;
+    max-width: 550px;
+    margin: 0 auto;
+}
+
 #intro ul {
+    display: inline-block;
+    /* width: 75%; */
+    margin: 0 auto;
     list-style-type: none;
     max-width: 550px;
-    margin: auto;
     text-align: center;
     line-height: 1.6;
     font-size: 250%;
+    color: white;
 }
 
 #intro ul strong {
     font-size: 100px;
 }
-li {
-    margin: 16px 0;
+
+.intro-dividers {
+    color: rgb(255, 187, 0);
+    font-size: 250%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-weight: bolder;
+    /* margin: 0 auto; */
 }
- 
+
+#intro ul li {
+    float: center;
+
+}
+
+/* testing */
+#intro strong {
+    font-size: 80px;
+    margin-top: 15px;
+}
+
+#intro p {
+    font-size: 45px;
+}
+
+#intro ol {
+    font-size: 30px;
+    text-align: left;
+    margin-left: 50px;
+}
