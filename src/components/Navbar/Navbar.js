@@ -65,7 +65,7 @@ render(){
 
       const { username, showAuth } = this.state;
       const {
-        handleShowAuth, handleCloseAuth, handleAuthStateChange, handleSignOut,
+        handleShowAuth, handleCloseAuth, handleAuthStateChange, 
       } = this;
 
 
@@ -87,9 +87,6 @@ return(
                       <a id ="username">{username /*Printing the username*/} </a>
                       
                     </Nav.Item>
-                  <Nav.Item>
-                    <button className ="logout" style={{color:'white', background:'none', border:'none'}} onClick={handleSignOut}> <a>Sign out</a></button>
-                  </Nav.Item>
                 </Nav>
                 </div>
               )
@@ -112,7 +109,6 @@ return(
 
         <Dialog className ="auth" onClose={handleCloseAuth} aria-labelledby="simple-dialog-title" open={showAuth}>
           <Authenticator
-          
             hideDefault={!showAuth}
             onStateChange={handleAuthStateChange}
           />
