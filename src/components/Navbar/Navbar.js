@@ -79,7 +79,7 @@ return(
             {username
               ? (                  
                 <div className ="userLOGOUT">
-                <Nav className="navigation navbar">
+                <Nav className="navigation">
                     <ul>
                     <Nav.Item className="nav-link login" style={{color:'white'}}>
                     <li>
@@ -95,7 +95,7 @@ return(
                 </div>
               )
               : (
-                <Nav className="navigation navbar">
+                <Nav className="navigation">
                   <Button className ="login"
                   style={{color:'white'}}
                     onClick={handleShowAuth}
