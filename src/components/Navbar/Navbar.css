@@ -33,29 +33,29 @@
     font-size: 2vh;
 }
 
-.nav-items ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-} 
 
-.nav-items ul li{
-    padding: 0 0.5rem;
-}
 
 .space-btw-logo-items {
     flex: 1;
 }
 
-.login li{
-    font-family: 'Helvetica';
+.login a{
+    padding:auto;
+    font-size: 400%;
+}
+#username{
+    font-size: 300%;
     color:white;
-    font-size:200%;
+    margin-right:10vw;
+}
+
+.logout a{
+    font-size: 300%;
+    
 }
 
 .userLOGOUT ul{
-   display: list-item;
+   
 }
 .auth{
     font-size: 300%;
