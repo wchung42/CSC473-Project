@@ -144,6 +144,14 @@ class Game extends Component {
       console.log(localGame);
       let listQuestion = localGame.Questions.items.sort((a, b) => parseFloat(a.id) - parseFloat(b.id));
       console.log("List Of Questions: ", listQuestion);
+      let AnswerType = listQuestion.map(item => item.Answer_Type)
+      let Questions = listQuestion.map(item => item.Question)
+      let Answers = listQuestion.map(item => item.Answer)
+      let Hints = listQuestion.map(item => item.Hint)
+      console.log("Questions: ", Questions)
+      console.log("Answer Type: ", AnswerType)
+      console.log("Answers: ", Answers)
+      console.log("Hints: ", Hints)
       await this.setState({
         gameID: localGame.id,
         gameTitle: localGame.Title,
@@ -160,6 +168,8 @@ class Game extends Component {
         gameStory: localGame.Story,
         gameTimeLimt: localGame.Time_Limit,
         gameAtQuestion: localGame.At_Question,
+        gameReady: true,
+        gameSynopsis: 1
       })
       // await this.setState({ games: gamesTest.reverse() });
     } catch (error) { console.log(error) }
@@ -181,8 +191,7 @@ class Game extends Component {
     //   gameAnswerType: this.state.games[id].AnswerType,
     //   gameAnswers: this.state.games[id].Answers,
     //   gameGeoLocation: "",
-    //   gameReady: true,
-    //   gameSynopsis: 1
+
     // })
     // const nQuestion = {
     //   id: this.state.gameID,
@@ -280,13 +289,6 @@ class Game extends Component {
             <button className="btn btn-lg btn-danger" type="button"><a href="/">&nbsp; Exit &nbsp;</a></button>
           </div>
           <div className="game-list">
-            {/* <Connect query={graphqlOperation(ListGames)}>
-              {({ data, loading, errors }) => {
-                if (loading) { return <div>Loading...</div> }
-                if (errors) { console.log(errors) }
-                <Panel games={data} func={this.getGameId} />
-              }}
-            </Connect> */}
             <Panel games={this.state.games} func={this.getGameId} />
           </div>
           <br />
