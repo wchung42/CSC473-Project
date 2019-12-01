@@ -13,26 +13,33 @@ class home extends React.Component {
         <img className="hp-image"src={require("./hp.jpg")} alt="logo" />
         
         <div className='banner-text'>
-          <h1>IMAGINE ESCAPE ROOMS WITHOUT THE ROOM</h1>
+          <h1>NO ROOM? NO PROBLEM!</h1>
           <h4><strong>Welcome To Escape!</strong></h4>
         </div>
         
         <div id = 'play-now-button'>
           <button className = 'btn-lg btn-danger'>PLAY NOW</button>
         </div>
-        <section id='intro'>
-          <h3 id='headline'>Introduction</h3>
-            <ul>
+        <br/>
+        <div id='intro'>
+          {/* <h3 id='headline'>Introduction</h3> */}
+            {/* <ul>
               <li>
                 <strong>Goal</strong>
                 <br/>
                  Players cooperatively discover clues, solve puzzles, and accomplish tasks in games in order to know more about our school's history in a limited amount of time
               </li>
+              <div className = 'intro-dividers'>
+                __________________________________
+              </div>
               <li>
               <strong>Feature</strong>
               <br/>
                 Players play with games according to their geolocation
               </li>
+              <div className = 'intro-dividers'>
+                __________________________________
+              </div>
               <li>
                 <strong>Step</strong>
                 <br/>
@@ -41,8 +48,38 @@ class home extends React.Component {
                 Start the game                  
               </li>
               
-            </ul>
-          </section>
+            </ul> */}
+            <div className = 'mission-text'>
+              <strong>Goal</strong>
+                <br/>
+              <p>Players cooperatively discover clues, solve puzzles, and accomplish tasks in games in order to know more about our school's history in a limited amount of time</p>
+            </div>
+            <div className = 'intro-dividers'>
+                __________________________________
+            </div>
+            <div className = 'mission-text'>
+              <strong>Feature</strong>
+                <br/>
+              <p>Geolocation-based. Puzzle games everywhere, anytime.</p>
+            </div>
+            <div className = 'intro-dividers'>
+                __________________________________
+            </div>
+            <div className = 'mission-text'>
+              <strong>How To Play</strong>
+                <br/>
+              <ol>
+                <li>Sign up</li>
+                <li>Select a game</li>
+                <li>Head to the designated location</li>
+                <li>Hit PLAY!</li>
+              </ol>
+              
+            </div>
+            <div className = 'intro-dividers'>
+                __________________________________
+            </div>
+          </div>
         <br/>
         <br/>
         <br/>
