@@ -43,6 +43,7 @@ class Timer extends Component {
                 )
             }
             else {
+                console.log("From Timer", this.props.gameVisualAid0, this.props.gameVisualAid1)
                 return (
                     <div id="time">
                         <p id="timer"><strong>{this.convertSeconds(count)}</strong></p>
@@ -60,8 +61,13 @@ class Timer extends Component {
                             gQuestionVisualAids={this.props.gameQuestionVisualAids}
                             gHints={this.props.gameHints}
                             gAnswerType={this.props.gameAnswerType}
+                            gVisualAid0={this.props.gameVisualAid0}
+                            gVisualAid1={this.props.gameVisualAid1}
+                            gVisualAid2={this.props.gameVisualAid2}
+                            gVisualAid3={this.props.gameVisualAid3}
                             gAnswers={this.props.gameAnswers}
                             gGeoLocation={this.props.gameGeoLocation}
+                            gAidStuffs={this.props.gameAidStuffs}
                             gameHandler={this.gameHandler}
                         />
                     </div>
@@ -83,7 +89,7 @@ class Timer extends Component {
                     count: prevState.count - 1
                 }))
             }
-        }, 1000)
+        }, 10000)
     }
 
 }

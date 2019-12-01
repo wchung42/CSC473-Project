@@ -13,7 +13,7 @@ type Game @model {
   Total_Questions(limit: Int = 15): Int!						    #Number of Questions
   Total_Hints(limit: Int = 5): Int!								      #Number of Hints player allowed to use
   At_Question: Int!                                     #Index to indicate what question the whole game at!
-  Questions: [Question]!  @connection(name:"GamePlay")  #List of Question of the game
+  Questions(limit: Int = 99): [Question]!  @connection(name:"GamePlay")  #List of Question of the game
   Rating(limit: Int = 5):Int									          #Rating user leave when finish the game
   Review: String												                #Review user leave when finish the game
   Aid_Stuffs: [String]											            #Aid stuffs for different type of answer

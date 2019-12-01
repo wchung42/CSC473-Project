@@ -57,6 +57,10 @@ class Game extends Component {
       latitude: null,
       longitude: null,
       gameReady: false,
+      gameVisualAid0: [],
+      gameVisualAid1: [],
+      gameVisualAid2: [],
+      gameVisualAid3: [],
       gameSynopsis: 0, // 0: don't display game synopsis ; 1: display synopsis
       gameStart: 0 // 0: start button clicked, start game ; 1: stay on synopsis page
     };
@@ -90,12 +94,11 @@ class Game extends Component {
           }
         }
 
+
       });
     } catch (errorOfSub) { console.log(errorOfSub) }
 
   }
-
-
 
   //onclick will getGameId and then edit all states
   async getGameId(ev) {
@@ -103,7 +106,9 @@ class Game extends Component {
     try {
       const apiData = await API.graphql(graphqlOperation(queries.getGame, { id: id }));
       const localGame = apiData.data.getGame;
+      console.log(localGame);
       let listQuestion = localGame.Questions.items.sort((a, b) => parseFloat(a.id) - parseFloat(b.id));
+      console.log(listQuestion)
       await this.setState({
         gameID: localGame.id,
         gameTitle: localGame.Title,
@@ -116,7 +121,12 @@ class Game extends Component {
         gameTotalQuestions: localGame.Total_Questions,
         gameTotalHints: localGame.Total_Hints,
         gameQuestions: listQuestion.map(item => item.Question),
+        gameQuestionVisualAids: listQuestion.map(item => item.Question_Aid),
         gameAnswerType: listQuestion.map(item => item.Answer_Type),
+        gameVisualAid0: listQuestion.map(item => item.Answer_Aid0),
+        gameVisualAid1: listQuestion.map(item => item.Answer_Aid1),
+        gameVisualAid2: listQuestion.map(item => item.Answer_Aid2),
+        gameVisualAid3: listQuestion.map(item => item.Answer_Aid3),
         gameAnswers: listQuestion.map(item => item.Answer),
         gameHints: listQuestion.map(item => item.Hint),
         gameGeoLocation: localGame.Geo_Location,
@@ -128,12 +138,15 @@ class Game extends Component {
       })
     } catch (error) { console.log(error) }
 
+    console.log(this.state.gameAtQuestion);
+    console.log(this.state.gameVisualAid0);
+    console.log(this.state.gameVisualAid1);
     const nQuestion = {
       id: this.state.gameID,
       Finished: false
     }
     const nextQuestion = await API.graphql(graphqlOperation(mutations.updateGame, { input: nQuestion }));
-    console.log("Title of this game: ", this.state.Title);
+    console.log("Title of this game: ", this.state.gameTitle);
     console.log("Total Questions of this game: ", this.state.gameTotalQuestions);
     console.log("List of Questions of this game: ", this.state.gameQuestions);
     console.log("List of answers of this game: ", this.state.gameAnswers);
@@ -274,6 +287,10 @@ class Game extends Component {
               gameAnswerType={this.state.gameAnswerType}
               gameAnswers={this.state.gameAnswers}
               gameGeoLocation={this.state.gameGeoLocation}
+              gameVisualAid0={this.state.gameVisualAid0}
+              gameVisualAid1={this.state.gameVisualAid1}
+              gameVisualAid2={this.state.gameVisualAid2}
+              gameVisualAid3={this.state.gameVisualAid3}
               startCount={this.state.gameTimeLimt} />
           </div>
           <br />
