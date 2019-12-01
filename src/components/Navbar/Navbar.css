@@ -60,3 +60,6 @@
 .auth{
     font-size: 300%;
 }
+.MuiDialog-paperWidthSm{
+    max-width: 100px;
+}

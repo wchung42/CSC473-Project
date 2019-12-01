@@ -7,6 +7,7 @@ import Dialog from '@material-ui/core/Dialog';
 import awsconfig from '../../aws-exports';
 import '../Navbar/Navbar.css'
 import DrawerToggleButton from '../SideDrawerMenu/DrawerToggleButton';
+import { minHeight } from '@material-ui/system';
 
 Amplify.configure(awsconfig);
 
@@ -111,6 +112,7 @@ return(
 
         <Dialog className ="auth" onClose={handleCloseAuth} aria-labelledby="simple-dialog-title" open={showAuth}>
           <Authenticator
+          
             hideDefault={!showAuth}
             onStateChange={handleAuthStateChange}
           />
