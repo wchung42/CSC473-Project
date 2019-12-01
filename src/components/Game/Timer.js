@@ -34,10 +34,10 @@ class Timer extends Component {
             //not time out and win the game
         } else {
             if (this.state.isPaused) {
+                console.log("Win game yet? ", this.state.isPaused)
                 const winPage = <Endgame outcome={this.state.isPaused} />;
                 return (
                     <div>
-                        {/* display win page when game is completed before timer hits 0 */}
                         {winPage}
                     </div>
                 )
@@ -62,7 +62,7 @@ class Timer extends Component {
                             gAnswerType={this.props.gameAnswerType}
                             gAnswers={this.props.gameAnswers}
                             gGeoLocation={this.props.gameGeoLocation}
-                        // gameHandler={this.gameHandler} 
+                            gameHandler={this.gameHandler}
                         />
                     </div>
                 )

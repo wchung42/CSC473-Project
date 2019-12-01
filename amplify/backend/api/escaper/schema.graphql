@@ -16,21 +16,21 @@ type Game @model {
   Questions: [Question]!  @connection(name:"GamePlay")  #List of Question of the game
   Rating(limit: Int = 5):Int									          #Rating user leave when finish the game
   Review: String												                #Review user leave when finish the game
-  Aid_Stuffs: [String]											              #Aid stuffs for different type of answer
+  Aid_Stuffs: [String]											            #Aid stuffs for different type of answer
 }
 # define Question model/object
 type Question @model{
-  id: ID!                                     #ID of question
-  game: Game  @connection(name:"GamePlay")    #What game this question belongs to
-  Instruction: String!                        #To indicate how the player can unlock the question
-  Question_Geo: [String]!                      #GeoLocation to unlock the question
-  Question: String!                           #Question user have to answer
-  Question_Aid: [String]                       #Image to aid answering the question
-  Answer_Type: String!                         #Type of answer used to render the way user input answer
-  Answer: [String]!                           #Answer user have to guess right
-  Answer_Aid0: [String]                        #For special type of answer
-  Answer_Aid1: [String]                        #For special type of answer
-  Answer_Aid2: [String]                        #For special type of answer
-  Answer_Aid3: [String]                        #For special type of answer                          
-  Hint: String!                               #When they don't know the answer
+  id: ID!                                       #ID of question
+  game: Game  @connection(name:"GamePlay")      #What game this question belongs to
+  Instruction: String!                          #To indicate how the player can unlock the question
+  Question_Geo: [String]!                       #GeoLocation to unlock the question
+  Question: String!                             #Question user have to answer
+  Question_Aid: String                          #Image to aid answering the question
+  Answer_Type: String!                          #Type of answer used to render the way user input answer
+  Answer: String!                               #Answer user have to guess right
+  Answer_Aid0: [String]                         #For special type of answer
+  Answer_Aid1: [String]                         #For special type of answer
+  Answer_Aid2: [String]                         #For special type of answer
+  Answer_Aid3: [String]                         #For special type of answer                          
+  Hint: String!                                 #When they don't know the answer
 }

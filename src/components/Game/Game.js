@@ -102,35 +102,28 @@ class Game extends Component {
       const gamesTest = apiData.data.listGames.items;
       this.setState({ games: gamesTest.reverse() });
     } catch (error) { console.log(error) }
+
+    try {
+      this.gameUpdateSubscriptions = await API.graphql(graphqlOperation(subscriptions.onUpdateGame, { id: this.state.gameID })).subscribe({
+        next: (gameData) => {
+          console.log("SUBSCRIPTION DATA", gameData.value.data.onUpdateGame.At_Question);
+          if (gameData.value.data.onUpdateGame.id == this.state.gameID) {
+            this.setState({
+              gameAtQuestion: gameData.value.data.onUpdateGame.At_Question,
+              gameFinished: gameData.value.data.onUpdateGame.Finished
+            })
+            console.log("new atquestion:", this.state.gameAtQuestion)
+            console.log("Game finished?", this.state.gameFinished)
+          }
+          else {
+            console.log("Game", gameData.value.data.onUpdateGame.id, " updated")
+          }
+        }
+
+      });
+    } catch (errorOfSub) { console.log(errorOfSub) }
+
   }
-  //retrieve infomation from DB
-  // async componentDidMount() {
-  //   try {
-  //     const apiData = await API.graphql(graphqlOperation(ListGames));
-  //     const gamesTest = apiData.data.listGames.items;
-  //     this.setState({ games: gamesTest.reverse() });
-  //   } catch (error) { console.log(error) }
-
-  //   try {
-  //     this.gameUpdateSubscriptions = await API.graphql(graphqlOperation(subscriptions.onUpdateGame, { id: this.state.gameID })).subscribe({
-  //       next: (gameData) => {
-  //         console.log("SUBSCRIPTION DATA", gameData.value.data.onUpdateGame.AtQuestion);
-  //         if (gameData.value.data.onUpdateGame.id == this.state.gameID) {
-  //           this.setState({
-  //             gameAtQuestion: gameData.value.data.onUpdateGame.AtQuestion,
-  //             gameFinished: gameData.value.data.onUpdateGame.Finished
-  //           })
-  //           console.log("new atquestion:", this.state.gameAtQuestion)
-  //         }
-  //         else {
-  //           console.log("Game", gameData.value.data.onUpdateGame.id, " updated")
-  //         }
-  //       }
-
-  //     });
-  //   } catch (errorOfSub) { console.log(errorOfSub) }
-
-  // }
 
 
 
@@ -139,19 +132,8 @@ class Game extends Component {
     let id = ev.currentTarget.value.toString();
     try {
       const apiData = await API.graphql(graphqlOperation(queries.getGame, { id: id }));
-      // console.log(apiData);
       const localGame = apiData.data.getGame;
-      console.log(localGame);
       let listQuestion = localGame.Questions.items.sort((a, b) => parseFloat(a.id) - parseFloat(b.id));
-      console.log("List Of Questions: ", listQuestion);
-      let AnswerType = listQuestion.map(item => item.Answer_Type)
-      let Questions = listQuestion.map(item => item.Question)
-      let Answers = listQuestion.map(item => item.Answer)
-      let Hints = listQuestion.map(item => item.Hint)
-      console.log("Questions: ", Questions)
-      console.log("Answer Type: ", AnswerType)
-      console.log("Answers: ", Answers)
-      console.log("Hints: ", Hints)
       await this.setState({
         gameID: localGame.id,
         gameTitle: localGame.Title,
@@ -163,7 +145,10 @@ class Game extends Component {
         gameFinished: localGame.Finished,
         gameTotalQuestions: localGame.Total_Questions,
         gameTotalHints: localGame.Total_Hints,
-        gameQuestions: localGame.Questions,
+        gameQuestions: listQuestion.map(item => item.Question),
+        gameAnswerType: listQuestion.map(item => item.Answer_Type),
+        gameAnswers: listQuestion.map(item => item.Answer),
+        gameHints: listQuestion.map(item => item.Hint),
         gameGeoLocation: localGame.Geo_Location,
         gameStory: localGame.Story,
         gameTimeLimt: localGame.Time_Limit,
@@ -171,43 +156,17 @@ class Game extends Component {
         gameReady: true,
         gameSynopsis: 1
       })
-      // await this.setState({ games: gamesTest.reverse() });
     } catch (error) { console.log(error) }
-    // await this.setState({
-    //   gameID: id,
-    //   gameTitle: this.state.games[id].Title,
-    //   gameThumbnail: this.state.games[id].Thumbnail,
-    //   gameLocation: "CCNY",
-    //   gameDifficulty: this.state.games[id].Difficulty,
-    //   gameStory: this.state.games[id].Story,
-    //   gameTimeLimt: "1800",
-    //   gameFinished: this.state.games[id].Finished,
-    //   gameTotalQuestions: this.state.games[id].Total_Questions,
-    //   gameTotalHints: this.state.games[id].Total_Hints,
-    //   gameQuestions: this.state.games[id].Questions,
-    //   gameAtQuestion: this.state.games[id].AtQuestion,
-    //   gameQuestionVisualAids: this.state.games[id].QuestionVisualAid,
-    //   gameHints: this.state.games[id].Hints,
-    //   gameAnswerType: this.state.games[id].AnswerType,
-    //   gameAnswers: this.state.games[id].Answers,
-    //   gameGeoLocation: "",
 
-    // })
-    // const nQuestion = {
-    //   id: this.state.gameID,
-    //   Finished: false
-    // }
-    // const nextQuestion = await API.graphql(graphqlOperation(mutations.updateGame, { input: nQuestion }));
-    // console.log("Games0: ", this.state.games[0])
-    // console.log("Games0 Question: ", this.state.games[0].Questions)
-    // console.log("Games1: ", this.state.games[1])
-    // console.log("Id got back from user is: ", id)
-    // console.log("Game Id is", this.state.gameID)
-    // console.log("Game Title: ", this.state.gameTitle)
-    // console.log("At Question: ", this.state.gameAtQuestion)
-    // console.log("hints of this game: ", this.state.gameHints)
-    // console.log("questions of this game: ", this.state.gameQuestions)
-    // console.log("Answers of this games: ", this.state.gameAnswers)
+    const nQuestion = {
+      id: this.state.gameID,
+      Finished: false
+    }
+    const nextQuestion = await API.graphql(graphqlOperation(mutations.updateGame, { input: nQuestion }));
+    console.log("Title of this game: ", this.state.Title);
+    console.log("Total Questions of this game: ", this.state.gameTotalQuestions);
+    console.log("List of Questions of this game: ", this.state.gameQuestions);
+    console.log("List of answers of this game: ", this.state.gameAnswers);
   }
 
   startGame() {
