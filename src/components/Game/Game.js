@@ -30,36 +30,6 @@ const ListGames = `query ListGames{
   }
 }`;
 
-const GetGame = `query GetGameInfo($id: ID!){
-  getGame(id:$id){
-    id
-    Title
-    Thumbnail
-    Location
-    Difficulty
-    Capacity
-    Players
-    Finished
-    Geo_Location
-    Story
-    Time_Limit
-    Total_Questions
-    Total_Hints
-    At_Question
-    Questions{
-      items{
-        id
-        Question
-        Answer
-        Hint
-        Answer_Aid0
-        Answer_Aid1
-        Answer_Aid2
-        Answer_Aid3
-      }
-    }
-  }
-}`;
 
 class Game extends Component {
   constructor(props) {
