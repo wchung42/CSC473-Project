@@ -12,6 +12,7 @@ export const createGame = `mutation CreateGame($input: CreateGameInput!) {
     Story
     TimeLimit
     Players
+    Finished
     Total_Questions
     Total_Hints
     Questions
@@ -38,6 +39,7 @@ export const updateGame = `mutation UpdateGame($input: UpdateGameInput!) {
     Story
     TimeLimit
     Players
+    Finished
     Total_Questions
     Total_Hints
     Questions
@@ -64,6 +66,7 @@ export const deleteGame = `mutation DeleteGame($input: DeleteGameInput!) {
     Story
     TimeLimit
     Players
+    Finished
     Total_Questions
     Total_Hints
     Questions
