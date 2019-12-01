@@ -9,23 +9,38 @@ min-height: 100vh;
 }
 .banner-text{
     background-color: black;
-    opacity: 8;
-    width: 80%;
+    width: 100%;
     margin-left: auto;
     margin-right:auto;
+    padding: 25px 25px 25px 25px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 
 }
 .banner-text h1{
-    font-size: 50px;
-    font-weight:bold;
+    font-size: 75px;
+    /* font-weight:bold; */
     color:white;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.banner-text h4{
+    color: white;
+    font-size: 65px;
 
 }
+
+#play-now-button {
+    margin-top: 25px;
+}
+
+#play-now-button .btn-lg {
+    size: 50px;
+}
+
  .hp-image{
-    width: 80%;
-    margin-top:2%;
+    width: 100%;
 
 } 
 #headline {
@@ -36,11 +51,16 @@ min-height: 100vh;
 }
 
 #intro ul {
+    list-style-type: none;
     max-width: 550px;
-    margin: 0 auto 50px auto;
-    text-align: left;
+    margin: auto;
+    text-align: center;
     line-height: 1.6;
     font-size: 250%;
+}
+
+#intro ul strong {
+    font-size: 100px;
 }
 li {
     margin: 16px 0;

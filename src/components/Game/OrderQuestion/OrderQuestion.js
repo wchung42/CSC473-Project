@@ -100,9 +100,18 @@ class OrderQuestion extends Component {
 
 
         )
-
-
+        
+            // return (
+            //     <DragDropContext onDragEnd={this.onDragEnd}>
+            //         <div className="orderQuestion">
+            //             <Row key={this.state.data.rows[rowId].id} row={this.state.data.rows[rowId]} images={row.imageIds.map(imageID => this.state.data.images[imageID])} />
+            //             <button id="submitButtonOrderVerify" className="btn btn-primary" type="button" onClick={this.handleOrderChange} value="">&nbsp; Verify Order &nbsp;</button>
+            //         </div>
+            //     </DragDropContext>
+            // )
     }
+
+    
 }
 
 export default OrderQuestion;

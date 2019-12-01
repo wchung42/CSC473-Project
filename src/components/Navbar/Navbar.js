@@ -79,29 +79,27 @@ return(
             {username
               ? (                  
                 <div className ="userLOGOUT">
-                <Nav className="navigation navbar">
-                    <ul>
-                    <Nav.Item className="nav-link login" style={{color:'white'}}>
-                    <li>
+                <Nav className="navigation">
+                    
+                    <Nav.Item className="nav-link login" >
                       {' '}
-                      {username /*Printing the username*/} 
-                      </li>
+                      <a id ="username">{username /*Printing the username*/} </a>
+                      
                     </Nav.Item>
                   <Nav.Item>
-                    <Button className ="login" style={{color:'white', fontSize:'200%'}} onClick={handleSignOut} data-testid="logout-button"> <li style={{color:'white', fontSize:'100%'}}>Sign Out</li></Button>
+                    <button className ="logout" style={{color:'white', background:'none', border:'none'}} onClick={handleSignOut}> <a>Sign out</a></button>
                   </Nav.Item>
-                  </ul>
                 </Nav>
                 </div>
               )
               : (
-                <Nav className="navigation navbar">
-                  <Button className ="login"
-                  style={{color:'white'}}
+                <Nav className="navigation">
+                  <button className ="login"
+                  style={{color:'white', background:'none', border:'none',  }}
                     onClick={handleShowAuth}
                   >
-                    <a>Log in</a>
-                  </Button>
+                    <a>Sign in</a>
+                  </button>
                 </Nav>
               )}
               </div>
