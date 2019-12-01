@@ -23,19 +23,19 @@ class home extends React.Component {
               <li>
                 <strong>Goal</strong>
                 <br/>
-                 Players cooperatively discover clues, solve puzzles, and accomplish tasks in games in order to know more about our school's history in a limited amount of time
+                 -players cooperatively discover clues, solve puzzles, and accomplish tasks in games in order to know more about our school's history in a limited amount of time'
               </li>
               <li>
               <strong>Feature</strong>
               <br/>
-                Players play with games according to their geolocation
+                -players play with games according to their geolocation
               </li>
               <li>
                 <strong>Step</strong>
                 <br/>
-                Sign up  
+                -sign up  
                 <br/>                               
-                Start the game                  
+                -start the game                  
               </li>
               
             </ul>

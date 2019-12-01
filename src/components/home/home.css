@@ -2,8 +2,6 @@
 background: #bdc3c7;  /* fallback for old browsers */
 background: -webkit-linear-gradient(to bottom, #2c3e50, #bdc3c7);  /* Chrome 10-25, Safari 5.1-6 */
 background: linear-gradient(to bottom, #2c3e50, #bdc3c7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-position: relative;
-min-height: 100vh;
 }
 .banner-text{
     background-color: black;
@@ -22,23 +20,27 @@ min-height: 100vh;
 
 }
  .hp-image{
+   
+    opacity: 8;
     width: 80%;
     margin-top:2%;
+    margin-left: auto;
+    margin-right:auto;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    
 
 } 
 #headline {
     margin: 50px 0;
     text-align: center;
-    font-size: 400%;
-    text-decoration: underline;
 }
 
-#intro ul {
+ul {
     max-width: 550px;
     margin: 0 auto 50px auto;
     text-align: left;
     line-height: 1.6;
-    font-size: 250%;
 }
 li {
     margin: 16px 0;
