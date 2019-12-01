@@ -34,7 +34,7 @@ test('navbar Testing', () => {
   
   const nav= shallow(<Navbar  />);
 
-  expect(nav.text()).toEqual('<drawerToggleButton />');
+  expect(nav.text()).toEqual('Sign in<drawerToggleButton /><Authenticator />');
 
   
 });

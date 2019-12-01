@@ -14,21 +14,23 @@ describe("<Answer/> component", () => {
         it('number question renders numpad', () => {
             const testProps = {
                 id: 1,
-                qId: 1
+                qId: 1,
+                answerType: 'Number'
             }
             wrapper = shallow(<Answer {...testProps} />);
             expect(wrapper.find('#numPad').length).toBe(1);
         })
 
         it('numpad should have 12 buttons', () => {
-            wrapper = shallow(<Answer id = {1} qId = {1}/>);
+            wrapper = shallow(<Answer id = {1} qId = {1} answerType={'Number'}/>);
             expect(wrapper.find('button.number').length).toBe(12);
         })
 
         it('text question renders text', () => {
             const testProps = {
                 id: 1,
-                qId: 2
+                qId: 2,
+                answerType: 'Number'
             }
             
             wrapper = shallow(<Answer {...testProps} />);
@@ -36,26 +38,27 @@ describe("<Answer/> component", () => {
         })
 
         it('text question should render with 1 textfield', () => {
-            wrapper = shallow(<Answer id = {1} qId = {2} />);
+            wrapper = shallow(<Answer id = {1} qId = {2} answerType={'Number'}/>);
             expect(wrapper.find('#textAnswer').length).toBe(1);
         })
 
         it('text question should render with 1 submit button', () => {
-            wrapper = shallow(<Answer id = {1} qId = {2} />);
+            wrapper = shallow(<Answer id = {1} qId = {2} answerType={'Number'}/>);
             expect(wrapper.find('#submitBttn').length).toBe(1);
         })
 
         it('ordering question renders drag and drop', () => {
             const testProps = {
                 id: 1,
-                qId: 7
+                qId: 7,
+                answerType: 'Number'
             }
             wrapper = shallow(<Answer {...testProps} />);
             expect(wrapper.find(OrderQuestion).length).toBe(1);
         })
 
         it('ordering question renders with 1 submit button', () => {
-            wrapper = shallow(<Answer id = {1} qId = {7} />);
+            wrapper = shallow(<Answer id = {1} qId = {7} answerType={'Number'}/>);
             expect(wrapper.find('#submitButtonOrder').length).toBe(1);
         })
     })
