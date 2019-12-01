@@ -6,38 +6,26 @@ import './Contact.css'
 const Contact=(props)=>{
     return(
         <div className="container">
-            
-            <div className="inner-box" >
-              
-            <h3 classname="inner-box-title">Advertisement</h3>
-            
-			
-            <p>Email:<strong>ad@city.com</strong></p>
+            <div id = 'heading-title'>
+                <h1>Contact Us</h1> 
             </div>
-
-            <div className="inner-box">
-            <h3 classname="inner-box-title">Business cooperation</h3>
-				
-                <p>Email:<strong>bc@city.com</strong></p>
+            <div className = 'form-area was-validated'>
+                <form>
+                    <div className = 'form-group'>
+                        <label for = 'name'>Your Name (required)</label>
+                        <input type = 'text' className = 'form-control' required></input>
+                        <label for = 'name'>Your Email (required)</label>
+                        <input type = 'email' className = 'form-control' required></input>
+                        <label for = 'name'>Your Message (required)</label>
+                        <textarea className = 'form-control' rows = '5' required />
+                        {/* <div class = 'invalid-feedback'>
+                            Please enter a message.
+                        </div> */}
+                        <br></br>
+                        <button type = 'submit' className = 'btn-lg' id = 'submit-button'>Submit</button>
+                    </div>
+                </form>
             </div>
-
-            <div className="inner-box" >
-            <h3 classname="inner-box-title">Game cooperation</h3>
-				
-               <p> Email:<strong>gc@city.com</strong></p>
-            </div>
-
-            <div className="inner-box" >
-            <h3 classname="inner-box-title">Media contact</h3> 
-				
-               <p> Email:<strong>mc@city.com.com</strong></p>
-            </div>
-            
-
-      
-            
-           
-        
         
         </div>
         
