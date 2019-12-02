@@ -23,6 +23,7 @@ class Navigation extends Component{
 
       async componentDidMount() {
         const user = await Auth.currentUserInfo();
+        //const user = Auth.currentUserInfo();
         if (user) {
           this.setState({
             username: user.username,
@@ -47,7 +48,7 @@ class Navigation extends Component{
           const { username } = Auth.user;
           this.setState({
             showAuth: false,
-            username,
+            username: username,
           });
         }
       }

@@ -5,13 +5,39 @@
   background-color: black;
   font-family: 'Courier New', Courier, monospace;
   color: white;
+  position: relative;
 }
 
+.heading h1{
+  font-size: 125px;
+  text-align: center;
+  padding-top: 75px;
+  padding-bottom: 75px;
+}
+
+.mission-statement {
+  /* max-width: 500px; */
+  margin: 0 auto;
+}
+
+.statement-header h3 {
+  font-size: 75px;
+}
+
+.statement-body p {
+  margin: 0 auto;
+  max-width: 600px;
+  font-size: 35px;
+}
+
+.section-divider {
+  color: rgb(255, 187, 0);
+  margin-top: 25px;
+  margin-bottom: 25px;
+  font-size: 30px;
+}
 .a-image{
-    
-    align-content: center;
     margin-top:10%;
-    margin-left: 15%;
     width: 70vw;
     height: 40vh;
   }
