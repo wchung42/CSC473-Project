@@ -198,7 +198,7 @@ const puppeteer=require('puppeteer');
             
         },20000);
     
-        test('testing math game',async() => {
+        test('testing curious game',async() => {
     
             const browser = await puppeteer.launch({
                 headless: false,
@@ -223,10 +223,54 @@ const puppeteer=require('puppeteer');
             const text=await page.$eval('div.synopsis',(e)=>e.textContent);  
                 expect(text).toBe('Some spirits are strong and manifest in a ghost like form, most are weak and must live on in within a host. The host is usually an object. CCNY is known for having dead in the library due to an impossible engineering department. The Grove School of Engineering has caused this room to become filled with spirits trapped in objects, we need you to set them free!');
                 expect( await page.$eval('.start',(e)=>e.className)).toBe('start')
-            await page.click('.start');
+            // await page.click('.start');
+            // await page.waitForSelector('button#start-btn');
+            // // await page.click('button#start-btn')
+            
+            // // await page.waitForSelector('p#timer');
+            // // const time=await page.$eval('p#timer',(e)=>e.textContent); 
+            // // expect(time).toBe('30:00')
 
                 await browser.close();
         },40000);
+        test('testing math game',async() => {
+    
+            const browser = await puppeteer.launch({
+                headless: false,
+                slowMo:80,
+                args:['--window-size=1920,1080']
+            });
+            const page = await browser.newPage();
+            await page.goto('https://master.dlhem6nvy7qu4.amplifyapp.com');
+            await page.click('button.login');
+            await page.click('input.Input__input___3e_bf');
+            await page.type('input.Input__input___3e_bf','admin12345');
+            await page.click('[type=password]');
+            await page.type('[type=password]','admin12345')
+            await page.click('button.Button__button___vS7Mv');
+            await page.click('button.toggle-button');
+            await page.click('div.toggle-button-line');
+            await page.waitForSelector('[href="/Game"]');
+            await page.click('[href="/Game"]');
+            await page.waitForSelector('button#bttn0');
+            await page.click('button#bttn0');
+            await page.click('#start-btn');
+            const text=await page.$eval('div.synopsis',(e)=>e.textContent); 
+            expect(text).toBe('Math is difficult regard your level of eudcation')
+            expect( await page.$eval('.start',(e)=>e.className)).toBe('start')
+            // await page.waitForSelector('.start');
+            // await page.click('.start');
+            // await page.waitForSelector('button#start-btn');
+            // await page.click('button#start-btn')
+            
+            // await page.waitForSelector('p#timer');
+            // const time=await page.$eval('p#timer',(e)=>e.textContent); 
+            // expect(time).toBe('30:00')
+            //const question=await page.$eval('h1',(e)=>e.textContent); 
+           // expect(question).toBe('chalenge')
+
+            await browser.close();
+        },50000);
     
         // test('testing hero of angle game',async() => {
     
