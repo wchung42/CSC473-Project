@@ -43,7 +43,6 @@ class Timer extends Component {
                 )
             }
             else {
-                console.log("From Timer", this.props.gameVisualAid0, this.props.gameVisualAid1)
                 return (
                     <div id="time">
                         <p id="timer"><strong>{this.convertSeconds(count)}</strong></p>

@@ -53,8 +53,6 @@ class Puzzle extends Component {
         console.log('List of Answer', this.state.answers)
         console.log('Answer Type List: ', this.state.answerType)
         console.log('List of Question Visual Aid', this.state.questionVisualAid)
-        // let currentGameIndex = this.state.index;
-        // let currentQuestionIndex = this.state.atQuestion;
         let answer = this.state.answers[this.state.atQuestion];
         console.log(answer)
         //if the answer is correct
@@ -214,15 +212,17 @@ class Puzzle extends Component {
 
     render() {
         // game states - playing or end game
+
+        //define DragDrop data
         let DragDrop_Data = {};
         if (this.state.answerType[this.state.atQuestion] == "Ordering") {
             let AidStuffs0 = this.props.gVisualAid0[this.state.atQuestion]; //initial order
             let AidStuffs1 = this.props.gVisualAid1[this.state.atQuestion]; //array of images
             let AidStuffs2 = this.props.gVisualAid2[this.state.atQuestion];
             let AidStuffs3 = this.props.gVisualAid3[this.state.atQuestion];
-            console.log("AidStuffs0: ", AidStuffs0)
-            console.log("AidStuffs1: ", AidStuffs1)
-            console.log("AidStuffs2: ", AidStuffs2)
+            // console.log("AidStuffs0: ", AidStuffs0)
+            // console.log("AidStuffs1: ", AidStuffs1)
+            // console.log("AidStuffs2: ", AidStuffs2)
             //define attributes for Drag and Drop
             let row1 = {
                 "id": "row1",
@@ -238,11 +238,11 @@ class Puzzle extends Component {
                 }
                 let temp2 = {}
                 images[i.toString()] = temp
-                // images[i.toString()] = temp2
             };
             let rowOrder = ["row1"];
             DragDrop_Data = { rows, images, rowOrder };
         }
+        //-----------------------------------------------//
         let questionPage = <Question
             qContent={this.state.questions[this.state.atQuestion]}
             qAid={this.state.questionVisualAid[this.state.atQuestion]} />;

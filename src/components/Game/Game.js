@@ -104,7 +104,7 @@ class Game extends Component {
   async getGameId(ev) {
     let id = ev.currentTarget.value.toString();
     try {
-      const apiData = await API.graphql(graphqlOperation(queries.getGame, { id: id }));
+      const apiData = await API.graphql(graphqlOperation(queries.getGame, { first: 50, id: id }));
       const localGame = apiData.data.getGame;
       console.log(localGame);
       let listQuestion = localGame.Questions.items.sort((a, b) => parseFloat(a.id) - parseFloat(b.id));
@@ -138,9 +138,6 @@ class Game extends Component {
       })
     } catch (error) { console.log(error) }
 
-    console.log(this.state.gameAtQuestion);
-    console.log(this.state.gameVisualAid0);
-    console.log(this.state.gameVisualAid1);
     const nQuestion = {
       id: this.state.gameID,
       Finished: false
