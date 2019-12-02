@@ -3,29 +3,44 @@ import './About.css'
 
 const About=(props)=>{
     return(
-<<<<<<< HEAD
-        <div >  
-            <section>
-           <img id='bg' className="ab-image"src={require("./Grey.jpg")} alt="logo" /> 
-           <h1>ABOUT <br/><span>US</span></h1>
-           <hr />
-           <p>we are escape, our app is to help you blabalbalabla</p>
-=======
         <div className = 'about-container'>
             
-            <div><h1>About Us</h1></div>
-            <div><a href="/"><img className="a-image"src={require("./escaperoom.jpg")} alt="logo" /></a></div>
-            <div><p>balabalablabla</p></div>
-            
-           
-        
->>>>>>> 79eaa841e20a1da03c313e9207327319e022b9de
-        
-           </section>
+            <div className = 'heading'>
+                <h1>About Us</h1>
+            </div>
+            {/* <div className = 'about-image'>
+                <a href="/"><img className="a-image"src={require("./escaperoom.jpg")} alt="logo" /></a>
+            </div> */}
+            <div className = 'mission-statement'>
+                <div className = 'statement-header'>
+                    <h3><strong>Our Mission</strong></h3>
+                </div>
+                <div className = 'statement-body'>
+                    <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    </p>
+                </div>
+                <div className = 'section-divider'>
+                    <p>_________________________________</p>
+                </div>
+            </div>
+            <div className = 'meet-team'>
+                <div className = 'statement-header'>
+                    <h3><strong>Meet The Team</strong></h3>
+                </div>
+                <div className = 'statement-body'>
+                    <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    </p>
+                </div>
+                <div className = 'section-divider'>
+                    <p>_________________________________</p>
+                </div>
+            </div>
+
         </div>
         
     )
 };
 
 export default About;
-

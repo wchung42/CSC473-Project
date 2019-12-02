@@ -1,23 +1,45 @@
+.ending-page {
+    background-image: url(../home/home-background.jpg);
+    font-family: "Courier New";
+    min-height: 100vh;
+    color: white;
+}
+
 #message {
     text-align: center;
-    font-size: 4vh;
+    font-size: 85px;
+    color: white;
+    max-width: 80%;
+    margin: 0 auto;
 }
 
 #outcome-img {
     flex: center;
-    max-height: 300px;
-    max-width: 450px;
+    max-height: 400px;
+    max-width: 500px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+#review-form {
     margin: 0 auto;
 }
 
-#feedback-form {
-    margin: 0 auto;
-    font-size:2vh;
+.form-label {
+    font-size: 50px;
 }
 
 #rating-select{
-    font-size:3vh;
+    font-size: 30px;
 }
 #feedback{
-    font-size:3vh;
+    font-size: 30px;
+}
+
+.review-submit-button {
+    background-color: rgb(255, 187, 0);
+}
+
+.section-divider p {
+    font-size: 30px;
 }
