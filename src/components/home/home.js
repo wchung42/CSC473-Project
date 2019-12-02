@@ -18,7 +18,7 @@ class home extends React.Component {
         </div>
         
         <div id = 'play-now-button'>
-          <button className = 'btn-lg btn-danger'>PLAY NOW</button>
+          <a href = '/game' className = 'btn-lg btn-danger'>PLAY NOW</a>
         </div>
         <br/>
         <div id='intro'>

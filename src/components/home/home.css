@@ -40,6 +40,10 @@
     size: 50px;
 }
 
+#play-now-button a {
+    text-decoration: none;
+}
+
 .hp-image{
     width: 100%;
 } 
