@@ -1,18 +1,32 @@
-
 .container{
-    height: 500px;
-    display: flexbox;
+    min-height: 100vh;
+    max-width: 100%;
+    background-color: black;
+    font-family: 'Courier New', Courier, monospace;
+    color: white;
+    background-image: url(../home/home-background.jpg);
+}
 
+#heading-title h1 {
+    text-align: center;
+    font-size: 100px;
+    padding-top: 75px;
+    padding-bottom: 75px;
+}
+
+.form-area {
+    font-size: 50px;
 
 }
-.inner-box{
-    display: inline-block;
-    border-radius: 4px;
-    border-style: solid;
-    margin: 5%;
-    border-width: 2px;
-    
-    
-    
 
+.form-control {
+    font-size: 35px;
+    width: 75%;
+    height: 100px;
+    margin: auto;
+
+}
+
+#submit-button {
+    background-color: rgb(255, 187, 0);
 }

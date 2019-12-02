@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import Row from './Row';
 import { DragDropContext } from 'react-beautiful-dnd';
-import games from '../games.json'
+// import games from '../games.json'
 
 class OrderQuestion extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: games[this.props.id].DragDrop_Data,
+            data: this.props.data,
             order: ''
         }
 
@@ -31,8 +31,9 @@ class OrderQuestion extends Component {
         ) {
             return;
         }
-
+        console.log("source.droppableId", source.droppableId)
         const row = this.state.data.rows[source.droppableId];
+        console.log(row.imageIds)
         const newImageIds = Array.from(row.imageIds);
 
         // move images from old index to new index
@@ -56,7 +57,7 @@ class OrderQuestion extends Component {
         // todo: need to match this new state with a correct state
         this.setState({
             data: newState,
-            order: newState.rows['row-1'].imageIds.toString()
+            order: newState.rows['row1'].imageIds.toString()
         });
         //console.log(this.state.order)
 
@@ -64,22 +65,23 @@ class OrderQuestion extends Component {
 
     //handle order change -- returns the order to the parent
     handleOrderChange = () => {
-        let currentOrder = this.state.data.rows['row-1'].imageIds.toString();
+        let currentOrder = this.state.data.rows['row1'].imageIds.toString();
         console.log("TEST: " + currentOrder)
         this.props.handleOrderChange(currentOrder)
 
     }
 
     render() {
-
+        console.log(this.state.data)
         return (
             <DragDropContext onDragEnd={this.onDragEnd}>
                 {this.state.data.rowOrder.map((rowId) => {
                     // get row order
                     const row = this.state.data.rows[rowId];
-
                     // get order of the images in the row
                     const images = row.imageIds.map(imageID => this.state.data.images[imageID]);
+                    console.log("Images Object: ", images)
+                    images.map((image, index) => console.log(image.id))
                     // print current state for TESTING
                     //console.log("Current state: " + this.state.data.rows['row-1'].imageIds.toString())
                     // set state as current order

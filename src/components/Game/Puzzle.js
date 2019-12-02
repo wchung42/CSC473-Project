@@ -12,7 +12,7 @@ import * as mutations from '../../graphql/mutations';
 //Rework Hint component a little bit
 import getDistanceFromLatLonInKm from './util.js' // distance function
 // still need this lat and long
-import games from './games.json'
+// import games from './games.json';
 
 class Puzzle extends Component {
     constructor(props) {
@@ -52,8 +52,7 @@ class Puzzle extends Component {
         console.log("current Questions Index", this.state.atQuestion)
         console.log('List of Answer', this.state.answers)
         console.log('Answer Type List: ', this.state.answerType)
-        // let currentGameIndex = this.state.index;
-        // let currentQuestionIndex = this.state.atQuestion;
+        console.log('List of Question Visual Aid', this.state.questionVisualAid)
         let answer = this.state.answers[this.state.atQuestion];
         console.log(answer)
         //if the answer is correct
@@ -75,12 +74,15 @@ class Puzzle extends Component {
                 }); console.log("End of game");
                 const nQuestion = {
                     id: this.props.gID,
-                    AtQuestion: 0,
+                    At_Question: 0,
                     Finished: true
                 }
                 //update the database when the answer is correct
-                const nextQuestion = await API.graphql(graphqlOperation(mutations.updateGame, { input: nQuestion }));
-                console.log("Next Question: ", nextQuestion);
+                try {
+                    const nextQuestion = await API.graphql(graphqlOperation(mutations.updateGame, { input: nQuestion }));
+                    console.log("Next Question: ", nextQuestion);
+                } catch (errors) { console.log(errors) };
+
             } else {
                 if (document.getElementById("answerBox")) {
                     document.getElementById("answerBox").value = "";
@@ -90,7 +92,7 @@ class Puzzle extends Component {
 
                 const nQuestion = {
                     id: this.state.index,
-                    AtQuestion: this.props.gAtQuestion + 1
+                    At_Question: this.props.gAtQuestion + 1
                 }
                 const nextQuestion = await API.graphql(graphqlOperation(mutations.updateGame, { input: nQuestion }));
                 console.log("Next Question: ", nextQuestion);
@@ -162,110 +164,92 @@ class Puzzle extends Component {
             }, 2000)
         }
     }
-
-    // start acquiring player location when component mounts
-    // componentDidMount() {
-    //     // watch current location
-    //     let current, target, dist;
-    //     let currentState = this;
-
-    //     function success(position) {
-    //         let userCoords = position.coords;
-    //         console.log(`latitude: ${userCoords.latitude} | longitude: ${userCoords.longitude}`)
-
-    //         // calculate distance to target
-    //         dist = getDistanceFromLatLonInKm(userCoords.latitude, userCoords.longitude, target.latitude, target.longitude);
-    //         console.log('Distance to question: ' + dist)
-    //         console.log('target lat: ' + target.latitude)
-
-    //         // player must be within 20 meters of location for answer to appear
-    //         if (dist <= 0.02) {
-    //             console.log('You can now answer the question!');
-    //             // stop watching player location
-    //             navigator.geolocation.clearWatch(current)
-    //             // allow question
-    //             currentState.setState({
-    //                 atLocation: 1
-    //             });
-    //         } else {
-    //             //document.getElementById('notAtLocationIndicator').innerText = 'You are not at the starting location of the game.';
-
-    //         }
-    //     }
-
-    //     // error callback
-    //     function error(err) {
-    //     console.warn('Error(' + err.code + '): ' + err.message);
-    //     }
-
-    //     // this is just a test location for now -- in front of webb statue
-    //     target = {
-    //         latitude: games[this.state.index].Locations[this.state.questionIndex].lat,
-    //         longitude: games[this.state.index].Locations[this.state.questionIndex].long
-    //     }
-
-    //     // start watching
-    //     current = navigator.geolocation.watchPosition(success, error, {enableHighAccuracy: true});
-    // }
-
     // when state changes, check to see if the game has ended
     // stop timer when game is completed
     componentDidUpdate() {
         if (this.state.win && this.state.timeStopper === 0) {
             this.setState({ timeStopper: 1 })
-            // this.props.gameHandler();
+            this.props.gameHandler();
         }
-
         // check location upon component update
-        let current, target, dist;
-        let currentState = this;
+        // let current, target, dist;
+        // let currentState = this;
 
-        function success(position) {
-            let userCoords = position.coords;
-            console.log(`latitude: ${userCoords.latitude} | longitude: ${userCoords.longitude}`)
+        // function success(position) {
+        //     let userCoords = position.coords;
+        //     console.log(`latitude: ${userCoords.latitude} | longitude: ${userCoords.longitude}`)
 
-            // calculate distance to target
-            dist = getDistanceFromLatLonInKm(userCoords.latitude, userCoords.longitude, target.latitude, target.longitude);
-            console.log('Distance: ' + dist)
+        //     // calculate distance to target
+        //     dist = getDistanceFromLatLonInKm(userCoords.latitude, userCoords.longitude, target.latitude, target.longitude);
+        //     console.log('Distance: ' + dist)
 
-            // player must be within 20 meters of location for answer to appear
-            if (dist <= 0.03) {
-                console.log('You are here!');
-                // stop watching player location
-                navigator.geolocation.clearWatch(current)
-                // allow question
-                currentState.setState({
-                    atLocation: 1
-                });
-            }
-        }
+        //     // player must be within 20 meters of location for answer to appear
+        //     if (dist <= 0.03) {
+        //         console.log('You are here!');
+        //         // stop watching player location
+        //         navigator.geolocation.clearWatch(current)
+        //         // allow question
+        //         currentState.setState({
+        //             atLocation: 1
+        //         });
+        //     }
+        // }
 
-        // error callback
-        function error(err) {
-            console.warn('Error(' + err.code + '): ' + err.message);
-        }
+        // // error callback
+        // function error(err) {
+        //     console.warn('Error(' + err.code + '): ' + err.message);
+        // }
 
-        // TAKEN FROM THE JSON FILE FOR NOW
-        target = {
-            latitude: games[this.state.index].Locations[this.state.atQuestion + 1].lat,
-            longitude: games[this.state.index].Locations[this.state.atQuestion + 1].long
-        }
+        // // TAKEN FROM THE JSON FILE FOR NOW
+        // target = {
+        //     latitude: 40.820583,
+        //     longitude: -73.949105
+        // }
 
-        // start watching
-        current = navigator.geolocation.watchPosition(success, error, { enableHighAccuracy: true });
+        // // start watching
+        // current = setTimeout(navigator.geolocation.watchPosition(success, error, { enableHighAccuracy: true }), 10000);
     }
 
     render() {
         // game states - playing or end game
 
-
+        //define DragDrop data
+        let DragDrop_Data = {};
+        if (this.state.answerType[this.state.atQuestion] == "Ordering") {
+            let AidStuffs0 = this.props.gVisualAid0[this.state.atQuestion]; //initial order
+            let AidStuffs1 = this.props.gVisualAid1[this.state.atQuestion]; //array of images
+            let AidStuffs2 = this.props.gVisualAid2[this.state.atQuestion];
+            let AidStuffs3 = this.props.gVisualAid3[this.state.atQuestion];
+            // console.log("AidStuffs0: ", AidStuffs0)
+            // console.log("AidStuffs1: ", AidStuffs1)
+            // console.log("AidStuffs2: ", AidStuffs2)
+            //define attributes for Drag and Drop
+            let row1 = {
+                "id": "row1",
+                "title": "placeholder",
+                "imageIds": AidStuffs0
+            };
+            let rows = { row1 };
+            let images = {};
+            for (let i = 0; i < AidStuffs1.length; i++) {
+                let temp = {
+                    "id": i.toString(),
+                    "url": AidStuffs1[i]
+                }
+                let temp2 = {}
+                images[i.toString()] = temp
+            };
+            let rowOrder = ["row1"];
+            DragDrop_Data = { rows, images, rowOrder };
+        }
+        //-----------------------------------------------//
         let questionPage = <Question
             qContent={this.state.questions[this.state.atQuestion]}
             qAid={this.state.questionVisualAid[this.state.atQuestion]} />;
         let answerPage = <Answer
             answerType={this.state.answerType[this.state.atQuestion]}
-            action={this.getAnswer} />;
-            
+            action={this.getAnswer}
+            aidStuffs={DragDrop_Data} />;
         return (
             <div className="game">
                 <section className="middle">

@@ -44,19 +44,17 @@
     font-size: 400%;
 }
 #username{
-    font-size: 300%;
+    font-size: 275%;
     color:white;
-    margin-right:10vw;
 }
 
 .logout a{
     font-size: 300%;
-    
 }
 
-.userLOGOUT ul{
-   
-}
 .auth{
     font-size: 300%;
+}
+.MuiDialog-paperWidthSm{
+    max-width: 100px;
 }

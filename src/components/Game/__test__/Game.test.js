@@ -250,7 +250,7 @@ const puppeteer=require('puppeteer');
             await page.click('button.Button__button___vS7Mv');
             await page.click('button.toggle-button');
             await page.click('div.toggle-button-line');
-            await page.waitForSelector('[href="/Game"]');
+            await page.waitForSelector('[href="/Game"]'); 
             await page.click('[href="/Game"]');
             await page.waitForSelector('button#bttn0');
             await page.click('button#bttn0');

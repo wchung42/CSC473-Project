@@ -50,11 +50,11 @@ class Answer extends Component {
                 </div>
             )
         }
-        else if (this.props.answerType == "ordering") {
+        else if (this.props.answerType == "Ordering") {
             return (
                 <div className="answerSpace">
                     <div id="orderingAnswer">
-                        <OrderQuestion id="1" handleOrderChange={this.handleOrderAnswer} />
+                        <OrderQuestion id="1" handleOrderChange={this.handleOrderAnswer} data={this.props.aidStuffs} />
                         <br />
                         <div className="submit">
                             <button id="submitButtonOrder" className="btn-lg  btn-success" type="button" onClick={this.props.action} value="">&nbsp; Submit &nbsp;</button>

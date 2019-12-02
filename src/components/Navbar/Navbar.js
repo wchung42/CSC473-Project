@@ -7,6 +7,7 @@ import Dialog from '@material-ui/core/Dialog';
 import awsconfig from '../../aws-exports';
 import '../Navbar/Navbar.css'
 import DrawerToggleButton from '../SideDrawerMenu/DrawerToggleButton';
+import { minHeight } from '@material-ui/system';
 
 Amplify.configure(awsconfig);
 
@@ -64,7 +65,7 @@ render(){
 
       const { username, showAuth } = this.state;
       const {
-        handleShowAuth, handleCloseAuth, handleAuthStateChange, handleSignOut,
+        handleShowAuth, handleCloseAuth, handleAuthStateChange, 
       } = this;
 
 
@@ -86,9 +87,6 @@ return(
                       <a id ="username">{username /*Printing the username*/} </a>
                       
                     </Nav.Item>
-                  <Nav.Item>
-                    <button className ="logout" style={{color:'white', background:'none', border:'none'}} onClick={handleSignOut}> <a>Sign out</a></button>
-                  </Nav.Item>
                 </Nav>
                 </div>
               )
