@@ -224,9 +224,9 @@ class Game extends Component {
             integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
             crossOrigin="anonymous" />
           <br />
-          <div className="exit">
+          {/* <div className="exit">
             <button className="btn btn-lg btn-danger" type="button"><a href="/">&nbsp; Exit &nbsp;</a></button>
-          </div>
+          </div> */}
           <div className="game-list">
             <Panel games={this.state.games} func={this.getGameId} />
           </div>
@@ -237,19 +237,40 @@ class Game extends Component {
     // Display game Story
     else if (this.state.gameReady && (this.state.gameSynopsis === 1) && (this.state.gameStart === 0)) {
       return (
-        <div className="Game">
-          <div className="exit">
-            <a href="/Game" className="btn btn-lg btn-danger nounderline" type="button">&nbsp; Exit &nbsp;</a>
+        <div className="game-synopsis-container">
+          <div className="back-button">
+            <a href="/Game" className="nounderline"><p>Browse more games</p></a>
           </div>
-          <div className="synopsis">
-            <h1>{this.state.games[this.state.gameID].Story}</h1>
+          <div className = 'game-title'>
+            <h1>{ this.state.games[this.state.gameID].Title}</h1>
           </div>
-          <div className="start">
-            <button id="start-btn" className="btn btn-lg btn-success" type="button" onClick={this.startGame}>&nbsp; Start &nbsp;</button>
+          <div className = 'synopsis-inner-container'>
+            <div className = 'section-title'>
+              <h3><strong>Story</strong></h3>
+            </div>
+            <div className="synopsis">
+              <p>{this.state.games[this.state.gameID].Story}</p>
+            </div>
+            <div className = 'section-divider'>
+              <p>_________________________________</p>
+            </div>
+            <div className = 'section-title'>
+              <h3><strong>Starting Location</strong></h3>
+            </div>
+            <div className = 'section-divider'>
+              <p>_________________________________</p>
+            </div>
+            <div className = 'section-title'>
+              <h3><strong>Instructions</strong></h3>
+            </div>
+            <div className="start">
+              <button id="start-btn" className="btn btn-lg btn-success" type="button" onClick={this.startGame}>&nbsp; Start &nbsp;</button>
+            </div>
+            <div id="notAtLocationIndicator">
+              <p></p>
+            </div>
           </div>
-          <div id="notAtLocationIndicator">
-            <p></p>
-          </div>
+          
 
         </div>
       )
