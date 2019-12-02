@@ -31,8 +31,9 @@ class OrderQuestion extends Component {
         ) {
             return;
         }
-
+        console.log("source.droppableId", source.droppableId)
         const row = this.state.data.rows[source.droppableId];
+        console.log(row.imageIds)
         const newImageIds = Array.from(row.imageIds);
 
         // move images from old index to new index

@@ -26,7 +26,7 @@ class Row extends Component {
         return (
             <div className='imageContainer'>
 
-                <Droppable droppableId="nothing" direction="horizontal">
+                <Droppable droppableId={this.props.row.id} direction="horizontal">
                     {(provided) => (
                         <div className='imagesList'
                             // required droppable props --> added to component we want  to drop

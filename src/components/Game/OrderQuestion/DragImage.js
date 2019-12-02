@@ -6,7 +6,7 @@ import './orderQuestion.css';
 class DragImage extends Component {
     render() {
         return (
-            <Draggable draggableId={"president" + this.props.image.id} index={this.props.index}>
+            <Draggable draggableId={this.props.image.id} index={this.props.index}>
                 {(provided) => (
                     <div className="imageQuestion"
                         // necessary draggable props --> makes each item draggable

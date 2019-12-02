@@ -233,7 +233,7 @@ class Puzzle extends Component {
             let images = {};
             for (let i = 0; i < AidStuffs1.length; i++) {
                 let temp = {
-                    "id": i,
+                    "id": i.toString(),
                     "url": AidStuffs1[i]
                 }
                 let temp2 = {}
