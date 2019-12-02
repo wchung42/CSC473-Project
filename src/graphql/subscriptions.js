@@ -10,21 +10,33 @@ export const onCreateGame = `subscription OnCreateGame {
     Difficulty
     Capacity
     Story
-    TimeLimit
+    Time_Limit
+    Geo_Location
     Players
     Finished
     Total_Questions
     Total_Hints
-    Questions
-    AtQuestion
-    QuestionVisualAid
-    Hints
-    GeoLocation
-    AnswerType
-    Answers
+    At_Question
+    Questions {
+      items {
+        id
+        Instruction
+        Question_Geo
+        Question
+        Question_Aid
+        Answer_Type
+        Answer
+        Answer_Aid0
+        Answer_Aid1
+        Answer_Aid2
+        Answer_Aid3
+        Hint
+      }
+      nextToken
+    }
     Rating
     Review
-    AidStuffs
+    Aid_Stuffs
   }
 }
 `;
@@ -37,21 +49,33 @@ export const onUpdateGame = `subscription OnUpdateGame {
     Difficulty
     Capacity
     Story
-    TimeLimit
+    Time_Limit
+    Geo_Location
     Players
     Finished
     Total_Questions
     Total_Hints
-    Questions
-    AtQuestion
-    QuestionVisualAid
-    Hints
-    GeoLocation
-    AnswerType
-    Answers
+    At_Question
+    Questions {
+      items {
+        id
+        Instruction
+        Question_Geo
+        Question
+        Question_Aid
+        Answer_Type
+        Answer
+        Answer_Aid0
+        Answer_Aid1
+        Answer_Aid2
+        Answer_Aid3
+        Hint
+      }
+      nextToken
+    }
     Rating
     Review
-    AidStuffs
+    Aid_Stuffs
   }
 }
 `;
@@ -64,21 +88,150 @@ export const onDeleteGame = `subscription OnDeleteGame {
     Difficulty
     Capacity
     Story
-    TimeLimit
+    Time_Limit
+    Geo_Location
     Players
     Finished
     Total_Questions
     Total_Hints
-    Questions
-    AtQuestion
-    QuestionVisualAid
-    Hints
-    GeoLocation
-    AnswerType
-    Answers
+    At_Question
+    Questions {
+      items {
+        id
+        Instruction
+        Question_Geo
+        Question
+        Question_Aid
+        Answer_Type
+        Answer
+        Answer_Aid0
+        Answer_Aid1
+        Answer_Aid2
+        Answer_Aid3
+        Hint
+      }
+      nextToken
+    }
     Rating
     Review
-    AidStuffs
+    Aid_Stuffs
+  }
+}
+`;
+export const onCreateQuestion = `subscription OnCreateQuestion {
+  onCreateQuestion {
+    id
+    game {
+      id
+      Title
+      Thumbnail
+      Location
+      Difficulty
+      Capacity
+      Story
+      Time_Limit
+      Geo_Location
+      Players
+      Finished
+      Total_Questions
+      Total_Hints
+      At_Question
+      Questions {
+        nextToken
+      }
+      Rating
+      Review
+      Aid_Stuffs
+    }
+    Instruction
+    Question_Geo
+    Question
+    Question_Aid
+    Answer_Type
+    Answer
+    Answer_Aid0
+    Answer_Aid1
+    Answer_Aid2
+    Answer_Aid3
+    Hint
+  }
+}
+`;
+export const onUpdateQuestion = `subscription OnUpdateQuestion {
+  onUpdateQuestion {
+    id
+    game {
+      id
+      Title
+      Thumbnail
+      Location
+      Difficulty
+      Capacity
+      Story
+      Time_Limit
+      Geo_Location
+      Players
+      Finished
+      Total_Questions
+      Total_Hints
+      At_Question
+      Questions {
+        nextToken
+      }
+      Rating
+      Review
+      Aid_Stuffs
+    }
+    Instruction
+    Question_Geo
+    Question
+    Question_Aid
+    Answer_Type
+    Answer
+    Answer_Aid0
+    Answer_Aid1
+    Answer_Aid2
+    Answer_Aid3
+    Hint
+  }
+}
+`;
+export const onDeleteQuestion = `subscription OnDeleteQuestion {
+  onDeleteQuestion {
+    id
+    game {
+      id
+      Title
+      Thumbnail
+      Location
+      Difficulty
+      Capacity
+      Story
+      Time_Limit
+      Geo_Location
+      Players
+      Finished
+      Total_Questions
+      Total_Hints
+      At_Question
+      Questions {
+        nextToken
+      }
+      Rating
+      Review
+      Aid_Stuffs
+    }
+    Instruction
+    Question_Geo
+    Question
+    Question_Aid
+    Answer_Type
+    Answer
+    Answer_Aid0
+    Answer_Aid1
+    Answer_Aid2
+    Answer_Aid3
+    Hint
   }
 }
 `;
