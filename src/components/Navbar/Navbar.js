@@ -7,6 +7,7 @@ import Dialog from '@material-ui/core/Dialog';
 import awsconfig from '../../aws-exports';
 import '../Navbar/Navbar.css'
 import DrawerToggleButton from '../SideDrawerMenu/DrawerToggleButton';
+import { minHeight } from '@material-ui/system';
 
 Amplify.configure(awsconfig);
 
@@ -64,7 +65,7 @@ render(){
 
       const { username, showAuth } = this.state;
       const {
-        handleShowAuth, handleCloseAuth, handleAuthStateChange, handleSignOut,
+        handleShowAuth, handleCloseAuth, handleAuthStateChange, 
       } = this;
 
 
@@ -79,29 +80,24 @@ return(
             {username
               ? (                  
                 <div className ="userLOGOUT">
-                <Nav className="navigation navbar">
-                    <ul>
-                    <Nav.Item className="nav-link login" style={{color:'white'}}>
-                    <li>
+                <Nav className="navigation">
+                    
+                    <Nav.Item className="nav-link login" >
                       {' '}
-                      {username /*Printing the username*/} 
-                      </li>
+                      <a id ="username">{username /*Printing the username*/} </a>
+                      
                     </Nav.Item>
-                  <Nav.Item>
-                    <Button className ="login" style={{color:'white', fontSize:'200%'}} onClick={handleSignOut} data-testid="logout-button"> <li style={{color:'white', fontSize:'100%'}}>Sign Out</li></Button>
-                  </Nav.Item>
-                  </ul>
                 </Nav>
                 </div>
               )
               : (
-                <Nav className="navigation navbar">
-                  <Button className ="login"
-                  style={{color:'white'}}
+                <Nav className="navigation">
+                  <button className ="login"
+                  style={{color:'white', background:'none', border:'none',  }}
                     onClick={handleShowAuth}
                   >
-                    <a>Log in</a>
-                  </Button>
+                    <a>Sign in</a>
+                  </button>
                 </Nav>
               )}
               </div>
