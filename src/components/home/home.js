@@ -48,11 +48,6 @@ class home extends React.Component {
                 -start the game                  
               </li>
               
-<<<<<<< HEAD
-              
-            </ul>
-          </section>
-=======
             </ul> */}
             <div className = 'mission-text'>
               <strong>Goal</strong>
@@ -85,7 +80,6 @@ class home extends React.Component {
                 __________________________________
             </div>
           </div>
->>>>>>> 79eaa841e20a1da03c313e9207327319e022b9de
         <br/>
         <br/>
         <br/>
