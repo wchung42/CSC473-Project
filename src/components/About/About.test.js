@@ -20,6 +20,21 @@ describe('about page', () => {
         expect(wrapper.find('div.heading').length).toBe(1);
     })
 
+    it('find the mission stage',()=>{
+        const wrapper = shallow(< About />); 
+        expect(wrapper.find('div.mission-statement').length).toBe(1);
+
+
+    })
+
+    it('find the meet-team',()=>{
+        const wrapper = shallow(< About />); 
+        expect(wrapper.find('div.meet-team').length).toBe(1);
+
+    })
+
+    
+
 
 
 
