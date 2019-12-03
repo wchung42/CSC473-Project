@@ -10,28 +10,28 @@ class gamePanel extends Component {
 
         let listItems = this.props.games
             .map(item =>
-                <li className="card-body" key={item.id} >
-                    <img
-                        key={item.id}
-                        className="card-img-top"
-                        src={item.Thumbnail}
-                        alt='' />
-                    <h5 className="card-title">
-                        <strong>{item.Title}</strong>
-                    </h5>
-                    <ul className="card-text">
-                        <li>Location: {item.Location}</li>
-                        <li>Capacity: {item.Capacity}</li>
-                        <li>Game Length: {item.Time_Limit / 60} minutes</li>
-                        <li>Difficulty: {item.Difficulty}/5</li>
-                    </ul>
-                    <button id={"bttn" + item.id} className="btn btn-lg btn-primary" type="button" onClick={this.props.func} value={item.id}>START</button>
-                </li>
+                <div id={"game" + item.id} className="card">
+                    <li className="card-body" key={item.id} >
+                        <img
+                            key={item.id}
+                            className="card-img-top"
+                            src={item.Thumbnail}
+                            alt='' />
+                        <h5 className="card-title">
+                            <strong>{item.Title}</strong>
+                        </h5>
+                        <ul className="card-text">
+                            <li>Location: {item.Location}</li>
+                            <li>Capacity: {item.Capacity}</li>
+                            <li>Game Length: {item.Time_Limit / 60} minutes</li>
+                            <li>Difficulty: {item.Difficulty}/5</li>
+                        </ul>
+                        <button id={"bttn" + item.id} className="btn btn-lg btn-primary" type="button" onClick={this.props.func} value={item.id}>START</button>
+                    </li>
+                </div>
             );
         return (
-            <div className="card">
-                <ul style={gameCardListStyle}>{listItems}</ul>
-            </div>
+            <ul style={gameCardListStyle}>{listItems}</ul>
         )
     }
 

@@ -34,8 +34,15 @@ export const getGame = `query GetGame($id: ID!) {
       }
       nextToken
     }
-    Rating
-    Review
+    Review {
+      items {
+        id
+        rating
+        review
+        username
+      }
+      nextToken
+    }
     Aid_Stuffs
   }
 }
@@ -64,8 +71,9 @@ export const listGames = `query ListGames(
       Questions {
         nextToken
       }
-      Rating
-      Review
+      Review {
+        nextToken
+      }
       Aid_Stuffs
     }
     nextToken
@@ -93,8 +101,9 @@ export const getQuestion = `query GetQuestion($id: ID!) {
       Questions {
         nextToken
       }
-      Rating
-      Review
+      Review {
+        nextToken
+      }
       Aid_Stuffs
     }
     Instruction
@@ -134,8 +143,6 @@ export const listQuestions = `query ListQuestions(
         Total_Questions
         Total_Hints
         At_Question
-        Rating
-        Review
         Aid_Stuffs
       }
       Instruction
@@ -149,6 +156,71 @@ export const listQuestions = `query ListQuestions(
       Answer_Aid2
       Answer_Aid3
       Hint
+    }
+    nextToken
+  }
+}
+`;
+export const getReview = `query GetReview($id: ID!) {
+  getReview(id: $id) {
+    id
+    game {
+      id
+      Title
+      Thumbnail
+      Location
+      Difficulty
+      Capacity
+      Story
+      Time_Limit
+      Geo_Location
+      Players
+      Finished
+      Total_Questions
+      Total_Hints
+      At_Question
+      Questions {
+        nextToken
+      }
+      Review {
+        nextToken
+      }
+      Aid_Stuffs
+    }
+    rating
+    review
+    username
+  }
+}
+`;
+export const listReviews = `query ListReviews(
+  $filter: ModelReviewFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listReviews(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      game {
+        id
+        Title
+        Thumbnail
+        Location
+        Difficulty
+        Capacity
+        Story
+        Time_Limit
+        Geo_Location
+        Players
+        Finished
+        Total_Questions
+        Total_Hints
+        At_Question
+        Aid_Stuffs
+      }
+      rating
+      review
+      username
     }
     nextToken
   }

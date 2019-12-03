@@ -75,6 +75,7 @@ class Puzzle extends Component {
                 const nQuestion = {
                     id: this.props.gID,
                     At_Question: 0,
+                    Players: [],
                     Finished: true
                 }
                 //update the database when the answer is correct

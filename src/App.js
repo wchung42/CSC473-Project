@@ -30,11 +30,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      currentUser: null,
-      latitude: null,
-      longitude: null,
       sideDrawerMenuOpen: false
-
     }
   }
 
@@ -69,7 +65,7 @@ class App extends Component {
 
         <meta name="viewport" content="600px"></meta>
 
-        <div >
+        <div key={this.state.sideDrawerMenuOpen.toString()} >
           <Navbar drawerClickHandler={this.drawerToggleClickHandler} />
 
           <SideDrawerMenu show={this.state.sideDrawerMenuOpen} />
