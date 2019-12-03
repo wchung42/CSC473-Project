@@ -34,7 +34,7 @@ class GameStory extends Component{
                         <textarea className = 'form-control' rows = '10' required/>
                             
                             <br></br>
-                            <button type = 'submit' className = 'btn-lg btn-success'>Create</button>
+                            <button type = 'submit' className = 'btn-lg btn-success'>Add</button>
                         </div>
                     </form>
                 </div>   
