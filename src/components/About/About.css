@@ -30,11 +30,11 @@
   font-size: 35px;
 }
 
-.section-divider {
-  color: rgb(255, 187, 0);
+.section-divider hr {
   margin-top: 25px;
   margin-bottom: 25px;
-  font-size: 30px;
+  max-width: 550px;
+  border-top: 5px solid rgb(255, 187, 0)
 }
 .a-image{
     margin-top:10%;
