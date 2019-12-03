@@ -111,128 +111,128 @@ const puppeteer=require('puppeteer');
             await browser.close(); 
         },20000);
 
-        test('testing location ',async() => {
+        // test('testing location ',async() => {
 
-            const browser = await puppeteer.launch({
-                headless: false,
-                slowMo:50,
-                args:['--window-size=1920,1080']
-               });
-            const page = await browser.newPage();
-            await page.goto('https://master.dlhem6nvy7qu4.amplifyapp.com');
+        //     const browser = await puppeteer.launch({
+        //         headless: false,
+        //         slowMo:50,
+        //         args:['--window-size=1920,1080']
+        //        });
+        //     const page = await browser.newPage();
+        //     await page.goto('https://master.d4apr1nsr4agq.amplifyapp.com/');
             
-            await page.click('button.login');
-            await page.click('input.Input__input___3e_bf');
-            await page.type('input.Input__input___3e_bf','admin12345');
-            await page.click('[type=password]');
-            await page.type('[type=password]','admin12345')
-            await page.click('button.Button__button___vS7Mv');
-            await page.click('button.toggle-button');
-            await page.click('div.toggle-button-line');
-            await page.waitForSelector('[href="/Game"]');
-            await page.click('[href="/Game"]');
-            await page.waitForSelector('button.Location');
-            await page.click('button.Location');
-            const location=await page.$eval('button.Location',(button)=>button.className)   
-            expect(location).toBe('Location');   
+        //     await page.click('button.login');
+        //     await page.click('input.Input__input___3e_bf');
+        //     await page.type('input.Input__input___3e_bf','admin2');
+        //     await page.click('[type=password]');
+        //     await page.type('[type=password]','admin123')
+        //     await page.click('button.Button__button___vS7Mv');
+        //     await page.click('button.toggle-button');
+        //     await page.click('div.toggle-button-line');
+        //     await page.waitForSelector('[href="/Game"]');
+        //     await page.click('[href="/Game"]');
+        //     await page.waitForSelector('button.Location');
+        //     await page.click('button.Location');
+        //     const location=await page.$eval('button.Location',(button)=>button.className)   
+        //     expect(location).toBe('Location');   
                 
             
-            await browser.close(); 
-        },30000);
+        //     await browser.close(); 
+        // },30000);
     
     
-        test('testing exist button',async() => {
+        // test('testing exist button',async() => {
     
-            const browser = await puppeteer.launch({
-                headless: false,
-                slowMo:50,
-                args:['--window-size=1920,1080']
-            });
-            const page = await browser.newPage();
-            await page.goto('https://master.dlhem6nvy7qu4.amplifyapp.com');
-            await page.click('button.login');
-            await page.click('input.Input__input___3e_bf');
-            await page.type('input.Input__input___3e_bf','admin12345');
-            await page.click('[type=password]');
-            await page.type('[type=password]','admin12345')
-            await page.click('button.Button__button___vS7Mv');
-            await page.click('button.toggle-button');
-            await page.click('div.toggle-button-line');
-            await page.waitForSelector('[href="/Game"]');
-            await page.click('[href="/Game"]');
-            await page.waitForSelector('div.exit');
-            await page.click('div.exit');
-                const exit=await page.$eval('div.exit',(div)=>div.className)   
-                expect(exit).toBe('exit');
+        //     const browser = await puppeteer.launch({
+        //         headless: false,
+        //         slowMo:50,
+        //         args:['--window-size=1920,1080']
+        //     });
+        //     const page = await browser.newPage();
+        //     await page.goto('https://master.d4apr1nsr4agq.amplifyapp.com/');
+        //     await page.click('button.login');
+        //     await page.click('input.Input__input___3e_bf');
+        //     await page.type('input.Input__input___3e_bf','admin2');
+        //     await page.click('[type=password]');
+        //     await page.type('[type=password]','admin123')
+        //     await page.click('button.Button__button___vS7Mv');
+        //     await page.click('button.toggle-button');
+        //     await page.click('div.toggle-button-line');
+        //     await page.waitForSelector('[href="/Game"]');
+        //     await page.click('[href="/Game"]');
+        //     await page.waitForSelector('div.exit');
+        //     await page.click('div.exit');
+        //         const exit=await page.$eval('div.exit',(div)=>div.className)   
+        //         expect(exit).toBe('exit');
         
-                await browser.close();  
-        },30000);
+        //         await browser.close();  
+        // },30000);
     
-        test('testing hover page get className',async() => {
+        // test('testing hover page get className',async() => {
     
-            const browser = await puppeteer.launch({
-                headless: false,
-                slowMo:80,
-                args:['--window-size=1920,1080']
-            });
+        //     const browser = await puppeteer.launch({
+        //         headless: false,
+        //         slowMo:80,
+        //         args:['--window-size=1920,1080']
+        //     });
             
-            const page = await browser.newPage();
-            await page.goto('https://master.dlhem6nvy7qu4.amplifyapp.com');
+        //     const page = await browser.newPage();
+        //     await page.goto('https://master.d4apr1nsr4agq.amplifyapp.com/');
             
-            await page.click('button.login');
-            await page.click('input.Input__input___3e_bf');
-            await page.type('input.Input__input___3e_bf','admin12345');
-            await page.click('[type=password]');
-            await page.type('[type=password]','admin12345')
-            await page.click('button.Button__button___vS7Mv');
-            await page.click('button.toggle-button');
-            await page.click('div.toggle-button-line');
-            await page.waitForSelector('[href="/Game"]');
-            await page.click('[href="/Game"]');
-            await page.waitForSelector('div.game-list');
-            await page.hover('div.game-list')
-                const game=await page.$eval('div.game-list',(div)=>div.className)   
-                expect(game).toBe('game-list');
+        //     await page.click('button.login');
+        //     await page.click('input.Input__input___3e_bf');
+        //     await page.type('input.Input__input___3e_bf','admin2');
+        //     await page.click('[type=password]');
+        //     await page.type('[type=password]','admin123')
+        //     await page.click('button.Button__button___vS7Mv');
+        //     await page.click('button.toggle-button');
+        //     await page.click('div.toggle-button-line');
+        //     await page.waitForSelector('[href="/Game"]');
+        //     await page.click('[href="/Game"]');
+        //     await page.waitForSelector('div.game-list');
+        //     await page.hover('div.game-list')
+        //         const game=await page.$eval('div.game-list',(div)=>div.className)   
+        //         expect(game).toBe('game-list');
         
-                await browser.close();  
+        //         await browser.close();  
             
-        },20000);
+        // },20000);
     
-        test('testing curious game',async() => {
+        // test('testing curious game',async() => {
     
-            const browser = await puppeteer.launch({
-                headless: false,
-                slowMo:80,
-                args:['--window-size=1920,1080']
-            });
-            const page = await browser.newPage();
-            await page.goto('https://master.dlhem6nvy7qu4.amplifyapp.com');
-            await page.click('button.login');
-            await page.click('input.Input__input___3e_bf');
-            await page.type('input.Input__input___3e_bf','admin12345');
-            await page.click('[type=password]');
-            await page.type('[type=password]','admin12345')
-            await page.click('button.Button__button___vS7Mv');
-            await page.click('button.toggle-button');
-            await page.click('div.toggle-button-line');
-            await page.waitForSelector('[href="/Game"]');
-            await page.click('[href="/Game"]');
-            await page.waitForSelector('button#bttn1');
-            await page.click('button#bttn1');
-            await page.click('#start-btn');
-            const text=await page.$eval('div.synopsis',(e)=>e.textContent);  
-                expect(text).toBe('Some spirits are strong and manifest in a ghost like form, most are weak and must live on in within a host. The host is usually an object. CCNY is known for having dead in the library due to an impossible engineering department. The Grove School of Engineering has caused this room to become filled with spirits trapped in objects, we need you to set them free!');
-                expect( await page.$eval('.start',(e)=>e.className)).toBe('start')
-            // await page.click('.start');
-            // await page.waitForSelector('button#start-btn');
-            // // await page.click('button#start-btn')
+        //     const browser = await puppeteer.launch({
+        //         headless: false,
+        //         slowMo:80,
+        //         args:['--window-size=1920,1080']
+        //     });
+        //     const page = await browser.newPage();
+        //     await page.goto('https://master.d4apr1nsr4agq.amplifyapp.com/');
+        //     await page.click('button.login');
+        //     await page.click('input.Input__input___3e_bf');
+        //     await page.type('input.Input__input___3e_bf','admin2');
+        //     await page.click('[type=password]');
+        //     await page.type('[type=password]','admin123')
+        //     await page.click('button.Button__button___vS7Mv');
+        //     await page.click('button.toggle-button');
+        //     await page.click('div.toggle-button-line');
+        //     await page.waitForSelector('[href="/Game"]');
+        //     await page.click('[href="/Game"]');
+        //     await page.waitForSelector('button#bttn0');
+        //     await page.click('button#bttn1');
+        //     await page.click('#start-btn');
+        //     const text=await page.$eval('div.synopsis',(e)=>e.textContent);  
+        //         expect(text).toBe('Some spirits are strong and manifest in a ghost like form, most are weak and must live on in within a host. The host is usually an object. CCNY is known for having dead in the library due to an impossible engineering department. The Grove School of Engineering has caused this room to become filled with spirits trapped in objects, we need you to set them free!');
+        //         expect( await page.$eval('.start',(e)=>e.className)).toBe('start')
+        //     await page.click('.start');
+        //     await page.waitForSelector('button#start-btn');
+        //     await page.click('button#start-btn')
             
-            // // await page.waitForSelector('p#timer');
-            // // const time=await page.$eval('p#timer',(e)=>e.textContent); 
-            // // expect(time).toBe('30:00')
+        //     await page.waitForSelector('p#timer');
+        //     const time=await page.$eval('p#timer',(e)=>e.textContent); 
+        //     expect(time).toBe('30:00')
 
-                await browser.close();
-        },40000);
+        //        await browser.close();
+        // },30000);
         test('testing math game',async() => {
     
             const browser = await puppeteer.launch({
@@ -241,23 +241,42 @@ const puppeteer=require('puppeteer');
                 args:['--window-size=1920,1080']
             });
             const page = await browser.newPage();
-            await page.goto('https://master.dlhem6nvy7qu4.amplifyapp.com');
+            await page.goto('https://master.d4apr1nsr4agq.amplifyapp.com');
             await page.click('button.login');
             await page.click('input.Input__input___3e_bf');
-            await page.type('input.Input__input___3e_bf','admin12345');
+            await page.type('input.Input__input___3e_bf','admin2');
             await page.click('[type=password]');
-            await page.type('[type=password]','admin12345')
+            await page.type('[type=password]','admin123')
             await page.click('button.Button__button___vS7Mv');
             await page.click('button.toggle-button');
             await page.click('div.toggle-button-line');
             await page.waitForSelector('[href="/Game"]'); 
             await page.click('[href="/Game"]');
-            await page.waitForSelector('button#bttn0');
-            await page.click('button#bttn0');
-            await page.click('#start-btn');
+            await page.waitForSelector('button#bttn1');
+            await page.click('button#bttn1');
+            await page.waitForSelector('div.synopsis'); 
             const text=await page.$eval('div.synopsis',(e)=>e.textContent); 
-            expect(text).toBe('Math is difficult regard your level of eudcation')
-            expect( await page.$eval('.start',(e)=>e.className)).toBe('start')
+            expect(text).toBe('Math is hard regardless of your level of education!')
+            
+            const context = browser.defaultBrowserContext();
+            await context.overridePermissions('https://master.d4apr1nsr4agq.amplifyapp.com', ['geolocation']);
+            await page.waitForSelector('button#start-btn');
+            await page.click('button#start-btn');
+            await page.click('button#start-btn');
+            
+            // page.on('dialog', async dialog => {
+            //     console.log(dialog.message());
+            //     await dialog.accept();
+            //     //await browser.close();
+            //   });
+              
+            await page.waitForSelector('button#num2');
+            await page.click('button#num2');
+            // await page.click('button#pound');
+
+
+
+           // expect( await page.$eval('.start',(e)=>e.className)).toBe('start')
             // await page.waitForSelector('.start');
             // await page.click('.start');
             // await page.waitForSelector('button#start-btn');
@@ -270,7 +289,7 @@ const puppeteer=require('puppeteer');
            // expect(question).toBe('chalenge')
 
             await browser.close();
-        },50000);
+        },40000);
     
         // test('testing hero of angle game',async() => {
     
