@@ -5,6 +5,22 @@ import 'bootstrap/dist/css/bootstrap.css';
 // id, AtQuestion,Players
 
 class Endgame extends Component {
+    constructor(props) {
+        super(props);
+        
+        this.handleSubmit =  this.handleSubmit.bind(this);
+    }
+
+    handleSubmit(e) {
+        e.preventDefault();
+        const rating = e.target.rating.value;
+        const review = e.target.review.value;
+        console.log('Rating: ' + rating);
+        console.log('Review: ' + review);
+
+        // clear form
+        e.target.reset();
+    }
 
     render() {
         if (this.props.outcome) {
@@ -19,10 +35,10 @@ class Endgame extends Component {
                         <h3>Tell us about your experience</h3>
                     </div>
                     <div className="review-form-container">
-                        <form id="review-form">
+                        <form id="review-form" onSubmit = { this.handleSubmit }>
                             <div className="form-group" id="rating">
                                 <label for="rating" className = "form-label">Rating (Required)</label>
-                                <select className="form-control" id="rating-select" required>
+                                <select className="form-control" id="rating" required>
                                     <option defaultValue>1</option>
                                     <option>2</option>
                                     <option>3</option>
@@ -33,7 +49,7 @@ class Endgame extends Component {
                             <br />
                             <div className="form-group">
                                 <label for="feedback" className = "form-label">Review (Required)</label>
-                                <textarea className="form-control" id="feedback" rows = "5" required/>
+                                <textarea className="form-control" id="review" rows = "5" required/>
                             </div>
                             <br />
                             <button className="review-submit-button btn-lg" type = "submit">Submit</button>
@@ -55,7 +71,7 @@ class Endgame extends Component {
                         <h3>Tell us about your experience</h3>
                     </div>
                     <div className="review-form-container">
-                        <form id="review-form">
+                        <form id="review-form" onSubmit = { this.handleSubmit }>
                             <div className="form-group" id="rating">
                                 <label for="rating" className = "form-label">Rating (Required)</label>
                                 <select className="form-control" id="rating-select" required>
