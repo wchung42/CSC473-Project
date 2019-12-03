@@ -40,6 +40,11 @@ class sideDrawerMenu extends Component {
     return (
       <nav className={animateDrawer}>
         <ul>
+          <li><a href="/Home">Home</a></li>
+          {/* <div className = 'side-drawer-divider'>
+            <hr/>
+          </div> */}
+          
           <li><a href="/Game">Games</a></li>
           <li><a href="/About">About Us</a></li>
           <li><a href="/Contact">Contact Us</a></li>
