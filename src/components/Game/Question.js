@@ -11,7 +11,10 @@ class riddleQuestion extends Component {
                 <p className="text-center quest">
                     {this.props.qContent}
                 </p>
-                <img className="imgG" src={this.props.qAid} />
+                {
+                    (this.props.qAid == "#") ? "" : <img className="imgG card-img-top" src={this.props.qAid} />
+                }
+
             </div>
         )
     }

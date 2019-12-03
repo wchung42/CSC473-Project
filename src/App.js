@@ -30,11 +30,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      currentUser: null,
-      latitude: null,
-      longitude: null,
       sideDrawerMenuOpen: false
-
     }
   }
 

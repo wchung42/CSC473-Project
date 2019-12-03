@@ -25,7 +25,6 @@ const ListGames = `query ListGames{
       Capacity
       Story
       Time_Limit
-      Rating
     }
   }
 }`;
@@ -241,26 +240,26 @@ class Game extends Component {
           <div className="back-button">
             <a href="/Game" className="nounderline"><p>Browse more games</p></a>
           </div>
-          <div className = 'game-title'>
-            <h1>{ this.state.games[this.state.gameID].Title}</h1>
+          <div className='game-title'>
+            <h1>{this.state.games[this.state.gameID].Title}</h1>
           </div>
-          <div className = 'synopsis-inner-container'>
-            <div className = 'section-title'>
+          <div className='synopsis-inner-container'>
+            <div className='section-title'>
               <h3><strong>Story</strong></h3>
             </div>
             <div className="synopsis">
               <p>{this.state.games[this.state.gameID].Story}</p>
             </div>
-            <div className = 'section-divider'>
+            <div className='section-divider'>
               <p>_________________________________</p>
             </div>
-            <div className = 'section-title'>
+            <div className='section-title'>
               <h3><strong>Starting Location</strong></h3>
             </div>
-            <div className = 'section-divider'>
+            <div className='section-divider'>
               <p>_________________________________</p>
             </div>
-            <div className = 'section-title'>
+            <div className='section-title'>
               <h3><strong>Instructions</strong></h3>
             </div>
             <div className="start">
@@ -270,7 +269,7 @@ class Game extends Component {
               <p></p>
             </div>
           </div>
-          
+
 
         </div>
       )

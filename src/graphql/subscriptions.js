@@ -34,8 +34,15 @@ export const onCreateGame = `subscription OnCreateGame {
       }
       nextToken
     }
-    Rating
-    Review
+    Review {
+      items {
+        id
+        rating
+        review
+        username
+      }
+      nextToken
+    }
     Aid_Stuffs
   }
 }
@@ -73,8 +80,15 @@ export const onUpdateGame = `subscription OnUpdateGame {
       }
       nextToken
     }
-    Rating
-    Review
+    Review {
+      items {
+        id
+        rating
+        review
+        username
+      }
+      nextToken
+    }
     Aid_Stuffs
   }
 }
@@ -112,8 +126,15 @@ export const onDeleteGame = `subscription OnDeleteGame {
       }
       nextToken
     }
-    Rating
-    Review
+    Review {
+      items {
+        id
+        rating
+        review
+        username
+      }
+      nextToken
+    }
     Aid_Stuffs
   }
 }
@@ -139,8 +160,9 @@ export const onCreateQuestion = `subscription OnCreateQuestion {
       Questions {
         nextToken
       }
-      Rating
-      Review
+      Review {
+        nextToken
+      }
       Aid_Stuffs
     }
     Instruction
@@ -178,8 +200,9 @@ export const onUpdateQuestion = `subscription OnUpdateQuestion {
       Questions {
         nextToken
       }
-      Rating
-      Review
+      Review {
+        nextToken
+      }
       Aid_Stuffs
     }
     Instruction
@@ -217,8 +240,9 @@ export const onDeleteQuestion = `subscription OnDeleteQuestion {
       Questions {
         nextToken
       }
-      Rating
-      Review
+      Review {
+        nextToken
+      }
       Aid_Stuffs
     }
     Instruction
@@ -232,6 +256,102 @@ export const onDeleteQuestion = `subscription OnDeleteQuestion {
     Answer_Aid2
     Answer_Aid3
     Hint
+  }
+}
+`;
+export const onCreateReview = `subscription OnCreateReview {
+  onCreateReview {
+    id
+    game {
+      id
+      Title
+      Thumbnail
+      Location
+      Difficulty
+      Capacity
+      Story
+      Time_Limit
+      Geo_Location
+      Players
+      Finished
+      Total_Questions
+      Total_Hints
+      At_Question
+      Questions {
+        nextToken
+      }
+      Review {
+        nextToken
+      }
+      Aid_Stuffs
+    }
+    rating
+    review
+    username
+  }
+}
+`;
+export const onUpdateReview = `subscription OnUpdateReview {
+  onUpdateReview {
+    id
+    game {
+      id
+      Title
+      Thumbnail
+      Location
+      Difficulty
+      Capacity
+      Story
+      Time_Limit
+      Geo_Location
+      Players
+      Finished
+      Total_Questions
+      Total_Hints
+      At_Question
+      Questions {
+        nextToken
+      }
+      Review {
+        nextToken
+      }
+      Aid_Stuffs
+    }
+    rating
+    review
+    username
+  }
+}
+`;
+export const onDeleteReview = `subscription OnDeleteReview {
+  onDeleteReview {
+    id
+    game {
+      id
+      Title
+      Thumbnail
+      Location
+      Difficulty
+      Capacity
+      Story
+      Time_Limit
+      Geo_Location
+      Players
+      Finished
+      Total_Questions
+      Total_Hints
+      At_Question
+      Questions {
+        nextToken
+      }
+      Review {
+        nextToken
+      }
+      Aid_Stuffs
+    }
+    rating
+    review
+    username
   }
 }
 `;
