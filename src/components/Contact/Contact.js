@@ -74,13 +74,13 @@ class Contact extends Component {
                     <form onSubmit = { this.handleSubmit.bind(this) }>
                         <div className = 'form-group'>
                             <label for = 'name'>Your Name (required)</label>
-                            <input type = 'text' className = 'form-control' value = { this.state.name } required onChange = { this.handleChange.bind(this, 'name') }></input>
+                            <input id = 'nameInput' type = 'text' className = 'form-control' value = { this.state.name } required onChange = { this.handleChange.bind(this, 'name') }></input>
                             <label for = 'name'>Your Email (required)</label>
-                            <input type = 'email' className = 'form-control' value = { this.state.email } required onChange = { this.handleChange.bind(this, 'email')}></input>
+                            <input id = 'emailInput' type = 'email' className = 'form-control' value = { this.state.email } required onChange = { this.handleChange.bind(this, 'email')}></input>
                             <label for = 'name'>Subject (required)</label>
-                            <input type = 'text' className = 'form-control' value = { this.state.subject } required onChange = { this.handleChange.bind(this, 'subject')}></input>
+                            <input id = 'subjectInput' type = 'text' className = 'form-control' value = { this.state.subject } required onChange = { this.handleChange.bind(this, 'subject')}></input>
                             <label for = 'name'>Your Message (required)</label>
-                            <textarea className = 'form-control' rows = '5' value = { this.state.message } required onChange = { this.handleChange.bind(this, 'message') }/>
+                            <textarea id = 'messageInput' className = 'form-control' rows = '5' value = { this.state.message } required onChange = { this.handleChange.bind(this, 'message') }/>
                             {/* <div class = 'invalid-feedback'>
                                 Please enter a message.
                             </div> */}
