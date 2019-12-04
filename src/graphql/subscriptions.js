@@ -44,6 +44,13 @@ export const onCreateGame = `subscription OnCreateGame {
       nextToken
     }
     Aid_Stuffs
+    Record {
+      items {
+        id
+        time
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -90,6 +97,13 @@ export const onUpdateGame = `subscription OnUpdateGame {
       nextToken
     }
     Aid_Stuffs
+    Record {
+      items {
+        id
+        time
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -136,6 +150,13 @@ export const onDeleteGame = `subscription OnDeleteGame {
       nextToken
     }
     Aid_Stuffs
+    Record {
+      items {
+        id
+        time
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -164,6 +185,9 @@ export const onCreateQuestion = `subscription OnCreateQuestion {
         nextToken
       }
       Aid_Stuffs
+      Record {
+        nextToken
+      }
     }
     Instruction
     Question_Geo
@@ -204,6 +228,9 @@ export const onUpdateQuestion = `subscription OnUpdateQuestion {
         nextToken
       }
       Aid_Stuffs
+      Record {
+        nextToken
+      }
     }
     Instruction
     Question_Geo
@@ -244,6 +271,9 @@ export const onDeleteQuestion = `subscription OnDeleteQuestion {
         nextToken
       }
       Aid_Stuffs
+      Record {
+        nextToken
+      }
     }
     Instruction
     Question_Geo
@@ -284,6 +314,9 @@ export const onCreateReview = `subscription OnCreateReview {
         nextToken
       }
       Aid_Stuffs
+      Record {
+        nextToken
+      }
     }
     rating
     review
@@ -316,6 +349,9 @@ export const onUpdateReview = `subscription OnUpdateReview {
         nextToken
       }
       Aid_Stuffs
+      Record {
+        nextToken
+      }
     }
     rating
     review
@@ -348,10 +384,268 @@ export const onDeleteReview = `subscription OnDeleteReview {
         nextToken
       }
       Aid_Stuffs
+      Record {
+        nextToken
+      }
     }
     rating
     review
     username
+  }
+}
+`;
+export const onCreateUserProfile = `subscription OnCreateUserProfile {
+  onCreateUserProfile {
+    id
+    Username
+    Name
+    Bio
+    ProfilePic
+    isAdmin
+    record {
+      id
+      game {
+        id
+        Title
+        Thumbnail
+        Location
+        Difficulty
+        Capacity
+        Story
+        Time_Limit
+        Geo_Location
+        Players
+        Finished
+        Total_Questions
+        Total_Hints
+        At_Question
+        Aid_Stuffs
+      }
+      user {
+        id
+        Username
+        Name
+        Bio
+        ProfilePic
+        isAdmin
+      }
+      time
+    }
+  }
+}
+`;
+export const onUpdateUserProfile = `subscription OnUpdateUserProfile {
+  onUpdateUserProfile {
+    id
+    Username
+    Name
+    Bio
+    ProfilePic
+    isAdmin
+    record {
+      id
+      game {
+        id
+        Title
+        Thumbnail
+        Location
+        Difficulty
+        Capacity
+        Story
+        Time_Limit
+        Geo_Location
+        Players
+        Finished
+        Total_Questions
+        Total_Hints
+        At_Question
+        Aid_Stuffs
+      }
+      user {
+        id
+        Username
+        Name
+        Bio
+        ProfilePic
+        isAdmin
+      }
+      time
+    }
+  }
+}
+`;
+export const onDeleteUserProfile = `subscription OnDeleteUserProfile {
+  onDeleteUserProfile {
+    id
+    Username
+    Name
+    Bio
+    ProfilePic
+    isAdmin
+    record {
+      id
+      game {
+        id
+        Title
+        Thumbnail
+        Location
+        Difficulty
+        Capacity
+        Story
+        Time_Limit
+        Geo_Location
+        Players
+        Finished
+        Total_Questions
+        Total_Hints
+        At_Question
+        Aid_Stuffs
+      }
+      user {
+        id
+        Username
+        Name
+        Bio
+        ProfilePic
+        isAdmin
+      }
+      time
+    }
+  }
+}
+`;
+export const onCreateRecord = `subscription OnCreateRecord {
+  onCreateRecord {
+    id
+    game {
+      id
+      Title
+      Thumbnail
+      Location
+      Difficulty
+      Capacity
+      Story
+      Time_Limit
+      Geo_Location
+      Players
+      Finished
+      Total_Questions
+      Total_Hints
+      At_Question
+      Questions {
+        nextToken
+      }
+      Review {
+        nextToken
+      }
+      Aid_Stuffs
+      Record {
+        nextToken
+      }
+    }
+    user {
+      id
+      Username
+      Name
+      Bio
+      ProfilePic
+      isAdmin
+      record {
+        id
+        time
+      }
+    }
+    time
+  }
+}
+`;
+export const onUpdateRecord = `subscription OnUpdateRecord {
+  onUpdateRecord {
+    id
+    game {
+      id
+      Title
+      Thumbnail
+      Location
+      Difficulty
+      Capacity
+      Story
+      Time_Limit
+      Geo_Location
+      Players
+      Finished
+      Total_Questions
+      Total_Hints
+      At_Question
+      Questions {
+        nextToken
+      }
+      Review {
+        nextToken
+      }
+      Aid_Stuffs
+      Record {
+        nextToken
+      }
+    }
+    user {
+      id
+      Username
+      Name
+      Bio
+      ProfilePic
+      isAdmin
+      record {
+        id
+        time
+      }
+    }
+    time
+  }
+}
+`;
+export const onDeleteRecord = `subscription OnDeleteRecord {
+  onDeleteRecord {
+    id
+    game {
+      id
+      Title
+      Thumbnail
+      Location
+      Difficulty
+      Capacity
+      Story
+      Time_Limit
+      Geo_Location
+      Players
+      Finished
+      Total_Questions
+      Total_Hints
+      At_Question
+      Questions {
+        nextToken
+      }
+      Review {
+        nextToken
+      }
+      Aid_Stuffs
+      Record {
+        nextToken
+      }
+    }
+    user {
+      id
+      Username
+      Name
+      Bio
+      ProfilePic
+      isAdmin
+      record {
+        id
+        time
+      }
+    }
+    time
   }
 }
 `;

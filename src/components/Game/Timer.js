@@ -54,6 +54,7 @@ class Timer extends Component {
                             gTotalHints={this.props.gameTotalHints}
                             gAtQuestion={this.props.gameAtQuestion}
                             gQuestions={this.props.gameQuestions}
+                            gQuestionGeos={this.props.gameQuestionGeos}
                             gQuestionVisualAids={this.props.gameQuestionVisualAids}
                             gHints={this.props.gameHints}
                             gAnswerType={this.props.gameAnswerType}
@@ -62,7 +63,6 @@ class Timer extends Component {
                             gVisualAid2={this.props.gameVisualAid2}
                             gVisualAid3={this.props.gameVisualAid3}
                             gAnswers={this.props.gameAnswers}
-                            gGeoLocation={this.props.gameGeoLocation}
                             gAidStuffs={this.props.gameAidStuffs}
                             gameHandler={this.gameHandler}
                         />

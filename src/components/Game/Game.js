@@ -50,13 +50,12 @@ class Game extends Component {
       gameAtQuestion: "",
       gamePlayers: [],
       gameQuestions: [],
+      gameQuestionGeos: [],
       gameQuestionVisualAids: [],
       gameHints: [],
       gameAnswerType: [],
       gameAnswers: [],
-      gameGeoLocation: [],
-      latitude: null,
-      longitude: null,
+      latitude: 0,
       gameReady: false,
       gameVisualAid0: [],
       gameVisualAid1: [],
@@ -81,9 +80,13 @@ class Game extends Component {
     } catch (error) { console.log(error) }
 
     Auth.currentAuthenticatedUser()
-      .then(user => this.setState({
-        gameUserName: user.username
-      }))
+      .then(user =>
+        this.setState({
+          gameUserName: user.username
+
+        })
+        // console.log(user)
+      )
       .catch(err => console.log(err))
 
     try {
@@ -128,9 +131,11 @@ class Game extends Component {
         gamePlayers: localGame.Players,
         gameFinished: localGame.Finished,
         gameTotalQuestions: localGame.Total_Questions,
-        gameGeoLocation: localGame.Geo_Location,
+        latitude: localGame.Geo_Location[0],
+        longitude: localGame.Geo_Location[1],
         gameTotalHints: localGame.Total_Hints,
         gameQuestions: listQuestion.map(item => item.Question),
+        gameQuestionGeos: listQuestion.map(item => item.Question_Geo),
         gameQuestionVisualAids: listQuestion.map(item => item.Question_Aid),
         gameAnswerType: listQuestion.map(item => item.Answer_Type),
         gameVisualAid0: listQuestion.map(item => item.Answer_Aid0),
@@ -161,7 +166,7 @@ class Game extends Component {
     console.log("List of answers of this game: ", this.state.gameAnswers);
     console.log("Capacity of this game", this.state.gameCapacity);
     console.log("list of Player in game: ", this.state.gamePlayers);
-    console.log("Geo Location of this game: ", this.state.gameGeoLocation);
+    console.log("Geo Location of this game: ", this.state.longitude, this.state.latitude);
   }
 
   async startGame() {
@@ -169,9 +174,10 @@ class Game extends Component {
     let current, dist;
     let currentState = this;
     let target = {
-      latitude: this.state.gameGeoLocation[0],
-      longitude: this.state.gameGeoLocation[1]
+      latitude: this.state.latitude,
+      longitude: this.state.longitude
     }
+    console.log("long and lat of the game: ", target)
     function success(position) {
       let userCoords = position.coords;
       console.log(`latitude: ${userCoords.latitude} | longitude: ${userCoords.longitude}`)
@@ -288,7 +294,7 @@ class Game extends Component {
                 In order to begin the game, head to the <strong>starting location</strong> as indicated above.
                 Once there, the <strong>START</strong> button will turn green. Click "Start" to begin the game.
               </p>
-                <br></br>
+              <br></br>
               <div className='instruction-questions'>
                 <h4><strong>Types of Questions</strong></h4>
                 <ul>
@@ -298,10 +304,10 @@ class Game extends Component {
                     If the POUND(#) key flashes RED, your answer is incorrect!
                   </p>
                   <br />
-                  <img src = 'https://user-images.githubusercontent.com/15526256/70118142-572f0b00-1635-11ea-8051-513754791f7a.gif'
-                        alt = 'numpad gif'
-                        className = 'instruction-gifs'/>
-                  <br/>
+                  <img src='https://user-images.githubusercontent.com/15526256/70118142-572f0b00-1635-11ea-8051-513754791f7a.gif'
+                    alt='numpad gif'
+                    className='instruction-gifs' />
+                  <br />
                   <li>Text</li>
                   <p>
                     To complete these types of questions, simply enter your answer into the textbox and click SUBMIT.
@@ -309,9 +315,9 @@ class Game extends Component {
                     <strong>NOTE: ANSWERS NOT CASE SENSITIVE</strong>
                   </p>
                   <br />
-                  <img src = 'https://user-images.githubusercontent.com/15526256/70118449-023fc480-1636-11ea-97a1-192d94088285.gif' 
-                      alt = 'text gif'
-                      className = 'instruction-gifs'/>
+                  <img src='https://user-images.githubusercontent.com/15526256/70118449-023fc480-1636-11ea-97a1-192d94088285.gif'
+                    alt='text gif'
+                    className='instruction-gifs' />
                   <br />
                   <br />
                   <li>Ordering</li>
@@ -319,9 +325,9 @@ class Game extends Component {
                     These questions are completed by dragging and dropping the images into the correct order and hitting SUBMIT.
                   </p>
                   <br />
-                  <img src = 'https://user-images.githubusercontent.com/15526256/70117945-c821f300-1634-11ea-9b3e-e86832e7cf32.gif' 
-                      alt = 'dnd gif' 
-                      className = 'instruction-gifs'
+                  <img src='https://user-images.githubusercontent.com/15526256/70117945-c821f300-1634-11ea-9b3e-e86832e7cf32.gif'
+                    alt='dnd gif'
+                    className='instruction-gifs'
                   />
                 </ul>
               </div>
@@ -370,11 +376,11 @@ class Game extends Component {
               gameTotalHints={this.state.gameTotalHints}
               gameAtQuestion={this.state.gameAtQuestion}
               gameQuestions={this.state.gameQuestions}
+              gameQuestionGeos={this.state.gameQuestionGeos}
               gameQuestionVisualAids={this.state.gameQuestionVisualAids}
               gameHints={this.state.gameHints}
               gameAnswerType={this.state.gameAnswerType}
               gameAnswers={this.state.gameAnswers}
-              gameGeoLocation={this.state.gameGeoLocation}
               gameVisualAid0={this.state.gameVisualAid0}
               gameVisualAid1={this.state.gameVisualAid1}
               gameVisualAid2={this.state.gameVisualAid2}

@@ -15,7 +15,8 @@ type Game @model {
   At_Question: Int!                                     #Index to indicate what question the whole game at!
   Questions(limit: Int = 99): [Question]!  @connection(name:"GamePlay")  #List of Question of the game
   Review: [Review]!   @connection(name:"GamePlay")
-  Aid_Stuffs: [String]											            #Aid stuffs for different type of answer
+  Aid_Stuffs: [String]
+  Record: [Record] @connection(name:"gameRecord")					#Aid stuffs for different type of answer
 }
 # define Question model/object
 type Question @model{
@@ -40,4 +41,21 @@ type Review @model{
   rating(limit: Int = 5): Int!
   review: String!
   username: String!
+}
+
+type UserProfile @model {
+  id: ID!                                         # SUB (unique identifier) of the user
+  Username: String!                               # Will be connected with username but can be changed.  
+  Name: String!                                   # Real name or fake name
+  Bio: String!                                    # 
+  ProfilePic: String!
+  isAdmin: Boolean
+  record: Record @connection(name:"gameRecord")
+}
+
+type Record @model{
+  id: ID!
+  game: Game @connection(name:"gameRecord")
+  user: UserProfile @connection(name:"gameRecord")
+  time: String!
 }
