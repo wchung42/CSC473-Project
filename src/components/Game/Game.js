@@ -147,11 +147,7 @@ class Game extends Component {
       })
     } catch (error) { console.log(error) }
 
-    const nQuestion = {
-      id: this.state.gameID,
-      Finished: false
-    }
-    const nextQuestion = await API.graphql(graphqlOperation(mutations.updateGame, { input: nQuestion }));
+
     console.log("Title of this game: ", this.state.gameTitle);
     console.log("Total Questions of this game: ", this.state.gameTotalQuestions);
     console.log("List of Questions of this game: ", this.state.gameQuestions);
@@ -173,7 +169,7 @@ class Game extends Component {
       dist = getDistanceFromLatLonInKm(userCoords.latitude, userCoords.longitude, target.latitude, target.longitude);
       console.log('Distance: ' + dist)
       // player must be within 10 meters of starting point for game to begin
-      if (dist <= 0.09) {
+      if (dist >= 0.09) {
         console.log('You are here!');
         // stop watching player location
         navigator.geolocation.clearWatch(current)
@@ -195,7 +191,8 @@ class Game extends Component {
         const newGameState = {
           id: currentState.state.gameID,
           Capacity: currentCapacity,
-          Players: listPlayers
+          Players: listPlayers,
+          Finished: false
         }
         try {
           const newCapacity = API.graphql(graphqlOperation(mutations.updateGame, { input: newGameState }));
@@ -217,8 +214,8 @@ class Game extends Component {
 
     // this is just a test location for now -- in front of webb statue
     target = {
-      latitude: 40.820583,
-      longitude: -73.949105
+      latitude: this.state.gameGeoLocation[0],
+      longitude: this.state.gameGeoLocation[1]
     }
 
     // start watching
