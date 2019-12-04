@@ -4,6 +4,7 @@ import Puzzle from './Puzzle';
 import './Game.css'
 //props this file needs to operate: Time limit
 class Timer extends Component {
+    _isMounted = false;
     constructor(props) {
         super(props);
         this.state = {
@@ -49,10 +50,6 @@ class Timer extends Component {
                         <Puzzle
                             gID={this.props.gameID}
                             gTitle={this.props.gameTitle}
-                            // gameThumbnail={this.props.gameThumbnail}
-                            // gameLocation={this.props.gameLocation}
-                            // gameDifficulty={this.props.gameDifficulty}
-                            // gameStory={this.props.gameStory}
                             gTotalQuestions={this.props.gameTotalQuestions}
                             gTotalHints={this.props.gameTotalHints}
                             gAtQuestion={this.props.gameAtQuestion}
@@ -77,7 +74,8 @@ class Timer extends Component {
 
     }
 
-    componentDidMount() {
+    async componentDidMount() {
+        this._isMounted = true;
         const { startCount } = this.props;
         this.setState({
             count: startCount
@@ -89,6 +87,9 @@ class Timer extends Component {
                 }))
             }
         }, 10000)
+    }
+    componentWillUnmount() {
+        this._isMounted = false;
     }
 
 }
