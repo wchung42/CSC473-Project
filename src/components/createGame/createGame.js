@@ -64,7 +64,6 @@ class CreateGame extends Component{
                         </div>
                     </form>
                 </div>   
-                <GameStory GameName ={this.state.GameName}/>
             </div>
         )
         
