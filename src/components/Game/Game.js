@@ -306,35 +306,47 @@ class Game extends Component {
               <p>
                 In order to begin the game, head to the <strong>starting location</strong> as indicated above.
                 Once there, the <strong>START</strong> button will turn green. Click "Start" to begin the game.
-                <br></br>
-                <div className='instruction-questions'>
-                  <strong>Types of Questions</strong>
-                  <ul>
-                    <li>Combination</li>
-                    <p>
-                      To complete these types of questions, enter the combination into the numpad and hit the POUND(#) key.
-                      If the POUND(#) key flashes RED, your answer is incorrect!
-                    </p>
-                    <br />
-                    <p>INSERT GIF HERE</p>
-                    <li>Text</li>
-                    <p>
-                      To complete these types of questions, simply enter your answer into the textbox and click SUBMIT.
-                      <br></br>
-                      <strong>NOTE: ANSWERS NOT CASE SENSITIVE</strong>
-                    </p>
-                    <br />
-                    <p>INSERT GIF HERE</p>
-                    <li>Ordering</li>
-                    <p>
-                      These questions are completed by dragging and dropping the images into the correct order and hitting SUBMIT.
-                    </p>
-                    <br />
-                    <p>INSERT GIF HERE</p>
-                  </ul>
-                </div>
-
               </p>
+                <br></br>
+              <div className='instruction-questions'>
+                <h4><strong>Types of Questions</strong></h4>
+                <ul>
+                  <li>Combination</li>
+                  <p>
+                    Enter the combination into the numpad and hit the POUND(#) key.
+                    If the POUND(#) key flashes RED, your answer is incorrect!
+                  </p>
+                  <br />
+                  <img src = 'https://user-images.githubusercontent.com/15526256/70118142-572f0b00-1635-11ea-8051-513754791f7a.gif'
+                        alt = 'numpad gif'
+                        className = 'instruction-gifs'/>
+                  <br/>
+                  <li>Text</li>
+                  <p>
+                    To complete these types of questions, simply enter your answer into the textbox and click SUBMIT.
+                    <br></br>
+                    <strong>NOTE: ANSWERS NOT CASE SENSITIVE</strong>
+                  </p>
+                  <br />
+                  <img src = 'https://user-images.githubusercontent.com/15526256/70117945-c821f300-1634-11ea-9b3e-e86832e7cf32.gif' 
+                      alt = 'dnd gif' 
+                      className = 'instruction-gifs'
+                  />
+                  <br />
+                  <li>Ordering</li>
+                  <p>
+                    These questions are completed by dragging and dropping the images into the correct order and hitting SUBMIT.
+                  </p>
+                  <br />
+                  <img src = 'https://user-images.githubusercontent.com/15526256/70118449-023fc480-1636-11ea-97a1-192d94088285.gif' 
+                      alt = 'text gif'
+                      className = 'instruction-gifs'/>
+                  <br />
+                </ul>
+              </div>
+            </div>
+            <div className='section-divider'>
+              <hr />
             </div>
             <div className="start">
               <button id="start-btn" className="btn btn-lg btn-success" type="button" onClick={this.startGame}>&nbsp; Start &nbsp;</button>
