@@ -151,7 +151,7 @@ class Game extends Component {
         gameAnswers: listQuestion.map(item => item.Answer),
         gameHints: listQuestion.map(item => item.Hint),
         gameReviewCount: localGame.ReviewCount,
-        gameAverageRating: localGame.gameAverageRating,
+        gameAverageRating: localGame.Average_Rating,
         gameStory: localGame.Story,
         gameTimeLimt: localGame.Time_Limit,
         gameAtQuestion: localGame.At_Question,
