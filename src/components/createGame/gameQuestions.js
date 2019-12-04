@@ -39,6 +39,13 @@ class GameQuestions extends Component{
 
                             <label for = 'name'>Question</label>
                             <input type = 'text' className = 'form-control' required></input>
+                            <label for = 'name'>Question Ans Type</label>
+                            <select className = 'form-control' required > 
+                                <option>Text</option>
+                                <option>Number</option>
+                                <option>Ordering</option>
+                            </select>
+
                             <label for = 'name'>Visual Aid</label>
                             <input type = 'text' className = 'form-control' value = {this.state.imgLink} required onChange={ this.handleChange.bind(this, 'imgLink')}></input>
                             <br/>
