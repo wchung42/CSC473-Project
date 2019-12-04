@@ -70,9 +70,9 @@ class App extends Component {
 
         <meta name="viewport" content="600px"></meta>
 
-        <div key={this.state.sideDrawerMenuOpen.toString()} >
-          <Navbar drawerClickHandler={this.drawerToggleClickHandler} />
 
+        <Navbar drawerClickHandler={this.drawerToggleClickHandler} />
+        <div key={this.state.sideDrawerMenuOpen.toString()} >
           <SideDrawerMenu show={this.state.sideDrawerMenuOpen} />
           {backdrop}
         </div>
