@@ -147,6 +147,13 @@ class Game extends Component {
       })
     } catch (error) { console.log(error) }
 
+    const nQuestion = {
+      id: this.state.gameID,
+      Finished: false
+    }
+    try {
+      const nextQuestion = await API.graphql(graphqlOperation(mutations.updateGame, { input: nQuestion }));
+    } catch (errors) { console.log(errors) };
 
     console.log("Title of this game: ", this.state.gameTitle);
     console.log("Total Questions of this game: ", this.state.gameTotalQuestions);
@@ -157,7 +164,7 @@ class Game extends Component {
     console.log("Geo Location of this game: ", this.state.gameGeoLocation);
   }
 
-  startGame() {
+  async startGame() {
     // watch current location
     let current, target, dist;
     let currentState = this;
@@ -175,10 +182,7 @@ class Game extends Component {
         navigator.geolocation.clearWatch(current)
         // testtt
         console.log('starting game');
-        currentState.setState({
-          gameSynopsis: 0,
-          gameStart: 1
-        })
+
         // update game when a user join the game: Capacity -1 && username added to list of players
         let userName = currentState.state.gameUserName;
         let currentCapacity = currentState.state.gameCapacity - 1;
@@ -198,7 +202,14 @@ class Game extends Component {
           const newCapacity = API.graphql(graphqlOperation(mutations.updateGame, { input: newGameState }));
           console.log(newCapacity);
         } catch (errors) { console.log(errors) }
-        return true;
+
+        currentState.setState({
+          gameSynopsis: 0,
+          gameStart: 1,
+          gameCapacity: currentCapacity,
+          gamePlayers: listPlayers
+        })
+
       } else {
         document.getElementById('notAtLocationIndicator').innerText = 'You are not at the starting location of the game.';
         console.log('not there yet');
@@ -282,23 +293,23 @@ class Game extends Component {
               <p>{this.state.games[this.state.gameID].Story}</p>
             </div>
             <div className='section-divider'>
-              <hr/>
+              <hr />
             </div>
             <div className='section-title'>
               <h3><strong>Starting Location</strong></h3>
             </div>
             <div className='section-divider'>
-              <hr/>
+              <hr />
             </div>
             <div className='section-title'>
               <h3><strong>Instructions</strong></h3>
             </div>
-            <div className = 'instructions'>
+            <div className='instructions'>
               <p>
                 In order to begin the game, head to the <strong>starting location</strong> as indicated above.
                 Once there, the <strong>START</strong> button will turn green. Click "Start" to begin the game.
                 <br></br>
-                <div className = 'instruction-questions'>
+                <div className='instruction-questions'>
                   <strong>Types of Questions</strong>
                   <ul>
                     <li>Combination</li>
@@ -306,7 +317,7 @@ class Game extends Component {
                       To complete these types of questions, enter the combination into the numpad and hit the POUND(#) key.
                       If the POUND(#) key flashes RED, your answer is incorrect!
                     </p>
-                    <br/>
+                    <br />
                     <p>INSERT GIF HERE</p>
                     <li>Text</li>
                     <p>
@@ -314,13 +325,13 @@ class Game extends Component {
                       <br></br>
                       <strong>NOTE: ANSWERS NOT CASE SENSITIVE</strong>
                     </p>
-                    <br/>
+                    <br />
                     <p>INSERT GIF HERE</p>
                     <li>Ordering</li>
                     <p>
                       These questions are completed by dragging and dropping the images into the correct order and hitting SUBMIT.
                     </p>
-                    <br/>
+                    <br />
                     <p>INSERT GIF HERE</p>
                   </ul>
                 </div>
@@ -333,7 +344,7 @@ class Game extends Component {
             <div id="notAtLocationIndicator">
               <p></p>
             </div>
-            <div className = 'section-title'>
+            <div className='section-title'>
               <h3><strong>Reviews</strong></h3>
             </div>
           </div>
@@ -356,6 +367,7 @@ class Game extends Component {
           <div className="gameInterface">
             <Timer
               key={this.state.gameAtQuestion}
+              gameUserName={this.state.gameUserName}
               gameID={this.state.gameID}
               gameTitle={this.state.gameTitle}
               gameThumbnail={this.state.gameThumbnail}
