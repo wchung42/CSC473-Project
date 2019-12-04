@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
 import DragImage from './DragImage';
 import { Droppable } from 'react-beautiful-dnd';
 

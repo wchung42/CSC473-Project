@@ -1,16 +1,14 @@
-import React, { Component, ReactDOM } from 'react';
+import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import './Game.css';
 import Timer from './Timer';  // timer component that determines state of game
-import games from './games.json'; // get the game title
 import Panel from './gamePanel';
-import { withAuthenticator, Connect } from 'aws-amplify-react';
+import { withAuthenticator } from 'aws-amplify-react';
 import * as subscriptions from '../../graphql/subscriptions';
-import Amplify, { Analytics, API, Auth, graphqlOperation, Storage } from 'aws-amplify';
-import gql from 'graphql-tag';
+import { API, Auth, graphqlOperation } from 'aws-amplify';
 import * as mutations from '../../graphql/mutations';
 import * as queries from '../../graphql/queries';
-import { getCurrentLocation, getDistanceFromLatLonInKm } from './util.js'; // import geolocation helper functions
+import { getDistanceFromLatLonInKm } from './util.js'; // import geolocation helper functions
 // import { List } from 'material-ui';
 
 //each time the user press Play => mutationUpdate players
@@ -89,7 +87,7 @@ class Game extends Component {
       this.gameUpdateSubscriptions = await API.graphql(graphqlOperation(subscriptions.onUpdateGame, { id: this.state.gameID })).subscribe({
         next: (gameData) => {
           console.log("SUBSCRIPTION DATA", gameData.value.data.onUpdateGame.At_Question);
-          if (gameData.value.data.onUpdateGame.id == this.state.gameID) {
+          if (gameData.value.data.onUpdateGame.id === this.state.gameID) {
             this.setState({
               gameAtQuestion: gameData.value.data.onUpdateGame.At_Question,
               gameFinished: gameData.value.data.onUpdateGame.Finished
@@ -138,7 +136,6 @@ class Game extends Component {
         gameVisualAid3: listQuestion.map(item => item.Answer_Aid3),
         gameAnswers: listQuestion.map(item => item.Answer),
         gameHints: listQuestion.map(item => item.Hint),
-        gameGeoLocation: localGame.Geo_Location,
         gameStory: localGame.Story,
         gameTimeLimt: localGame.Time_Limit,
         gameAtQuestion: localGame.At_Question,
@@ -152,7 +149,7 @@ class Game extends Component {
       Finished: false
     }
     try {
-      const nextQuestion = await API.graphql(graphqlOperation(mutations.updateGame, { input: nQuestion }));
+      await API.graphql(graphqlOperation(mutations.updateGame, { input: nQuestion }));
     } catch (errors) { console.log(errors) };
 
     console.log("Title of this game: ", this.state.gameTitle);

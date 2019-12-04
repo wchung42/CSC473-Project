@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Nav, Navbar } from 'react-bootstrap';
 import Amplify, { Auth } from 'aws-amplify';
-import { Authenticator, Greetings } from 'aws-amplify-react';
-import Button from '@material-ui/core/Button';
+import { Authenticator } from 'aws-amplify-react';
+// import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import awsconfig from '../../aws-exports';
 import '../Navbar/Navbar.css'
 import DrawerToggleButton from '../SideDrawerMenu/DrawerToggleButton';
-import { minHeight } from '@material-ui/system';
+// import { minHeight } from '@material-ui/system';
 
 Amplify.configure(awsconfig);
 let exportUserName = '';

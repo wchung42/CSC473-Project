@@ -13,14 +13,10 @@ import Contact from './components/Contact/Contact';
 import CreateGame from './components/createGame/createGame';
 import GameStory from './components/createGame/gameStory'
 import GameQuestions from './components/createGame/gameQuestions'
-import Amplify, { Analytics, API, Auth, graphqlOperation, Storage } from 'aws-amplify';
+import Amplify, { Analytics } from 'aws-amplify';
 //backend stuffs START HERE
 
 import aws_config from './aws-exports';
-import { Connect } from 'aws-amplify-react';
-import * as queries from './graphql/queries';
-import * as mutations from './graphql/mutations';
-
 
 Amplify.configure(aws_config);
 
