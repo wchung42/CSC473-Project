@@ -21,6 +21,7 @@ const ListGames = `query ListGames{
       Title
       Thumbnail
       Location
+      Geo_Location
       Difficulty
       Capacity
       Story
@@ -34,6 +35,7 @@ class Game extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      gameUserName: "",
       games: [],
       gameID: 0,
       gameTitle: "",
@@ -47,6 +49,7 @@ class Game extends Component {
       gameTotalQuestions: "",
       gameTotalHints: "",
       gameAtQuestion: "",
+      gamePlayers: [],
       gameQuestions: [],
       gameQuestionVisualAids: [],
       gameHints: [],
@@ -75,6 +78,12 @@ class Game extends Component {
       const gamesTest = apiData.data.listGames.items;
       this.setState({ games: gamesTest.reverse() });
     } catch (error) { console.log(error) }
+
+    Auth.currentAuthenticatedUser()
+      .then(user => this.setState({
+        gameUserName: user.username
+      }))
+      .catch(err => console.log(err))
 
     try {
       this.gameUpdateSubscriptions = await API.graphql(graphqlOperation(subscriptions.onUpdateGame, { id: this.state.gameID })).subscribe({
@@ -118,6 +127,7 @@ class Game extends Component {
         gamePlayers: localGame.Players,
         gameFinished: localGame.Finished,
         gameTotalQuestions: localGame.Total_Questions,
+        gameGeoLocation: localGame.Geo_Location,
         gameTotalHints: localGame.Total_Hints,
         gameQuestions: listQuestion.map(item => item.Question),
         gameQuestionVisualAids: listQuestion.map(item => item.Question_Aid),
@@ -137,15 +147,14 @@ class Game extends Component {
       })
     } catch (error) { console.log(error) }
 
-    const nQuestion = {
-      id: this.state.gameID,
-      Finished: false
-    }
-    const nextQuestion = await API.graphql(graphqlOperation(mutations.updateGame, { input: nQuestion }));
+
     console.log("Title of this game: ", this.state.gameTitle);
     console.log("Total Questions of this game: ", this.state.gameTotalQuestions);
     console.log("List of Questions of this game: ", this.state.gameQuestions);
     console.log("List of answers of this game: ", this.state.gameAnswers);
+    console.log("Capacity of this game", this.state.gameCapacity);
+    console.log("list of Player in game: ", this.state.gamePlayers);
+    console.log("Geo Location of this game: ", this.state.gameGeoLocation);
   }
 
   startGame() {
@@ -170,12 +179,33 @@ class Game extends Component {
           gameSynopsis: 0,
           gameStart: 1
         })
+        // update game when a user join the game: Capacity -1 && username added to list of players
+        let userName = currentState.state.gameUserName;
+        let currentCapacity = currentState.state.gameCapacity - 1;
+        currentState.state.gamePlayers.push(userName.toString());
+        let listPlayers = currentState.state.gamePlayers;
+
+        console.log("userName: ", userName);
+        console.log("List player: ", listPlayers);
+        console.log("currentState.state.gamePlayers.", currentState.state.gamePlayers);
+        const newGameState = {
+          id: currentState.state.gameID,
+          Capacity: currentCapacity,
+          Players: listPlayers,
+          Finished: false
+        }
+        try {
+          const newCapacity = API.graphql(graphqlOperation(mutations.updateGame, { input: newGameState }));
+          console.log(newCapacity);
+        } catch (errors) { console.log(errors) }
+        return true;
       } else {
         document.getElementById('notAtLocationIndicator').innerText = 'You are not at the starting location of the game.';
         console.log('not there yet');
-
+        return false;
       }
     }
+
 
     // error callback
     function error(err) {
@@ -184,12 +214,13 @@ class Game extends Component {
 
     // this is just a test location for now -- in front of webb statue
     target = {
-      latitude: 40.820583,
-      longitude: -73.949105
+      latitude: this.state.gameGeoLocation[0],
+      longitude: this.state.gameGeoLocation[1]
     }
 
     // start watching
     current = navigator.geolocation.watchPosition(success, error, { enableHighAccuracy: true });
+    console.log("CURRENT IS: ", current);
   }
 
   getPosition() {

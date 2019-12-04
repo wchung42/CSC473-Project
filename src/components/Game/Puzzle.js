@@ -75,6 +75,7 @@ class Puzzle extends Component {
                 const nQuestion = {
                     id: this.props.gID,
                     At_Question: 0,
+                    Capacity: 15,
                     Players: [],
                     Finished: true
                 }

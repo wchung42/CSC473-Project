@@ -10,7 +10,7 @@ import DrawerToggleButton from '../SideDrawerMenu/DrawerToggleButton';
 import { minHeight } from '@material-ui/system';
 
 Amplify.configure(awsconfig);
-
+let exportUserName = '';
 class Navigation extends Component {
 
   constructor(props) {
@@ -67,6 +67,7 @@ class Navigation extends Component {
 
 
     const { username, showAuth } = this.state;
+    exportUserName = this.state.username;
     const {
       handleShowAuth, handleCloseAuth, handleAuthStateChange,
     } = this;
@@ -120,3 +121,4 @@ class Navigation extends Component {
   }
 }
 export default Navigation;
+export { exportUserName };
