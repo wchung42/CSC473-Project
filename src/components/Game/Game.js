@@ -30,6 +30,7 @@ const ListGames = `query ListGames{
 
 
 class Game extends Component {
+  _isMounted = false;
   constructor(props) {
     super(props)
     this.state = {
@@ -71,6 +72,7 @@ class Game extends Component {
   }
 
   async componentDidMount() {
+    this._isMounted = true;
     try {
       const apiData = await API.graphql(graphqlOperation(ListGames));
       const gamesTest = apiData.data.listGames.items;
@@ -91,20 +93,20 @@ class Game extends Component {
           if (gameData.value.data.onUpdateGame.id === this.state.gameID) {
             this.setState({
               gameAtQuestion: gameData.value.data.onUpdateGame.At_Question,
-              gameFinished: gameData.value.data.onUpdateGame.Finished
+              gameFinished: gameData.value.data.onUpdateGame.Finished,
+              gameCapacity: gameData.value.data.onUpdateGame.Capacity,
+              gamePlayers: gameData.value.data.onUpdateGame.Players,
             })
-            console.log("new atquestion:", this.state.gameAtQuestion)
-            console.log("Game finished?", this.state.gameFinished)
-          }
-          else {
-            console.log("Game", gameData.value.data.onUpdateGame.id, " updated")
+            console.log("list of Players in-game: ", this.state.gamePlayers)
           }
         }
-
-
       });
     } catch (errorOfSub) { console.log(errorOfSub) }
 
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   //onclick will getGameId and then edit all states
@@ -164,9 +166,12 @@ class Game extends Component {
 
   async startGame() {
     // watch current location
-    let current, target, dist;
+    let current, dist;
     let currentState = this;
-
+    let target = {
+      latitude: this.state.gameGeoLocation[0],
+      longitude: this.state.gameGeoLocation[1]
+    }
     function success(position) {
       let userCoords = position.coords;
       console.log(`latitude: ${userCoords.latitude} | longitude: ${userCoords.longitude}`)
@@ -175,61 +180,37 @@ class Game extends Component {
       console.log('Distance: ' + dist)
       // player must be within 10 meters of starting point for game to begin
       if (dist >= 0.09) {
-        console.log('You are here!');
         // stop watching player location
-        navigator.geolocation.clearWatch(current)
-        // testtt
-        console.log('starting game');
-
-        // update game when a user join the game: Capacity -1 && username added to list of players
-        let userName = currentState.state.gameUserName;
-        let currentCapacity = currentState.state.gameCapacity - 1;
-        currentState.state.gamePlayers.push(userName.toString());
-        let listPlayers = currentState.state.gamePlayers;
-
-        console.log("userName: ", userName);
-        console.log("List player: ", listPlayers);
-        console.log("currentState.state.gamePlayers.", currentState.state.gamePlayers);
-        const newGameState = {
-          id: currentState.state.gameID,
-          Capacity: currentCapacity,
-          Players: listPlayers,
-          Finished: false
-        }
-        try {
-          const newCapacity = API.graphql(graphqlOperation(mutations.updateGame, { input: newGameState }));
-          console.log(newCapacity);
-        } catch (errors) { console.log(errors) }
-
         currentState.setState({
           gameSynopsis: 0,
           gameStart: 1,
-          gameCapacity: currentCapacity,
-          gamePlayers: listPlayers
         })
+        navigator.geolocation.clearWatch(current)
 
+        let userName = currentState.state.gameUserName;
+        currentState.state.gamePlayers.push(userName);
+        const newGameState = {
+          id: currentState.state.gameID,
+          Capacity: currentState.state.gameCapacity - 1,
+          Players: currentState.state.gamePlayers,
+        }
+        try {  // update game when a user join the game: Capacity -1 && username added to list of players
+          API.graphql(graphqlOperation(mutations.updateGame, { input: newGameState }));
+        } catch (errors) { console.log(errors) }
       } else {
         document.getElementById('notAtLocationIndicator').innerText = 'You are not at the starting location of the game.';
         console.log('not there yet');
-        return false;
       }
     }
-
 
     // error callback
     function error(err) {
       console.warn('Error(' + err.code + '): ' + err.message);
     }
-
-    // this is just a test location for now -- in front of webb statue
-    target = {
-      latitude: this.state.gameGeoLocation[0],
-      longitude: this.state.gameGeoLocation[1]
-    }
-
     // start watching
-    current = navigator.geolocation.watchPosition(success, error, { enableHighAccuracy: true });
-    console.log("CURRENT IS: ", current);
+    current = await navigator.geolocation.watchPosition(success, error, { enableHighAccuracy: true });
+
+
   }
 
   getPosition() {

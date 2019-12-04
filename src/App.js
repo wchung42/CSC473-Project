@@ -10,11 +10,11 @@ import Home from './components/home/home';
 import Footer from './components/Footer/Footer'
 import About from './components/About/About';
 import Contact from './components/Contact/Contact';
+import ProfilePage from './components/Profile/Profile';
 import CreateGame from './components/createGame/createGame';
 import GameStory from './components/createGame/gameStory'
 import GameQuestions from './components/createGame/gameQuestions'
 import Amplify, { Analytics } from 'aws-amplify';
-import ProfilePage from './components/Profile/Profile'
 //backend stuffs START HERE
 
 import aws_config from './aws-exports';
