@@ -328,20 +328,20 @@ class Game extends Component {
                     <strong>NOTE: ANSWERS NOT CASE SENSITIVE</strong>
                   </p>
                   <br />
-                  <img src = 'https://user-images.githubusercontent.com/15526256/70117945-c821f300-1634-11ea-9b3e-e86832e7cf32.gif' 
-                      alt = 'dnd gif' 
-                      className = 'instruction-gifs'
-                  />
+                  <img src = 'https://user-images.githubusercontent.com/15526256/70118449-023fc480-1636-11ea-97a1-192d94088285.gif' 
+                      alt = 'text gif'
+                      className = 'instruction-gifs'/>
+                  <br />
                   <br />
                   <li>Ordering</li>
                   <p>
                     These questions are completed by dragging and dropping the images into the correct order and hitting SUBMIT.
                   </p>
                   <br />
-                  <img src = 'https://user-images.githubusercontent.com/15526256/70118449-023fc480-1636-11ea-97a1-192d94088285.gif' 
-                      alt = 'text gif'
-                      className = 'instruction-gifs'/>
-                  <br />
+                  <img src = 'https://user-images.githubusercontent.com/15526256/70117945-c821f300-1634-11ea-9b3e-e86832e7cf32.gif' 
+                      alt = 'dnd gif' 
+                      className = 'instruction-gifs'
+                  />
                 </ul>
               </div>
             </div>
