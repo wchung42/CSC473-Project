@@ -12,7 +12,7 @@ class riddleQuestion extends Component {
                     {this.props.qContent}
                 </p>
                 {
-                    (this.props.qAid == "#") ? "" : <img className="imgG card-img-top" src={this.props.qAid} />
+                    (this.props.qAid === "#") ? "" : <img className="imgG card-img-top" src={this.props.qAid} alt={this.props.qId + " Image"} />
                 }
 
             </div>

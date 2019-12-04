@@ -21,12 +21,12 @@ class gamePanel extends Component {
                             <strong>{item.Title}</strong>
                         </h5>
                         <ul className="card-text">
-                            <li>Location: {item.Location}</li>
-                            <li>Capacity: {item.Capacity}</li>
-                            <li>Game Length: {item.Time_Limit / 60} minutes</li>
-                            <li>Difficulty: {item.Difficulty}/5</li>
+                            <li key="location">Location: {item.Location}</li>
+                            <li key="capacity">Capacity: {item.Capacity}</li>
+                            <li key="gameLength">Game Length: {item.Time_Limit / 60} minutes</li>
+                            <li key="difficulty">Difficulty: {item.Difficulty}/5</li>
                         </ul>
-                        <button disabled={item.Capacity == 0} id={"bttn" + item.id} className="btn btn-lg btn-primary" type="button" onClick={this.props.func} value={item.id}>START</button>
+                        <button disabled={item.Capacity === 0} id={"bttn" + item.id} className="btn btn-lg btn-primary" type="button" onClick={this.props.func} value={item.id}>START</button>
                     </li>
                 </div>
             );

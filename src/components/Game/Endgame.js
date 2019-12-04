@@ -29,12 +29,10 @@ class Endgame extends Component {
             reviewGameId: this.props.gameId
         }
         try {
-            const createReview = await API.graphql(graphqlOperation(mutations.createReview, { input: newReview }));
-            console.log("new Review info: ", createReview);
-            console.log("User review added to DB");
+            await API.graphql(graphqlOperation(mutations.createReview, { input: newReview }));
         } catch (errors) {
             try {
-                const updateReview = await API.graphql(graphqlOperation(mutations.updateReview, { input: newReview }));
+                await API.graphql(graphqlOperation(mutations.updateReview, { input: newReview }));
             } catch (error) { console.log(error) }
         }
         // clear form

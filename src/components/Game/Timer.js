@@ -28,7 +28,7 @@ class Timer extends Component {
     render() {
         const { count } = this.state;
         //time out
-        if (this.state.count == 0) {
+        if (this.state.count === 0) {
             clearInterval(this.myInterval);
             return <Endgame gameId={this.props.gameID} gameUserName={this.props.gameUserName} outcome={false} />;
             //not time out and win the game

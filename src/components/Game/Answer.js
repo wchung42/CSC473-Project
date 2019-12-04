@@ -25,7 +25,7 @@ class Answer extends Component {
     }
 
     render() {
-        if (this.props.answerType == "Number") {
+        if (this.props.answerType === "Number") {
             return (
                 // Construct Num Pad
                 <div className="answerSpace">
@@ -50,7 +50,7 @@ class Answer extends Component {
                 </div>
             )
         }
-        else if (this.props.answerType == "Ordering") {
+        else if (this.props.answerType === "Ordering") {
             return (
                 <div className="answerSpace">
                     <div id="orderingAnswer">

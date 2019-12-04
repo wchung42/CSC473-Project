@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './SideDrawerMenu.css';
-import Amplify, { Auth } from 'aws-amplify';
-import { NONAME } from 'dns';
+import { Auth } from 'aws-amplify';
+// import { NONAME } from 'dns';
 
 class sideDrawerMenu extends Component {
   constructor(props) {
@@ -44,7 +44,7 @@ class sideDrawerMenu extends Component {
           {/* <div className = 'side-drawer-divider'>
             <hr/>
           </div> */}
-          
+
           <li><a href="/Game">Games</a></li>
           <li><a href="/About">About Us</a></li>
           <li><a href="/Contact">Contact Us</a></li>

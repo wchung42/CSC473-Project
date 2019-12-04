@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import './Game.css';
-import Endgame from './Endgame';
 import Answer from './Answer';
 import Question from './Question';
-import Amplify, { API, graphqlOperation } from 'aws-amplify';
+import { API, graphqlOperation } from 'aws-amplify';
 import * as mutations from '../../graphql/mutations';
 //props this file needs to run: Id, TotalQuestion, TotalHints, AtQuestion, Questions, AnswerType, Answers, Hints, Long, Lad, TimeLimit
 //Each time answers is right => mutation Update AtQuestion 
 //When the game ends it will reset players pool => mutation updateGame(players: "")
 //Rework Hint component a little bit
-import getDistanceFromLatLonInKm from './util.js' // distance function
 // still need this lat and long
 // import games from './games.json';
 
@@ -56,7 +54,7 @@ class Puzzle extends Component {
         let answer = this.state.answers[this.state.atQuestion];
         console.log(answer)
         //if the answer is correct
-        if (userAnswer.toLowerCase() == answer.toLowerCase()) {
+        if (userAnswer.toLowerCase() === answer.toLowerCase()) {
             //moving to the next question
             console.log("right answer");
             // clear hint space when moving to next question
@@ -67,7 +65,7 @@ class Puzzle extends Component {
                 atLocation: 0
             })
             //if this is the last question then End game
-            if (this.state.atQuestion == this.state.totalQuestions) {
+            if (this.state.atQuestion === this.state.totalQuestions) {
                 await this.setState({
                     gameState: false,
                     win: true
@@ -217,11 +215,9 @@ class Puzzle extends Component {
 
         //define DragDrop data
         let DragDrop_Data = {};
-        if (this.state.answerType[this.state.atQuestion] == "Ordering") {
+        if (this.state.answerType[this.state.atQuestion] === "Ordering") {
             let AidStuffs0 = this.props.gVisualAid0[this.state.atQuestion]; //initial order
             let AidStuffs1 = this.props.gVisualAid1[this.state.atQuestion]; //array of images
-            let AidStuffs2 = this.props.gVisualAid2[this.state.atQuestion];
-            let AidStuffs3 = this.props.gVisualAid3[this.state.atQuestion];
             // console.log("AidStuffs0: ", AidStuffs0)
             // console.log("AidStuffs1: ", AidStuffs1)
             // console.log("AidStuffs2: ", AidStuffs2)
@@ -238,7 +234,6 @@ class Puzzle extends Component {
                     "id": i.toString(),
                     "url": AidStuffs1[i]
                 }
-                let temp2 = {}
                 images[i.toString()] = temp
             };
             let rowOrder = ["row1"];
