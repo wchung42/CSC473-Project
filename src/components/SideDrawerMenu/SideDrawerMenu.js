@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import './SideDrawerMenu.css';
 import { Auth } from 'aws-amplify';
-// import { NONAME } from 'dns';
+import { AmazonAIPredictionsProvider } from '@aws-amplify/predictions';
 
+let amins = ['admin','admin2', 'admin3', 'admin4']
 class sideDrawerMenu extends Component {
   constructor(props) {
     super(props)
     this.state = {
       username: '',
       isLoggedIn: false,
+      isadmin: false
     }
   }
 
@@ -19,6 +21,13 @@ class sideDrawerMenu extends Component {
         username: user.username,
         isLoggedIn: true,
       });
+    for(var i = 0; i< amins.length;i++){
+      if (this.state.username === amins[i]){
+        this.setState({
+          isadmin: true
+        });
+      }
+    }
     }
   }
 
@@ -27,6 +36,7 @@ class sideDrawerMenu extends Component {
       this.setState({
         username: '',
         isLoggedIn: false,
+        isadmin: false
       });
     });
   }
@@ -49,7 +59,7 @@ class sideDrawerMenu extends Component {
           <li><a href="/About">About Us</a></li>
           <li><a href="/Contact">Contact Us</a></li>
           <li><button hidden={!this.state.isLoggedIn} onClick={this.handleSignOut} style={{ background: 'none', border: 'none' }}><a href="/">Sign out</a></button></li>
-          <li hidden={!this.state.isLoggedIn}><a href="/cc">Create Game (Beta)</a></li>
+          <li hidden={!this.state.isadmin}><a href="/cc">Create Game (Beta)</a></li>
         </ul>
       </nav>
     );
