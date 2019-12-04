@@ -8,6 +8,7 @@ import Navbar from './components/Navbar/Navbar'
 import Footer from './components/Footer/Footer'
 import backdrop from './components/Backdrop/Backdrop'
 
+
 import { shallow, mount } from 'enzyme';
 import { async } from 'q';
 
@@ -34,7 +35,7 @@ test('navbar Testing', () => {
   
   const nav= shallow(<Navbar  />);
 
-  expect(nav.text()).toEqual('<drawerToggleButton />');
+  expect(nav.text()).toEqual('Sign in<drawerToggleButton /><Authenticator />');
 
   
 });
