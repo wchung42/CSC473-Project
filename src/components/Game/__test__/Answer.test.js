@@ -30,7 +30,7 @@ describe("<Answer/> component", () => {
             const testProps = {
                 id: 1,
                 qId: 2,
-                answerType: 'Number'
+                answerType: 'Text'
             }
             
             wrapper = shallow(<Answer {...testProps} />);
@@ -38,12 +38,12 @@ describe("<Answer/> component", () => {
         })
 
         it('text question should render with 1 textfield', () => {
-            wrapper = shallow(<Answer id = {1} qId = {2} answerType={'Number'}/>);
+            wrapper = shallow(<Answer id = {1} qId = {2} answerType={'Text'}/>);
             expect(wrapper.find('#textAnswer').length).toBe(1);
         })
 
         it('text question should render with 1 submit button', () => {
-            wrapper = shallow(<Answer id = {1} qId = {2} answerType={'Number'}/>);
+            wrapper = shallow(<Answer id = {1} qId = {2} answerType={'Text'}/>);
             expect(wrapper.find('#submitBttn').length).toBe(1);
         })
 
@@ -51,14 +51,14 @@ describe("<Answer/> component", () => {
             const testProps = {
                 id: 1,
                 qId: 7,
-                answerType: 'Number'
+                answerType: 'Ordering'
             }
             wrapper = shallow(<Answer {...testProps} />);
             expect(wrapper.find(OrderQuestion).length).toBe(1);
         })
 
         it('ordering question renders with 1 submit button', () => {
-            wrapper = shallow(<Answer id = {1} qId = {7} answerType={'Number'}/>);
+            wrapper = shallow(<Answer id = {1} qId = {7} answerType={'Ordering'}/>);
             expect(wrapper.find('#submitButtonOrder').length).toBe(1);
         })
     })
@@ -68,7 +68,7 @@ describe("<Answer/> component", () => {
         //beforeEach(() => {wrapper = shallow(<Answer />);})
 
         it('pressing on numpad buttons should call enterNum', () => {
-            wrapper = shallow(<Answer id = {1} qId = {1} />)
+            wrapper = shallow(<Answer id = {1} qId = {1} answerType = {'Number'}/>)
             const instance = wrapper.instance();
             //jest.spyOn(document, 'getElementById').mockReturnValueOnce({value: 'pound'});
             const spy = jest.spyOn(instance, "enterNum");
@@ -90,6 +90,21 @@ describe("<Answer/> component", () => {
             button = wrapper.find('#numDot');
             expect(button.length).toBe(1);
             button.simulate('click', { currentTarget: '.'}, spy);
+            expect(spy).toHaveBeenCalled();
+
+        });
+
+        it('clicking submit in text questions should call enterText', () => {
+            wrapper = shallow(<Answer answerType = {'Text'}/>);
+            const instance = wrapper.instance();
+            const spy = jest.spyOn(instance, "enterText");
+            instance.forceUpdate();
+            let input;
+            jest.spyOn(document, 'getElementById').mockReturnValueOnce({value: 'submitBttn'})
+            const answerSpy = jest.spyOn(document, 'getElementById').mockReturnValueOnce({value: 'answerBox'});
+            input = wrapper.find('#answerBox');
+            expect(input.length).toBe(1);
+            input.simulate('change', { answerSpy: 'Hello world'}, spy);
             expect(spy).toHaveBeenCalled();
 
         })
