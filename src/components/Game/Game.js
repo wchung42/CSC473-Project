@@ -75,6 +75,7 @@ class Game extends Component {
       const apiData = await API.graphql(graphqlOperation(ListGames));
       const gamesTest = apiData.data.listGames.items;
       this.setState({ games: gamesTest.reverse() });
+      console.log(this.state.games);
     } catch (error) { console.log(error) }
 
     Auth.currentAuthenticatedUser()
