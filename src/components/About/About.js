@@ -17,7 +17,8 @@ const About=(props)=>{
                 </div>
                 <div className = 'statement-body'>
                     <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Going to escape rooms with friends is always fun, but it's pretty pricey. Our Goal at Escape is to provide outdoor 
+                    "Escape rooms" with friends.
                     </p>
                 </div>
                 <div className = 'section-divider'>
@@ -29,9 +30,7 @@ const About=(props)=>{
                     <h3><strong>Meet The Team</strong></h3>
                 </div>
                 <div className = 'statement-body'>
-                    <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    </p>
+                    <img style ={{width:'70%'}} src="https://cdn.discordapp.com/attachments/629102063107964961/651616913637638154/image0.jpg"></img>
                 </div>
                 <div className = 'section-divider'>
                     <hr/>

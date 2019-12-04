@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Avatar from 'react-avatar';
+import Amplify, { Auth } from 'aws-amplify';
 
 class ProfilePage extends Component{
     constructor(props) {
@@ -19,7 +21,29 @@ class ProfilePage extends Component{
           });
         }
       }
+render(){
+    return(
+    <div>
+        <div className="container">
+            <br/>
+        <Avatar name={this.state.username} size ="300" round={true} />
+        <br/>
+        <br/>
+        <br/>
+        <h1 style={{fontSize:'400%'}}>Welcome Home  {this.state.username}!</h1>
 
+        <h1 style={{fontSize:'400%'}}>Bio:</h1>
+        <textarea style={{fontSize:'400%', backgroundColor:'gray'}} value="Just happy to be here honestly"></textarea>
+
+        <hr/>
+        </div>
+        
+    </div>
+    
+    
+    
+    )
+}
 
 }
 

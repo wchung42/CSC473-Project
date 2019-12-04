@@ -82,6 +82,7 @@ class App extends Component {
               <Route path='/cc' component={CreateGame} />
               <Route path='/gs' component={GameStory} />
               <Route path='/gq' component={GameQuestions} />
+              <Route path='/profile' component={ProfilePage} />
               <Route path='/' component={Home} />
 
 
