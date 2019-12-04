@@ -27,29 +27,32 @@ describe('<Contact /> component testing', () => {
     describe("<Contact /> interactions", () => {
         let wrapper;
         describe('states change when form is changed', () => {
-            it('name changes when name is entered', () => {
+            beforeEach(() => {
                 wrapper = shallow(<Contact />);
+            })
+            it('name changes when name is entered', () => {
+                
                 let input = wrapper.find('#nameInput');
                 expect(wrapper.find('#nameInput').length).toBe(1);
                 input.simulate('change', {target:{value: 'Yoda'}});
                 expect(wrapper.state().name).toEqual('Yoda')
             });
             it('email changes when email is entered', () => {
-                wrapper = shallow(<Contact />);
+                
                 let input = wrapper.find('#emailInput');
                 expect(wrapper.find('#emailInput').length).toBe(1);
                 input.simulate('change', {target:{value: 'babyyoda@gmail.com'}});
                 expect(wrapper.state().email).toEqual('babyyoda@gmail.com')
             });
             it('message changes when subject is entered', () => {
-                wrapper = shallow(<Contact />);
+                
                 let input = wrapper.find('#subjectInput');
                 expect(wrapper.find('#subjectInput').length).toBe(1);
                 input.simulate('change', {target:{value: 'Baby yoda is adorable!!!'}});
                 expect(wrapper.state().subject).toEqual('Baby yoda is adorable!!!')
             });
             it('email changes when message is entered', () => {
-                wrapper = shallow(<Contact />);
+                
                 let input = wrapper.find('#messageInput');
                 expect(wrapper.find('#messageInput').length).toBe(1);
                 input.simulate('change', {target:{value: 'I love baby yoda.'}});
@@ -58,6 +61,16 @@ describe('<Contact /> component testing', () => {
         });
         // test the handle submit interaction
         
+        it('submit button should call handleSubmit', () => {
+            wrapper = shallow(<Contact />);
+            //const handleSubmit = jest.spyOn('handleSubmit');
+            let button = wrapper.find('#submit-button');
+            expect(button.length).toBe(1);
+            const form = wrapper.find('form');
+            expect(form.length).toBe(1);
+            form.simulate('submit', {preventDefault: () => {}});
+            //expect(handleSubmit).toHaveBeenCalledTimes(1);
+        })
     })
 
     it('check that has navigation', () => {
