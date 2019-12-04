@@ -107,7 +107,9 @@ describe("<Answer/> component", () => {
             input.simulate('change', { answerSpy: 'Hello world'}, spy);
             expect(spy).toHaveBeenCalled();
 
-        })
+        });
+
+        // integration testing for ordering question
     })
 
 })
