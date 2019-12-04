@@ -177,7 +177,7 @@
 }
 
 .synopsis-inner-container {
-  max-width: 70%;
+  max-width: 80%;
   margin: 0 auto;
 }
 
@@ -199,6 +199,19 @@
 .instructions p {
   font-size: 30px;
   text-align: left;
+}
+
+.instruction-questions h4 strong{
+  font-size: 40px;
+}
+
+.instruction-questions ul {
+  list-style-type: none;
+}
+
+.instruction-questions ul li {
+  font-size: 30px;
+  
 }
 
 .section-divider hr {
