@@ -15,6 +15,8 @@ type Game @model {
   At_Question: Int!                                     #Index to indicate what question the whole game at!
   Questions(limit: Int = 99): [Question]!  @connection(name:"GamePlay")  #List of Question of the game
   Review: [Review]!   @connection(name:"GamePlay")
+  ReviewCount: Int!
+  Average_Rating: String!
   Aid_Stuffs: [String]
   Record: [Record] @connection(name:"gameRecord")					#Aid stuffs for different type of answer
 }

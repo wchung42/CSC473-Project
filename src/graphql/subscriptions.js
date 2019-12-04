@@ -43,6 +43,8 @@ export const onCreateGame = `subscription OnCreateGame {
       }
       nextToken
     }
+    ReviewCount
+    Average_Rating
     Aid_Stuffs
     Record {
       items {
@@ -96,6 +98,8 @@ export const onUpdateGame = `subscription OnUpdateGame {
       }
       nextToken
     }
+    ReviewCount
+    Average_Rating
     Aid_Stuffs
     Record {
       items {
@@ -149,6 +153,8 @@ export const onDeleteGame = `subscription OnDeleteGame {
       }
       nextToken
     }
+    ReviewCount
+    Average_Rating
     Aid_Stuffs
     Record {
       items {
@@ -184,6 +190,8 @@ export const onCreateQuestion = `subscription OnCreateQuestion {
       Review {
         nextToken
       }
+      ReviewCount
+      Average_Rating
       Aid_Stuffs
       Record {
         nextToken
@@ -227,6 +235,8 @@ export const onUpdateQuestion = `subscription OnUpdateQuestion {
       Review {
         nextToken
       }
+      ReviewCount
+      Average_Rating
       Aid_Stuffs
       Record {
         nextToken
@@ -270,6 +280,8 @@ export const onDeleteQuestion = `subscription OnDeleteQuestion {
       Review {
         nextToken
       }
+      ReviewCount
+      Average_Rating
       Aid_Stuffs
       Record {
         nextToken
@@ -313,6 +325,8 @@ export const onCreateReview = `subscription OnCreateReview {
       Review {
         nextToken
       }
+      ReviewCount
+      Average_Rating
       Aid_Stuffs
       Record {
         nextToken
@@ -348,6 +362,8 @@ export const onUpdateReview = `subscription OnUpdateReview {
       Review {
         nextToken
       }
+      ReviewCount
+      Average_Rating
       Aid_Stuffs
       Record {
         nextToken
@@ -383,6 +399,8 @@ export const onDeleteReview = `subscription OnDeleteReview {
       Review {
         nextToken
       }
+      ReviewCount
+      Average_Rating
       Aid_Stuffs
       Record {
         nextToken
@@ -419,6 +437,8 @@ export const onCreateUserProfile = `subscription OnCreateUserProfile {
         Total_Questions
         Total_Hints
         At_Question
+        ReviewCount
+        Average_Rating
         Aid_Stuffs
       }
       user {
@@ -459,6 +479,8 @@ export const onUpdateUserProfile = `subscription OnUpdateUserProfile {
         Total_Questions
         Total_Hints
         At_Question
+        ReviewCount
+        Average_Rating
         Aid_Stuffs
       }
       user {
@@ -499,6 +521,8 @@ export const onDeleteUserProfile = `subscription OnDeleteUserProfile {
         Total_Questions
         Total_Hints
         At_Question
+        ReviewCount
+        Average_Rating
         Aid_Stuffs
       }
       user {
@@ -538,6 +562,8 @@ export const onCreateRecord = `subscription OnCreateRecord {
       Review {
         nextToken
       }
+      ReviewCount
+      Average_Rating
       Aid_Stuffs
       Record {
         nextToken
@@ -583,6 +609,8 @@ export const onUpdateRecord = `subscription OnUpdateRecord {
       Review {
         nextToken
       }
+      ReviewCount
+      Average_Rating
       Aid_Stuffs
       Record {
         nextToken
@@ -628,6 +656,8 @@ export const onDeleteRecord = `subscription OnDeleteRecord {
       Review {
         nextToken
       }
+      ReviewCount
+      Average_Rating
       Aid_Stuffs
       Record {
         nextToken

@@ -24,6 +24,8 @@ const ListGames = `query ListGames{
       Capacity
       Story
       Time_Limit
+      ReviewCount
+      Average_Rating
     }
   }
 }`;
@@ -55,7 +57,11 @@ class Game extends Component {
       gameHints: [],
       gameAnswerType: [],
       gameAnswers: [],
+      gameReviewCount: "",
+      gameReviews: [],
+      gameAverageRating: "",
       latitude: 0,
+      longitude: 0,
       gameReady: false,
       gameVisualAid0: [],
       gameVisualAid1: [],
@@ -144,6 +150,8 @@ class Game extends Component {
         gameVisualAid3: listQuestion.map(item => item.Answer_Aid3),
         gameAnswers: listQuestion.map(item => item.Answer),
         gameHints: listQuestion.map(item => item.Hint),
+        gameReviewCount: localGame.ReviewCount,
+        gameAverageRating: localGame.gameAverageRating,
         gameStory: localGame.Story,
         gameTimeLimt: localGame.Time_Limit,
         gameAtQuestion: localGame.At_Question,
@@ -167,6 +175,8 @@ class Game extends Component {
     console.log("Capacity of this game", this.state.gameCapacity);
     console.log("list of Player in game: ", this.state.gamePlayers);
     console.log("Geo Location of this game: ", this.state.longitude, this.state.latitude);
+    console.log("Number of Rating of this game: ", this.state.gameReviewCount)
+    console.log("Game Average Rating: ", this.state.gameAverageRating)
   }
 
   async startGame() {
@@ -381,6 +391,8 @@ class Game extends Component {
               gameHints={this.state.gameHints}
               gameAnswerType={this.state.gameAnswerType}
               gameAnswers={this.state.gameAnswers}
+              gameAverageRating={this.state.gameAverageRating}
+              gameReviewCount={this.state.gameReviewCount}
               gameVisualAid0={this.state.gameVisualAid0}
               gameVisualAid1={this.state.gameVisualAid1}
               gameVisualAid2={this.state.gameVisualAid2}

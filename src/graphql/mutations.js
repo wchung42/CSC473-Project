@@ -43,6 +43,8 @@ export const createGame = `mutation CreateGame($input: CreateGameInput!) {
       }
       nextToken
     }
+    ReviewCount
+    Average_Rating
     Aid_Stuffs
     Record {
       items {
@@ -96,6 +98,8 @@ export const updateGame = `mutation UpdateGame($input: UpdateGameInput!) {
       }
       nextToken
     }
+    ReviewCount
+    Average_Rating
     Aid_Stuffs
     Record {
       items {
@@ -149,6 +153,8 @@ export const deleteGame = `mutation DeleteGame($input: DeleteGameInput!) {
       }
       nextToken
     }
+    ReviewCount
+    Average_Rating
     Aid_Stuffs
     Record {
       items {
@@ -184,6 +190,8 @@ export const createQuestion = `mutation CreateQuestion($input: CreateQuestionInp
       Review {
         nextToken
       }
+      ReviewCount
+      Average_Rating
       Aid_Stuffs
       Record {
         nextToken
@@ -227,6 +235,8 @@ export const updateQuestion = `mutation UpdateQuestion($input: UpdateQuestionInp
       Review {
         nextToken
       }
+      ReviewCount
+      Average_Rating
       Aid_Stuffs
       Record {
         nextToken
@@ -270,6 +280,8 @@ export const deleteQuestion = `mutation DeleteQuestion($input: DeleteQuestionInp
       Review {
         nextToken
       }
+      ReviewCount
+      Average_Rating
       Aid_Stuffs
       Record {
         nextToken
@@ -313,6 +325,8 @@ export const createReview = `mutation CreateReview($input: CreateReviewInput!) {
       Review {
         nextToken
       }
+      ReviewCount
+      Average_Rating
       Aid_Stuffs
       Record {
         nextToken
@@ -348,6 +362,8 @@ export const updateReview = `mutation UpdateReview($input: UpdateReviewInput!) {
       Review {
         nextToken
       }
+      ReviewCount
+      Average_Rating
       Aid_Stuffs
       Record {
         nextToken
@@ -383,6 +399,8 @@ export const deleteReview = `mutation DeleteReview($input: DeleteReviewInput!) {
       Review {
         nextToken
       }
+      ReviewCount
+      Average_Rating
       Aid_Stuffs
       Record {
         nextToken
@@ -419,6 +437,8 @@ export const createUserProfile = `mutation CreateUserProfile($input: CreateUserP
         Total_Questions
         Total_Hints
         At_Question
+        ReviewCount
+        Average_Rating
         Aid_Stuffs
       }
       user {
@@ -459,6 +479,8 @@ export const updateUserProfile = `mutation UpdateUserProfile($input: UpdateUserP
         Total_Questions
         Total_Hints
         At_Question
+        ReviewCount
+        Average_Rating
         Aid_Stuffs
       }
       user {
@@ -499,6 +521,8 @@ export const deleteUserProfile = `mutation DeleteUserProfile($input: DeleteUserP
         Total_Questions
         Total_Hints
         At_Question
+        ReviewCount
+        Average_Rating
         Aid_Stuffs
       }
       user {
@@ -538,6 +562,8 @@ export const createRecord = `mutation CreateRecord($input: CreateRecordInput!) {
       Review {
         nextToken
       }
+      ReviewCount
+      Average_Rating
       Aid_Stuffs
       Record {
         nextToken
@@ -583,6 +609,8 @@ export const updateRecord = `mutation UpdateRecord($input: UpdateRecordInput!) {
       Review {
         nextToken
       }
+      ReviewCount
+      Average_Rating
       Aid_Stuffs
       Record {
         nextToken
@@ -628,6 +656,8 @@ export const deleteRecord = `mutation DeleteRecord($input: DeleteRecordInput!) {
       Review {
         nextToken
       }
+      ReviewCount
+      Average_Rating
       Aid_Stuffs
       Record {
         nextToken

@@ -43,6 +43,8 @@ export const getGame = `query GetGame($id: ID!) {
       }
       nextToken
     }
+    ReviewCount
+    Average_Rating
     Aid_Stuffs
     Record {
       items {
@@ -81,6 +83,8 @@ export const listGames = `query ListGames(
       Review {
         nextToken
       }
+      ReviewCount
+      Average_Rating
       Aid_Stuffs
       Record {
         nextToken
@@ -114,6 +118,8 @@ export const getQuestion = `query GetQuestion($id: ID!) {
       Review {
         nextToken
       }
+      ReviewCount
+      Average_Rating
       Aid_Stuffs
       Record {
         nextToken
@@ -156,6 +162,8 @@ export const listQuestions = `query ListQuestions(
         Total_Questions
         Total_Hints
         At_Question
+        ReviewCount
+        Average_Rating
         Aid_Stuffs
       }
       Instruction
@@ -198,6 +206,8 @@ export const getReview = `query GetReview($id: ID!) {
       Review {
         nextToken
       }
+      ReviewCount
+      Average_Rating
       Aid_Stuffs
       Record {
         nextToken
@@ -232,6 +242,8 @@ export const listReviews = `query ListReviews(
         Total_Questions
         Total_Hints
         At_Question
+        ReviewCount
+        Average_Rating
         Aid_Stuffs
       }
       rating
@@ -267,6 +279,8 @@ export const getUserProfile = `query GetUserProfile($id: ID!) {
         Total_Questions
         Total_Hints
         At_Question
+        ReviewCount
+        Average_Rating
         Aid_Stuffs
       }
       user {
@@ -328,6 +342,8 @@ export const getRecord = `query GetRecord($id: ID!) {
       Review {
         nextToken
       }
+      ReviewCount
+      Average_Rating
       Aid_Stuffs
       Record {
         nextToken
@@ -372,6 +388,8 @@ export const listRecords = `query ListRecords(
         Total_Questions
         Total_Hints
         At_Question
+        ReviewCount
+        Average_Rating
         Aid_Stuffs
       }
       user {
