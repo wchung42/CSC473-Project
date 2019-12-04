@@ -44,6 +44,7 @@ class GameQuestions extends Component{
                                 <option>Text</option>
                                 <option>Number</option>
                                 <option>Ordering</option>
+                                <option>New?</option>
                             </select>
 
                             <label for = 'name'>Visual Aid</label>
