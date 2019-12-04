@@ -69,9 +69,9 @@ class App extends Component {
 
         <meta name="viewport" content="600px"></meta>
 
-        <div key={this.state.sideDrawerMenuOpen.toString()} >
-          <Navbar drawerClickHandler={this.drawerToggleClickHandler} />
 
+        <Navbar drawerClickHandler={this.drawerToggleClickHandler} />
+        <div key={this.state.sideDrawerMenuOpen.toString()} >
           <SideDrawerMenu show={this.state.sideDrawerMenuOpen} />
           {backdrop}
         </div>
@@ -83,9 +83,9 @@ class App extends Component {
               <Route path='/Game' component={Game} />
               <Route path='/about' component={About} />
               <Route path='/contact' component={Contact} />
-              <Route path ='/cc' component={CreateGame}/>
-              <Route path ='/gs' component={GameStory}/>
-              <Route path ='/gq' component={GameQuestions}/>
+              <Route path='/cc' component={CreateGame} />
+              <Route path='/gs' component={GameStory} />
+              <Route path='/gq' component={GameQuestions} />
               <Route path='/' component={Home} />
 
 
