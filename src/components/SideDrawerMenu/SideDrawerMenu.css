@@ -19,7 +19,8 @@
     flex-direction: column;
     list-style: none;
     padding-top: 1vh;
-    margin-top: 2vh;
+    margin-top: 5em;
+    margin-left: 1em;
 }
 
 .side-drawer li {
@@ -33,6 +34,14 @@
     font-size: 3vh;
     color: white;
 }
+
+.side-drawer-divider {
+    padding: 0;
+    margin-top: 2em;
+    margin-bottom: 0;
+    max-width: 30em;
+    border-top: 5px solid rgb(255, 187, 0)
+  }
 
 /* animating the side drawer - default position */
 .side-drawer.open {

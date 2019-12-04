@@ -40,10 +40,16 @@ class sideDrawerMenu extends Component {
     return (
       <nav className={animateDrawer}>
         <ul>
+          <li><a href="/Home">Home</a></li>
+          {/* <div className = 'side-drawer-divider'>
+            <hr/>
+          </div> */}
+          
           <li><a href="/Game">Games</a></li>
           <li><a href="/About">About Us</a></li>
           <li><a href="/Contact">Contact Us</a></li>
           <li><button hidden={!this.state.isLoggedIn} onClick={this.handleSignOut} style={{ background: 'none', border: 'none' }}><a href="/">Sign out</a></button></li>
+          <li hidden={!this.state.isLoggedIn}><a href="/cc">Create Game (Beta)</a></li>
         </ul>
       </nav>
     );

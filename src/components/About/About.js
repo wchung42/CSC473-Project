@@ -21,7 +21,7 @@ const About=(props)=>{
                     </p>
                 </div>
                 <div className = 'section-divider'>
-                    <p>_________________________________</p>
+                    <hr/>
                 </div>
             </div>
             <div className = 'meet-team'>
@@ -34,9 +34,10 @@ const About=(props)=>{
                     </p>
                 </div>
                 <div className = 'section-divider'>
-                    <p>_________________________________</p>
+                    <hr/>
                 </div>
             </div>
+            <br></br>
 
         </div>
         
@@ -44,4 +45,3 @@ const About=(props)=>{
 };
 
 export default About;
-
