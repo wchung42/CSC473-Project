@@ -13,6 +13,7 @@ import Contact from './components/Contact/Contact';
 import CreateGame from './components/createGame/createGame';
 import GameStory from './components/createGame/gameStory'
 import GameQuestions from './components/createGame/gameQuestions'
+import ProfilePage from './components/Profile/Profile'
 import Amplify, { Analytics, API, Auth, graphqlOperation, Storage } from 'aws-amplify';
 //backend stuffs START HERE
 
@@ -86,6 +87,7 @@ class App extends Component {
               <Route path ='/cc' component={CreateGame}/>
               <Route path ='/gs' component={GameStory}/>
               <Route path ='/gq' component={GameQuestions}/>
+              <Route path ='/profile' component={ProfilePage}/>
               <Route path='/' component={Home} />
 
 
