@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Endgame from './Endgame';
 import Puzzle from './Puzzle';
 import './Game.css'
+import * as mutations from '../../graphql/mutations';
+import { API, graphqlOperation } from 'aws-amplify';
 //props this file needs to operate: Time limit
 class Timer extends Component {
     _isMounted = false;
@@ -10,15 +12,28 @@ class Timer extends Component {
         this.state = {
             count: 1,
             isPaused: false,
+            isReady: false,
             isFinished: this.props.gameFinished
         }
         this.gameHandler = this.gameHandler.bind(this);
+        this.gameReady = this.gameReady.bind(this);
     }
 
     gameHandler() {
         this.setState({
             isPaused: true
         })
+    }
+
+    async gameReady() {
+        await this.setState({
+            isReady: true
+        })
+        const gameStart = {
+            id: this.props.gameID,
+            Capacity: 0
+        }
+        await API.graphql(graphqlOperation(mutations.createReview, { input: gameStart }));
     }
 
     convertSeconds(seconds) {
@@ -55,7 +70,22 @@ class Timer extends Component {
                 )
             }
             else {
-                console.log("Count: ", count)
+                //render instruction to play the game with "GO" button.
+                // once is pressed => isPaused: false + updateGame with Capacity: 0 to prevent more ppl joining game.
+                // now they are moveing forward at the same pace. 
+                if (!this.state.isReady) {
+                    return (
+                        <div id="Ready">
+                            <h3 id="Hello"> EVERYONE READY? IF SO PRESS THE BUTTON </h3>
+                            <button className="btn-lg" onClick={this.gameReady}>
+                                START
+                            </button>
+                        </div>
+                    )
+                }
+                else {
+
+                }
                 return (
                     <div id="time">
                         <h3 id="timer"><strong>{this.convertSeconds(count)}</strong></h3>

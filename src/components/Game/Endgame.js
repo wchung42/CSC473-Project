@@ -104,7 +104,11 @@ class Endgame extends Component {
                                 <textarea className="form-control" id="review" rows="5" required />
                             </div>
                             <br />
-                            <button className="review-submit-button btn-lg" type="submit">Submit</button>
+                            <button className="review-submit-button btn-lg" type="submit">
+                                <a href="/Game">
+                                    Submit
+                                </a>
+                            </button>
                         </form>
                     </div>
                 </div>
@@ -140,7 +144,11 @@ class Endgame extends Component {
                                 <textarea className="form-control" id="feedback" rows="5" required />
                             </div>
                             <br />
-                            <button className="review-submit-button btn-lg" type="submit">Submit</button>
+                            <button className="review-submit-button btn-lg" type="submit">
+                                <a href="/Game">
+                                    Submit
+                                </a>
+                            </button>
                         </form>
                     </div>
                 </div>

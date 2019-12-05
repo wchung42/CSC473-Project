@@ -361,7 +361,7 @@ class Game extends Component {
               <hr />
             </div>
             <div className="start">
-              <button id="start-btn" className="btn btn-lg btn-success" type="button" onClick={this.startGame}>&nbsp; Start &nbsp;</button>
+              <button id="start-btn" className="btn btn-lg btn-success" type="button" onClick={this.startGame}>&nbsp; JOIN &nbsp;</button>
             </div>
             <div id="notAtLocationIndicator">
               <p></p>

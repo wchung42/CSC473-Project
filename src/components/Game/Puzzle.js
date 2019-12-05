@@ -5,6 +5,7 @@ import Answer from './Answer';
 import Question from './Question';
 import { API, graphqlOperation } from 'aws-amplify';
 import * as mutations from '../../graphql/mutations';
+import * as subscriptions from '../../graphql/subscriptions';
 //props this file needs to run: Id, TotalQuestion, TotalHints, AtQuestion, Questions, AnswerType, Answers, Hints, Long, Lad, TimeLimit
 //Each time answers is right => mutation Update AtQuestion 
 //When the game ends it will reset players pool => mutation updateGame(players: "")
@@ -71,7 +72,7 @@ class Puzzle extends Component {
                     gameState: false,
                     win: true
                 }); console.log("End of game");
-                const nQuestion = {
+                const lQuestion = {
                     id: this.props.gID,
                     At_Question: 0,
                     Capacity: 15,
@@ -82,7 +83,7 @@ class Puzzle extends Component {
                 }
                 //update the database when the answer is correct
                 try {
-                    const nextQuestion = await API.graphql(graphqlOperation(mutations.updateGame, { input: nQuestion }));
+                    const nextQuestion = await API.graphql(graphqlOperation(mutations.updateGame, { input: lQuestion }));
                     console.log("Next Question: ", nextQuestion);
                 } catch (errors) { console.log(errors) };
 
@@ -175,16 +176,22 @@ class Puzzle extends Component {
             // document.getElementById("hintBttn").style.backgroundColor = "gray";
             setTimeout(function () {
                 document.getElementById("hintBttn").disabled = false;
-            }, 2000)
+            }, 1000)
         }
     }
     // when state changes, check to see if the game has ended
     // stop timer when game is completed
-    componentDidUpdate() {
+    async componentDidUpdate() {
         if (this.state.win && this.state.timeStopper === 0) {
             this.setState({ timeStopper: 1 })
             this.props.gameHandler();
         }
+        let timeLeft = this.props.gTimeLeft;
+        const currentTimeLeft = {
+            id: this.state.index,
+            Time_Left: timeLeft,
+        }
+
         // check location upon component update
         // let current, target, dist;
         // let currentState = this;
