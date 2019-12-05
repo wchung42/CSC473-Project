@@ -26,7 +26,7 @@ class Puzzle extends Component {
             answerType: this.props.gAnswerType,
             answers: this.props.gAnswers,
             hints: this.props.gHints,
-            hintCount: 0,
+            hintCount: this.props.gHintCount,
             usedHint: false,
             latitude: null,
             longitude: null,
@@ -62,10 +62,11 @@ class Puzzle extends Component {
             await this.setState({
                 atQuestion: this.state.atQuestion + 1,
                 usedHint: false,
-                atLocation: 0
+                atLocation: 0,
             })
             //if this is the last question then End game
             if (this.state.atQuestion === this.state.totalQuestions) {
+                this.props.gameHandler();
                 await this.setState({
                     gameState: false,
                     win: true
@@ -75,7 +76,9 @@ class Puzzle extends Component {
                     At_Question: 0,
                     Capacity: 15,
                     Players: [],
-                    Finished: true
+                    Finished: true,
+                    Time_Left: this.props.gTimeLimit,
+                    Hint_Count: this.state.totalHints
                 }
                 //update the database when the answer is correct
                 try {
@@ -84,6 +87,10 @@ class Puzzle extends Component {
                 } catch (errors) { console.log(errors) };
 
             } else {
+                this.props.gameHandler();
+                let timeLeft = this.props.gTimeLeft;
+                console.log("Time Left inside puzzle.js", timeLeft);
+                console.log("Total Hint: ", this.state.totalHints);
                 if (document.getElementById("answerBox")) {
                     document.getElementById("answerBox").value = "";
                     document.getElementById("submitBttn").value = "";
@@ -92,7 +99,9 @@ class Puzzle extends Component {
 
                 const nQuestion = {
                     id: this.state.index,
-                    At_Question: this.props.gAtQuestion + 1
+                    At_Question: this.props.gAtQuestion + 1,
+                    Time_Left: timeLeft,
+                    Hint_Count: this.state.totalHints
                 }
                 const nextQuestion = await API.graphql(graphqlOperation(mutations.updateGame, { input: nQuestion }));
                 console.log("Next Question: ", nextQuestion);

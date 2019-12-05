@@ -3,6 +3,7 @@ import './Endgame.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import { API, graphqlOperation } from 'aws-amplify';
 import * as mutations from '../../graphql/mutations';
+import * as queries from '../../graphql/queries';
 //props this file needs:
 // id, AtQuestion,Players
 
@@ -12,15 +13,19 @@ class Endgame extends Component {
 
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-
+    // if this is the first time user wrintg review:
+    // Create new review with id 
+    // update reviewCount + 1 and calculate with that average
+    // Else update current review of that id
+    // query to get this user past review => + or - their rating / current reviewCount = averageRating
     async handleSubmit(e) {
         e.preventDefault();
         const userName = this.props.gameUserName;
         const userRating = Number(e.target.rating.value);
         const userReview = e.target.review.value;
         const reviewId = "00" + this.props.gameId + userName;
-        const reviewCount = this.props.gameReviewCount + 1;
-        const averageRating = Math.round((Number(this.props.gameAverageRating) + userRating) / reviewCount * 100) / 100;
+        const reviewCount = this.props.gameReviewCount;
+
         console.log('Rating: ' + userRating);
         console.log('Review: ' + userReview);
         console.log('')
@@ -31,24 +36,39 @@ class Endgame extends Component {
             username: userName,
             reviewGameId: this.props.gameId
         }
-        const newReviewCount = {
-            id: this.props.gameId,
-            ReviewCount: reviewCount,
-            Average_Rating: averageRating.toString()
-        }
+
         try {
+
+            const newReviewCount = {
+                id: this.props.gameId,
+                ReviewCount: reviewCount + 1,
+                Average_Rating: (Math.round((Number(this.props.gameAverageRating) + userRating) / (reviewCount + 1) * 100) / 100).toString()
+            }
+
             await API.graphql(graphqlOperation(mutations.createReview, { input: newReview }));
+            try {
+                await API.graphql(graphqlOperation(mutations.updateGame, { input: newReviewCount }));
+            } catch (errors) { console.log(errors) }
+
         } catch (errors) {
             try {
+                const exReview = await API.graphql(graphqlOperation(queries.getReview, { id: reviewId }));
+                console.log(exReview.data.getReview);
+                let localReview = exReview.data.getReview;
+                let localRating = Number(localReview.rating);
+                let changedRating = Number(userRating - localRating);
+                const oldReviewCount = {
+                    id: this.props.gameId,
+                    ReviewCount: reviewCount,
+                    Average_Rating: (Math.round((Number(this.props.gameAverageRating) + changedRating) / (reviewCount + 1) * 100) / 100).toString()
+                }
+                try {
+                    await API.graphql(graphqlOperation(mutations.updateGame, { input: oldReviewCount }));
+                } catch (errors) { console.log(errors) }
+
                 await API.graphql(graphqlOperation(mutations.updateReview, { input: newReview }));
             } catch (error) { console.log(error) }
         }
-
-        try {
-            await API.graphql(graphqlOperation(mutations.updateGame, { input: newReviewCount }));
-        } catch (errors) { console.log(errors) }
-
-
         // clear form
         // e.target.reset();
     }

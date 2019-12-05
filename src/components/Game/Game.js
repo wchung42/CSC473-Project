@@ -26,6 +26,7 @@ const ListGames = `query ListGames{
       Time_Limit
       ReviewCount
       Average_Rating
+      Time_Left
     }
   }
 }`;
@@ -45,10 +46,12 @@ class Game extends Component {
       gameDifficulty: 3,
       gameStory: "",
       gameCapacity: "",
-      gameTimeLimt: "",
+      gameTimeLimit: "",
+      gameTimeLeft: "",
       gameFinished: false,
       gameTotalQuestions: "",
       gameTotalHints: "",
+      gameHintCount: "",
       gameAtQuestion: "",
       gamePlayers: [],
       gameQuestions: [],
@@ -105,6 +108,8 @@ class Game extends Component {
               gameFinished: gameData.value.data.onUpdateGame.Finished,
               gameCapacity: gameData.value.data.onUpdateGame.Capacity,
               gamePlayers: gameData.value.data.onUpdateGame.Players,
+              gameHintCount: gameData.value.data.onUpdateGame.Hint_Count,
+              gameTimeLeft: gameData.value.data.onUpdateGame.Time_Left
             })
             console.log("list of Players in-game: ", this.state.gamePlayers)
           }
@@ -136,10 +141,13 @@ class Game extends Component {
         gameCapacity: localGame.Capacity,
         gamePlayers: localGame.Players,
         gameFinished: localGame.Finished,
+        gameTimeLimit: localGame.Time_Limit,
+        gameTimeLeft: localGame.Time_Left,
         gameTotalQuestions: localGame.Total_Questions,
         latitude: localGame.Geo_Location[0],
         longitude: localGame.Geo_Location[1],
         gameTotalHints: localGame.Total_Hints,
+        gameHintCount: localGame.Hint_Count,
         gameQuestions: listQuestion.map(item => item.Question),
         gameQuestionGeos: listQuestion.map(item => item.Question_Geo),
         gameQuestionVisualAids: listQuestion.map(item => item.Question_Aid),
@@ -153,7 +161,6 @@ class Game extends Component {
         gameReviewCount: localGame.ReviewCount,
         gameAverageRating: localGame.Average_Rating,
         gameStory: localGame.Story,
-        gameTimeLimt: localGame.Time_Limit,
         gameAtQuestion: localGame.At_Question,
         gameReady: true,
         gameSynopsis: 1
@@ -175,8 +182,9 @@ class Game extends Component {
     console.log("Capacity of this game", this.state.gameCapacity);
     console.log("list of Player in game: ", this.state.gamePlayers);
     console.log("Geo Location of this game: ", this.state.longitude, this.state.latitude);
-    console.log("Number of Rating of this game: ", this.state.gameReviewCount)
-    console.log("Game Average Rating: ", this.state.gameAverageRating)
+    console.log("Number of Rating of this game: ", this.state.gameReviewCount);
+    console.log("Game Average Rating: ", this.state.gameAverageRating);
+    console.log("Hint used: ", this.state.gameHintCount);
   }
 
   async startGame() {
@@ -280,7 +288,7 @@ class Game extends Component {
           <div className='game-title'>
             <h1>{this.state.games[this.state.gameID].Title}</h1>
           </div>
-          <br/><br/>
+          <br /><br />
           <div className='synopsis-inner-container'>
             <div className='section-title'>
               <h3><strong>Story</strong></h3>
@@ -291,7 +299,7 @@ class Game extends Component {
             <div className="synopsis">
               <p>{this.state.games[this.state.gameID].Story}</p>
             </div>
-            
+
             <div className='section-divider'>
               <hr />
             </div>
@@ -304,7 +312,7 @@ class Game extends Component {
             <div className='section-title'>
               <h3><strong>Instructions</strong></h3>
             </div>
-            
+
             <div className='instructions'>
               <p>
                 In order to begin the game, head to the <strong>starting location</strong> as indicated above.
@@ -391,6 +399,7 @@ class Game extends Component {
               gameFinished={this.state.gameFinished}
               gameTotalQuestions={this.state.gameTotalQuestions}
               gameTotalHints={this.state.gameTotalHints}
+              gameHintCount={this.state.gameHintCount}
               gameAtQuestion={this.state.gameAtQuestion}
               gameQuestions={this.state.gameQuestions}
               gameQuestionGeos={this.state.gameQuestionGeos}
@@ -404,7 +413,8 @@ class Game extends Component {
               gameVisualAid1={this.state.gameVisualAid1}
               gameVisualAid2={this.state.gameVisualAid2}
               gameVisualAid3={this.state.gameVisualAid3}
-              startCount={this.state.gameTimeLimt} />
+              gameTimeLimit={this.state.gameTimeLimit}
+              startCount={this.state.gameTimeLeft} />
           </div>
           <br />
         </div>

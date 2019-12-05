@@ -11,11 +11,13 @@ export const createGame = `mutation CreateGame($input: CreateGameInput!) {
     Capacity
     Story
     Time_Limit
+    Time_Left
     Geo_Location
     Players
     Finished
     Total_Questions
     Total_Hints
+    Hint_Count
     At_Question
     Questions {
       items {
@@ -66,11 +68,13 @@ export const updateGame = `mutation UpdateGame($input: UpdateGameInput!) {
     Capacity
     Story
     Time_Limit
+    Time_Left
     Geo_Location
     Players
     Finished
     Total_Questions
     Total_Hints
+    Hint_Count
     At_Question
     Questions {
       items {
@@ -121,11 +125,13 @@ export const deleteGame = `mutation DeleteGame($input: DeleteGameInput!) {
     Capacity
     Story
     Time_Limit
+    Time_Left
     Geo_Location
     Players
     Finished
     Total_Questions
     Total_Hints
+    Hint_Count
     At_Question
     Questions {
       items {
@@ -178,11 +184,13 @@ export const createQuestion = `mutation CreateQuestion($input: CreateQuestionInp
       Capacity
       Story
       Time_Limit
+      Time_Left
       Geo_Location
       Players
       Finished
       Total_Questions
       Total_Hints
+      Hint_Count
       At_Question
       Questions {
         nextToken
@@ -223,11 +231,13 @@ export const updateQuestion = `mutation UpdateQuestion($input: UpdateQuestionInp
       Capacity
       Story
       Time_Limit
+      Time_Left
       Geo_Location
       Players
       Finished
       Total_Questions
       Total_Hints
+      Hint_Count
       At_Question
       Questions {
         nextToken
@@ -268,11 +278,13 @@ export const deleteQuestion = `mutation DeleteQuestion($input: DeleteQuestionInp
       Capacity
       Story
       Time_Limit
+      Time_Left
       Geo_Location
       Players
       Finished
       Total_Questions
       Total_Hints
+      Hint_Count
       At_Question
       Questions {
         nextToken
@@ -313,11 +325,13 @@ export const createReview = `mutation CreateReview($input: CreateReviewInput!) {
       Capacity
       Story
       Time_Limit
+      Time_Left
       Geo_Location
       Players
       Finished
       Total_Questions
       Total_Hints
+      Hint_Count
       At_Question
       Questions {
         nextToken
@@ -350,11 +364,13 @@ export const updateReview = `mutation UpdateReview($input: UpdateReviewInput!) {
       Capacity
       Story
       Time_Limit
+      Time_Left
       Geo_Location
       Players
       Finished
       Total_Questions
       Total_Hints
+      Hint_Count
       At_Question
       Questions {
         nextToken
@@ -387,11 +403,13 @@ export const deleteReview = `mutation DeleteReview($input: DeleteReviewInput!) {
       Capacity
       Story
       Time_Limit
+      Time_Left
       Geo_Location
       Players
       Finished
       Total_Questions
       Total_Hints
+      Hint_Count
       At_Question
       Questions {
         nextToken
@@ -431,11 +449,13 @@ export const createUserProfile = `mutation CreateUserProfile($input: CreateUserP
         Capacity
         Story
         Time_Limit
+        Time_Left
         Geo_Location
         Players
         Finished
         Total_Questions
         Total_Hints
+        Hint_Count
         At_Question
         ReviewCount
         Average_Rating
@@ -473,11 +493,13 @@ export const updateUserProfile = `mutation UpdateUserProfile($input: UpdateUserP
         Capacity
         Story
         Time_Limit
+        Time_Left
         Geo_Location
         Players
         Finished
         Total_Questions
         Total_Hints
+        Hint_Count
         At_Question
         ReviewCount
         Average_Rating
@@ -515,11 +537,13 @@ export const deleteUserProfile = `mutation DeleteUserProfile($input: DeleteUserP
         Capacity
         Story
         Time_Limit
+        Time_Left
         Geo_Location
         Players
         Finished
         Total_Questions
         Total_Hints
+        Hint_Count
         At_Question
         ReviewCount
         Average_Rating
@@ -550,11 +574,13 @@ export const createRecord = `mutation CreateRecord($input: CreateRecordInput!) {
       Capacity
       Story
       Time_Limit
+      Time_Left
       Geo_Location
       Players
       Finished
       Total_Questions
       Total_Hints
+      Hint_Count
       At_Question
       Questions {
         nextToken
@@ -597,11 +623,13 @@ export const updateRecord = `mutation UpdateRecord($input: UpdateRecordInput!) {
       Capacity
       Story
       Time_Limit
+      Time_Left
       Geo_Location
       Players
       Finished
       Total_Questions
       Total_Hints
+      Hint_Count
       At_Question
       Questions {
         nextToken
@@ -644,11 +672,13 @@ export const deleteRecord = `mutation DeleteRecord($input: DeleteRecordInput!) {
       Capacity
       Story
       Time_Limit
+      Time_Left
       Geo_Location
       Players
       Finished
       Total_Questions
       Total_Hints
+      Hint_Count
       At_Question
       Questions {
         nextToken

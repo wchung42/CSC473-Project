@@ -11,11 +11,13 @@ export const onCreateGame = `subscription OnCreateGame {
     Capacity
     Story
     Time_Limit
+    Time_Left
     Geo_Location
     Players
     Finished
     Total_Questions
     Total_Hints
+    Hint_Count
     At_Question
     Questions {
       items {
@@ -66,11 +68,13 @@ export const onUpdateGame = `subscription OnUpdateGame {
     Capacity
     Story
     Time_Limit
+    Time_Left
     Geo_Location
     Players
     Finished
     Total_Questions
     Total_Hints
+    Hint_Count
     At_Question
     Questions {
       items {
@@ -121,11 +125,13 @@ export const onDeleteGame = `subscription OnDeleteGame {
     Capacity
     Story
     Time_Limit
+    Time_Left
     Geo_Location
     Players
     Finished
     Total_Questions
     Total_Hints
+    Hint_Count
     At_Question
     Questions {
       items {
@@ -178,11 +184,13 @@ export const onCreateQuestion = `subscription OnCreateQuestion {
       Capacity
       Story
       Time_Limit
+      Time_Left
       Geo_Location
       Players
       Finished
       Total_Questions
       Total_Hints
+      Hint_Count
       At_Question
       Questions {
         nextToken
@@ -223,11 +231,13 @@ export const onUpdateQuestion = `subscription OnUpdateQuestion {
       Capacity
       Story
       Time_Limit
+      Time_Left
       Geo_Location
       Players
       Finished
       Total_Questions
       Total_Hints
+      Hint_Count
       At_Question
       Questions {
         nextToken
@@ -268,11 +278,13 @@ export const onDeleteQuestion = `subscription OnDeleteQuestion {
       Capacity
       Story
       Time_Limit
+      Time_Left
       Geo_Location
       Players
       Finished
       Total_Questions
       Total_Hints
+      Hint_Count
       At_Question
       Questions {
         nextToken
@@ -313,11 +325,13 @@ export const onCreateReview = `subscription OnCreateReview {
       Capacity
       Story
       Time_Limit
+      Time_Left
       Geo_Location
       Players
       Finished
       Total_Questions
       Total_Hints
+      Hint_Count
       At_Question
       Questions {
         nextToken
@@ -350,11 +364,13 @@ export const onUpdateReview = `subscription OnUpdateReview {
       Capacity
       Story
       Time_Limit
+      Time_Left
       Geo_Location
       Players
       Finished
       Total_Questions
       Total_Hints
+      Hint_Count
       At_Question
       Questions {
         nextToken
@@ -387,11 +403,13 @@ export const onDeleteReview = `subscription OnDeleteReview {
       Capacity
       Story
       Time_Limit
+      Time_Left
       Geo_Location
       Players
       Finished
       Total_Questions
       Total_Hints
+      Hint_Count
       At_Question
       Questions {
         nextToken
@@ -431,11 +449,13 @@ export const onCreateUserProfile = `subscription OnCreateUserProfile {
         Capacity
         Story
         Time_Limit
+        Time_Left
         Geo_Location
         Players
         Finished
         Total_Questions
         Total_Hints
+        Hint_Count
         At_Question
         ReviewCount
         Average_Rating
@@ -473,11 +493,13 @@ export const onUpdateUserProfile = `subscription OnUpdateUserProfile {
         Capacity
         Story
         Time_Limit
+        Time_Left
         Geo_Location
         Players
         Finished
         Total_Questions
         Total_Hints
+        Hint_Count
         At_Question
         ReviewCount
         Average_Rating
@@ -515,11 +537,13 @@ export const onDeleteUserProfile = `subscription OnDeleteUserProfile {
         Capacity
         Story
         Time_Limit
+        Time_Left
         Geo_Location
         Players
         Finished
         Total_Questions
         Total_Hints
+        Hint_Count
         At_Question
         ReviewCount
         Average_Rating
@@ -550,11 +574,13 @@ export const onCreateRecord = `subscription OnCreateRecord {
       Capacity
       Story
       Time_Limit
+      Time_Left
       Geo_Location
       Players
       Finished
       Total_Questions
       Total_Hints
+      Hint_Count
       At_Question
       Questions {
         nextToken
@@ -597,11 +623,13 @@ export const onUpdateRecord = `subscription OnUpdateRecord {
       Capacity
       Story
       Time_Limit
+      Time_Left
       Geo_Location
       Players
       Finished
       Total_Questions
       Total_Hints
+      Hint_Count
       At_Question
       Questions {
         nextToken
@@ -644,11 +672,13 @@ export const onDeleteRecord = `subscription OnDeleteRecord {
       Capacity
       Story
       Time_Limit
+      Time_Left
       Geo_Location
       Players
       Finished
       Total_Questions
       Total_Hints
+      Hint_Count
       At_Question
       Questions {
         nextToken

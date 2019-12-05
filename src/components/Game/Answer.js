@@ -55,11 +55,11 @@ class Answer extends Component {
             return (
                 <div className="answerSpace">
                     <div id="orderingAnswer">
-                        <OrderQuestion id="1" data={this.props.aidStuffs} action = {this.props.action}/>
+                        <OrderQuestion id="1" data={this.props.aidStuffs} action={this.props.action} />
                         <br />
                         {/* <div className="submit">
                             <button id="submitButtonOrder" className="btn-lg  btn-success" type="button" onClick={this.props.action} value="">&nbsp; Submit &nbsp;</button>
-                        </div> */}      
+                        </div> */}
                     </div>
 
 
