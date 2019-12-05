@@ -79,7 +79,8 @@ class Puzzle extends Component {
                     Players: [],
                     Finished: true,
                     Time_Left: this.props.gTimeLimit,
-                    Hint_Count: this.state.totalHints
+                    Hint_Count: this.state.totalHints,
+                    In_Progress: false,
                 }
                 //update the database when the answer is correct
                 try {
@@ -263,7 +264,8 @@ class Puzzle extends Component {
         //-----------------------------------------------//
         let questionPage = <Question
             qContent={this.state.questions[this.state.atQuestion]}
-            qAid={this.state.questionVisualAid[this.state.atQuestion]} />;
+            qAid={this.state.questionVisualAid[this.state.atQuestion]}
+            qGeo={this.state.questionGeos[this.state.atQuestion]} />;
         let answerPage = <Answer
             answerType={this.state.answerType[this.state.atQuestion]}
             action={this.getAnswer}

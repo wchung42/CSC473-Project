@@ -15,6 +15,7 @@ export const createGame = `mutation CreateGame($input: CreateGameInput!) {
     Geo_Location
     Players
     Finished
+    In_Progress
     Total_Questions
     Total_Hints
     Hint_Count
@@ -72,6 +73,7 @@ export const updateGame = `mutation UpdateGame($input: UpdateGameInput!) {
     Geo_Location
     Players
     Finished
+    In_Progress
     Total_Questions
     Total_Hints
     Hint_Count
@@ -129,6 +131,7 @@ export const deleteGame = `mutation DeleteGame($input: DeleteGameInput!) {
     Geo_Location
     Players
     Finished
+    In_Progress
     Total_Questions
     Total_Hints
     Hint_Count
@@ -188,6 +191,7 @@ export const createQuestion = `mutation CreateQuestion($input: CreateQuestionInp
       Geo_Location
       Players
       Finished
+      In_Progress
       Total_Questions
       Total_Hints
       Hint_Count
@@ -235,6 +239,7 @@ export const updateQuestion = `mutation UpdateQuestion($input: UpdateQuestionInp
       Geo_Location
       Players
       Finished
+      In_Progress
       Total_Questions
       Total_Hints
       Hint_Count
@@ -282,6 +287,7 @@ export const deleteQuestion = `mutation DeleteQuestion($input: DeleteQuestionInp
       Geo_Location
       Players
       Finished
+      In_Progress
       Total_Questions
       Total_Hints
       Hint_Count
@@ -329,6 +335,7 @@ export const createReview = `mutation CreateReview($input: CreateReviewInput!) {
       Geo_Location
       Players
       Finished
+      In_Progress
       Total_Questions
       Total_Hints
       Hint_Count
@@ -368,6 +375,7 @@ export const updateReview = `mutation UpdateReview($input: UpdateReviewInput!) {
       Geo_Location
       Players
       Finished
+      In_Progress
       Total_Questions
       Total_Hints
       Hint_Count
@@ -407,6 +415,7 @@ export const deleteReview = `mutation DeleteReview($input: DeleteReviewInput!) {
       Geo_Location
       Players
       Finished
+      In_Progress
       Total_Questions
       Total_Hints
       Hint_Count
@@ -453,6 +462,7 @@ export const createUserProfile = `mutation CreateUserProfile($input: CreateUserP
         Geo_Location
         Players
         Finished
+        In_Progress
         Total_Questions
         Total_Hints
         Hint_Count
@@ -497,6 +507,7 @@ export const updateUserProfile = `mutation UpdateUserProfile($input: UpdateUserP
         Geo_Location
         Players
         Finished
+        In_Progress
         Total_Questions
         Total_Hints
         Hint_Count
@@ -541,6 +552,7 @@ export const deleteUserProfile = `mutation DeleteUserProfile($input: DeleteUserP
         Geo_Location
         Players
         Finished
+        In_Progress
         Total_Questions
         Total_Hints
         Hint_Count
@@ -578,6 +590,7 @@ export const createRecord = `mutation CreateRecord($input: CreateRecordInput!) {
       Geo_Location
       Players
       Finished
+      In_Progress
       Total_Questions
       Total_Hints
       Hint_Count
@@ -627,6 +640,7 @@ export const updateRecord = `mutation UpdateRecord($input: UpdateRecordInput!) {
       Geo_Location
       Players
       Finished
+      In_Progress
       Total_Questions
       Total_Hints
       Hint_Count
@@ -676,6 +690,7 @@ export const deleteRecord = `mutation DeleteRecord($input: DeleteRecordInput!) {
       Geo_Location
       Players
       Finished
+      In_Progress
       Total_Questions
       Total_Hints
       Hint_Count

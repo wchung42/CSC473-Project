@@ -11,6 +11,7 @@ type Game @model {
   Geo_Location: [String]                                #Geo Location to start the game
   Players(limit: Int = Capacity): [String]!						  #List of Players who are currently in this game
   Finished: Boolean!                                    #true = win / false = not finished the game
+  In_Progress: Boolean!
   Total_Questions(limit: Int = 15): Int!						    #Number of Questions
   Total_Hints(limit: Int = 5): Int!								      #Number of Hints player allowed to use
   Hint_Count: Int!                                      #Count number of hint used by player
