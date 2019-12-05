@@ -43,7 +43,16 @@ export const getGame = `query GetGame($id: ID!) {
       }
       nextToken
     }
+    ReviewCount
+    Average_Rating
     Aid_Stuffs
+    Record {
+      items {
+        id
+        time
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -74,7 +83,12 @@ export const listGames = `query ListGames(
       Review {
         nextToken
       }
+      ReviewCount
+      Average_Rating
       Aid_Stuffs
+      Record {
+        nextToken
+      }
     }
     nextToken
   }
@@ -104,7 +118,12 @@ export const getQuestion = `query GetQuestion($id: ID!) {
       Review {
         nextToken
       }
+      ReviewCount
+      Average_Rating
       Aid_Stuffs
+      Record {
+        nextToken
+      }
     }
     Instruction
     Question_Geo
@@ -143,6 +162,8 @@ export const listQuestions = `query ListQuestions(
         Total_Questions
         Total_Hints
         At_Question
+        ReviewCount
+        Average_Rating
         Aid_Stuffs
       }
       Instruction
@@ -185,7 +206,12 @@ export const getReview = `query GetReview($id: ID!) {
       Review {
         nextToken
       }
+      ReviewCount
+      Average_Rating
       Aid_Stuffs
+      Record {
+        nextToken
+      }
     }
     rating
     review
@@ -216,11 +242,165 @@ export const listReviews = `query ListReviews(
         Total_Questions
         Total_Hints
         At_Question
+        ReviewCount
+        Average_Rating
         Aid_Stuffs
       }
       rating
       review
       username
+    }
+    nextToken
+  }
+}
+`;
+export const getUserProfile = `query GetUserProfile($id: ID!) {
+  getUserProfile(id: $id) {
+    id
+    Username
+    Name
+    Bio
+    ProfilePic
+    isAdmin
+    record {
+      id
+      game {
+        id
+        Title
+        Thumbnail
+        Location
+        Difficulty
+        Capacity
+        Story
+        Time_Limit
+        Geo_Location
+        Players
+        Finished
+        Total_Questions
+        Total_Hints
+        At_Question
+        ReviewCount
+        Average_Rating
+        Aid_Stuffs
+      }
+      user {
+        id
+        Username
+        Name
+        Bio
+        ProfilePic
+        isAdmin
+      }
+      time
+    }
+  }
+}
+`;
+export const listUserProfiles = `query ListUserProfiles(
+  $filter: ModelUserProfileFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listUserProfiles(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      Username
+      Name
+      Bio
+      ProfilePic
+      isAdmin
+      record {
+        id
+        time
+      }
+    }
+    nextToken
+  }
+}
+`;
+export const getRecord = `query GetRecord($id: ID!) {
+  getRecord(id: $id) {
+    id
+    game {
+      id
+      Title
+      Thumbnail
+      Location
+      Difficulty
+      Capacity
+      Story
+      Time_Limit
+      Geo_Location
+      Players
+      Finished
+      Total_Questions
+      Total_Hints
+      At_Question
+      Questions {
+        nextToken
+      }
+      Review {
+        nextToken
+      }
+      ReviewCount
+      Average_Rating
+      Aid_Stuffs
+      Record {
+        nextToken
+      }
+    }
+    user {
+      id
+      Username
+      Name
+      Bio
+      ProfilePic
+      isAdmin
+      record {
+        id
+        time
+      }
+    }
+    time
+  }
+}
+`;
+export const listRecords = `query ListRecords(
+  $filter: ModelRecordFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listRecords(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      game {
+        id
+        Title
+        Thumbnail
+        Location
+        Difficulty
+        Capacity
+        Story
+        Time_Limit
+        Geo_Location
+        Players
+        Finished
+        Total_Questions
+        Total_Hints
+        At_Question
+        ReviewCount
+        Average_Rating
+        Aid_Stuffs
+      }
+      user {
+        id
+        Username
+        Name
+        Bio
+        ProfilePic
+        isAdmin
+      }
+      time
     }
     nextToken
   }

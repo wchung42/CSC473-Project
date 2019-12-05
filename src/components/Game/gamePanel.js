@@ -21,6 +21,7 @@ class gamePanel extends Component {
                             <strong>{item.Title}</strong>
                         </h5>
                         <ul className="card-text">
+                            <li key="rating">Rating: {item.Average_Rating} ({item.ReviewCount})</li>
                             <li key="location">Location: {item.Location}</li>
                             <li key="capacity">Capacity: {item.Capacity}</li>
                             <li key="gameLength">Game Length: {item.Time_Limit / 60} minutes</li>

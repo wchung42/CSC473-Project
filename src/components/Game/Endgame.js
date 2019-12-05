@@ -16,17 +16,25 @@ class Endgame extends Component {
     async handleSubmit(e) {
         e.preventDefault();
         const userName = this.props.gameUserName;
-        const userRating = e.target.rating.value;
+        const userRating = Number(e.target.rating.value);
         const userReview = e.target.review.value;
         const reviewId = "00" + this.props.gameId + userName;
+        const reviewCount = this.props.gameReviewCount + 1;
+        const averageRating = Math.round((Number(this.props.gameAverageRating) + userRating) / reviewCount * 100) / 100;
         console.log('Rating: ' + userRating);
         console.log('Review: ' + userReview);
+        console.log('')
         const newReview = {
             id: reviewId,
             rating: userRating,
             review: userReview,
             username: userName,
             reviewGameId: this.props.gameId
+        }
+        const newReviewCount = {
+            id: this.props.gameId,
+            ReviewCount: reviewCount,
+            Average_Rating: averageRating.toString()
         }
         try {
             await API.graphql(graphqlOperation(mutations.createReview, { input: newReview }));
@@ -35,6 +43,12 @@ class Endgame extends Component {
                 await API.graphql(graphqlOperation(mutations.updateReview, { input: newReview }));
             } catch (error) { console.log(error) }
         }
+
+        try {
+            await API.graphql(graphqlOperation(mutations.updateGame, { input: newReviewCount }));
+        } catch (errors) { console.log(errors) }
+
+
         // clear form
         // e.target.reset();
     }
