@@ -90,7 +90,9 @@ class OrderQuestion extends Component {
                     return (
                         <div className="orderQuestion">
                             <Row key={row.id} row={row} images={images} />
-                            <button id="submitButtonOrder" className="btn btn-primary" type="button" onClick={this.handleOrderChange} value="">&nbsp; Submit &nbsp;</button>
+                            <p id = 'incorrect-prompt' className = 'blinking'></p>
+                            <br/>
+                            <button id="submitButtonOrder" className="btn-lg btn-success" type="button" onClick={this.handleOrderChange} value="">&nbsp; Submit &nbsp;</button>
                         </div>
 
 
