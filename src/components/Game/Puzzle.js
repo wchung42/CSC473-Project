@@ -5,7 +5,7 @@ import Answer from './Answer';
 import Question from './Question';
 import { API, graphqlOperation } from 'aws-amplify';
 import * as mutations from '../../graphql/mutations';
-import * as subscriptions from '../../graphql/subscriptions';
+import { getDistanceFromLatLonInKm } from './util.js';
 //props this file needs to run: Id, TotalQuestion, TotalHints, AtQuestion, Questions, AnswerType, Answers, Hints, Long, Lad, TimeLimit
 //Each time answers is right => mutation Update AtQuestion 
 //When the game ends it will reset players pool => mutation updateGame(players: "")
@@ -32,7 +32,7 @@ class Puzzle extends Component {
             latitude: null,
             longitude: null,
             // 0 when player not at location; 1 when player is
-            atLocation: 0,
+            atLocation: false,
             // game ends when last question is completed
             gameState: true,
             win: false,
@@ -63,7 +63,7 @@ class Puzzle extends Component {
             await this.setState({
                 atQuestion: this.state.atQuestion + 1,
                 usedHint: false,
-                atLocation: 0,
+                atLocation: false,
             })
             //if this is the last question then End game
             if (this.state.atQuestion === this.state.totalQuestions) {
@@ -194,42 +194,48 @@ class Puzzle extends Component {
         }
 
         // check location upon component update
-        // let current, target, dist;
-        // let currentState = this;
+        let current, target, dist;
+        let currentState = this;
 
-        // function success(position) {
-        //     let userCoords = position.coords;
-        //     console.log(`latitude: ${userCoords.latitude} | longitude: ${userCoords.longitude}`)
+        function success(position) {
+            let userCoords = position.coords;
+            // console.log(`latitude: ${userCoords.latitude} | longitude: ${userCoords.longitude}`)
 
-        //     // calculate distance to target
-        //     dist = getDistanceFromLatLonInKm(userCoords.latitude, userCoords.longitude, target.latitude, target.longitude);
-        //     console.log('Distance: ' + dist)
+            // calculate distance to target
+            dist = getDistanceFromLatLonInKm(userCoords.latitude, userCoords.longitude, target.latitude, target.longitude);
+            console.log('Distance: ' + dist)
 
-        //     // player must be within 20 meters of location for answer to appear
-        //     if (dist <= 0.03) {
-        //         console.log('You are here!');
-        //         // stop watching player location
-        //         navigator.geolocation.clearWatch(current)
-        //         // allow question
-        //         currentState.setState({
-        //             atLocation: 1
-        //         });
-        //     }
-        // }
+            // player must be within 20 meters of location for answer to appear
+            if (dist <= 0.03) {
+                console.log('You are here!');
+                // stop watching player location
+                navigator.geolocation.clearWatch(current)
+                // allow question
+                currentState.setState({
+                    atLocation: true
+                });
+            }
+            else {
+                document.getElementById("distance").innerHTML = "You are " + dist + " meters away from the destination"
+                currentState.setState({
+                    atLocation: false
+                });
+            }
+        }
 
-        // // error callback
-        // function error(err) {
-        //     console.warn('Error(' + err.code + '): ' + err.message);
-        // }
+        // error callback
+        function error(err) {
+            console.warn('Error(' + err.code + '): ' + err.message);
+        }
 
-        // // TAKEN FROM THE JSON FILE FOR NOW
-        // target = {
-        //     latitude: 40.820583,
-        //     longitude: -73.949105
-        // }
+        // TAKEN FROM THE JSON FILE FOR NOW
+        target = {
+            latitude: this.state.questionGeos[this.state.atQuestion][0],
+            longitude: this.state.questionGeos[this.state.atQuestion][1]
+        }
 
-        // // start watching
-        // current = setTimeout(navigator.geolocation.watchPosition(success, error, { enableHighAccuracy: true }), 10000);
+        // start watching
+        current = setTimeout(navigator.geolocation.watchPosition(success, error, { enableHighAccuracy: true }), 10000);
     }
 
     render() {
@@ -270,6 +276,7 @@ class Puzzle extends Component {
             answerType={this.state.answerType[this.state.atQuestion]}
             action={this.getAnswer}
             aidStuffs={DragDrop_Data} />;
+        let message = <p id="distance">Calculating Your Distance...</p>;
         return (
             <div className="game">
                 <section className="middle">
@@ -279,7 +286,7 @@ class Puzzle extends Component {
                         <h1>{this.props.gTitle} Challenge</h1>
                         {questionPage}
                         <br /><br /><br />
-                        {answerPage}
+                        {(this.state.atLocation) ? answerPage : message}
                         <p id="hint" className="questN" value=""></p>
                         <div className="hint">
                             <button id="hintBttn" className="btn-lg btn-warning" type="button" onClick={this.getHint}>
