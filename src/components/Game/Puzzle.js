@@ -124,8 +124,13 @@ class Puzzle extends Component {
                 setTimeout(function () {
                     document.getElementById('pound').style.background = '#DDDDDD';
                 }, 750);
-
-
+            }
+            if (document.getElementById("incorrect-prompt")) {
+                // visual cue for wrong answer in ordering
+                document.getElementById("incorrect-prompt").innerText = 'Incorrect';
+                setTimeout(function () {
+                    document.getElementById('incorrect-prompt').innerText = '';
+                }, 5000)
             }
         }
     }
