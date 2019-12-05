@@ -280,13 +280,18 @@ class Game extends Component {
           <div className='game-title'>
             <h1>{this.state.games[this.state.gameID].Title}</h1>
           </div>
+          <br/><br/>
           <div className='synopsis-inner-container'>
             <div className='section-title'>
               <h3><strong>Story</strong></h3>
             </div>
+            <div className='section-divider'>
+              <hr />
+            </div>
             <div className="synopsis">
               <p>{this.state.games[this.state.gameID].Story}</p>
             </div>
+            
             <div className='section-divider'>
               <hr />
             </div>
@@ -299,6 +304,7 @@ class Game extends Component {
             <div className='section-title'>
               <h3><strong>Instructions</strong></h3>
             </div>
+            
             <div className='instructions'>
               <p>
                 In order to begin the game, head to the <strong>starting location</strong> as indicated above.
@@ -317,6 +323,7 @@ class Game extends Component {
                   <img src='https://user-images.githubusercontent.com/15526256/70118142-572f0b00-1635-11ea-8051-513754791f7a.gif'
                     alt='numpad gif'
                     className='instruction-gifs' />
+                  <br />
                   <br />
                   <li>Text</li>
                   <p>

@@ -173,7 +173,9 @@
 }
 
 .game-title {
-  background-color: black;
+  background:black;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .synopsis-inner-container {
@@ -183,7 +185,8 @@
 
 .game-title h1 {
   font-size: 75px;
-  color: white;
+  color: black;
+  text-decoration: underline;
 }
 
 .section-title h3 {
@@ -193,12 +196,12 @@
 }
 
 .synopsis p{
-  font-size: 30px;
+  font-size: 35px;
 }
 
 .instructions p {
-  font-size: 30px;
-  text-align: left;
+  font-size: 35px;
+  text-align: center;
 }
 
 .instruction-questions h4 strong{
@@ -210,8 +213,12 @@
 }
 
 .instruction-questions ul li {
-  font-size: 30px;
+  font-size: 40px;
+  text-decoration: underline;
   
+}
+.instruction-gifs{
+  width: 70%;
 }
 
 .section-divider hr {
