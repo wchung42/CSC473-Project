@@ -7,18 +7,20 @@ type Game @model {
   Capacity: Int!		                                    #Number of people allow to participate
   Story: String!		                                    #Story of the game
   Time_Limit: String!                                   #Time allowed to play game
+  Time_Left: String!                                    #Indicate how much time does the user have left after each question
   Geo_Location: [String]                                #Geo Location to start the game
   Players(limit: Int = Capacity): [String]!						  #List of Players who are currently in this game
   Finished: Boolean!                                    #true = win / false = not finished the game
   Total_Questions(limit: Int = 15): Int!						    #Number of Questions
   Total_Hints(limit: Int = 5): Int!								      #Number of Hints player allowed to use
+  Hint_Count: Int!                                      #Count number of hint used by player
   At_Question: Int!                                     #Index to indicate what question the whole game at!
   Questions(limit: Int = 99): [Question]!  @connection(name:"GamePlay")  #List of Question of the game
-  Review: [Review]!   @connection(name:"GamePlay")
-  ReviewCount: Int!
-  Average_Rating: String!
-  Aid_Stuffs: [String]
-  Record: [Record] @connection(name:"gameRecord")					#Aid stuffs for different type of answer
+  Review: [Review]!   @connection(name:"GamePlay")      #Review Object (Rating + Feedback + username)
+  ReviewCount: Int!                                     #Count many reviews has been submitted
+  Average_Rating: String!                               #Average Rating extracted from review count
+  Aid_Stuffs: [String]                                  #Aid stuffs for different type of answer
+  Record: [Record] @connection(name:"gameRecord")			  #To record username + time spent for this game
 }
 # define Question model/object
 type Question @model{

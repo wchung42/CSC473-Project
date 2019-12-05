@@ -11,11 +11,13 @@ export const getGame = `query GetGame($id: ID!) {
     Capacity
     Story
     Time_Limit
+    Time_Left
     Geo_Location
     Players
     Finished
     Total_Questions
     Total_Hints
+    Hint_Count
     At_Question
     Questions {
       items {
@@ -71,11 +73,13 @@ export const listGames = `query ListGames(
       Capacity
       Story
       Time_Limit
+      Time_Left
       Geo_Location
       Players
       Finished
       Total_Questions
       Total_Hints
+      Hint_Count
       At_Question
       Questions {
         nextToken
@@ -106,11 +110,13 @@ export const getQuestion = `query GetQuestion($id: ID!) {
       Capacity
       Story
       Time_Limit
+      Time_Left
       Geo_Location
       Players
       Finished
       Total_Questions
       Total_Hints
+      Hint_Count
       At_Question
       Questions {
         nextToken
@@ -156,11 +162,13 @@ export const listQuestions = `query ListQuestions(
         Capacity
         Story
         Time_Limit
+        Time_Left
         Geo_Location
         Players
         Finished
         Total_Questions
         Total_Hints
+        Hint_Count
         At_Question
         ReviewCount
         Average_Rating
@@ -194,11 +202,13 @@ export const getReview = `query GetReview($id: ID!) {
       Capacity
       Story
       Time_Limit
+      Time_Left
       Geo_Location
       Players
       Finished
       Total_Questions
       Total_Hints
+      Hint_Count
       At_Question
       Questions {
         nextToken
@@ -236,11 +246,13 @@ export const listReviews = `query ListReviews(
         Capacity
         Story
         Time_Limit
+        Time_Left
         Geo_Location
         Players
         Finished
         Total_Questions
         Total_Hints
+        Hint_Count
         At_Question
         ReviewCount
         Average_Rating
@@ -273,11 +285,13 @@ export const getUserProfile = `query GetUserProfile($id: ID!) {
         Capacity
         Story
         Time_Limit
+        Time_Left
         Geo_Location
         Players
         Finished
         Total_Questions
         Total_Hints
+        Hint_Count
         At_Question
         ReviewCount
         Average_Rating
@@ -330,11 +344,13 @@ export const getRecord = `query GetRecord($id: ID!) {
       Capacity
       Story
       Time_Limit
+      Time_Left
       Geo_Location
       Players
       Finished
       Total_Questions
       Total_Hints
+      Hint_Count
       At_Question
       Questions {
         nextToken
@@ -382,11 +398,13 @@ export const listRecords = `query ListRecords(
         Capacity
         Story
         Time_Limit
+        Time_Left
         Geo_Location
         Players
         Finished
         Total_Questions
         Total_Hints
+        Hint_Count
         At_Question
         ReviewCount
         Average_Rating

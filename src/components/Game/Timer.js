@@ -9,7 +9,8 @@ class Timer extends Component {
         super(props);
         this.state = {
             count: 1,
-            isPaused: this.props.gameFinished
+            isPaused: false,
+            isFinished: this.props.gameFinished
         }
         this.gameHandler = this.gameHandler.bind(this);
     }
@@ -39,14 +40,14 @@ class Timer extends Component {
                 outcome={false} />;
             //not time out and win the game
         } else {
-            if (this.state.isPaused) {
-                console.log("Win game yet? ", this.state.isPaused)
+            if (this.state.isFinished) {
+                console.log("Win game yet? ", this.state.isFinished)
                 const winPage = <Endgame
                     gameId={this.props.gameID}
                     gameUserName={this.props.gameUserName}
                     gameReviewCount={this.props.gameReviewCount}
                     gameAverageRating={this.props.gameAverageRating}
-                    outcome={this.state.isPaused} />;
+                    outcome={this.state.isFinished} />;
                 return (
                     <div>
                         {winPage}
@@ -54,14 +55,18 @@ class Timer extends Component {
                 )
             }
             else {
+                console.log("Count: ", count)
                 return (
                     <div id="time">
-                        <p id="timer"><strong>{this.convertSeconds(count)}</strong></p>
+                        <h3 id="timer"><strong>{this.convertSeconds(count)}</strong></h3>
                         <Puzzle
                             gID={this.props.gameID}
                             gTitle={this.props.gameTitle}
+                            gTimeLimit={this.props.gameTimeLimit}
+                            gTimeLeft={count}
                             gTotalQuestions={this.props.gameTotalQuestions}
                             gTotalHints={this.props.gameTotalHints}
+                            gHintCount={this.props.gameHintCount}
                             gAtQuestion={this.props.gameAtQuestion}
                             gQuestions={this.props.gameQuestions}
                             gQuestionGeos={this.props.gameQuestionGeos}
@@ -88,18 +93,20 @@ class Timer extends Component {
         this._isMounted = true;
         const { startCount } = this.props;
         this.setState({
-            count: startCount
+            count: startCount,
+            isPaused: false
         })
         this.myInterval = setInterval(() => {
-            if (!this.state.isPaused) {
+            if (!this.state.isPaused && !this.state.isFinished) {
                 this.setState(prevState => ({
                     count: prevState.count - 1
                 }))
             }
-        }, 10000)
+        }, 1000)
     }
     componentWillUnmount() {
         this._isMounted = false;
+        clearInterval(this.myInterval)
     }
 
 }
