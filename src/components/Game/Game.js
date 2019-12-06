@@ -77,7 +77,6 @@ class Game extends Component {
     };
     this.getGameId = this.getGameId.bind(this);
     this.startGame = this.startGame.bind(this);
-    this.getPosition = this.getPosition.bind(this);
     // this.gameUpdateSubscriptions = null;
   }
 
@@ -245,18 +244,6 @@ class Game extends Component {
 
   }
 
-  getPosition() {
-    const success = async (pos) => {
-      await this.setState({
-        longitude: pos.coords.latitude,
-        latitude: pos.coords.longitude
-      })
-      console.log("Inside", this.state.latitude, this.state.longitude);
-    }
-    const error = (err) => { console.warn(`ERROR(${err.code}): ${err.message}`); }
-    navigator.geolocation.getCurrentPosition(success, error);
-  }
-
   //This will load list of games in the database (from __games__ )
   render = () => {
     // id, thumbnail, title,location, capacity, timelimite, difficulty
@@ -265,12 +252,6 @@ class Game extends Component {
       return (
 
         <div className="Game">
-          <p className="Location">Click the button to get your coordinates.</p>
-
-          <p className="Location">{this.state.latitude} {this.state.longitude}</p>
-
-          <button onClick={this.getPosition} className='Location'>Location</button>
-          <br />
 
           <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
             integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
