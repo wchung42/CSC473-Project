@@ -134,6 +134,7 @@ class Game extends Component {
       const localGame = apiData.data.getGame;
       console.log(localGame);
       let listQuestion = localGame.Questions.items.sort((a, b) => parseFloat(a.id) - parseFloat(b.id));
+      let review = localGame.Review.items;
       console.log(listQuestion)
       await this.setState({
         gameID: localGame.id,
@@ -161,6 +162,7 @@ class Game extends Component {
         gameVisualAid2: listQuestion.map(item => item.Answer_Aid2),
         gameVisualAid3: listQuestion.map(item => item.Answer_Aid3),
         gameAnswers: listQuestion.map(item => item.Answer),
+        gameReviews: review,
         gameHints: listQuestion.map(item => item.Hint),
         gameReviewCount: localGame.ReviewCount,
         gameAverageRating: localGame.Average_Rating,
@@ -190,6 +192,7 @@ class Game extends Component {
     console.log("Game Average Rating: ", this.state.gameAverageRating);
     console.log("Hint used: ", this.state.gameHintCount);
     console.log("Geo Location of Questions:", this.state.gameQuestionGeos);
+    console.log("Review of This game is: ", this.state.gameReviews);
   }
 
   async startGame() {
@@ -227,7 +230,7 @@ class Game extends Component {
           API.graphql(graphqlOperation(mutations.updateGame, { input: newGameState }));
         } catch (errors) { console.log(errors) }
       } else {
-        document.getElementById('notAtLocationIndicator').innerText = 'You are not at the starting location of the game.';
+        document.getElementById('notAtLocationIndicator').innerText = Math.round(dist * 1000) + 'm Away from the Starting Location';
         console.log('not there yet');
       }
     }
@@ -285,6 +288,12 @@ class Game extends Component {
     }
     // Display game Story
     else if (this.state.gameReady && (this.state.gameSynopsis === 1) && (this.state.gameStart === 0)) {
+      let reviews = this.state.gameReviews ?
+        this.state.gameReviews.map(item =>
+          <h4 className="reviewSection">
+            {item.review} - {item.username}
+          </h4>) : <h4>This Game Doesn't Have any Reviews.</h4>
+
       return (
         <div className="game-synopsis-container">
           <div className="back-button">
@@ -324,8 +333,6 @@ class Game extends Component {
                 Once there, the <strong>START</strong> button will turn green. Click "Start" to begin the game.
               </p>
               <br></br>
-              {/* INSERT REVIEWS HERE BY QUERRYING REVIEWS WITH GIVEN GAME ID AND DISPLAY IT */}
-
             </div>
             <div className='section-divider'>
               <hr />
@@ -338,6 +345,7 @@ class Game extends Component {
             </div>
             <div className='section-title'>
               <h3><strong>Reviews</strong></h3>
+              {reviews}
             </div>
           </div>
 

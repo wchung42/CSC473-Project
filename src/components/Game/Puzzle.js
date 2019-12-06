@@ -203,7 +203,7 @@ class Puzzle extends Component {
 
             // calculate distance to target
             dist = getDistanceFromLatLonInKm(userCoords.latitude, userCoords.longitude, target.latitude, target.longitude);
-            console.log('Distance: ' + dist)
+            // console.log('Distance: ' + dist)
 
             // player must be within 20 meters of location for answer to appear
             if (dist <= 0.03) {
@@ -216,7 +216,7 @@ class Puzzle extends Component {
                 });
             }
             else {
-                document.getElementById("distance").innerHTML = "You are " + dist + " meters away from the destination"
+                document.getElementById("distance").innerHTML = "You are " + Math.round(dist * 1000) + " meters away from the destination"
                 currentState.setState({
                     atLocation: false
                 });

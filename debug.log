@@ -195,3 +195,5 @@
 [1205/142843.121:ERROR:crash_report_database_win.cc(469)] failed to stat report
 [1205/144343.123:ERROR:crash_report_database_win.cc(469)] failed to stat report
 [1205/145843.126:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[1205/151343.129:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[1206/080930.452:ERROR:crash_report_database_win.cc(469)] failed to stat report

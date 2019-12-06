@@ -115,7 +115,7 @@ class Timer extends Component {
                                 </ul>
                             </div>
                             <h3 id="Hello"> EVERYONE READY? IF SO PRESS THE BUTTON </h3>
-                            <button className="btn-lg" onClick={this.gameReady}>
+                            <button className="btn btn-lg btn-primary" onClick={this.gameReady}>
                                 START
                             </button>
                         </div>
