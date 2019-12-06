@@ -15,6 +15,7 @@ export const getGame = `query GetGame($id: ID!) {
     Geo_Location
     Players
     Finished
+    In_Progress
     Total_Questions
     Total_Hints
     Hint_Count
@@ -77,6 +78,7 @@ export const listGames = `query ListGames(
       Geo_Location
       Players
       Finished
+      In_Progress
       Total_Questions
       Total_Hints
       Hint_Count
@@ -114,6 +116,7 @@ export const getQuestion = `query GetQuestion($id: ID!) {
       Geo_Location
       Players
       Finished
+      In_Progress
       Total_Questions
       Total_Hints
       Hint_Count
@@ -166,6 +169,7 @@ export const listQuestions = `query ListQuestions(
         Geo_Location
         Players
         Finished
+        In_Progress
         Total_Questions
         Total_Hints
         Hint_Count
@@ -206,6 +210,7 @@ export const getReview = `query GetReview($id: ID!) {
       Geo_Location
       Players
       Finished
+      In_Progress
       Total_Questions
       Total_Hints
       Hint_Count
@@ -250,6 +255,7 @@ export const listReviews = `query ListReviews(
         Geo_Location
         Players
         Finished
+        In_Progress
         Total_Questions
         Total_Hints
         Hint_Count
@@ -289,6 +295,7 @@ export const getUserProfile = `query GetUserProfile($id: ID!) {
         Geo_Location
         Players
         Finished
+        In_Progress
         Total_Questions
         Total_Hints
         Hint_Count
@@ -348,6 +355,7 @@ export const getRecord = `query GetRecord($id: ID!) {
       Geo_Location
       Players
       Finished
+      In_Progress
       Total_Questions
       Total_Hints
       Hint_Count
@@ -402,6 +410,7 @@ export const listRecords = `query ListRecords(
         Geo_Location
         Players
         Finished
+        In_Progress
         Total_Questions
         Total_Hints
         Hint_Count

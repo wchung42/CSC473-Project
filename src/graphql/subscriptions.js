@@ -15,6 +15,7 @@ export const onCreateGame = `subscription OnCreateGame {
     Geo_Location
     Players
     Finished
+    In_Progress
     Total_Questions
     Total_Hints
     Hint_Count
@@ -72,6 +73,7 @@ export const onUpdateGame = `subscription OnUpdateGame {
     Geo_Location
     Players
     Finished
+    In_Progress
     Total_Questions
     Total_Hints
     Hint_Count
@@ -129,6 +131,7 @@ export const onDeleteGame = `subscription OnDeleteGame {
     Geo_Location
     Players
     Finished
+    In_Progress
     Total_Questions
     Total_Hints
     Hint_Count
@@ -188,6 +191,7 @@ export const onCreateQuestion = `subscription OnCreateQuestion {
       Geo_Location
       Players
       Finished
+      In_Progress
       Total_Questions
       Total_Hints
       Hint_Count
@@ -235,6 +239,7 @@ export const onUpdateQuestion = `subscription OnUpdateQuestion {
       Geo_Location
       Players
       Finished
+      In_Progress
       Total_Questions
       Total_Hints
       Hint_Count
@@ -282,6 +287,7 @@ export const onDeleteQuestion = `subscription OnDeleteQuestion {
       Geo_Location
       Players
       Finished
+      In_Progress
       Total_Questions
       Total_Hints
       Hint_Count
@@ -329,6 +335,7 @@ export const onCreateReview = `subscription OnCreateReview {
       Geo_Location
       Players
       Finished
+      In_Progress
       Total_Questions
       Total_Hints
       Hint_Count
@@ -368,6 +375,7 @@ export const onUpdateReview = `subscription OnUpdateReview {
       Geo_Location
       Players
       Finished
+      In_Progress
       Total_Questions
       Total_Hints
       Hint_Count
@@ -407,6 +415,7 @@ export const onDeleteReview = `subscription OnDeleteReview {
       Geo_Location
       Players
       Finished
+      In_Progress
       Total_Questions
       Total_Hints
       Hint_Count
@@ -453,6 +462,7 @@ export const onCreateUserProfile = `subscription OnCreateUserProfile {
         Geo_Location
         Players
         Finished
+        In_Progress
         Total_Questions
         Total_Hints
         Hint_Count
@@ -497,6 +507,7 @@ export const onUpdateUserProfile = `subscription OnUpdateUserProfile {
         Geo_Location
         Players
         Finished
+        In_Progress
         Total_Questions
         Total_Hints
         Hint_Count
@@ -541,6 +552,7 @@ export const onDeleteUserProfile = `subscription OnDeleteUserProfile {
         Geo_Location
         Players
         Finished
+        In_Progress
         Total_Questions
         Total_Hints
         Hint_Count
@@ -578,6 +590,7 @@ export const onCreateRecord = `subscription OnCreateRecord {
       Geo_Location
       Players
       Finished
+      In_Progress
       Total_Questions
       Total_Hints
       Hint_Count
@@ -627,6 +640,7 @@ export const onUpdateRecord = `subscription OnUpdateRecord {
       Geo_Location
       Players
       Finished
+      In_Progress
       Total_Questions
       Total_Hints
       Hint_Count
@@ -676,6 +690,7 @@ export const onDeleteRecord = `subscription OnDeleteRecord {
       Geo_Location
       Players
       Finished
+      In_Progress
       Total_Questions
       Total_Hints
       Hint_Count

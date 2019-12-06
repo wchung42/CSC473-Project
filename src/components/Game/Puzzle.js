@@ -5,6 +5,7 @@ import Answer from './Answer';
 import Question from './Question';
 import { API, graphqlOperation } from 'aws-amplify';
 import * as mutations from '../../graphql/mutations';
+import { getDistanceFromLatLonInKm } from './util.js';
 //props this file needs to run: Id, TotalQuestion, TotalHints, AtQuestion, Questions, AnswerType, Answers, Hints, Long, Lad, TimeLimit
 //Each time answers is right => mutation Update AtQuestion 
 //When the game ends it will reset players pool => mutation updateGame(players: "")
@@ -31,7 +32,7 @@ class Puzzle extends Component {
             latitude: null,
             longitude: null,
             // 0 when player not at location; 1 when player is
-            atLocation: 0,
+            atLocation: false,
             // game ends when last question is completed
             gameState: true,
             win: false,
@@ -40,6 +41,7 @@ class Puzzle extends Component {
         }
         this.getAnswer = this.getAnswer.bind(this);
         this.getHint = this.getHint.bind(this);
+        this.getLocation = this.getLocation.bind(this);
     }
     //this function is to get answer from NUMBER TYPE
     async getAnswer(e) {
@@ -62,7 +64,7 @@ class Puzzle extends Component {
             await this.setState({
                 atQuestion: this.state.atQuestion + 1,
                 usedHint: false,
-                atLocation: 0,
+                atLocation: false,
             })
             //if this is the last question then End game
             if (this.state.atQuestion === this.state.totalQuestions) {
@@ -71,18 +73,19 @@ class Puzzle extends Component {
                     gameState: false,
                     win: true
                 }); console.log("End of game");
-                const nQuestion = {
+                const lQuestion = {
                     id: this.props.gID,
                     At_Question: 0,
                     Capacity: 15,
                     Players: [],
                     Finished: true,
                     Time_Left: this.props.gTimeLimit,
-                    Hint_Count: this.state.totalHints
+                    Hint_Count: this.state.totalHints,
+                    In_Progress: false,
                 }
                 //update the database when the answer is correct
                 try {
-                    const nextQuestion = await API.graphql(graphqlOperation(mutations.updateGame, { input: nQuestion }));
+                    const nextQuestion = await API.graphql(graphqlOperation(mutations.updateGame, { input: lQuestion }));
                     console.log("Next Question: ", nextQuestion);
                 } catch (errors) { console.log(errors) };
 
@@ -175,53 +178,106 @@ class Puzzle extends Component {
             // document.getElementById("hintBttn").style.backgroundColor = "gray";
             setTimeout(function () {
                 document.getElementById("hintBttn").disabled = false;
-            }, 2000)
+            }, 1000)
         }
     }
     // when state changes, check to see if the game has ended
     // stop timer when game is completed
-    componentDidUpdate() {
+
+    async getLocation() {
+        let current, dist;
+        let currentState = this;
+        let target = {
+            latitude: this.state.questionGeos[this.state.atQuestion][0],
+            longitude: this.state.questionGeos[this.state.atQuestion][1]
+        }
+
+        console.log("long and lat of the game: ", target)
+        function success(position) {
+            let userCoords = position.coords;
+            console.log(`latitude: ${userCoords.latitude} | longitude: ${userCoords.longitude}`)
+            // calculate distance to target
+            dist = getDistanceFromLatLonInKm(userCoords.latitude, userCoords.longitude, target.latitude, target.longitude);
+            console.log('Distance: ' + dist)
+            // player must be within 10 meters of starting point for game to begin
+            if (dist <= 0.09) {
+                // stop watching player location
+                navigator.geolocation.clearWatch(current)
+                // allow question
+                currentState.setState({
+                    atLocation: true
+                });
+            } else {
+                document.getElementById("distance").innerHTML = "You are " + Math.round(dist * 1000) + " meters away from the destination"
+                currentState.setState({
+                    atLocation: false
+                });
+            }
+        }
+
+        // error callback
+        function error(err) {
+            console.warn('Error(' + err.code + '): ' + err.message);
+        }
+        // start watching
+        current = await navigator.geolocation.watchPosition(success, error, { enableHighAccuracy: true });
+
+    }
+
+    async componentDidUpdate() {
         if (this.state.win && this.state.timeStopper === 0) {
             this.setState({ timeStopper: 1 })
             this.props.gameHandler();
         }
+
         // check location upon component update
-        // let current, target, dist;
-        // let currentState = this;
+        let current, target, dist;
+        let currentState = this;
 
-        // function success(position) {
-        //     let userCoords = position.coords;
-        //     console.log(`latitude: ${userCoords.latitude} | longitude: ${userCoords.longitude}`)
+        function success(position) {
+            let userCoords = position.coords;
+            // console.log(`latitude: ${userCoords.latitude} | longitude: ${userCoords.longitude}`)
 
-        //     // calculate distance to target
-        //     dist = getDistanceFromLatLonInKm(userCoords.latitude, userCoords.longitude, target.latitude, target.longitude);
-        //     console.log('Distance: ' + dist)
+            // calculate distance to target
+            dist = getDistanceFromLatLonInKm(userCoords.latitude, userCoords.longitude, target.latitude, target.longitude);
+            // console.log('Distance: ' + dist)
 
-        //     // player must be within 20 meters of location for answer to appear
-        //     if (dist <= 0.03) {
-        //         console.log('You are here!');
-        //         // stop watching player location
-        //         navigator.geolocation.clearWatch(current)
-        //         // allow question
-        //         currentState.setState({
-        //             atLocation: 1
-        //         });
-        //     }
-        // }
+            // player must be within 20 meters of location for answer to appear
+            if (dist >= 0.09) {
+                console.log('You are here!');
+                // stop watching player location
+                navigator.geolocation.clearWatch(current)
+                // allow question
+                currentState.setState({
+                    atLocation: true
+                });
+            }
+            else {
+                document.getElementById("distance").innerHTML = "You are " + Math.round(dist * 1000) + " meters away from the destination"
+                currentState.setState({
+                    atLocation: false
+                });
+            }
+        }
 
-        // // error callback
-        // function error(err) {
-        //     console.warn('Error(' + err.code + '): ' + err.message);
-        // }
+        // error callback
+        function error(err) {
+            console.warn('Error(' + err.code + '): ' + err.message);
+        }
 
-        // // TAKEN FROM THE JSON FILE FOR NOW
-        // target = {
-        //     latitude: 40.820583,
-        //     longitude: -73.949105
-        // }
+        // TAKEN FROM THE JSON FILE FOR NOW
+        target = {
+            latitude: this.state.questionGeos[this.state.atQuestion][0],
+            longitude: this.state.questionGeos[this.state.atQuestion][1]
+        }
 
-        // // start watching
-        // current = setTimeout(navigator.geolocation.watchPosition(success, error, { enableHighAccuracy: true }), 10000);
+        // start watching
+        current = navigator.geolocation.watchPosition(success, error, { enableHighAccuracy: true });
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false;
+        clearInterval(this.myInterval)
     }
 
     render() {
@@ -256,11 +312,13 @@ class Puzzle extends Component {
         //-----------------------------------------------//
         let questionPage = <Question
             qContent={this.state.questions[this.state.atQuestion]}
-            qAid={this.state.questionVisualAid[this.state.atQuestion]} />;
+            qAid={this.state.questionVisualAid[this.state.atQuestion]}
+            qGeo={this.state.questionGeos[this.state.atQuestion]} />;
         let answerPage = <Answer
             answerType={this.state.answerType[this.state.atQuestion]}
             action={this.getAnswer}
             aidStuffs={DragDrop_Data} />;
+        let message = <p id="distance">Calculating Your Distance...</p>;
         return (
             <div className="game">
                 <section className="middle">
@@ -269,8 +327,9 @@ class Puzzle extends Component {
                     <div className="text-center">
                         <h1>{this.props.gTitle} Challenge</h1>
                         {questionPage}
+                        {/* <button id="start-btn" className="btn btn-lg btn-success" type="button" onClick={this.getLocation}>&nbsp; VERIFY MY LOCATION &nbsp;</button> */}
                         <br /><br /><br />
-                        {answerPage}
+                        {(this.state.atLocation) ? answerPage : message}
                         <p id="hint" className="questN" value=""></p>
                         <div className="hint">
                             <button id="hintBttn" className="btn-lg btn-warning" type="button" onClick={this.getHint}>

@@ -27,6 +27,7 @@ const ListGames = `query ListGames{
       ReviewCount
       Average_Rating
       Time_Left
+      In_Progress
     }
   }
 }`;
@@ -49,6 +50,7 @@ class Game extends Component {
       gameTimeLimit: "",
       gameTimeLeft: "",
       gameFinished: false,
+      gameInProgress: "",
       gameTotalQuestions: "",
       gameTotalHints: "",
       gameHintCount: "",
@@ -75,7 +77,6 @@ class Game extends Component {
     };
     this.getGameId = this.getGameId.bind(this);
     this.startGame = this.startGame.bind(this);
-    this.getPosition = this.getPosition.bind(this);
     // this.gameUpdateSubscriptions = null;
   }
 
@@ -109,7 +110,8 @@ class Game extends Component {
               gameCapacity: gameData.value.data.onUpdateGame.Capacity,
               gamePlayers: gameData.value.data.onUpdateGame.Players,
               gameHintCount: gameData.value.data.onUpdateGame.Hint_Count,
-              gameTimeLeft: gameData.value.data.onUpdateGame.Time_Left
+              gameTimeLeft: gameData.value.data.onUpdateGame.Time_Left,
+              gameInProgress: gameData.value.data.onUpdateGame.In_Progress
             })
             console.log("list of Players in-game: ", this.state.gamePlayers)
           }
@@ -131,6 +133,7 @@ class Game extends Component {
       const localGame = apiData.data.getGame;
       console.log(localGame);
       let listQuestion = localGame.Questions.items.sort((a, b) => parseFloat(a.id) - parseFloat(b.id));
+      let review = localGame.Review.items;
       console.log(listQuestion)
       await this.setState({
         gameID: localGame.id,
@@ -143,6 +146,7 @@ class Game extends Component {
         gameFinished: localGame.Finished,
         gameTimeLimit: localGame.Time_Limit,
         gameTimeLeft: localGame.Time_Left,
+        gameInProgress: localGame.In_Progress,
         gameTotalQuestions: localGame.Total_Questions,
         latitude: localGame.Geo_Location[0],
         longitude: localGame.Geo_Location[1],
@@ -157,6 +161,7 @@ class Game extends Component {
         gameVisualAid2: listQuestion.map(item => item.Answer_Aid2),
         gameVisualAid3: listQuestion.map(item => item.Answer_Aid3),
         gameAnswers: listQuestion.map(item => item.Answer),
+        gameReviews: review,
         gameHints: listQuestion.map(item => item.Hint),
         gameReviewCount: localGame.ReviewCount,
         gameAverageRating: localGame.Average_Rating,
@@ -185,6 +190,8 @@ class Game extends Component {
     console.log("Number of Rating of this game: ", this.state.gameReviewCount);
     console.log("Game Average Rating: ", this.state.gameAverageRating);
     console.log("Hint used: ", this.state.gameHintCount);
+    console.log("Geo Location of Questions:", this.state.gameQuestionGeos);
+    console.log("Review of This game is: ", this.state.gameReviews);
   }
 
   async startGame() {
@@ -222,7 +229,7 @@ class Game extends Component {
           API.graphql(graphqlOperation(mutations.updateGame, { input: newGameState }));
         } catch (errors) { console.log(errors) }
       } else {
-        document.getElementById('notAtLocationIndicator').innerText = 'You are not at the starting location of the game.';
+        document.getElementById('notAtLocationIndicator').innerText = Math.round(dist * 1000) + 'm Away from the Starting Location';
         console.log('not there yet');
       }
     }
@@ -237,18 +244,6 @@ class Game extends Component {
 
   }
 
-  getPosition() {
-    const success = async (pos) => {
-      await this.setState({
-        longitude: pos.coords.latitude,
-        latitude: pos.coords.longitude
-      })
-      console.log("Inside", this.state.latitude, this.state.longitude);
-    }
-    const error = (err) => { console.warn(`ERROR(${err.code}): ${err.message}`); }
-    navigator.geolocation.getCurrentPosition(success, error);
-  }
-
   //This will load list of games in the database (from __games__ )
   render = () => {
     // id, thumbnail, title,location, capacity, timelimite, difficulty
@@ -257,12 +252,6 @@ class Game extends Component {
       return (
 
         <div className="Game">
-          <p className="Location">Click the button to get your coordinates.</p>
-
-          <p className="Location">{this.state.latitude} {this.state.longitude}</p>
-
-          <button onClick={this.getPosition} className='Location'>Location</button>
-          <br />
 
           <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
             integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
@@ -280,6 +269,12 @@ class Game extends Component {
     }
     // Display game Story
     else if (this.state.gameReady && (this.state.gameSynopsis === 1) && (this.state.gameStart === 0)) {
+      let reviews = this.state.gameReviews ?
+        this.state.gameReviews.map(item =>
+          <h4 className="reviewSection">
+            {item.review} - {item.username}
+          </h4>) : <h4>This Game Doesn't Have any Reviews.</h4>
+
       return (
         <div className="game-synopsis-container">
           <div className="back-button">
@@ -315,59 +310,23 @@ class Game extends Component {
 
             <div className='instructions'>
               <p>
-                In order to begin the game, head to the <strong>starting location</strong> as indicated above.
+                In order to JOIN the game, head to the <strong>starting location</strong> as indicated above.
                 Once there, the <strong>START</strong> button will turn green. Click "Start" to begin the game.
               </p>
               <br></br>
-              <div className='instruction-questions'>
-                <h4><strong>Types of Questions</strong></h4>
-                <ul>
-                  <li>Combination</li>
-                  <p>
-                    Enter the combination into the numpad and hit the POUND(#) key.
-                    If the POUND(#) key flashes RED, your answer is incorrect!
-                  </p>
-                  <br />
-                  <img src='https://user-images.githubusercontent.com/15526256/70118142-572f0b00-1635-11ea-8051-513754791f7a.gif'
-                    alt='numpad gif'
-                    className='instruction-gifs' />
-                  <br />
-                  <br />
-                  <li>Text</li>
-                  <p>
-                    To complete these types of questions, simply enter your answer into the textbox and click SUBMIT.
-                    <br></br>
-                    <strong>NOTE: ANSWERS NOT CASE SENSITIVE</strong>
-                  </p>
-                  <br />
-                  <img src='https://user-images.githubusercontent.com/15526256/70118449-023fc480-1636-11ea-97a1-192d94088285.gif'
-                    alt='text gif'
-                    className='instruction-gifs' />
-                  <br />
-                  <br />
-                  <li>Ordering</li>
-                  <p>
-                    These questions are completed by dragging and dropping the images into the correct order and hitting SUBMIT.
-                  </p>
-                  <br />
-                  <img src='https://user-images.githubusercontent.com/15526256/70117945-c821f300-1634-11ea-9b3e-e86832e7cf32.gif'
-                    alt='dnd gif'
-                    className='instruction-gifs'
-                  />
-                </ul>
-              </div>
             </div>
             <div className='section-divider'>
               <hr />
             </div>
             <div className="start">
-              <button id="start-btn" className="btn btn-lg btn-success" type="button" onClick={this.startGame}>&nbsp; Start &nbsp;</button>
+              <button id="start-btn" className="btn btn-lg btn-success" type="button" onClick={this.startGame}>&nbsp; JOIN &nbsp;</button>
             </div>
             <div id="notAtLocationIndicator">
               <p></p>
             </div>
             <div className='section-title'>
               <h3><strong>Reviews</strong></h3>
+              {reviews}
             </div>
           </div>
 
@@ -388,7 +347,7 @@ class Game extends Component {
           </div>
           <div className="gameInterface">
             <Timer
-              key={this.state.gameAtQuestion}
+              key={this.state.gameAtQuestion + this.state.gameInProgress}
               gameUserName={this.state.gameUserName}
               gameID={this.state.gameID}
               gameTitle={this.state.gameTitle}
@@ -397,6 +356,7 @@ class Game extends Component {
               gameDifficulty={this.state.gameDifficulty}
               gameStory={this.state.gameStory}
               gameFinished={this.state.gameFinished}
+              gameInProgress={this.state.gameInProgress}
               gameTotalQuestions={this.state.gameTotalQuestions}
               gameTotalHints={this.state.gameTotalHints}
               gameHintCount={this.state.gameHintCount}
