@@ -272,7 +272,7 @@ class Puzzle extends Component {
         }
 
         // start watching
-        current = setTimeOut(navigator.geolocation.watchPosition(success, error, { enableHighAccuracy: true }), 10000);
+        current = setTimeout(navigator.geolocation.watchPosition(success, error, { enableHighAccuracy: true }), 10000);
     }
 
     componentWillUnmount() {
