@@ -34,7 +34,7 @@ class gamePanel extends Component {
                                     id={"bttn" + item.id}
                                     className="btn btn-lg btn-primary"
                                     type="button"
-                                    value={item.id}>
+                                >
                                     In Progress
                         </button> :
                                 <button
@@ -42,8 +42,8 @@ class gamePanel extends Component {
                                     id={"bttn" + item.id}
                                     className="btn btn-lg btn-primary"
                                     type="button"
-                                    onClick={this.props.func}
-                                    value={item.id}>
+                                    onClick={() => this.props.func(item.id)}
+                                >
                                     More Info
                         </button>
                         }
