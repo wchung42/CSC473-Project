@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Avatar from 'react-avatar';
 import Amplify, { Auth } from 'aws-amplify';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Table from 'react-bootstrap/Table';
 
 class ProfilePage extends Component {
   constructor(props) {
@@ -36,8 +38,27 @@ class ProfilePage extends Component {
           <textarea style={{ fontSize: '400%', backgroundColor: 'gray' }} value="Just happy to be here honestly"></textarea>
 
           <hr />
-        </div>
+          <div>
+            <h2 style={{fontSize:'450%', textDecoration:'underline'}}>Leaderboard</h2>
+                <Table style={{fontSize:'450%', color:'white'}}  striped bordered hover>
+                <thead>
+                    <tr>
+                        <th>{this.state.username}</th>
+                        <th>Accuracy</th>
+                        </tr>
+                </thead>
+                    <tbody>
+                            <tr>
+                                <th>test</th>
+                                <th>%</th>
+                            </tr>
+                    </tbody>
+                    </Table>
+                
+            </div>
 
+        </div>
+        
       </div>
 
 
