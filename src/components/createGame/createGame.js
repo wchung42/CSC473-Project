@@ -46,34 +46,57 @@ class CreateGame extends Component {
 
     async handleSubmit(e) {
         e.preventDefault();
+
+        let id = this.state.id,
+            Title = e.target["game-title"].value,
+            Thumbnail = e.target["game-thumbnail"].value,
+            Location = e.target["game-location"].value,
+            Difficulty = e.target["game-difficulty"].value,
+            Capacity = e.target["game-capacity"].value,
+            Story = e.target["game-story"].value,
+            Time_Limit = (Number(e.target["game-time-limit"].value) * 60).toString(),
+            Time_Left = (Number(e.target["game-time-limit"].value) * 60).toString(),// similar to Time_Limit
+            Geo_Location = [e.target["game-longtitude"].value, e.target["game-ladtitude"].value],
+            Players = [],
+            Finished = false,
+            In_Progress = false,
+            Total_Questions = e.target["game-total-questions"].value,
+            Total_Hints = e.target["game-total-hints"].value,
+            Hint_Count = 0,
+            At_Question = 0,
+            ReviewCount = 0,
+            Average_Rating = 0;
         const newGame = {
-            id: this.state.id,
-            Title: e.target["game-title"].value,
-            Thumbnail: e.target["game-thumbnail"].value,
-            Location: e.target["game-location"].value,
-            Difficulty: e.target["game-difficulty"].value,
-            Capacity: e.target["game-capacity"].value,
-            Story: e.target["game-story"].value,
-            Time_Limit: (Number(e.target["game-time-limit"].value) * 3600).toString(),
-            Time_Left: (Number(e.target["game-time-limit"].value) * 3600).toString(),// similar to Time_Limit
-            Geo_Location: [e.target["game-longtitude"].value, e.target["game-ladtitude"].value],
+            id: id,
+            Title: Title,
+            Thumbnail: Thumbnail,
+            Location: Location,
+            Difficulty: Difficulty,
+            Capacity: Capacity,
+            Story: Story,
+            Time_Limit: Time_Limit,
+            Time_Left: Time_Limit,// similar to Time_Limit
+            Geo_Location: Geo_Location,
             Players: [],
             Finished: false,
             In_Progress: false,
-            Total_Questions: e.target["game-total-questions"].value,
-            Total_Hints: e.target["game-total-hints"].value,
+            Total_Questions: Total_Questions,
+            Total_Hints: Total_Hints,
             Hint_Count: 0,
             At_Question: 0,
             ReviewCount: 0,
             Average_Rating: 0,
         }
+
         try {
-            // await API.graphql(graphqlOperation(mutations.createGame, { input: newGame }));
-            await this.setState({
+            this.setState({
                 gameCreated: true,
-                gameTitle: e.target["game-title"].value,
-                totalQuestions: e.target["game-total-questions"].value
+                gameTitle: Title,
+                totalQuestions: Total_Questions
             })
+            await API.graphql(graphqlOperation(mutations.createGame, { input: newGame }));
+            console.log(newGame);
+
         } catch (error) { console.log(error) }
     }
 
@@ -90,7 +113,6 @@ class CreateGame extends Component {
         }
 
     }
-
 
     render() {
         let a = <p>Hello World 1</p>;
@@ -126,11 +148,11 @@ class CreateGame extends Component {
                                 {/* GAME DIFFICULTY*/}
                                 <label for='game-difficulty'>Difficulty (1-5)</label>
                                 <select id='game-difficulty' className='form-control' required >
-                                    <option>1 (Easy)</option>
+                                    <option>1</option>(Easy)
                                     <option>2</option>
                                     <option>3</option>
-                                    <option >4</option>
-                                    <option>5 (Hard)</option>
+                                    <option>4</option>
+                                    <option>5</option>(Hard)
                                 </select>
                                 {/* GAME CAPACITY */}
                                 <label for='game-capacity'>Capacity (8 max)</label>
