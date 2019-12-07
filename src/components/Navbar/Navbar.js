@@ -19,12 +19,14 @@ class Navigation extends Component {
       username: '',
       showAuth: false,
       isLoggedIn: false,
+      user: '',
     };
   }
 
   async componentDidMount() {
-    const user = await Auth.currentUserInfo();
-    //const user = Auth.currentUserInfo();
+    //const user = await Auth.currentUserInfo();
+    // get info of current user
+    const user = await Auth.currentAuthenticatedUser();
     if (user) {
       this.setState({
         username: user.username,
@@ -106,7 +108,7 @@ class Navigation extends Component {
           </div>
 
           <div>
-            <DrawerToggleButton click={this.props.drawerClickHandler} />
+            <DrawerToggleButton click={this.props.drawerClickHandler } currentUser = { this.props.currentUser }/>
           </div>
         </Navbar>
 
