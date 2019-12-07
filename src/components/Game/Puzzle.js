@@ -209,9 +209,6 @@ class Puzzle extends Component {
                 });
             } else {
                 document.getElementById("distance").innerHTML = "You are " + Math.round(dist * 1000) + " meters away from the destination"
-                currentState.setState({
-                    atLocation: false
-                });
             }
         }
 
@@ -224,62 +221,62 @@ class Puzzle extends Component {
 
     }
 
-    async componentDidUpdate() {
-        if (this.state.win && this.state.timeStopper === 0) {
-            this.setState({ timeStopper: 1 })
+    async componentDidMount() {
+        if (this.state.win) {
             this.props.gameHandler();
+        } else {
+            let current, target, dist;
+            let currentState = this;
+
+            function success(position) {
+                let userCoords = position.coords;
+                // console.log(`latitude: ${userCoords.latitude} | longitude: ${userCoords.longitude}`)
+
+                // calculate distance to target
+                dist = getDistanceFromLatLonInKm(userCoords.latitude, userCoords.longitude, target.latitude, target.longitude);
+                // console.log('Distance: ' + dist)
+
+                // player must be within 20 meters of location for answer to appear
+                if (dist <= 0.09) {
+                    console.log('You are here!');
+                    // stop watching player location
+                    navigator.geolocation.clearWatch(current)
+                    // allow question
+                    currentState.setState({
+                        atLocation: true
+                    });
+                }
+                else {
+                    document.getElementById("distance").innerHTML = "You are " + Math.round(dist * 1000) + " meters away from the destination"
+                    // currentState.setState({
+                    //     atLocation: false
+                    // });
+                }
+            }
+
+            // error callback
+            function error(err) {
+                console.warn('Error(' + err.code + '): ' + err.message);
+            }
+
+            // TAKEN FROM THE JSON FILE FOR NOW
+            target = {
+                latitude: this.state.questionGeos[this.state.atQuestion][0],
+                longitude: this.state.questionGeos[this.state.atQuestion][1]
+            }
+
+            // start watching
+            current = navigator.geolocation.watchPosition(success, error, { enableHighAccuracy: true });
         }
 
         // check location upon component update
-        let current, target, dist;
-        let currentState = this;
 
-        function success(position) {
-            let userCoords = position.coords;
-            // console.log(`latitude: ${userCoords.latitude} | longitude: ${userCoords.longitude}`)
-
-            // calculate distance to target
-            dist = getDistanceFromLatLonInKm(userCoords.latitude, userCoords.longitude, target.latitude, target.longitude);
-            // console.log('Distance: ' + dist)
-
-            // player must be within 20 meters of location for answer to appear
-            if (dist >= 0.09) {
-                console.log('You are here!');
-                // stop watching player location
-                navigator.geolocation.clearWatch(current)
-                // allow question
-                currentState.setState({
-                    atLocation: true
-                });
-            }
-            else {
-                document.getElementById("distance").innerHTML = "You are " + Math.round(dist * 1000) + " meters away from the destination"
-                currentState.setState({
-                    atLocation: false
-                });
-            }
-        }
-
-        // error callback
-        function error(err) {
-            console.warn('Error(' + err.code + '): ' + err.message);
-        }
-
-        // TAKEN FROM THE JSON FILE FOR NOW
-        target = {
-            latitude: this.state.questionGeos[this.state.atQuestion][0],
-            longitude: this.state.questionGeos[this.state.atQuestion][1]
-        }
-
-        // start watching
-        current = navigator.geolocation.watchPosition(success, error, { enableHighAccuracy: true });
     }
 
     componentWillUnmount() {
         this._isMounted = false;
         clearInterval(this.myInterval)
     }
-
     render() {
         // game states - playing or end game
 
@@ -327,7 +324,6 @@ class Puzzle extends Component {
                     <div className="text-center">
                         <h1>{this.props.gTitle} Challenge</h1>
                         {questionPage}
-                        {/* <button id="start-btn" className="btn btn-lg btn-success" type="button" onClick={this.getLocation}>&nbsp; VERIFY MY LOCATION &nbsp;</button> */}
                         <br /><br /><br />
                         {(this.state.atLocation) ? answerPage : message}
                         <p id="hint" className="questN" value=""></p>

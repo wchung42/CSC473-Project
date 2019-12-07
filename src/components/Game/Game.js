@@ -77,6 +77,7 @@ class Game extends Component {
     };
     this.getGameId = this.getGameId.bind(this);
     this.startGame = this.startGame.bind(this);
+    this.resetGame = this.resetGame.bind(this);
     // this.gameUpdateSubscriptions = null;
   }
 
@@ -85,8 +86,8 @@ class Game extends Component {
     try {
       const apiData = await API.graphql(graphqlOperation(ListGames));
       const gamesTest = apiData.data.listGames.items;
-      this.setState({ games: gamesTest.reverse() });
-      console.log(this.state.games);
+      this.setState({ games: gamesTest.sort((a, b) => (a.id - b.id)) });
+      console.log(this.state.games.length);
     } catch (error) { console.log(error) }
 
     Auth.currentAuthenticatedUser()
@@ -127,7 +128,7 @@ class Game extends Component {
 
   //onclick will getGameId and then edit all states
   async getGameId(ev) {
-    let id = ev.currentTarget.value.toString();
+    let id = ev;
     try {
       const apiData = await API.graphql(graphqlOperation(queries.getGame, { first: 50, id: id }));
       const localGame = apiData.data.getGame;
@@ -192,6 +193,23 @@ class Game extends Component {
     console.log("Hint used: ", this.state.gameHintCount);
     console.log("Geo Location of Questions:", this.state.gameQuestionGeos);
     console.log("Review of This game is: ", this.state.gameReviews);
+  }
+
+  async resetGame(value) {
+    const id = value;
+    const resetGameData = {
+      id: id,
+      Capacity: 15,
+      Time_Left: 1800,
+      Finished: false,
+      In_Progress: false,
+      At_Question: 0,
+      Hint_Count: 0,
+      Players: [],
+    }
+    try {
+      await API.graphql(graphqlOperation(mutations.updateGame, { input: resetGameData }))
+    } catch (errors) { console.log(errors) }
   }
 
   async startGame() {
@@ -261,7 +279,7 @@ class Game extends Component {
             <button className="btn btn-lg btn-danger" type="button"><a href="/">&nbsp; Exit &nbsp;</a></button>
           </div> */}
           <div className="game-list">
-            <Panel games={this.state.games} func={this.getGameId} />
+            <Panel username={this.props.gameUserName} games={this.state.games} func={this.getGameId} resetFunc={this.resetGame} />
           </div>
           <br />
         </div>
