@@ -121,7 +121,7 @@ class CreateGame extends Component {
         if (this.state.gameCreated && !this.state.questionsCreated) {
             return (<GameQuestion
                 key={this.state.atQuestion}
-                id={"00" + this.state.id}
+                id={this.state.id}
                 atQuestion={(this.state.atQuestion < 10) ? "00" + this.state.atQuestion : "0" + this.state.atQuestion}
                 func={this.upByOne} />)
         }

@@ -85,7 +85,7 @@ class Game extends Component {
     try {
       const apiData = await API.graphql(graphqlOperation(ListGames));
       const gamesTest = apiData.data.listGames.items;
-      this.setState({ games: gamesTest.reverse() });
+      this.setState({ games: gamesTest.sort((a, b) => (a.id - b.id)) });
       console.log(this.state.games.length);
     } catch (error) { console.log(error) }
 
