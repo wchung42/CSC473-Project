@@ -86,7 +86,7 @@ class Game extends Component {
       const apiData = await API.graphql(graphqlOperation(ListGames));
       const gamesTest = apiData.data.listGames.items;
       this.setState({ games: gamesTest.reverse() });
-      console.log(this.state.games);
+      console.log(this.state.games.length);
     } catch (error) { console.log(error) }
 
     Auth.currentAuthenticatedUser()
@@ -127,7 +127,7 @@ class Game extends Component {
 
   //onclick will getGameId and then edit all states
   async getGameId(ev) {
-    let id = ev.currentTarget.value.toString();
+    let id = ev;
     try {
       const apiData = await API.graphql(graphqlOperation(queries.getGame, { first: 50, id: id }));
       const localGame = apiData.data.getGame;
