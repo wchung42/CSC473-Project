@@ -47,6 +47,15 @@ class gamePanel extends Component {
                                     More Info
                         </button>
                         }
+                        <button
+                            hidden={['admin', 'admin123', 'admin2'].includes(this.props.username)}
+                            id={"resetBttn" + item.id}
+                            className="btn btn-lg btn-primary"
+                            type="button"
+                            onClick={() => this.props.resetFunc(item.id)}
+                        >
+                            RESET
+                        </button>
                     </li>
                 </div>
             );
