@@ -14,7 +14,7 @@ class riddleQuestion extends Component {
 
                 </p>
                 {
-                    (this.props.qAid === "#") ? <p>This Question Does Not Have Visual Aid</p> : <img className="imgG card-img-top" src={this.props.qAid} alt={this.props.qId + " Image"} />
+                    (this.props.qAid === "#") ? <p>This Question Does Not Have Visual Aid</p> : <img style={{width:"50%"}} src={this.props.qAid} alt={this.props.qId + " Image"} />
                 }
 
 

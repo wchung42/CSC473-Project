@@ -19,6 +19,9 @@
   font-size: 3vh;
   color: white;
 }
+#hintBttn{
+  font-size:3vh;
+}
 
 .exit{
   /* margin-top: 5%;
@@ -31,6 +34,7 @@
 .exit a{
   text-decoration: none; 
   color: white;
+  font-size: 3vh;
 }
 
 .start {
@@ -46,6 +50,10 @@
 }
 .quest{
   font-size: 225%;
+  text-align: center;
+  width: auto;
+  padding: 75px;
+  
 }
 
 .toggleGame-button-line {
@@ -199,8 +207,8 @@
   font-size: 35px;
 }
 
-.instructions p {
-  font-size: 35px;
+.instruction-questions p {
+  font-size: 30px;
   text-align: center;
 }
 
@@ -218,7 +226,7 @@
   
 }
 .instruction-gifs{
-  width: 70%;
+  width: 50%;
 }
 
 .section-divider hr {
