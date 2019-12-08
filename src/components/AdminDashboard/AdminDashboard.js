@@ -88,7 +88,6 @@ class AdminDashboard extends Component {
             Username: user.Username,
         }
 
-
         // check if user is disable
         if (user.Enabled) {
             cognitoidentityserviceprovider.adminDisableUser(params, function (err, data) {
@@ -105,9 +104,6 @@ class AdminDashboard extends Component {
                 status: false,
             });
             user.Enabled = false;
-            //this.forceUpdate();
-            //document.getElementById()
-            //e.target.checked = true
         } else if (!user.Enabled) {
             cognitoidentityserviceprovider.adminEnableUser(params, function (err, data) {
                 if (err) {
@@ -121,12 +117,89 @@ class AdminDashboard extends Component {
                 status: true,
             });
             user.Enabled = true;
-            // event.target.checked = false;
-            //this.forceUpdate();
-            //e.target.checked = false
         }
 
     };
+
+    // promote user to admin
+    async promoteUserToAdmin(event, user) {
+        event.preventDefault();
+        let cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider();
+        
+        // get user data to check if already an Administrator
+        const getParams = {
+            UserPoolId: process.env.REACT_APP_USER_POOL_ID,
+            Username: user.Username,
+        };
+
+        let params = {
+            GroupName: 'Administrators',
+            UserPoolId: process.env.REACT_APP_USER_POOL_ID,
+            Username: user.Username,
+        };
+
+        let removeParams = {
+            GroupName: 'Administrators',
+            Username: user.Username,
+            UserPoolId: process.env.REACT_APP_USER_POOL_ID,
+        }
+
+        let isAdmin = false;
+        cognitoidentityserviceprovider.adminListGroupsForUser(getParams, function(err, data){
+            if (data.Groups.length >= 1 && data.Groups[0].GroupName === "Administrators") {
+                console.log(isAdmin)
+                isAdmin = true;
+                console.log(isAdmin)
+                cognitoidentityserviceprovider.adminRemoveUserFromGroup(removeParams, function(err, data) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log("Removed from admin");
+                    }
+                })
+                console.log("User is already an Administrator or is not in a group")  
+            } else {
+                cognitoidentityserviceprovider.adminAddUserToGroup(params, function(err, data) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log("Changed to admin"); 
+                    }
+                })
+            }
+        })
+
+
+        // move selected user to 'Administrators' group
+        
+        
+        // check that user is confirmed
+        // if (!(user.UserStatus === "CONFIRMED" && user.Attributes.email_verified === "true")){
+        //     console.log("User was not properly confirmed and/or email was not verified");
+        // }
+        // console.log(isAdmin)
+        // if (isAdmin){
+        //     cognitoidentityserviceprovider.adminRemoveUserFromGroup(removeParams, function(err, data) {
+        //         if (err) {
+        //             console.log(err);
+        //         } else {
+        //             console.log("Removed from admin");
+        //         }
+        //     })
+        //     console.log("User is already an Administrator or is not in a group")   
+        // }
+        // else {
+            
+        //     cognitoidentityserviceprovider.adminAddUserToGroup(params, function(err, data) {
+        //     if (err) {
+        //         console.log(err);
+        //     } else {
+        //         console.log("Changed to admin"); 
+        //     }
+        // })
+        // }
+        
+    }
 
     render() {
         const { users } = this.state
@@ -142,7 +215,8 @@ class AdminDashboard extends Component {
                             <TableRow>
                                 <TableCell>Users</TableCell>
                                 {/* <TableCell>Email</TableCell> */}
-                                <TableCell>Enabled/Disabled</TableCell>
+                                <TableCell>Disabled</TableCell>
+                                <TableCell>Admin</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -155,6 +229,12 @@ class AdminDashboard extends Component {
                                         <Switch
                                             checked={!row.Enabled}
                                             onClick={(event) => this.handleDisable(event, row)}
+                                            id={row.Username} />
+                                    </TableCell>
+                                    <TableCell>
+                                        <Switch
+                                            checked={!row.Enabled}
+                                            onClick={(event) => this.promoteUserToAdmin(event, row)}
                                             id={row.Username} />
                                     </TableCell>
                                 </TableRow>
