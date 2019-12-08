@@ -19,7 +19,7 @@ class AdminDashboard extends Component {
 
             while (more) {
                 let params = {
-                    UserPoolId: "us-east-1_AkNe7bah5",
+                    UserPoolId: process.env.REACT_APP_USER_POOL_ID,
                     Limit: 60
                 };
                 if (paginationToken !== '') {
@@ -27,9 +27,9 @@ class AdminDashboard extends Component {
                 }
 
                 AWS.config.update({
-                    region: "us-east-1",
-                    accessKeyId: "AKIAYDN3D3IO54ALGBNB",
-                    secretAccessKey: "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",
+                    region: `${process.env.REACT_APP_REGION}`,
+                    accessKeyId: `${process.env.REACT_APP_ACCESS_KEY_ID}`,
+                    secretAccessKey: `${process.env.REACT_APP_SECRET_KEY}`,
                 });
                 const cognito = new AWS.CognitoIdentityServiceProvider();
                 const rawUsers = await cognito.listUsers(params).promise();

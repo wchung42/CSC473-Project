@@ -34,3 +34,6 @@ dist/
 node_modules/
 awsconfiguration.json
 aws-exports.js
+
+#api keys
+.env
