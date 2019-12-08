@@ -23,8 +23,6 @@ class sideDrawerMenu extends Component {
       .then(
         user => {
           this.setUserInfo(user);
-          console.log(this.state.username);
-          console.log(this.state.isAdmin);
         }
       )
       .catch(err => console.log(err));
