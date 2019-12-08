@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import AWS from 'aws-sdk';
 import './AdminDashboard.css';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+
 
 class AdminDashboard extends Component {
     constructor(props){
@@ -8,7 +15,10 @@ class AdminDashboard extends Component {
         this.state = ({
             users: [],
             setUsers: [],
+            usernames: []
         })
+        this.getUsers = this.getUsers.bind(this);
+        this.getData = this.getData.bind(this);
     }
 
     async getUsers() {
@@ -42,16 +52,55 @@ class AdminDashboard extends Component {
                     more = false;
                 }
             }
+
+            return allUsers;
         } catch (e) {
             console.log(e);
         }
     }
 
+    async getData() {
+        const userData = await this.getUsers();
+        console.log(userData);
+        let usernames = [];
+        for (let i = 0; i < userData.length; i++) {
+            usernames.push({username:userData[i].Username});
+        }
+        this.setState({
+            usernames: usernames
+        })
+        //console.log(usernames)
+    }
+
+
     render() {
+        //const rows = this.getData();
+        //console.log('rows' + rows)
         return (
             <div>
                <div>WELCOME ADMIN</div>
-            <button onClick = { this.getUsers }>Click me</button> 
+                <button onClick = { this.getData }>Click me</button>
+
+                {/* display table */}
+                <Paper>
+                    <Table aria-label="simple table">
+                        <TableHead>
+                        <TableRow>
+                            <TableCell>Users</TableCell>
+                        </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {this.state.usernames.map(row => (
+                                <TableRow key={row.username}>
+                                    <TableCell component="th" scope="row">
+                                        {row.username}
+                                    </TableCell>
+                            
+                            </TableRow>
+                        ))}
+                        </TableBody>
+                    </Table>
+                </Paper>
             </div>
             
         )
