@@ -144,6 +144,10 @@ class AdminDashboard extends Component {
             UserPoolId: process.env.REACT_APP_USER_POOL_ID,
         }
 
+        /*
+        add condition to check for disabled 
+        */
+       
         let isAdmin = false;
         cognitoidentityserviceprovider.adminListGroupsForUser(getParams, function(err, data){
             if (data.Groups.length >= 1 && data.Groups[0].GroupName === "Administrators") {
@@ -169,7 +173,7 @@ class AdminDashboard extends Component {
             }
         })
 
-
+        
         // move selected user to 'Administrators' group
         
         
