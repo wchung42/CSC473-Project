@@ -259,21 +259,28 @@ class Game extends Component {
     let gameId = (id < 10) ? "00" + id : "0" + id;
     //delete game
     try {
-      await API.graphql(graphqlOperation(mutations.deleteGame, { input: id }));
-    } catch (error) { console.log("Errors in Deleting Game: ", error) }
+      await API.graphql(graphqlOperation(mutations.deleteGame, { input: { id } }));
+      console.log(id);
+    } catch (error) { console.log("Errors on Deleting Game: ", error) }
     //delete questions connected to the game
-    try {
-      for (let i = 0; i < total; i++) {
-        let questionId2nd = (i < 10) ? "00" + i : "0" + i;
-        let questionId1st = gameId;
-        let questionId = questionId1st + questionId2nd;
-        await API.graphql(graphqlOperation(mutations.deleteQuestion, { input: questionId }));
-        questionId = "";
-      }
-    } catch (error) { console.log("Error on deleting game: ", error) }
+    for (let i = 0; i < total; i++) {
+      let questionId2nd = (i < 10) ? "00" + i : "0" + i;
+      let questionId1st = gameId;
+      let questionId = questionId1st + questionId2nd;
+      console.log("Deleting Question: ", questionId);
+      try {
+        await API.graphql(graphqlOperation(mutations.deleteQuestion, { input: { id: questionId } }));
+      } catch (error) { console.log("Error on deleting Question " + questionId + ": ", error) }
+
+      questionId = "";
+    }
     //delete reviews connected to the game
     try {
-
+      let reviews = this.state.gameReviews.map(item => item.id);
+      if (reviews != null) {
+        reviews.forEach(item =>
+          API.graphql(graphqlOperation(mutations.deleteReview, { input: { id: item } })))
+      }
     } catch (error) { console.log("Error on deleteing Reviews: ", error) }
   }
 
@@ -367,7 +374,15 @@ class Game extends Component {
               {reviews}
             </div>
           </div>
-
+          <button
+            hidden={!['admin', 'admin123', 'admin2'].includes(this.state.gameUserName) && this.state.gameID <= -1}
+            id={"deleteBttn" + this.state.gameID}
+            className="btn btn-lg btn-primary"
+            type="button"
+            onClick={() => this.deleteGame(this.state.gameID, this.state.gameTotalQuestions)}
+          >
+            DELETE
+            </button>
 
         </div>
       )

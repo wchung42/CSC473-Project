@@ -45,8 +45,10 @@ class Endgame extends Component {
             }
 
             await API.graphql(graphqlOperation(mutations.createReview, { input: newReview }));
+            alert("Your review is submitted!")
             try {
                 await API.graphql(graphqlOperation(mutations.updateGame, { input: newReviewCount }));
+                alert("Your review is submitted!")
             } catch (errors) { console.log(errors) }
 
         } catch (errors) {
@@ -63,9 +65,11 @@ class Endgame extends Component {
                 }
                 try {
                     await API.graphql(graphqlOperation(mutations.updateGame, { input: oldReviewCount }));
+                    alert("Your review is submitted!")
                 } catch (errors) { console.log(errors) }
 
                 await API.graphql(graphqlOperation(mutations.updateReview, { input: newReview }));
+                alert("Your review is submitted!")
             } catch (error) { console.log(error) }
         }
     }
@@ -112,9 +116,10 @@ class Endgame extends Component {
                             </div>
                             <br />
                             <button className="review-submit-button btn-lg" type="submit">
-                                <a href="/Game">
+                                Submit
+                                {/* <a href="/Game">
                                     Submit
-                                </a>
+                                </a> */}
                             </button>
                         </form>
                     </div>
@@ -152,9 +157,10 @@ class Endgame extends Component {
                             </div>
                             <br />
                             <button className="review-submit-button btn-lg" type="submit">
-                                <a href="/Game">
+                                Submit
+                                {/* <a href="/Game">
                                     Submit
-                                </a>
+                                </a> */}
                             </button>
                         </form>
                     </div>

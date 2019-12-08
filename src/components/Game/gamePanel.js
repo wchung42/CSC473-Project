@@ -56,15 +56,7 @@ class gamePanel extends Component {
                         >
                             RESET
                         </button>
-                        <button
-                            hidden={!['admin', 'admin123', 'admin2'].includes(this.props.username) && item.id <= 2}
-                            id={"deleteBttn" + item.id}
-                            className="btn btn-lg btn-primary"
-                            type="button"
-                            onClick={() => this.props.deleteFunc(item.id, item.Total_Questions)}
-                        >
-                            DELETE
-                        </button>
+
                     </li>
                 </div>
             );
