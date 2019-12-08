@@ -12,8 +12,6 @@ import About from './components/About/About';
 import Contact from './components/Contact/Contact';
 import ProfilePage from './components/Profile/Profile';
 import CreateGame from './components/createGame/createGame';
-import GameStory from './components/createGame/gameStory'
-import GameQuestions from './components/createGame/gameQuestions'
 import Amplify, { Analytics } from 'aws-amplify';
 //backend stuffs START HERE
 
@@ -34,7 +32,6 @@ class App extends Component {
       sideDrawerMenuOpen: false
     }
   }
-
 
   // toggle drawer button handler
   drawerToggleClickHandler = () => {
@@ -81,11 +78,8 @@ class App extends Component {
               <Route path='/about' component={About} />
               <Route path='/contact' component={Contact} />
               <Route path='/cc' component={CreateGame} />
-              <Route path='/gs' component={GameStory} />
-              <Route path='/gq' component={GameQuestions} />
               <Route path='/profile' component={ProfilePage} />
               <Route path='/' component={Home} />
-
 
             </Switch>
           </Router>
