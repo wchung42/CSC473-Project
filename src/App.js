@@ -12,7 +12,10 @@ import About from './components/About/About';
 import Contact from './components/Contact/Contact';
 import ProfilePage from './components/Profile/Profile';
 import CreateGame from './components/createGame/createGame';
-import Amplify, { Analytics } from 'aws-amplify';
+import GameQuestions from './components/createGame/gameQuestions';
+import AdminDashboard from './components/AdminDashboard/AdminDashboard';
+import Amplify, { Auth, Analytics } from 'aws-amplify';
+
 //backend stuffs START HERE
 
 import aws_config from './aws-exports';
@@ -29,7 +32,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      sideDrawerMenuOpen: false
+      sideDrawerMenuOpen: false,
     }
   }
 
@@ -66,20 +69,21 @@ class App extends Component {
 
         <Navbar drawerClickHandler={this.drawerToggleClickHandler} />
         <div key={this.state.sideDrawerMenuOpen.toString()} >
-          <SideDrawerMenu show={this.state.sideDrawerMenuOpen} />
+          <SideDrawerMenu show={this.state.sideDrawerMenuOpen}/>
           {backdrop}
         </div>
         <div className="body-page">
 
           <Router>
             <Switch>
-
+              <Route path='/admin' component = {AdminDashboard}/>
               <Route path='/Game' component={Game} />
               <Route path='/about' component={About} />
               <Route path='/contact' component={Contact} />
               <Route path='/cc' component={CreateGame} />
               <Route path='/profile' component={ProfilePage} />
               <Route path='/' component={Home} />
+
 
             </Switch>
           </Router>

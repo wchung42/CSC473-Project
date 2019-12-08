@@ -11,6 +11,7 @@ import React, { Component } from 'react';
 import GameQuestion from './gameQuestions.js';
 import { API, graphqlOperation } from 'aws-amplify';
 import * as mutations from '../../graphql/mutations';
+import './createGame.css'
 
 const ListGames = `query ListGames{
     listGames{
@@ -56,7 +57,7 @@ class CreateGame extends Component {
             Story = e.target["game-story"].value,
             Time_Limit = (Number(e.target["game-time-limit"].value) * 60).toString(),
             Time_Left = (Number(e.target["game-time-limit"].value) * 60).toString(),// similar to Time_Limit
-            Geo_Location = [e.target["game-longtitude"].value, e.target["game-ladtitude"].value],
+            Geo_Location = [e.target["game-longtitude"].value, e.target["game-latitude"].value],
             Players = [],
             Finished = false,
             In_Progress = false,
@@ -145,10 +146,15 @@ class CreateGame extends Component {
                                 {/* GAME LOCATION */}
                                 <label for='game-location'>Location</label>
                                 <input id='game-location' type='text' className='form-control' required></input>
+                                {/* GAME GEO LOCATION */}
+                                <label for='game-longtitude'>Longtitude</label>
+                                <input id='game-longtitude' type='text' className='form-control' required></input>
+                                <label for='game-latitude'>Latitude</label>
+                                <input id='game-latitude' type='text' className='form-control' required></input>
                                 {/* GAME DIFFICULTY*/}
                                 <label for='game-difficulty'>Difficulty (1-5)</label>
                                 <select id='game-difficulty' className='form-control' required >
-                                    <option>1</option>(Easy)
+                                    <option selected>1</option>(Easy)
                                     <option>2</option>
                                     <option>3</option>
                                     <option>4</option>
@@ -156,7 +162,17 @@ class CreateGame extends Component {
                                 </select>
                                 {/* GAME CAPACITY */}
                                 <label for='game-capacity'>Capacity (8 max)</label>
-                                <input id='game-capacity' type='number' className='form-control' max='8' required></input>
+                                <select id = 'game-capacity' className = 'form-control' required >
+                                    <option selected>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                </select>
+                                {/* <input id='game-capacity' type='number' className='form-control' max='8' required></input> */}
                                 {/* GAME STORY */}
                                 <label for='game-story'>Game Story</label>
                                 <input id='game-story' type='text' className='form-control' required></input>
@@ -164,19 +180,15 @@ class CreateGame extends Component {
                                 <label for='game-time-limit'>Time Limit (minutes)</label>
                                 <input id='game-time-limit' type='number' className='form-control' max='60' required ></input>
                                 {/* GAME TIME_LEFT = GAME TIME_LIMIT*/}
-                                {/* GAME GEO LOCATION */}
-                                <label for='game-longtitude'>Longtitude</label>
-                                <input id='game-longtitude' type='text' className='form-control' required></input>
-                                <label for='game-ladtitude'>Ladtitude</label>
-                                <input id='game-ladtitude' type='text' className='form-control' required></input>
+                                
                                 {/* GAME PLAYERS = [] */}
                                 {/* GAME FINISHED = false */}
                                 {/* GAME IN_PROGRESS = false */}
                                 {/* GAME TOTAL QUESTIONS */}
-                                <label for='game-total-questions'>Number of Question</label>
+                                <label for='game-total-questions'>Number of Question (Max 20)</label>
                                 <input id='game-total-questions' type='number' className='form-control' max='20' required></input>
                                 {/* GAME TOTAL HINTS */}
-                                <label for='game-total-hints'>Number of Hints Players Allowed to Use</label>
+                                <label for='game-total-hints'>Number of Hints Allowed (Max 20)</label>
                                 <input id='game-total-hints' type='number' className='form-control' max='20' required></input>
                                 {/* GAME HINT COUNT = 0 */}
                                 {/* GAME AT QUESTION = 0 */}
@@ -186,10 +198,11 @@ class CreateGame extends Component {
                                 {/* GAME AVERAGE RATING = 0 */}
                                 {/* GAME RECORD = [] */}
                                 <br></br>
-                                <button type='submit' className='btn-lg btn-success'>Create</button>
+                                <button type='submit' className='btn-lg btn-success' id = "gameSubmitButton">Create</button>
                             </div>
                         </form>
                     </div>
+                    <br/>
                 </div>
             )
         }
