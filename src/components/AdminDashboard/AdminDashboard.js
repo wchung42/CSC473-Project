@@ -16,7 +16,8 @@ class AdminDashboard extends Component {
         this.state = ({
             users: [],
             setUsers: [],
-            usernames: []
+            usernames: [],
+            status: false,
         })
         this.getUsers = this.getUsers.bind(this);
         this.handleDisable = this.handleDisable.bind(this);
@@ -96,9 +97,13 @@ class AdminDashboard extends Component {
                     
                     console.log("User disabled")
                 }
+                
             })
-            event.target.checked = true;
+            this.setState({
+                status: true,
+            })
             this.forceUpdate();
+            //document.getElementById()
             //e.target.checked = true
         } else if (user.Enabled === false) {
             cognitoidentityserviceprovider.adminEnableUser(params, function(err, data) {
@@ -107,9 +112,13 @@ class AdminDashboard extends Component {
                 } else {
                     console.log("User enabled");
                 }
+                
             })
-            event.target.checked = false;
-            this.forceUpdate();
+            this.setState({
+                status: true,
+            })
+            // event.target.checked = false;
+            // this.forceUpdate();
             //e.target.checked = false
         }
         
@@ -119,7 +128,7 @@ class AdminDashboard extends Component {
         return (
             <div>
                <div>WELCOME ADMIN</div>
-                <button onClick = { this.getUsers }>Click me</button>
+                {/* <button onClick = { this.getUsers }>Click me</button> */}
 
                 {/* display table */}
                 <Paper>
@@ -141,7 +150,7 @@ class AdminDashboard extends Component {
                                         {row}
                                     </TableCell> */}
                                     <TableCell>
-                                        <Switch checked = {!row.Enabled} onChange = {(event) => this.handleDisable(event, row) } value = {row.Username} />
+                                        <Switch checked = {!row.Enabled} onChange = {(event) => this.handleDisable(event, row) } id = {row.Username} />
                                     </TableCell>
                             </TableRow>
                         ))}
