@@ -15,6 +15,7 @@ import CreateGame from './components/createGame/createGame';
 import GameQuestions from './components/createGame/gameQuestions';
 import AdminDashboard from './components/AdminDashboard/AdminDashboard';
 import Amplify, { Auth, Analytics } from 'aws-amplify';
+
 //backend stuffs START HERE
 
 import aws_config from './aws-exports';
@@ -34,7 +35,6 @@ class App extends Component {
       sideDrawerMenuOpen: false,
     }
   }
-
 
   // toggle drawer button handler
   drawerToggleClickHandler = () => {
@@ -81,10 +81,9 @@ class App extends Component {
               <Route path='/about' component={About} />
               <Route path='/contact' component={Contact} />
               <Route path='/cc' component={CreateGame} />
-              <Route path='/gq' component={GameQuestions} />
               <Route path='/profile' component={ProfilePage} />
               <Route path='/' component={Home} />
-              
+
 
             </Switch>
           </Router>

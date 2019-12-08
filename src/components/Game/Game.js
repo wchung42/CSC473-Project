@@ -33,8 +33,6 @@ const ListGames = `query ListGames{
   }
 }`;
 
-const questionTotal = `query`
-
 
 class Game extends Component {
   _isMounted = false;
@@ -43,7 +41,7 @@ class Game extends Component {
     this.state = {
       gameUserName: "",
       games: [],
-      gameID: 0,
+      gameID: "",
       gameTitle: "",
       gameThumbnail: "#",
       gameLocation: "CCNY",
@@ -87,6 +85,8 @@ class Game extends Component {
   }
 
   async componentDidMount() {
+    console.log("Game Component Did Mount");
+    console.log("current Game Id: ", this.state.gameID);
     this._isMounted = true;
     try {
       const apiData = await API.graphql(graphqlOperation(ListGames));
@@ -102,26 +102,6 @@ class Game extends Component {
         })
       )
       .catch(err => console.log(err))
-
-    try {
-      this.gameUpdateSubscriptions = await API.graphql(graphqlOperation(subscriptions.onUpdateGame, { id: this.state.gameID })).subscribe({
-        next: (gameData) => {
-          console.log("SUBSCRIPTION DATA", gameData.value.data.onUpdateGame.At_Question);
-          if (gameData.value.data.onUpdateGame.id === this.state.gameID) {
-            this.setState({
-              gameAtQuestion: gameData.value.data.onUpdateGame.At_Question,
-              gameFinished: gameData.value.data.onUpdateGame.Finished,
-              gameCapacity: gameData.value.data.onUpdateGame.Capacity,
-              gamePlayers: gameData.value.data.onUpdateGame.Players,
-              gameHintCount: gameData.value.data.onUpdateGame.Hint_Count,
-              gameTimeLeft: gameData.value.data.onUpdateGame.Time_Left,
-              gameInProgress: gameData.value.data.onUpdateGame.In_Progress
-            })
-            console.log("list of Players in-game: ", this.state.gamePlayers)
-          }
-        }
-      });
-    } catch (errorOfSub) { console.log("Errors of Subscription Data: ", errorOfSub) }
 
   }
 
@@ -174,6 +154,27 @@ class Game extends Component {
         gameSynopsis: 1
       })
     } catch (errors) { console.log("Errors on Loading Game Info:", errors) }
+
+    try {
+      this.gameUpdateSubscriptions = await API.graphql(graphqlOperation(subscriptions.onUpdateGame, { id: ev })).subscribe({
+        next: (gameData) => {
+          console.log("SUBSCRIPTION TO GAME ID: ", gameData.value.data.onUpdateGame.id);
+          console.log("SUBSCRIPTION DATA", gameData.value.data.onUpdateGame.At_Question);
+          if (gameData.value.data.onUpdateGame.id === this.state.gameID) {
+            this.setState({
+              gameAtQuestion: gameData.value.data.onUpdateGame.At_Question,
+              gameFinished: gameData.value.data.onUpdateGame.Finished,
+              gameCapacity: gameData.value.data.onUpdateGame.Capacity,
+              gamePlayers: gameData.value.data.onUpdateGame.Players,
+              gameHintCount: gameData.value.data.onUpdateGame.Hint_Count,
+              gameTimeLeft: gameData.value.data.onUpdateGame.Time_Left,
+              gameInProgress: gameData.value.data.onUpdateGame.In_Progress
+            })
+            console.log("list of Players in-game: ", this.state.gamePlayers)
+          }
+        }
+      });
+    } catch (errorOfSub) { console.log("Errors of Subscription Data: ", errorOfSub) }
 
     console.log("Capacity of this game", this.state.gameCapacity);
     console.log("list of Player in game: ", this.state.gamePlayers);
