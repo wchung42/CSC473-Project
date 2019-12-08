@@ -85,16 +85,39 @@ class sideDrawerMenu extends Component {
       <nav className={animateDrawer}>
         <ul>
           <li><a href="/Home">Home</a></li>
-          {/* <div className = 'side-drawer-divider'>
+          <div className = 'side-drawer-divider'>
             <hr/>
-          </div> */}
+          </div>
 
           <li><a href="/Game">Games</a></li>
+          <div className = 'side-drawer-divider'>
+            <hr/>
+          </div>
+          
           <li><a href="/About">About Us</a></li>
+          <div className = 'side-drawer-divider'>
+            <hr/>
+          </div>
           <li><a href="/Contact">Contact Us</a></li>
-          <li><button hidden={!this.state.isLoggedIn} onClick={this.handleSignOut} style={{ background: 'none', border: 'none' }}><a href="/">Sign out</a></button></li>
+          <div className = 'side-drawer-divider'>
+            <hr/>
+          </div>
+         
+          <li hidden = {!this.state.isLoggedIn}><a href="/">Sign out</a></li>
+          <div hidden = {!this.state.isLoggedIn} className = 'side-drawer-divider'>
+            <hr/>
+          </div>
+          <div className = 'admin-section'>
+            <p>Admin Section</p>
+          </div>
           <li hidden={!this.state.isAdmin}><a href="/cc">Create Game (Beta)</a></li>
+          <div hidden = {!this.state.isAdmin} className = 'side-drawer-divider'>
+            <hr/>
+          </div>
           <li hidden = {!this.state.isAdmin}><a href ="/admin">Admin Dashboard</a></li>
+          <div hidden = {!this.state.isAdmin} className = 'side-drawer-divider'>
+            <hr/>
+          </div>
         </ul>
       </nav>
     );
