@@ -23,6 +23,7 @@ const ListGames = `query ListGames{
       Difficulty
       Capacity
       Story
+      Total_Questions
       Time_Limit
       ReviewCount
       Average_Rating
@@ -31,6 +32,8 @@ const ListGames = `query ListGames{
     }
   }
 }`;
+
+const questionTotal = `query`
 
 
 class Game extends Component {
@@ -79,6 +82,7 @@ class Game extends Component {
     this.startGame = this.startGame.bind(this);
     this.resetGame = this.resetGame.bind(this);
     this.exitGame = this.exitGame.bind(this);
+    this.deleteGame = this.deleteGame.bind(this);
     // this.gameUpdateSubscriptions = null;
   }
 
@@ -250,6 +254,29 @@ class Game extends Component {
     current = await navigator.geolocation.watchPosition(success, error, { enableHighAccuracy: true });
   }
 
+  async deleteGame(Id, total) {
+    let id = Id;
+    let gameId = (id < 10) ? "00" + id : "0" + id;
+    //delete game
+    try {
+      await API.graphql(graphqlOperation(mutations.deleteGame, { input: id }));
+    } catch (error) { console.log("Errors in Deleting Game: ", error) }
+    //delete questions connected to the game
+    try {
+      for (let i = 0; i < total; i++) {
+        let questionId2nd = (i < 10) ? "00" + i : "0" + i;
+        let questionId1st = gameId;
+        let questionId = questionId1st + questionId2nd;
+        await API.graphql(graphqlOperation(mutations.deleteQuestion, { input: questionId }));
+        questionId = "";
+      }
+    } catch (error) { console.log("Error on deleting game: ", error) }
+    //delete reviews connected to the game
+    try {
+
+    } catch (error) { console.log("Error on deleteing Reviews: ", error) }
+  }
+
   //This will load list of games in the database (from __games__ )
   render = () => {
     // id, thumbnail, title,location, capacity, timelimite, difficulty
@@ -267,7 +294,12 @@ class Game extends Component {
             <button className="btn btn-lg btn-danger" type="button"><a href="/">&nbsp; Exit &nbsp;</a></button>
           </div> */}
           <div className="game-list">
-            <Panel username={this.props.gameUserName} games={this.state.games} func={this.getGameId} resetFunc={this.resetGame} />
+            <Panel
+              username={this.props.gameUserName}
+              games={this.state.games}
+              func={this.getGameId}
+              resetFunc={this.resetGame}
+              deleteFunc={this.deleteGame} />
           </div>
           <br />
         </div>
