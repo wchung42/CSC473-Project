@@ -10,7 +10,6 @@ import * as queries from '../../graphql/queries';
 class Endgame extends Component {
     constructor(props) {
         super(props);
-
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     // if this is the first time user wrintg review:
@@ -69,8 +68,16 @@ class Endgame extends Component {
                 await API.graphql(graphqlOperation(mutations.updateReview, { input: newReview }));
             } catch (error) { console.log(error) }
         }
-        // clear form
-        // e.target.reset();
+    }
+    async componentDidMount() {
+        console.log("Endgame Component Did Mount");
+        const nQuestion = {
+            id: this.props.gameId,
+            Finished: false
+        }
+        try {
+            await API.graphql(graphqlOperation(mutations.updateGame, { input: nQuestion }));
+        } catch (errors) { console.log("Errors on reset game: ", errors) };
     }
 
     render() {
