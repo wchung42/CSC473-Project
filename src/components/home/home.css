@@ -9,7 +9,7 @@
 
 }
 .banner-text{
-    background-color: black;
+    background: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
     width: 100%;
     margin-left: auto;
     margin-right:auto;
@@ -37,7 +37,8 @@
 }
 
 #play-now-button .btn-lg {
-    size: 50px;
+    font-size: 5vh;
+    border-radius: 10px;
 }
 
 #play-now-button a {
