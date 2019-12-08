@@ -12,7 +12,6 @@ import About from './components/About/About';
 import Contact from './components/Contact/Contact';
 import ProfilePage from './components/Profile/Profile';
 import CreateGame from './components/createGame/createGame';
-import GameStory from './components/createGame/gameStory'
 import GameQuestions from './components/createGame/gameQuestions';
 import AdminDashboard from './components/AdminDashboard/AdminDashboard';
 import Amplify, { Auth, Analytics } from 'aws-amplify';
@@ -82,7 +81,6 @@ class App extends Component {
               <Route path='/about' component={About} />
               <Route path='/contact' component={Contact} />
               <Route path='/cc' component={CreateGame} />
-              <Route path='/gs' component={GameStory} />
               <Route path='/gq' component={GameQuestions} />
               <Route path='/profile' component={ProfilePage} />
               <Route path='/' component={Home} />
