@@ -23,6 +23,7 @@ const ListGames = `query ListGames{
       Difficulty
       Capacity
       Story
+      Total_Questions
       Time_Limit
       ReviewCount
       Average_Rating
@@ -31,6 +32,8 @@ const ListGames = `query ListGames{
     }
   }
 }`;
+
+const questionTotal = `query`
 
 
 class Game extends Component {
@@ -78,6 +81,8 @@ class Game extends Component {
     this.getGameId = this.getGameId.bind(this);
     this.startGame = this.startGame.bind(this);
     this.resetGame = this.resetGame.bind(this);
+    this.exitGame = this.exitGame.bind(this);
+    this.deleteGame = this.deleteGame.bind(this);
     // this.gameUpdateSubscriptions = null;
   }
 
@@ -88,15 +93,13 @@ class Game extends Component {
       const gamesTest = apiData.data.listGames.items;
       this.setState({ games: gamesTest.sort((a, b) => (a.id - b.id)) });
       console.log(this.state.games.length);
-    } catch (error) { console.log(error) }
+    } catch (error) { console.log("Errors in retrieving list of game: ", error) }
 
     Auth.currentAuthenticatedUser()
       .then(user =>
         this.setState({
           gameUserName: user.username
-
         })
-        // console.log(user)
       )
       .catch(err => console.log(err))
 
@@ -118,12 +121,13 @@ class Game extends Component {
           }
         }
       });
-    } catch (errorOfSub) { console.log(errorOfSub) }
+    } catch (errorOfSub) { console.log("Errors of Subscription Data: ", errorOfSub) }
 
   }
 
   componentWillUnmount() {
     this._isMounted = false;
+    console.log("GAME COMPONENT WILL UNMOUNT")
   }
 
   //onclick will getGameId and then edit all states
@@ -132,10 +136,8 @@ class Game extends Component {
     try {
       const apiData = await API.graphql(graphqlOperation(queries.getGame, { first: 50, id: id }));
       const localGame = apiData.data.getGame;
-      console.log(localGame);
       let listQuestion = localGame.Questions.items.sort((a, b) => parseFloat(a.id) - parseFloat(b.id));
       let review = localGame.Review.items;
-      console.log(listQuestion)
       await this.setState({
         gameID: localGame.id,
         gameTitle: localGame.Title,
@@ -171,28 +173,10 @@ class Game extends Component {
         gameReady: true,
         gameSynopsis: 1
       })
-    } catch (error) { console.log(error) }
+    } catch (errors) { console.log("Errors on Loading Game Info:", errors) }
 
-    const nQuestion = {
-      id: this.state.gameID,
-      Finished: false
-    }
-    try {
-      await API.graphql(graphqlOperation(mutations.updateGame, { input: nQuestion }));
-    } catch (errors) { console.log(errors) };
-
-    console.log("Title of this game: ", this.state.gameTitle);
-    console.log("Total Questions of this game: ", this.state.gameTotalQuestions);
-    console.log("List of Questions of this game: ", this.state.gameQuestions);
-    console.log("List of answers of this game: ", this.state.gameAnswers);
     console.log("Capacity of this game", this.state.gameCapacity);
     console.log("list of Player in game: ", this.state.gamePlayers);
-    console.log("Geo Location of this game: ", this.state.longitude, this.state.latitude);
-    console.log("Number of Rating of this game: ", this.state.gameReviewCount);
-    console.log("Game Average Rating: ", this.state.gameAverageRating);
-    console.log("Hint used: ", this.state.gameHintCount);
-    console.log("Geo Location of Questions:", this.state.gameQuestionGeos);
-    console.log("Review of This game is: ", this.state.gameReviews);
   }
 
   async resetGame(value) {
@@ -209,7 +193,21 @@ class Game extends Component {
     }
     try {
       await API.graphql(graphqlOperation(mutations.updateGame, { input: resetGameData }))
-    } catch (errors) { console.log(errors) }
+    } catch (errors) { console.log("Errors on Reset Game", errors) }
+  }
+
+  async exitGame() {
+    let username = this.state.gameUserName;
+    let listPlayer = this.state.gamePlayers.filter(function (value) { return value !== username });
+    const removePlayer = {
+      id: this.state.gameID,
+      Capacity: this.state.gameCapacity + 1,
+      Players: listPlayer
+    }
+    try {
+      const apidata = await API.graphql(graphqlOperation(mutations.updateGame, { input: removePlayer }));
+      console.log("Remove Player data: ", apidata)
+    } catch (error) { console.log("Error on Exit a game: ", error) }
   }
 
   async startGame() {
@@ -220,13 +218,10 @@ class Game extends Component {
       latitude: this.state.latitude,
       longitude: this.state.longitude
     }
-    console.log("long and lat of the game: ", target)
     function success(position) {
       let userCoords = position.coords;
-      console.log(`latitude: ${userCoords.latitude} | longitude: ${userCoords.longitude}`)
       // calculate distance to target
       dist = getDistanceFromLatLonInKm(userCoords.latitude, userCoords.longitude, target.latitude, target.longitude);
-      console.log('Distance: ' + dist)
       // player must be within 10 meters of starting point for game to begin
       if (dist >= 0.09) {
         // stop watching player location
@@ -245,10 +240,9 @@ class Game extends Component {
         }
         try {  // update game when a user join the game: Capacity -1 && username added to list of players
           API.graphql(graphqlOperation(mutations.updateGame, { input: newGameState }));
-        } catch (errors) { console.log(errors) }
+        } catch (errors) { console.log("Errors on Starting Game: ", errors) }
       } else {
         document.getElementById('notAtLocationIndicator').innerText = Math.round(dist * 1000) + 'm Away from the Starting Location';
-        console.log('not there yet');
       }
     }
 
@@ -258,8 +252,36 @@ class Game extends Component {
     }
     // start watching
     current = await navigator.geolocation.watchPosition(success, error, { enableHighAccuracy: true });
+  }
 
+  async deleteGame(Id, total) {
+    let id = Id;
+    let gameId = (id < 10) ? "00" + id : "0" + id;
+    //delete game
+    try {
+      await API.graphql(graphqlOperation(mutations.deleteGame, { input: { id } }));
+      console.log(id);
+    } catch (error) { console.log("Errors on Deleting Game: ", error) }
+    //delete questions connected to the game
+    for (let i = 0; i < total; i++) {
+      let questionId2nd = (i < 10) ? "00" + i : "0" + i;
+      let questionId1st = gameId;
+      let questionId = questionId1st + questionId2nd;
+      console.log("Deleting Question: ", questionId);
+      try {
+        await API.graphql(graphqlOperation(mutations.deleteQuestion, { input: { id: questionId } }));
+      } catch (error) { console.log("Error on deleting Question " + questionId + ": ", error) }
 
+      questionId = "";
+    }
+    //delete reviews connected to the game
+    try {
+      let reviews = this.state.gameReviews.map(item => item.id);
+      if (reviews != null) {
+        reviews.forEach(item =>
+          API.graphql(graphqlOperation(mutations.deleteReview, { input: { id: item } })))
+      }
+    } catch (error) { console.log("Error on deleteing Reviews: ", error) }
   }
 
   //This will load list of games in the database (from __games__ )
@@ -279,7 +301,12 @@ class Game extends Component {
             <button className="btn btn-lg btn-danger" type="button"><a href="/">&nbsp; Exit &nbsp;</a></button>
           </div> */}
           <div className="game-list">
-            <Panel username={this.props.gameUserName} games={this.state.games} func={this.getGameId} resetFunc={this.resetGame} />
+            <Panel
+              username={this.props.gameUserName}
+              games={this.state.games}
+              func={this.getGameId}
+              resetFunc={this.resetGame}
+              deleteFunc={this.deleteGame} />
           </div>
           <br />
         </div>
@@ -347,7 +374,15 @@ class Game extends Component {
               {reviews}
             </div>
           </div>
-
+          <button
+            hidden={!['admin', 'admin123', 'admin2'].includes(this.state.gameUserName) && this.state.gameID <= -1}
+            id={"deleteBttn" + this.state.gameID}
+            className="btn btn-lg btn-primary"
+            type="button"
+            onClick={() => this.deleteGame(this.state.gameID, this.state.gameTotalQuestions)}
+          >
+            DELETE
+            </button>
 
         </div>
       )
@@ -361,7 +396,11 @@ class Game extends Component {
             crossOrigin="anonymous" />
           <br />
           <div className="exit">
-            <button className="btn-lg btn-danger" type="button"><a href="/Game">&nbsp; Exit &nbsp;</a></button>
+            <button
+              className="btn-lg btn-danger"
+              type="button"
+              onClick={this.exitGame}
+            ><a href='/Game'>&nbsp;Exit&nbsp;</a></button>
           </div>
           <div className="gameInterface">
             <Timer

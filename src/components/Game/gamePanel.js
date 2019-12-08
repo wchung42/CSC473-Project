@@ -56,6 +56,7 @@ class gamePanel extends Component {
                         >
                             RESET
                         </button>
+
                     </li>
                 </div>
             );

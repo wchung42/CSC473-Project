@@ -6,12 +6,7 @@ import Question from './Question';
 import { API, graphqlOperation } from 'aws-amplify';
 import * as mutations from '../../graphql/mutations';
 import { getDistanceFromLatLonInKm } from './util.js';
-//props this file needs to run: Id, TotalQuestion, TotalHints, AtQuestion, Questions, AnswerType, Answers, Hints, Long, Lad, TimeLimit
-//Each time answers is right => mutation Update AtQuestion 
-//When the game ends it will reset players pool => mutation updateGame(players: "")
-//Rework Hint component a little bit
-// still need this lat and long
-// import games from './games.json';
+
 
 class Puzzle extends Component {
     constructor(props) {
@@ -36,25 +31,14 @@ class Puzzle extends Component {
             // game ends when last question is completed
             gameState: true,
             win: false,
-            timeStopper: 0 // used to stop timer
-
         }
         this.getAnswer = this.getAnswer.bind(this);
         this.getHint = this.getHint.bind(this);
-        this.getLocation = this.getLocation.bind(this);
     }
     //this function is to get answer from NUMBER TYPE
     async getAnswer(e) {
         let userAnswer = e.target.value.toString();
-        console.log("userAnswer", userAnswer)
-        console.log("current Index", this.state.index)
-        console.log("hints", this.state.hints)
-        console.log("current Questions Index", this.state.atQuestion)
-        console.log('List of Answer', this.state.answers)
-        console.log('Answer Type List: ', this.state.answerType)
-        console.log('List of Question Visual Aid', this.state.questionVisualAid)
         let answer = this.state.answers[this.state.atQuestion];
-        console.log(answer)
         //if the answer is correct
         if (userAnswer.toLowerCase() === answer.toLowerCase()) {
             //moving to the next question
@@ -85,15 +69,12 @@ class Puzzle extends Component {
                 }
                 //update the database when the answer is correct
                 try {
-                    const nextQuestion = await API.graphql(graphqlOperation(mutations.updateGame, { input: lQuestion }));
-                    console.log("Next Question: ", nextQuestion);
-                } catch (errors) { console.log(errors) };
+                    await API.graphql(graphqlOperation(mutations.updateGame, { input: lQuestion }));
+                } catch (errors) { console.log("Errors in Ending Game: ", errors) };
 
             } else {
                 this.props.gameHandler();
                 let timeLeft = this.props.gTimeLeft;
-                console.log("Time Left inside puzzle.js", timeLeft);
-                console.log("Total Hint: ", this.state.totalHints);
                 if (document.getElementById("answerBox")) {
                     document.getElementById("answerBox").value = "";
                     document.getElementById("submitBttn").value = "";
@@ -106,10 +87,10 @@ class Puzzle extends Component {
                     Time_Left: timeLeft,
                     Hint_Count: this.state.totalHints
                 }
-                const nextQuestion = await API.graphql(graphqlOperation(mutations.updateGame, { input: nQuestion }));
-                console.log("Next Question: ", nextQuestion);
-                console.log("this state index: ", this.state.index)
-                console.log("Currently At Question: ", this.state.atQuestion)
+                try {
+                    await API.graphql(graphqlOperation(mutations.updateGame, { input: nQuestion }));
+                } catch (errors) { console.log("Errors in Updating Next Question: ", errors) };
+
             }
             //reset value of submit buttons
 
@@ -168,7 +149,7 @@ class Puzzle extends Component {
         }
         //when the users run out of hint
         else {
-            hintArea.innerText = "Sorry You've Run Out Of Hint! NOW USE YOUR DAMN BRAIN"
+            hintArea.innerText = "Sorry You've Run Out Of Hint! NOW USE YOUR DAMN BRAIN!!!"
         }
         //Timeout to prevent spamming
         if (questionIndex + 1 > this.state.totalQuestions) {
@@ -184,93 +165,42 @@ class Puzzle extends Component {
     // when state changes, check to see if the game has ended
     // stop timer when game is completed
 
-    async getLocation() {
-        let current, dist;
-        let currentState = this;
-        let target = {
-            latitude: this.state.questionGeos[this.state.atQuestion][0],
-            longitude: this.state.questionGeos[this.state.atQuestion][1]
-        }
-
-        console.log("long and lat of the game: ", target)
-        function success(position) {
-            let userCoords = position.coords;
-            console.log(`latitude: ${userCoords.latitude} | longitude: ${userCoords.longitude}`)
-            // calculate distance to target
-            dist = getDistanceFromLatLonInKm(userCoords.latitude, userCoords.longitude, target.latitude, target.longitude);
-            console.log('Distance: ' + dist)
-            // player must be within 10 meters of starting point for game to begin
-            if (dist <= 0.09) {
-                // stop watching player location
-                navigator.geolocation.clearWatch(current)
-                // allow question
-                currentState.setState({
-                    atLocation: true
-                });
-            } else {
-                document.getElementById("distance").innerHTML = "You are " + Math.round(dist * 1000) + " meters away from the destination"
-            }
-        }
-
-        // error callback
-        function error(err) {
-            console.warn('Error(' + err.code + '): ' + err.message);
-        }
-        // start watching
-        current = await navigator.geolocation.watchPosition(success, error, { enableHighAccuracy: true });
-
-    }
-
     async componentDidMount() {
         if (this.state.win) {
             this.props.gameHandler();
         } else {
             let current, target, dist;
             let currentState = this;
-
             function success(position) {
                 let userCoords = position.coords;
-                // console.log(`latitude: ${userCoords.latitude} | longitude: ${userCoords.longitude}`)
-
-                // calculate distance to target
+                // calculate user's distance to target
                 dist = getDistanceFromLatLonInKm(userCoords.latitude, userCoords.longitude, target.latitude, target.longitude);
-                // console.log('Distance: ' + dist)
-
                 // player must be within 20 meters of location for answer to appear
-                if (dist <= 0.09) {
+                if (dist >= 0.09) {
                     console.log('You are here!');
                     // stop watching player location
                     navigator.geolocation.clearWatch(current)
-                    // allow question
+                    // unlock answer component
                     currentState.setState({
                         atLocation: true
                     });
                 }
                 else {
                     document.getElementById("distance").innerHTML = "You are " + Math.round(dist * 1000) + " meters away from the destination"
-                    // currentState.setState({
-                    //     atLocation: false
-                    // });
                 }
             }
-
             // error callback
             function error(err) {
                 console.warn('Error(' + err.code + '): ' + err.message);
             }
-
             // TAKEN FROM THE JSON FILE FOR NOW
             target = {
                 latitude: this.state.questionGeos[this.state.atQuestion][0],
                 longitude: this.state.questionGeos[this.state.atQuestion][1]
             }
-
             // start watching
             current = navigator.geolocation.watchPosition(success, error, { enableHighAccuracy: true });
         }
-
-        // check location upon component update
-
     }
 
     componentWillUnmount() {
@@ -285,9 +215,6 @@ class Puzzle extends Component {
         if (this.state.answerType[this.state.atQuestion] === "Ordering") {
             let AidStuffs0 = this.props.gVisualAid0[this.state.atQuestion]; //initial order
             let AidStuffs1 = this.props.gVisualAid1[this.state.atQuestion]; //array of images
-            // console.log("AidStuffs0: ", AidStuffs0)
-            // console.log("AidStuffs1: ", AidStuffs1)
-            // console.log("AidStuffs2: ", AidStuffs2)
             //define attributes for Drag and Drop
             let row1 = {
                 "id": "row1",
@@ -334,12 +261,8 @@ class Puzzle extends Component {
                     </div>
                 </section>
             </div>
-
         )
-
     }
-
-
 }
 
 export default Puzzle;

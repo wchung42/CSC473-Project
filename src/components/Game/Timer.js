@@ -114,9 +114,9 @@ class Timer extends Component {
                                     />
                                 </ul>
                             </div>
-                            <br/><br/>
+                            <br /><br />
                             <h3 id="Hello"> EVERYONE READY? IF SO PRESS THE BUTTON </h3>
-                            <button style={{fontSize:'3vh'}} className="btn btn-lg btn-primary" onClick={this.gameReady}>
+                            <button style={{ fontSize: '3vh' }} className="btn btn-lg btn-primary" onClick={this.gameReady}>
                                 START
                             </button>
                         </div>
@@ -173,9 +173,9 @@ class Timer extends Component {
             }
         }, 1000)
     }
-    componentWillUnmount() {
+    async componentWillUnmount() {
         this._isMounted = false;
-        clearInterval(this.myInterval)
+        clearInterval(this.myInterval);
     }
 
 }
