@@ -80,7 +80,7 @@ class AdminDashboard extends Component {
     //     //console.log(usernames)
     // }
 
-    handleDisable(event, user) {
+    async handleDisable(event, user){
         event.preventDefault();
         let cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider();
         let params = {
@@ -88,24 +88,27 @@ class AdminDashboard extends Component {
             Username: user.Username,
         }
         
+        
         // check if user is disable
-        if (user.Enabled === true) {
+        if (user.Enabled) {
             cognitoidentityserviceprovider.adminDisableUser(params, function(err, data) {
                 if (err) {
                     console.log(err);
-                } else {
+                } 
+                else {
                     
                     console.log("User disabled")
                 }
                 
             })
-            this.setState({
-                status: true,
-            })
-            this.forceUpdate();
+            this.setState ({
+                status: false,
+            });
+            user.Enabled = false;
+            //this.forceUpdate();
             //document.getElementById()
             //e.target.checked = true
-        } else if (user.Enabled === false) {
+        } else if (!user.Enabled) {
             cognitoidentityserviceprovider.adminEnableUser(params, function(err, data) {
                 if (err) {
                     console.log(err);
@@ -114,17 +117,19 @@ class AdminDashboard extends Component {
                 }
                 
             })
-            this.setState({
+            this.setState ({
                 status: true,
-            })
+            });
+            user.Enabled = true;
             // event.target.checked = false;
-            // this.forceUpdate();
+            //this.forceUpdate();
             //e.target.checked = false
         }
         
     };
 
     render() {
+        const{users} = this.state
         return (
             <div>
                <div>WELCOME ADMIN</div>
@@ -141,7 +146,7 @@ class AdminDashboard extends Component {
                         </TableRow>
                         </TableHead>
                         <TableBody>
-                            {this.state.users.map(row => (
+                            {users.map(row => (
                                 <TableRow key={row.Username}>
                                     <TableCell component="th" scope="row">
                                         {row.Username}
@@ -150,7 +155,7 @@ class AdminDashboard extends Component {
                                         {row}
                                     </TableCell> */}
                                     <TableCell>
-                                        <Switch checked = {!row.Enabled} onChange = {(event) => this.handleDisable(event, row) } id = {row.Username} />
+                                        <Switch defaultChecked = {!row.Enabled} onClick = {(event) => this.handleDisable(event, row) } id = {row.Username} />
                                     </TableCell>
                             </TableRow>
                         ))}
