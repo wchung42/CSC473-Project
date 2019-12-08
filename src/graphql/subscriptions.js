@@ -59,8 +59,8 @@ export const onCreateGame = `subscription OnCreateGame {
   }
 }
 `;
-export const onUpdateGame = `subscription OnUpdateGame {
-  onUpdateGame {
+export const onUpdateGame = `subscription OnUpdateGame($id:ID!) {
+  onUpdateGame(id: $id) {
     id
     Title
     Thumbnail
