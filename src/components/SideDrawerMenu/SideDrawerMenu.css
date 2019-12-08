@@ -29,11 +29,14 @@
 }   
 
 .side-drawer a {
-    text-decoration: none;
+    text-decoration: none !important;
     font-size: 3vh;
     color: white;
 }
 
+.side-drawer a:active {
+    color: rgb(255, 187, 0);
+}
 .side-drawer-divider {
     padding: 0;
     /* margin-top: 2em; */
