@@ -11,7 +11,7 @@ import Switch from '@material-ui/core/Switch';
 
 
 class AdminDashboard extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = ({
             users: [],
@@ -47,10 +47,10 @@ class AdminDashboard extends Component {
                 const rawUsers = await cognito.listUsers(params).promise();
                 allUsers = allUsers.concat(rawUsers.Users);
                 console.log(allUsers);
-                console.log(allUsers[3].Attributes.filter(attr => {return attr.Name === "email"})[0].Value)
+                console.log(allUsers[3].Attributes.filter(attr => { return attr.Name === "email" })[0].Value)
                 if (rawUsers.PaginationToken) {
                     paginationToken = rawUsers.PaginationToken;
-                  } else {
+                } else {
                     more = false;
                 }
             }
@@ -80,28 +80,28 @@ class AdminDashboard extends Component {
     //     //console.log(usernames)
     // }
 
-    async handleDisable(event, user){
+    async handleDisable(event, user) {
         event.preventDefault();
         let cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider();
         let params = {
             UserPoolId: process.env.REACT_APP_USER_POOL_ID,
             Username: user.Username,
         }
-        
-        
+
+
         // check if user is disable
         if (user.Enabled) {
-            cognitoidentityserviceprovider.adminDisableUser(params, function(err, data) {
+            cognitoidentityserviceprovider.adminDisableUser(params, function (err, data) {
                 if (err) {
                     console.log(err);
-                } 
+                }
                 else {
-                    
+
                     console.log("User disabled")
                 }
-                
+
             })
-            this.setState ({
+            this.setState({
                 status: false,
             });
             user.Enabled = false;
@@ -109,15 +109,15 @@ class AdminDashboard extends Component {
             //document.getElementById()
             //e.target.checked = true
         } else if (!user.Enabled) {
-            cognitoidentityserviceprovider.adminEnableUser(params, function(err, data) {
+            cognitoidentityserviceprovider.adminEnableUser(params, function (err, data) {
                 if (err) {
                     console.log(err);
                 } else {
                     console.log("User enabled");
                 }
-                
+
             })
-            this.setState ({
+            this.setState({
                 status: true,
             });
             user.Enabled = true;
@@ -125,25 +125,25 @@ class AdminDashboard extends Component {
             //this.forceUpdate();
             //e.target.checked = false
         }
-        
+
     };
 
     render() {
-        const{users} = this.state
+        const { users } = this.state
         return (
             <div>
-               <div>WELCOME ADMIN</div>
+                <div>WELCOME ADMIN</div>
                 {/* <button onClick = { this.getUsers }>Click me</button> */}
 
                 {/* display table */}
                 <Paper>
                     <Table aria-label="simple table">
                         <TableHead>
-                        <TableRow>
-                            <TableCell>Users</TableCell>
-                            {/* <TableCell>Email</TableCell> */}
-                            <TableCell>Enabled/Disabled</TableCell>
-                        </TableRow>
+                            <TableRow>
+                                <TableCell>Users</TableCell>
+                                {/* <TableCell>Email</TableCell> */}
+                                <TableCell>Enabled/Disabled</TableCell>
+                            </TableRow>
                         </TableHead>
                         <TableBody>
                             {users.map(row => (
@@ -151,22 +151,22 @@ class AdminDashboard extends Component {
                                     <TableCell component="th" scope="row">
                                         {row.Username}
                                     </TableCell>
-                                    {/* <TableCell>
-                                        {row}
-                                    </TableCell> */}
                                     <TableCell>
-                                        <Switch defaultChecked = {!row.Enabled} onClick = {(event) => this.handleDisable(event, row) } id = {row.Username} />
+                                        <Switch
+                                            checked={!row.Enabled}
+                                            onClick={(event) => this.handleDisable(event, row)}
+                                            id={row.Username} />
                                     </TableCell>
-                            </TableRow>
-                        ))}
+                                </TableRow>
+                            ))}
                         </TableBody>
                     </Table>
                 </Paper>
             </div>
-            
+
         )
 
-         
+
     }
 
 }
