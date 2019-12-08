@@ -7,6 +7,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Switch from '@material-ui/core/Switch';
 
 
 class AdminDashboard extends Component {
@@ -18,7 +19,7 @@ class AdminDashboard extends Component {
             usernames: []
         })
         this.getUsers = this.getUsers.bind(this);
-        this.getData = this.getData.bind(this);
+        this.handleDisable = this.handleDisable.bind(this);
     }
 
     async getUsers() {
@@ -43,9 +44,9 @@ class AdminDashboard extends Component {
                 });
                 const cognito = new AWS.CognitoIdentityServiceProvider();
                 const rawUsers = await cognito.listUsers(params).promise();
-                console.log(rawUsers);
                 allUsers = allUsers.concat(rawUsers.Users);
                 console.log(allUsers);
+                console.log(allUsers[3].Attributes.filter(attr => {return attr.Name === "email"})[0].Value)
                 if (rawUsers.PaginationToken) {
                     paginationToken = rawUsers.PaginationToken;
                   } else {
@@ -53,33 +54,72 @@ class AdminDashboard extends Component {
                 }
             }
 
-            return allUsers;
+            this.setState({
+                users: allUsers,
+            })
+
         } catch (e) {
             console.log(e);
         }
     }
 
-    async getData() {
-        const userData = await this.getUsers();
-        console.log(userData);
-        let usernames = [];
-        for (let i = 0; i < userData.length; i++) {
-            usernames.push({username:userData[i].Username});
-        }
-        this.setState({
-            usernames: usernames
-        })
-        //console.log(usernames)
+    async componentDidMount() {
+        await this.getUsers();
     }
+    // async getData() {
+    //     const userData = await this.getUsers();
+    //     console.log(userData);
+    //     let usernames = [];
+    //     for (let i = 0; i < userData.length; i++) {
+    //         usernames.push({username:userData[i].Username});
+    //     }
+    //     this.setState({
+    //         usernames: usernames
+    //     })
+    //     //console.log(usernames)
+    // }
 
+    handleDisable(event, user) {
+        event.preventDefault();
+        let cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider();
+        let params = {
+            UserPoolId: process.env.REACT_APP_USER_POOL_ID,
+            Username: user.Username,
+        }
+        
+        // check if user is disable
+        if (user.Enabled === true) {
+            cognitoidentityserviceprovider.adminDisableUser(params, function(err, data) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    
+                    console.log("User disabled")
+                }
+            })
+            event.target.checked = true;
+            this.forceUpdate();
+            //e.target.checked = true
+        } else if (user.Enabled === false) {
+            cognitoidentityserviceprovider.adminEnableUser(params, function(err, data) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log("User enabled");
+                }
+            })
+            event.target.checked = false;
+            this.forceUpdate();
+            //e.target.checked = false
+        }
+        
+    };
 
     render() {
-        //const rows = this.getData();
-        //console.log('rows' + rows)
         return (
             <div>
                <div>WELCOME ADMIN</div>
-                <button onClick = { this.getData }>Click me</button>
+                <button onClick = { this.getUsers }>Click me</button>
 
                 {/* display table */}
                 <Paper>
@@ -87,15 +127,22 @@ class AdminDashboard extends Component {
                         <TableHead>
                         <TableRow>
                             <TableCell>Users</TableCell>
+                            {/* <TableCell>Email</TableCell> */}
+                            <TableCell>Enabled/Disabled</TableCell>
                         </TableRow>
                         </TableHead>
                         <TableBody>
-                            {this.state.usernames.map(row => (
-                                <TableRow key={row.username}>
+                            {this.state.users.map(row => (
+                                <TableRow key={row.Username}>
                                     <TableCell component="th" scope="row">
-                                        {row.username}
+                                        {row.Username}
                                     </TableCell>
-                            
+                                    {/* <TableCell>
+                                        {row}
+                                    </TableCell> */}
+                                    <TableCell>
+                                        <Switch checked = {!row.Enabled} onChange = {(event) => this.handleDisable(event, row) } value = {row.Username} />
+                                    </TableCell>
                             </TableRow>
                         ))}
                         </TableBody>
