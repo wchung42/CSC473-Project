@@ -108,7 +108,7 @@ class EditGame extends Component {
                 gameStory: gameData.Story,
                 gameDifficulty: gameData.Difficulty,
                 gameCapacity: gameData.Capacity,
-                gameTimeLimit: gameData.Time_Limit,
+                gameTimeLimit: Number(gameData.Time_Limit) / 60,
                 gameTotalQuestions: gameData.Total_Questions,
                 latitude: gameData.Geo_Location[0],
                 longtitude: gameData.Geo_Location[1],
@@ -127,7 +127,7 @@ class EditGame extends Component {
             })
 
         } catch (error) { console.log("Error on Retrieving Data of GAMEID ", this.state.gameId, " ", error) }
-
+        console.log(this.state.gameTimeLimit)
     }
 
     render() {
@@ -199,7 +199,7 @@ class EditGame extends Component {
                                 <input id='game-story' type='text' className='form-control' required defaultValue={this.state.gameStory}></input>
                                 {/* GAME TIME_LIMIT */}
                                 <label for='game-time-limit'>Time Limit (minutes)</label>
-                                <input id='game-time-limit' type='number' className='form-control' max='60' required defaultValue={this.state.gameTimeLimit / 60}></input>
+                                <input id='game-time-limit' type='number' className='form-control' max='60' required defaultValue={this.state.gameTimeLimit}></input>
                                 {/* GAME TIME_LEFT = GAME TIME_LIMIT*/}
 
                                 {/* GAME PLAYERS = [] */}
