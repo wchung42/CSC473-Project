@@ -366,6 +366,10 @@ class Game extends Component {
             </div>
             <div className='section-title'>
               <h3><strong>Starting Location</strong></h3>
+              
+            </div>
+            <div className = 'starting-location'>
+              <h5>{this.state.games[this.state.gameID].Location}</h5>
             </div>
             <div className='section-divider'>
               <hr />

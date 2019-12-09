@@ -207,6 +207,14 @@
   font-size: 35px;
 }
 
+.starting-location h5 {
+  font-size: 30px;
+}
+
+.instructions p {
+  font-size: 30px;
+}
+
 .instruction-questions p {
   font-size: 30px;
   text-align: center;
