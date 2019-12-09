@@ -15,6 +15,7 @@ describe("Game component testing", () => {
         ReactDOM.render(<Game />, div);
         ReactDOM.unmountComponentAtNode(div);
     });
+})
 
     // test getGameID
     describe("component renders with only one game div", () => {
@@ -32,54 +33,6 @@ describe("Game component testing", () => {
         let wrapper;
         beforeEach(() => { wrapper = mount(<Game />); });
         
-<<<<<<< HEAD
-//         // renders game list
-//         it('user starts at game list page', () => {
-//             expect(wrapper.find('div.game-list').length).toBe(1);
-//         });
-//     })
-
-//         // renders synopsis
-//         describe('Game synopsis correctly',()=>{
-//             it('renders div with className synopsis', () => {
-//                 let wrapper = mount(<Game />);
-//                 wrapper.setState( {
-//                     gameReady: true,
-//                     gameSynopsis: 1,
-//                     gameStart: 0,
-//                 });
-//                 wrapper.update();
-//                 const button = wrapper.find('div.back-button');
-//                 expect(button.length).toBe(1);
-                
-//                 expect(wrapper.find('div.synopsis').length).toBe(1);
-//             })
-    
-            
-//         })
-
-
-        
-       
-        // it('renders div with className gameInterface', () => {
-        //     // wrapper.setState ( {
-        //     //     gameReady: true,
-        //     //     gameSynopsis: 0,
-        //     //     gameStart: 1,
-        //     // });
-        //     // wrapper.update();
-        //     let button = wrapper.find('#bttn0');
-        //     expect(button.length).toBe(1);
-        //     button.simulate('click');
-        //     button = wrapper.find('#start-btn');
-        //     button.simulate('click');
-        //     expect(wrapper.find('div.gameInterface').length).toBe(1);
-        //     expect(wrapper.find(Timer).length).toBe(1);
-        // })
-    
-
-
-=======
         // renders game list
         it('user starts at game list page', () => {
             expect(wrapper.find('div.game-list').length).toBe(1);
@@ -116,7 +69,6 @@ describe("Game component testing", () => {
         // })
     })
 
->>>>>>> 65504bc55ae433cdbd85e7ed398967686a9946be
     // describe('puppeteer testing', () => {
     //     test('testing login page',async()=>{
     //         const browser = await puppeteer.launch({
@@ -135,61 +87,6 @@ describe("Game component testing", () => {
 
         
 
-<<<<<<< HEAD
-        // test('testing login user name ',async() => {
-
-        //     const browser = await puppeteer.launch({
-              
-        //        });
-        //     const page = await browser.newPage();
-        //     await page.goto('https://master.dlhem6nvy7qu4.amplifyapp.com');
-            
-        //     await page.click('button.login');
-        //     await page.click('input.Input__input___3e_bf');
-        //     await page.type('input.Input__input___3e_bf','admin12345');
-        //     await page.click('[type=password]');
-        //     await page.type('[type=password]','admin12345')
-        //     await page.click('button.Button__button___vS7Mv');
-        //     await page.click('button.toggle-button');
-            
-            
-        //     let name=await page.$eval('li',(e)=>e.textContent) 
-        //     expect(name).toBe('Home');
-
-                
-            
-        //     await browser.close(); 
-        // },20000);
-
-        // test('testing location ',async() => {
-
-        //     const browser = await puppeteer.launch({
-        //         headless: false,
-        //         slowMo:50,
-        //         args:['--window-size=1920,1080']
-        //        });
-        //     const page = await browser.newPage();
-        //     await page.goto('https://master.d4apr1nsr4agq.amplifyapp.com/');
-            
-        //     await page.click('button.login');
-        //     await page.click('input.Input__input___3e_bf');
-        //     await page.type('input.Input__input___3e_bf','admin2');
-        //     await page.click('[type=password]');
-        //     await page.type('[type=password]','admin123')
-        //     await page.click('button.Button__button___vS7Mv');
-        //     await page.click('button.toggle-button');
-        //     await page.click('div.toggle-button-line');
-        //     await page.waitForSelector('[href="/Game"]');
-        //     await page.click('[href="/Game"]');
-        //     await page.waitForSelector('button.Location');
-        //     await page.click('button.Location');
-        //     const location=await page.$eval('button.Location',(button)=>button.className)   
-        //     expect(location).toBe('Location');   
-                
-            
-        //     await browser.close(); 
-        // },30000);
-=======
     //     test('testing login user name ',async() => {
 
     //         const browser = await puppeteer.launch({
@@ -243,7 +140,6 @@ describe("Game component testing", () => {
             
     //         await browser.close(); 
     //     },30000);
->>>>>>> 65504bc55ae433cdbd85e7ed398967686a9946be
     
     
         // test('testing exist button',async() => {
@@ -338,48 +234,56 @@ describe("Game component testing", () => {
 
         //        await browser.close();
         // },30000);
-        test('testing math game',async() => {
+        // test('testing math game',async() => {
     
-            const browser = await puppeteer.launch({
-                headless: false,
-                slowMo:80,
-                args:['--window-size=1920,1080']
-            });
-            const page = await browser.newPage();
-            await page.goto('https://master.d4apr1nsr4agq.amplifyapp.com');
-            await page.click('button.login');
-            await page.click('input.Input__input___3e_bf');
-            await page.type('input.Input__input___3e_bf','admin2');
-            await page.click('[type=password]');
-            await page.type('[type=password]','admin123')
-            await page.click('button.Button__button___vS7Mv');
-            await page.click('button.toggle-button');
-            await page.click('div.toggle-button-line');
-            await page.waitForSelector('[href="/Game"]'); 
-            await page.click('[href="/Game"]');
-            await page.waitForSelector('button#bttn1');
-            await page.click('button#bttn1');
-            await page.waitForSelector('div.synopsis'); 
-            const text=await page.$eval('div.synopsis',(e)=>e.textContent); 
-            expect(text).toBe('Math is hard regardless of your level of education!')
+        //     const browser = await puppeteer.launch({
+        //         headless: false,
+        //         slowMo:80,
+        //         args:['--window-size=1920,1080']
+        //     });
+        //     const page = await browser.newPage();
+        //     await page.goto('https://master.d4apr1nsr4agq.amplifyapp.com');
+        //     await page.click('button.login');
+        //     await page.click('input.Input__input___3e_bf');
+        //     await page.type('input.Input__input___3e_bf','admin2');
+        //     await page.click('[type=password]');
+        //     await page.type('[type=password]','admin123')
+        //     await page.click('button.Button__button___vS7Mv');
+        //     await page.click('button.toggle-button');
+        //     await page.click('div.toggle-button-line');
+        //     await page.waitForSelector('[href="/Game"]'); 
+        //     await page.click('[href="/Game"]');
+        //     await page.waitForSelector('button#bttn1');
+        //     await page.click('button#bttn1');
+        //     await page.waitForSelector('button#hintBttn');
+        //     await page.click('button#hintBttn');
+        //     await page.waitForSelector('button.btn-primary');
+        //     await page.click('button.btn-primary');
+        //     await page.waitForSelector('button#num7');
+        //     await page.click('button#num7');
+        //     await page.click('button#pound');
+           
+        //     await page.waitForSelector('div.synopsis'); 
+        //     const text=await page.$eval('div.synopsis',(e)=>e.textContent); 
+        //     expect(text).toBe('Math is hard regardless of your level of education!')
             
-            const context = browser.defaultBrowserContext();
-            await context.overridePermissions('https://master.d4apr1nsr4agq.amplifyapp.com', ['geolocation']);
-            await page.waitForSelector('button#start-btn');
-            await page.click('button#start-btn');
-            await page.click('button#start-btn');
+        //     const context = browser.defaultBrowserContext();
+        //     await context.overridePermissions('https://master.d4apr1nsr4agq.amplifyapp.com', ['geolocation']);
+        //     await page.waitForSelector('button#start-btn');
+        //     await page.click('button#start-btn');
+        //     await page.click('button#start-btn');
             
-            page.on('dialog', async dialog => {
-                console.log(dialog.message());
-                await dialog.accept();
-                //await browser.close();
-              });
+        //     page.on('dialog', async dialog => {
+        //         console.log(dialog.message());
+        //         await dialog.accept();
+        //         //await browser.close();
+        //       });
               
-            await page.waitForSelector('button#num2');
-            await page.click('button#num2');
-            await page.click('button#pound');
+        //     await page.waitForSelector('button#num2');
+        //     await page.click('button#num2');
+        //     await page.click('button#pound');
 
-        },50000);
+        // },50000);
 
            // expect( await page.$eval('.start',(e)=>e.className)).toBe('start')
             // await page.waitForSelector('.start');
@@ -489,4 +393,3 @@ describe("Game component testing", () => {
     //         expect(tree).toMatchSnapshot();
     //     });
         
-    // })

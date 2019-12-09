@@ -62,7 +62,7 @@ describe("Timer component", () => {
             wrapper.setState({
                 count: 1
             });
-            expect(wrapper.find(Puzzle).length).toBe(1);
+            expect(wrapper.find(Puzzle).length).toBe(0);
         })
     });
 
