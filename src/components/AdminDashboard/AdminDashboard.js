@@ -172,8 +172,6 @@ class AdminDashboard extends Component {
                 })
             }
         })
-
-        
         // move selected user to 'Administrators' group
         
         
@@ -202,41 +200,39 @@ class AdminDashboard extends Component {
         //     }
         // })
         // }
-        
     }
 
     render() {
         const { users } = this.state
         return (
-            <div>
-                <div>WELCOME ADMIN</div>
-                {/* <button onClick = { this.getUsers }>Click me</button> */}
-
-                {/* display table */}
+            <div className = 'about-container'>
+                <div className = 'heading'><h1>Admin DB</h1></div>
                 <Paper>
-                    <Table aria-label="simple table">
+                    <Table stickyHeader aria-label="sticky table" style={{background:'gray'}}>
                         <TableHead>
-                            <TableRow>
-                                <TableCell>Users</TableCell>
+                            <TableRow >
+                                <TableCell style={{fontSize:'3vh', color:'white', background:'black'}} >Users</TableCell>
                                 {/* <TableCell>Email</TableCell> */}
-                                <TableCell>Disabled</TableCell>
-                                <TableCell>Admin</TableCell>
+                                <TableCell style={{fontSize:'3vh', color:'white', background:'black'}}>Disabled</TableCell>
+                                <TableCell style={{fontSize:'3vh', color:'white', background:'black'}}>Admin</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {users.map(row => (
-                                <TableRow key={row.Username}>
-                                    <TableCell component="th" scope="row">
+                                <TableRow  key={row.Username}>
+                                    <TableCell style={{fontSize:'2.5vh'}} component="th" scope="row">
                                         {row.Username}
                                     </TableCell>
                                     <TableCell>
                                         <Switch
+                                            color = "primary"
                                             checked={!row.Enabled}
                                             onClick={(event) => this.handleDisable(event, row)}
                                             id={row.Username} />
                                     </TableCell>
                                     <TableCell>
                                         <Switch
+                                            color = "primary"
                                             checked={!row.Enabled}
                                             onClick={(event) => this.promoteUserToAdmin(event, row)}
                                             id={row.Username} />
