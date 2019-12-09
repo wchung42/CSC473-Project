@@ -11,7 +11,7 @@ class EditGame extends Component {
             gameId: this.props.gameId,
             editAtQuestion: 0,
             gameTitle: "",
-            gameThumbnail: "#",
+            gameThumbnail: "",
             gameLocation: "",
             gameDifficulty: "",
             gameStory: "",
@@ -37,7 +37,7 @@ class EditGame extends Component {
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.upByOne = this.upByOne.bind(this);
-        this.updateValue = this.updateValue.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     async handleSubmit(e) {
@@ -92,8 +92,8 @@ class EditGame extends Component {
 
     }
 
-    updateValue(e) {
-        document.getElementById(e.id).value = e.value;
+    handleChange(event) {
+        this.setState({ value: event.target.value });
     }
 
     async componentDidMount() {
@@ -174,25 +174,10 @@ class EditGame extends Component {
                                 <input id='game-latitude' type='text' className='form-control' required defaultValue={this.state.latitude}></input>
                                 {/* GAME DIFFICULTY*/}
                                 <label for='game-difficulty'>Difficulty (1-5)</label>
-                                <select id='game-difficulty' className='form-control' required defaultValue={this.state.gameDifficulty}>
-                                    <option>1</option>(Easy)
-                                <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>(Hard)
-                                </select>
+                                <input id='game-difficulty' type='number' className='form-control' max='5' required defaultValue={this.state.gameDifficulty}></input>
                                 {/* GAME CAPACITY */}
                                 <label for='game-capacity'>Capacity (8 max)</label>
-                                <select id='game-capacity' className='form-control' required defaultValue={this.state.gameCapacity}>
-                                    <option selected>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                    <option>6</option>
-                                    <option>7</option>
-                                    <option>8</option>
-                                </select>
+                                <input id='game-capacity' type='number' className='form-control' max='8' required defaultValue={this.state.gameCapacity}></input>
                                 {/* <input id='game-capacity' type='number' className='form-control' max='8' requir></input> */}
                                 {/* GAME STORY */}
                                 <label for='game-story' >Game Story</label>

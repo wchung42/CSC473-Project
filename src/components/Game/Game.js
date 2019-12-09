@@ -336,8 +336,8 @@ class Game extends Component {
                 func={this.getGameId}
                 resetFunc={this.resetGame}
                 deleteFunc={this.deleteGame}
-                editFunc={this.editGame} 
-                isAdmin = {this.state.isAdmin}/>
+                editFunc={this.editGame}
+                isAdmin={this.state.isAdmin} />
             </div>
             <br />
           </div>
@@ -378,10 +378,10 @@ class Game extends Component {
             </div>
             <div className='section-title'>
               <h3><strong>Starting Location</strong></h3>
-              
+
             </div>
-            <div className = 'starting-location'>
-              <h5>{this.state.games[this.state.gameID].Location}</h5>
+            <div className='starting-location'>
+              <h5>{this.state.gameLocation}</h5>
             </div>
             <div className='section-divider'>
               <hr />
@@ -413,7 +413,7 @@ class Game extends Component {
           </div>
           <button
             hidden={!this.state.isAdmin}
-            disabled = {!this.state.isAdmin}
+            disabled={!this.state.isAdmin}
             id={"deleteBttn" + this.state.gameID}
             className="btn btn-lg btn-primary"
             type="button"
