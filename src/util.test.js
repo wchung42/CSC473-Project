@@ -39,25 +39,59 @@ test('navbar Testing', () => {
 
   
 });
+describe('<footer /> component testing', () => {
+    test('footer Testing', () => {
 
-test('footer Testing', () => {
+      const footer= shallow(<Footer />);
+
+      expect(footer.text()).toEqual('Home·Games·About·Faq·ContactEscape Team © 2019');
+      expect(footer.find('div.footer-info').length).toBe(1)
+
+});
+test('render out footer', () => {
 
   const footer= shallow(<Footer />);
 
-  expect(footer.text()).toEqual('Home·Games·About·Faq·ContactEscape Team © 2019');
+ 
   expect(footer.find('div.footer-info').length).toBe(1)
 
-  
-});
+})
+test('render out footer-social', () => {
 
-test('Backdrop Testing', () => {
+  const footer= shallow(<Footer />);
 
-  const Backdrop = shallow(<backdrop />);
+ 
+  expect(footer.find('div.footer-social').length).toBe(1)
 
-  expect(Backdrop.find('div.backdrop').length).toBe(0)
+})
+test('render out footer-info', () => {
+
+  const footer= shallow(<Footer />);
+
+ 
+  expect(footer.find('div.footer-info').length).toBe(1)
+
+})
+test('render out footer-info', () => {
+
+  const footer= shallow(<Footer />);
+
+ 
+  expect(footer.find('div.footer-info').length).toBe(1)
+
+})
 
 
-});
+})
+
+// test('Backdrop Testing', () => {
+
+//   const Backdrop = shallow(<backdrop />);
+
+//   expect(Backdrop.find('footer.footer-all').length).toBe(1)
+
+
+// });
 
 
 
