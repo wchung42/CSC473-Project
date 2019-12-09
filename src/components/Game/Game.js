@@ -194,7 +194,7 @@ class Game extends Component {
       Hint_Count: 0,
       Players: [],
     }
-    if (['admin', 'admin123', 'admin2'].includes(this.state.gameUsername)) {
+    if (['admin', 'admin123', 'admin2'].includes(this.state.gameUserName)) {
       try {
         await API.graphql(graphqlOperation(mutations.updateGame, { input: resetGameData }))
       } catch (errors) { console.log("Errors on Reset Game", errors) }
@@ -262,7 +262,7 @@ class Game extends Component {
   async deleteGame(Id, total) {
     let id = Id;
     let gameId = (id < 10) ? "00" + id : "0" + id;
-    if (['admin', 'admin123', 'admin2'].includes(this.state.gameUsername)) {
+    if (['admin', 'admin123', 'admin2'].includes(this.state.gameUserName)) {
       //delete game
       try {
         await API.graphql(graphqlOperation(mutations.deleteGame, { input: { id } }));
@@ -302,6 +302,7 @@ class Game extends Component {
   render = () => {
     // id, thumbnail, title,location, capacity, timelimite, difficulty
     // go to game list page
+    console.log(this.state.gameUserName);
     if (!this.state.gameReady && (this.state.gameSynopsis === 0) && (this.state.gameStart === 0)) {
       if (this.state.editGame) {
         console.log("EDIT GAME ON FOR GAMEID: ", this.state.gameID)
@@ -319,7 +320,7 @@ class Game extends Component {
             <br />
             <div className="game-list">
               <Panel
-                username={this.props.gameUserName}
+                gameUserName={this.state.gameUserName}
                 games={this.state.games}
                 func={this.getGameId}
                 resetFunc={this.resetGame}
@@ -395,7 +396,8 @@ class Game extends Component {
             </div>
           </div>
           <button
-            hidden={!['admin', 'admin123', 'admin2'].includes(this.state.gameUserName) && this.state.gameID <= -1}
+            hidden={!['admin', 'admin123', 'admin2'].includes(this.state.gameUserName)}
+            disabled={!['admin', 'admin123', 'admin2'].includes(this.state.gameUserName)}
             id={"deleteBttn" + this.state.gameID}
             className="btn btn-lg btn-primary"
             type="button"

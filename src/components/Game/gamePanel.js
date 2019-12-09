@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 
 
 class gamePanel extends Component {
-
+    constructor(props) {
+        super(props)
+    }
     render() {
         const gameCardListStyle = {
             'list-style-type': 'none'
         }
+        console.log("User Name: ", this.props.gameUserName)
         let listItems = this.props.games
             .map(item =>
                 <div id={"game" + item.id} className="card">
@@ -48,7 +51,8 @@ class gamePanel extends Component {
                         </button>
                         }
                         <button
-                            hidden={['admin', 'admin123', 'admin2'].includes(this.props.username)}
+                            hidden={!['admin', 'admin123', 'admin2'].includes(this.props.gameUserName)}
+                            disabled={!['admin', 'admin123', 'admin2'].includes(this.props.gameUserName)}
                             id={"resetBttn" + item.id}
                             className="btn btn-lg btn-primary"
                             type="button"
@@ -57,7 +61,8 @@ class gamePanel extends Component {
                             RESET
                         </button>
                         <button
-                            // hidden={['admin', 'admin123', 'admin2'].includes(this.props.username)}
+                            hidden={!['admin', 'admin123', 'admin2'].includes(this.props.gameUserName)}
+                            disabled={!['admin', 'admin123', 'admin2'].includes(this.props.gameUserName)}
                             id={"EditBttn" + item.id}
                             className="btn btn-lg btn-primary"
                             type="button"
