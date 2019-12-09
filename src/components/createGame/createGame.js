@@ -58,15 +58,8 @@ class CreateGame extends Component {
             Time_Limit = (Number(e.target["game-time-limit"].value) * 60).toString(),
             Time_Left = (Number(e.target["game-time-limit"].value) * 60).toString(),// similar to Time_Limit
             Geo_Location = [e.target["game-longtitude"].value, e.target["game-latitude"].value],
-            Players = [],
-            Finished = false,
-            In_Progress = false,
             Total_Questions = e.target["game-total-questions"].value,
-            Total_Hints = e.target["game-total-hints"].value,
-            Hint_Count = 0,
-            At_Question = 0,
-            ReviewCount = 0,
-            Average_Rating = 0;
+            Total_Hints = e.target["game-total-hints"].value;
         const newGame = {
             id: id,
             Title: Title,
@@ -116,9 +109,6 @@ class CreateGame extends Component {
     }
 
     render() {
-        let a = <p>Hello World 1</p>;
-        const items = [];
-        let i = 0;
         if (this.state.gameCreated && !this.state.questionsCreated) {
             return (<GameQuestion
                 key={this.state.atQuestion}
@@ -162,7 +152,7 @@ class CreateGame extends Component {
                                 </select>
                                 {/* GAME CAPACITY */}
                                 <label for='game-capacity'>Capacity (8 max)</label>
-                                <select id = 'game-capacity' className = 'form-control' required >
+                                <select id='game-capacity' className='form-control' required >
                                     <option selected>1</option>
                                     <option>2</option>
                                     <option>3</option>
@@ -180,7 +170,7 @@ class CreateGame extends Component {
                                 <label for='game-time-limit'>Time Limit (minutes)</label>
                                 <input id='game-time-limit' type='number' className='form-control' max='60' required ></input>
                                 {/* GAME TIME_LEFT = GAME TIME_LIMIT*/}
-                                
+
                                 {/* GAME PLAYERS = [] */}
                                 {/* GAME FINISHED = false */}
                                 {/* GAME IN_PROGRESS = false */}
@@ -198,11 +188,11 @@ class CreateGame extends Component {
                                 {/* GAME AVERAGE RATING = 0 */}
                                 {/* GAME RECORD = [] */}
                                 <br></br>
-                                <button type='submit' className='btn-lg btn-success' id = "gameSubmitButton">Create</button>
+                                <button type='submit' className='btn-lg btn-success' id="gameSubmitButton">Create</button>
                             </div>
                         </form>
                     </div>
-                    <br/>
+                    <br />
                 </div>
             )
         }

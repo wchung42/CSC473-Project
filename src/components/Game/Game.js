@@ -9,7 +9,7 @@ import { API, Auth, graphqlOperation } from 'aws-amplify';
 import * as mutations from '../../graphql/mutations';
 import * as queries from '../../graphql/queries';
 import { getDistanceFromLatLonInKm } from './util.js'; // import geolocation helper functions
-// import { List } from 'material-ui';
+import EditGame from '../createGame/editGame';
 
 //each time the user press Play => mutationUpdate players
 const ListGames = `query ListGames{
@@ -74,13 +74,15 @@ class Game extends Component {
       gameVisualAid2: [],
       gameVisualAid3: [],
       gameSynopsis: 0, // 0: don't display game synopsis ; 1: display synopsis
-      gameStart: 0 // 0: start button clicked, start game ; 1: stay on synopsis page
+      gameStart: 0, // 0: start button clicked, start game ; 1: stay on synopsis page
+      editGame: false,
     };
     this.getGameId = this.getGameId.bind(this);
     this.startGame = this.startGame.bind(this);
     this.resetGame = this.resetGame.bind(this);
     this.exitGame = this.exitGame.bind(this);
     this.deleteGame = this.deleteGame.bind(this);
+    this.editGame = this.editGame.bind(this);
     // this.gameUpdateSubscriptions = null;
   }
 
@@ -192,9 +194,11 @@ class Game extends Component {
       Hint_Count: 0,
       Players: [],
     }
-    try {
-      await API.graphql(graphqlOperation(mutations.updateGame, { input: resetGameData }))
-    } catch (errors) { console.log("Errors on Reset Game", errors) }
+    if (['admin', 'admin123', 'admin2'].includes(this.state.gameUsername)) {
+      try {
+        await API.graphql(graphqlOperation(mutations.updateGame, { input: resetGameData }))
+      } catch (errors) { console.log("Errors on Reset Game", errors) }
+    }
   }
 
   async exitGame() {
@@ -258,31 +262,40 @@ class Game extends Component {
   async deleteGame(Id, total) {
     let id = Id;
     let gameId = (id < 10) ? "00" + id : "0" + id;
-    //delete game
-    try {
-      await API.graphql(graphqlOperation(mutations.deleteGame, { input: { id } }));
-      console.log(id);
-    } catch (error) { console.log("Errors on Deleting Game: ", error) }
-    //delete questions connected to the game
-    for (let i = 0; i < total; i++) {
-      let questionId2nd = (i < 10) ? "00" + i : "0" + i;
-      let questionId1st = gameId;
-      let questionId = questionId1st + questionId2nd;
-      console.log("Deleting Question: ", questionId);
+    if (['admin', 'admin123', 'admin2'].includes(this.state.gameUsername)) {
+      //delete game
       try {
-        await API.graphql(graphqlOperation(mutations.deleteQuestion, { input: { id: questionId } }));
-      } catch (error) { console.log("Error on deleting Question " + questionId + ": ", error) }
+        await API.graphql(graphqlOperation(mutations.deleteGame, { input: { id } }));
+        console.log(id);
+      } catch (error) { console.log("Errors on Deleting Game: ", error) }
+      //delete questions connected to the game
+      for (let i = 0; i < total; i++) {
+        let questionId2nd = (i < 10) ? "00" + i : "0" + i;
+        let questionId1st = gameId;
+        let questionId = questionId1st + questionId2nd;
+        console.log("Deleting Question: ", questionId);
+        try {
+          await API.graphql(graphqlOperation(mutations.deleteQuestion, { input: { id: questionId } }));
+        } catch (error) { console.log("Error on deleting Question " + questionId + ": ", error) }
 
-      questionId = "";
-    }
-    //delete reviews connected to the game
-    try {
-      let reviews = this.state.gameReviews.map(item => item.id);
-      if (reviews != null) {
-        reviews.forEach(item =>
-          API.graphql(graphqlOperation(mutations.deleteReview, { input: { id: item } })))
+        questionId = "";
       }
-    } catch (error) { console.log("Error on deleteing Reviews: ", error) }
+      //delete reviews connected to the game
+      try {
+        let reviews = this.state.gameReviews.map(item => item.id);
+        if (reviews != null) {
+          reviews.forEach(item =>
+            API.graphql(graphqlOperation(mutations.deleteReview, { input: { id: item } })))
+        }
+      } catch (error) { console.log("Error on deleteing Reviews: ", error) }
+    }
+  }
+
+  async editGame(ev) {
+    await this.setState({
+      editGame: true,
+      gameID: ev
+    })
   }
 
   //This will load list of games in the database (from __games__ )
@@ -290,28 +303,34 @@ class Game extends Component {
     // id, thumbnail, title,location, capacity, timelimite, difficulty
     // go to game list page
     if (!this.state.gameReady && (this.state.gameSynopsis === 0) && (this.state.gameStart === 0)) {
-      return (
+      if (this.state.editGame) {
+        console.log("EDIT GAME ON FOR GAMEID: ", this.state.gameID)
+        return (
+          <EditGame gameId={this.state.gameID} />
+        )
+      } else {
+        return (
 
-        <div className="Game">
+          <div className="Game">
 
-          <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
-            integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
-            crossOrigin="anonymous" />
-          <br />
-          {/* <div className="exit">
-            <button className="btn btn-lg btn-danger" type="button"><a href="/">&nbsp; Exit &nbsp;</a></button>
-          </div> */}
-          <div className="game-list">
-            <Panel
-              username={this.props.gameUserName}
-              games={this.state.games}
-              func={this.getGameId}
-              resetFunc={this.resetGame}
-              deleteFunc={this.deleteGame} />
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+              integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+              crossOrigin="anonymous" />
+            <br />
+            <div className="game-list">
+              <Panel
+                username={this.props.gameUserName}
+                games={this.state.games}
+                func={this.getGameId}
+                resetFunc={this.resetGame}
+                deleteFunc={this.deleteGame}
+                editFunc={this.editGame} />
+            </div>
+            <br />
           </div>
-          <br />
-        </div>
-      )
+        )
+      }
+
     }
     // Display game Story
     else if (this.state.gameReady && (this.state.gameSynopsis === 1) && (this.state.gameStart === 0)) {
