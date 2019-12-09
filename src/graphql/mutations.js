@@ -34,8 +34,15 @@ export const createGame = `mutation CreateGame($input: CreateGameInput!) {
       }
       nextToken
     }
-    Rating
-    Review
+    Review {
+      items {
+        id
+        rating
+        review
+        username
+      }
+      nextToken
+    }
     Aid_Stuffs
   }
 }
@@ -73,8 +80,15 @@ export const updateGame = `mutation UpdateGame($input: UpdateGameInput!) {
       }
       nextToken
     }
-    Rating
-    Review
+    Review {
+      items {
+        id
+        rating
+        review
+        username
+      }
+      nextToken
+    }
     Aid_Stuffs
   }
 }
@@ -112,8 +126,15 @@ export const deleteGame = `mutation DeleteGame($input: DeleteGameInput!) {
       }
       nextToken
     }
-    Rating
-    Review
+    Review {
+      items {
+        id
+        rating
+        review
+        username
+      }
+      nextToken
+    }
     Aid_Stuffs
   }
 }
@@ -139,8 +160,9 @@ export const createQuestion = `mutation CreateQuestion($input: CreateQuestionInp
       Questions {
         nextToken
       }
-      Rating
-      Review
+      Review {
+        nextToken
+      }
       Aid_Stuffs
     }
     Instruction
@@ -178,8 +200,9 @@ export const updateQuestion = `mutation UpdateQuestion($input: UpdateQuestionInp
       Questions {
         nextToken
       }
-      Rating
-      Review
+      Review {
+        nextToken
+      }
       Aid_Stuffs
     }
     Instruction
@@ -217,8 +240,9 @@ export const deleteQuestion = `mutation DeleteQuestion($input: DeleteQuestionInp
       Questions {
         nextToken
       }
-      Rating
-      Review
+      Review {
+        nextToken
+      }
       Aid_Stuffs
     }
     Instruction
@@ -232,6 +256,102 @@ export const deleteQuestion = `mutation DeleteQuestion($input: DeleteQuestionInp
     Answer_Aid2
     Answer_Aid3
     Hint
+  }
+}
+`;
+export const createReview = `mutation CreateReview($input: CreateReviewInput!) {
+  createReview(input: $input) {
+    id
+    game {
+      id
+      Title
+      Thumbnail
+      Location
+      Difficulty
+      Capacity
+      Story
+      Time_Limit
+      Geo_Location
+      Players
+      Finished
+      Total_Questions
+      Total_Hints
+      At_Question
+      Questions {
+        nextToken
+      }
+      Review {
+        nextToken
+      }
+      Aid_Stuffs
+    }
+    rating
+    review
+    username
+  }
+}
+`;
+export const updateReview = `mutation UpdateReview($input: UpdateReviewInput!) {
+  updateReview(input: $input) {
+    id
+    game {
+      id
+      Title
+      Thumbnail
+      Location
+      Difficulty
+      Capacity
+      Story
+      Time_Limit
+      Geo_Location
+      Players
+      Finished
+      Total_Questions
+      Total_Hints
+      At_Question
+      Questions {
+        nextToken
+      }
+      Review {
+        nextToken
+      }
+      Aid_Stuffs
+    }
+    rating
+    review
+    username
+  }
+}
+`;
+export const deleteReview = `mutation DeleteReview($input: DeleteReviewInput!) {
+  deleteReview(input: $input) {
+    id
+    game {
+      id
+      Title
+      Thumbnail
+      Location
+      Difficulty
+      Capacity
+      Story
+      Time_Limit
+      Geo_Location
+      Players
+      Finished
+      Total_Questions
+      Total_Hints
+      At_Question
+      Questions {
+        nextToken
+      }
+      Review {
+        nextToken
+      }
+      Aid_Stuffs
+    }
+    rating
+    review
+    username
   }
 }
 `;

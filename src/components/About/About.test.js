@@ -4,6 +4,8 @@ import About from './About'
 
 
 describe('about page', () => {
+    
+
     it('check that has navigation', () => {
       const wrapper = shallow(< About />);
       expect(wrapper.hasClass('navigation'))
@@ -32,6 +34,8 @@ describe('about page', () => {
         expect(wrapper.find('div.meet-team').length).toBe(1);
 
     })
+
+    
 
     
 

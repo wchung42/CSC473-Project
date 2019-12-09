@@ -18,7 +18,7 @@ class home extends React.Component {
         </div>
         
         <div id = 'play-now-button'>
-          <button className = 'btn-lg btn-danger'>PLAY NOW</button>
+          <a href = '/game' className = 'btn-lg btn-danger'>PLAY NOW</a>
         </div>
         <br/>
         <div id='intro'>
@@ -48,11 +48,6 @@ class home extends React.Component {
                 -start the game                  
               </li>
               
-<<<<<<< HEAD
-              
-            </ul>
-          </section>
-=======
             </ul> */}
             <div className = 'mission-text'>
               <strong>Goal</strong>
@@ -85,7 +80,6 @@ class home extends React.Component {
                 __________________________________
             </div>
           </div>
->>>>>>> 79eaa841e20a1da03c313e9207327319e022b9de
         <br/>
         <br/>
         <br/>

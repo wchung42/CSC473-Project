@@ -25,7 +25,6 @@ const ListGames = `query ListGames{
       Capacity
       Story
       Time_Limit
-      Rating
     }
   }
 }`;
@@ -241,27 +240,61 @@ class Game extends Component {
           <div className="back-button">
             <a href="/Game" className="nounderline"><p>Browse more games</p></a>
           </div>
-          <div className = 'game-title'>
-            <h1>{ this.state.games[this.state.gameID].Title}</h1>
+          <div className='game-title'>
+            <h1>{this.state.games[this.state.gameID].Title}</h1>
           </div>
-          <div className = 'synopsis-inner-container'>
-            <div className = 'section-title'>
+          <div className='synopsis-inner-container'>
+            <div className='section-title'>
               <h3><strong>Story</strong></h3>
             </div>
             <div className="synopsis">
               <p>{this.state.games[this.state.gameID].Story}</p>
             </div>
-            <div className = 'section-divider'>
-              <p>_________________________________</p>
+            <div className='section-divider'>
+              <hr/>
             </div>
-            <div className = 'section-title'>
+            <div className='section-title'>
               <h3><strong>Starting Location</strong></h3>
             </div>
-            <div className = 'section-divider'>
-              <p>_________________________________</p>
+            <div className='section-divider'>
+              <hr/>
             </div>
-            <div className = 'section-title'>
+            <div className='section-title'>
               <h3><strong>Instructions</strong></h3>
+            </div>
+            <div className = 'instructions'>
+              <p>
+                In order to begin the game, head to the <strong>starting location</strong> as indicated above.
+                Once there, the <strong>START</strong> button will turn green. Click "Start" to begin the game.
+                <br></br>
+                <div className = 'instruction-questions'>
+                  <strong>Types of Questions</strong>
+                  <ul>
+                    <li>Combination</li>
+                    <p>
+                      To complete these types of questions, enter the combination into the numpad and hit the POUND(#) key.
+                      If the POUND(#) key flashes RED, your answer is incorrect!
+                    </p>
+                    <br/>
+                    <p>INSERT GIF HERE</p>
+                    <li>Text</li>
+                    <p>
+                      To complete these types of questions, simply enter your answer into the textbox and click SUBMIT.
+                      <br></br>
+                      <strong>NOTE: ANSWERS NOT CASE SENSITIVE</strong>
+                    </p>
+                    <br/>
+                    <p>INSERT GIF HERE</p>
+                    <li>Ordering</li>
+                    <p>
+                      These questions are completed by dragging and dropping the images into the correct order and hitting SUBMIT.
+                    </p>
+                    <br/>
+                    <p>INSERT GIF HERE</p>
+                  </ul>
+                </div>
+
+              </p>
             </div>
             <div className="start">
               <button id="start-btn" className="btn btn-lg btn-success" type="button" onClick={this.startGame}>&nbsp; Start &nbsp;</button>
@@ -269,8 +302,11 @@ class Game extends Component {
             <div id="notAtLocationIndicator">
               <p></p>
             </div>
+            <div className = 'section-title'>
+              <h3><strong>Reviews</strong></h3>
+            </div>
           </div>
-          
+
 
         </div>
       )

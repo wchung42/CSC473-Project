@@ -72,7 +72,7 @@
 .game-list{
   display: grid;
   width: 50%;
-  margin-left: 6.5%;
+  margin-left: 3.5%;
 }
 
 .card{
@@ -177,7 +177,7 @@
 }
 
 .synopsis-inner-container {
-  max-width: 75%;
+  max-width: 70%;
   margin: 0 auto;
 }
 
@@ -196,6 +196,14 @@
   font-size: 30px;
 }
 
-.section-divider p {
-  font-size: 50px;
+.instructions p {
+  font-size: 30px;
+  text-align: left;
+}
+
+.section-divider hr {
+  margin-top: 25px;
+  margin-bottom: 25px;
+  max-width: 550px;
+  border-top: 5px solid rgb(255, 187, 0)
 }

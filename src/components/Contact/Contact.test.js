@@ -49,7 +49,6 @@ describe('contact page', () => {
 
 });
 
-
 describe('Have props',()=>{
     let wrapper
    
@@ -65,8 +64,24 @@ describe('Have props',()=>{
     
     
     })
+
+    it("pass name attr", () => {
+        let wrapper = shallow(<Contact />)
+        wrapper.setState({
+            name:'eric'      
+        })
+        expect(wrapper.state('name')).toEqual('eric');
+    });
+
+    it("pass email attr", () => {
+        let wrapper = shallow(<Contact />)
+        wrapper.setState({
+            email:'google.com'     
+        })
+        expect(wrapper.state('email')).toEqual('google.com');
+    }) 
     
-    
+  
 
 });
 
