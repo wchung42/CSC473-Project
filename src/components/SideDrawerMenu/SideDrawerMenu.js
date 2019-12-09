@@ -105,7 +105,7 @@ class sideDrawerMenu extends Component {
           <div hidden={!this.state.isLoggedIn} className='side-drawer-divider'>
             <hr />
           </div>
-          <div className='admin-section'>
+          <div hidden = {!this.state.isAdmin} className='admin-section'>
             <p>Admin Section</p>
           </div>
           <li hidden={!this.state.isAdmin}><a href="/cc">Create Game (Beta)</a></li>
