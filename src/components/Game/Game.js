@@ -40,6 +40,7 @@ class Game extends Component {
     super(props)
     this.state = {
       gameUserName: "",
+      isAdmin: false,
       games: [],
       gameID: "",
       gameTitle: "",
@@ -99,12 +100,22 @@ class Game extends Component {
 
     Auth.currentAuthenticatedUser()
       .then(user =>
-        this.setState({
-          gameUserName: user.username
-        })
+        this.setUserInfo(user)
       )
       .catch(err => console.log(err))
 
+  }
+
+  // this function will set user info
+  setUserInfo(user) {
+    this.setState({
+      gameUserName: user.username
+    });
+    if (user.signInUserSession.idToken.payload['cognito:groups'] == 'Administrators') {
+      this.setState({
+        isAdmin: true,
+      })
+    }
   }
 
   componentWillUnmount() {
@@ -194,7 +205,7 @@ class Game extends Component {
       Hint_Count: 0,
       Players: [],
     }
-    if (['admin', 'admin123', 'admin2'].includes(this.state.gameUserName)) {
+    if (this.state.isAdmin) {
       try {
         await API.graphql(graphqlOperation(mutations.updateGame, { input: resetGameData }))
       } catch (errors) { console.log("Errors on Reset Game", errors) }
@@ -325,7 +336,8 @@ class Game extends Component {
                 func={this.getGameId}
                 resetFunc={this.resetGame}
                 deleteFunc={this.deleteGame}
-                editFunc={this.editGame} />
+                editFunc={this.editGame} 
+                isAdmin = {this.state.isAdmin}/>
             </div>
             <br />
           </div>
@@ -400,8 +412,8 @@ class Game extends Component {
             </div>
           </div>
           <button
-            hidden={!['admin', 'admin123', 'admin2'].includes(this.state.gameUserName)}
-            disabled={!['admin', 'admin123', 'admin2'].includes(this.state.gameUserName)}
+            hidden={!this.state.isAdmin}
+            disabled = {!this.state.isAdmin}
             id={"deleteBttn" + this.state.gameID}
             className="btn btn-lg btn-primary"
             type="button"

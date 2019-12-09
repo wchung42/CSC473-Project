@@ -51,8 +51,8 @@ class gamePanel extends Component {
                         </button>
                         }
                         <button
-                            hidden={!['admin', 'admin123', 'admin2'].includes(this.props.gameUserName)}
-                            disabled={!['admin', 'admin123', 'admin2'].includes(this.props.gameUserName)}
+                            hidden={!this.props.isAdmin}
+                            disabled = {!this.props.isAdmin}
                             id={"resetBttn" + item.id}
                             className="btn btn-lg btn-primary"
                             type="button"
@@ -61,8 +61,8 @@ class gamePanel extends Component {
                             RESET
                         </button>
                         <button
-                            hidden={!['admin', 'admin123', 'admin2'].includes(this.props.gameUserName)}
-                            disabled={!['admin', 'admin123', 'admin2'].includes(this.props.gameUserName)}
+                            hidden={!this.props.isAdmin}
+                            disabled = {!this.props.isAdmin}
                             id={"EditBttn" + item.id}
                             className="btn btn-lg btn-primary"
                             type="button"
