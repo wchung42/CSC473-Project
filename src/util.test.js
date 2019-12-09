@@ -30,15 +30,16 @@ test('drawerToggleClickHandler Testing',()=>{
   expect(component.state.sideDrawerMenuOpen).toHaveReturned;
 
 })
-
-test('navbar Testing', () => {
+describe('<navbar /> component testing', () => {
+    test('navbar render testing', () => {
   
-  const nav= shallow(<Navbar  />);
+      const nav= shallow(<Navbar  />);
 
-  expect(nav.text()).toEqual('Sign in<DrawerToggleButton /><Authenticator />');
-
+      expect(nav.text()).toEqual('Sign in<DrawerToggleButton /><Authenticator />');
+      //expect(nav.find('div.navbar').length).toBe(1)
   
 });
+})
 describe('<footer /> component testing', () => {
     test('footer Testing', () => {
 
@@ -80,6 +81,31 @@ test('render out footer-info', () => {
   expect(footer.find('div.footer-info').length).toBe(1)
 
 })
+
+
+})
+describe('<footer /> text and icon testing', () => {
+
+  test('testing icon in footer', () => {
+
+    const footer= shallow(<Footer />);
+  
+   
+    expect(footer.find('i.fa-facebook').length).toBe(1)
+    expect(footer.find('i.fa-twitter').length).toBe(1)
+    expect(footer.find('i.fa-linkedin').length).toBe(1)
+    expect(footer.find('i.fa-github').length).toBe(1)
+  
+  })
+  test('testing icon in footer', () => {
+
+    const footer= shallow(<Footer />);
+  
+    expect(footer.find('p').children().length).toBe(10);
+   
+
+  })
+
 
 
 })
