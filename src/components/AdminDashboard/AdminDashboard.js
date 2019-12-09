@@ -15,12 +15,11 @@ class AdminDashboard extends Component {
         super(props);
         this.state = ({
             users: [],
-            setUsers: [],
-            usernames: [],
             status: false,
         })
         this.getUsers = this.getUsers.bind(this);
         this.handleDisable = this.handleDisable.bind(this);
+        this.promoteUserToAdmin = this.promoteUserToAdmin.bind(this);
     }
 
     /*
@@ -68,13 +67,13 @@ class AdminDashboard extends Component {
                 };
                 cognitoidentityserviceprovider.adminListGroupsForUser(params, function(err, data) {
                     if (data.Groups.length >= 1 && data.Groups[0].GroupName === "Administrators") {
-                        allUsers[i].isAdmin = true;
+                        allUsers[i].isUserAdmin = true;
                     } else {
-                        allUsers[i].isAdmin = false;
+                        allUsers[i].isUserAdmin = false;
                     }
                 })
             }
-            console.log(allUsers)
+            //console.log(allUsers)
             this.setState({
                 users: allUsers,
             })
@@ -115,7 +114,6 @@ class AdminDashboard extends Component {
                     console.log(err);
                 }
                 else {
-
                     console.log("User disabled")
                 }
 
@@ -147,7 +145,7 @@ class AdminDashboard extends Component {
         let cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider();
         
         // get user data to check if already an Administrator
-        const getParams = {
+        let getParams = {
             UserPoolId: process.env.REACT_APP_USER_POOL_ID,
             Username: user.Username,
         };
@@ -172,19 +170,17 @@ class AdminDashboard extends Component {
             If the user is already in the 'Administrators' group, then remove them from it
             Else move the user to the 'Administrators' group
         */
-        let isAdmin = false;
         cognitoidentityserviceprovider.adminListGroupsForUser(getParams, function(err, data){
             if (data.Groups.length >= 1 && data.Groups[0].GroupName === "Administrators") {
-                console.log(isAdmin)
-                isAdmin = true;
-                console.log(isAdmin)
+                
                 cognitoidentityserviceprovider.adminRemoveUserFromGroup(removeParams, function(err, data) {
                     if (err) {
                         console.log(err);
                     } else {
                         console.log("Removed from admin");
                     }
-                }) 
+                })
+                
             } else {
                 cognitoidentityserviceprovider.adminAddUserToGroup(params, function(err, data) {
                     if (err) {
@@ -193,8 +189,25 @@ class AdminDashboard extends Component {
                         console.log("Changed to admin"); 
                     }
                 })
+                
             }
         })
+        
+        // change toggle state
+        if (user.isUserAdmin === true) {
+            this.setState({
+                status: false,
+            })
+            user.isUserAdmin = false;
+        } else {
+            this.setState({
+                status: true,
+            })
+            user.isUserAdmin = true;
+        }
+        console.log(user);
+
+        
         // move selected user to 'Administrators' group
         
         
@@ -227,6 +240,7 @@ class AdminDashboard extends Component {
 
     render() {
         const { users } = this.state
+        console.log(users);
         return (
             <div className = 'about-container'>
                 <div className = 'heading'><h1>Admin DB</h1></div>
@@ -255,9 +269,9 @@ class AdminDashboard extends Component {
                                     </TableCell>
                                     <TableCell>
                                         <Switch
-                                            checked={row.isAdmin}
+                                            checked={row.isUserAdmin}
                                             onClick={(event) => this.promoteUserToAdmin(event, row)}
-                                            id={row.Username} />
+                                            id={row.Username + 'Admin'} />
                                     </TableCell>
                                 </TableRow>
                             ))}
