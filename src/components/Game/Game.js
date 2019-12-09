@@ -347,7 +347,7 @@ class Game extends Component {
             <a href="/Game" className="nounderline"><p>Browse more games</p></a>
           </div>
           <div className='game-title'>
-            <h1>{this.state.games[this.state.gameID].Title}</h1>
+            <h1>{this.state.gameTitle}</h1>
           </div>
           <br /><br />
           <div className='synopsis-inner-container'>
@@ -358,7 +358,7 @@ class Game extends Component {
               <hr />
             </div>
             <div className="synopsis">
-              <p>{this.state.games[this.state.gameID].Story}</p>
+              <p>{this.state.gameStory}</p>
             </div>
 
             <div className='section-divider'>
