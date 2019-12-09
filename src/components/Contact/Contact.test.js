@@ -1,6 +1,19 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import Contact from './Contact'
+//import{finByTestArr}from './../util'
+
+// const findByTestAtrr=(component,attr)=>{
+//     const wrapper=component.find(attr);
+//     return wrapper;
+// }
+// const setUp=(props={})=>{
+
+//     const component=shallow(<Contact {...props} />);
+//     return component;
+    
+
+// };
 
 describe('<Contact /> component testing', () => {
     describe("<Contact /> renders correctly", () => {
@@ -102,4 +115,43 @@ describe('<Contact /> component testing', () => {
 
     })
 
+   
+
 });
+
+describe('Have props',()=>{
+    let wrapper
+   
+    it('enter message',()=>{
+             const prop={
+                    name:'aa',
+                    email:'bb',
+                    subject:'cc',
+                    message:'dd'
+             }
+             wrapper = shallow(<Contact {...prop} />);
+             expect(wrapper.find('div.form-group').length).toBe(1);
+    
+    
+    })
+
+    it("pass name attr", () => {
+        let wrapper = shallow(<Contact />)
+        wrapper.setState({
+            name:'eric'      
+        })
+        expect(wrapper.state('name')).toEqual('eric');
+    });
+
+    it("pass email attr", () => {
+        let wrapper = shallow(<Contact />)
+        wrapper.setState({
+            email:'google.com'     
+        })
+        expect(wrapper.state('email')).toEqual('google.com');
+    }) 
+    
+  
+
+});
+

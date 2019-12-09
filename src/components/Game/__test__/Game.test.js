@@ -15,6 +15,7 @@ describe("Game component testing", () => {
         ReactDOM.render(<Game />, div);
         ReactDOM.unmountComponentAtNode(div);
     });
+})
 
     // test getGameID
     describe("component renders with only one game div", () => {
@@ -254,6 +255,14 @@ describe("Game component testing", () => {
         //     await page.click('[href="/Game"]');
         //     await page.waitForSelector('button#bttn1');
         //     await page.click('button#bttn1');
+        //     await page.waitForSelector('button#hintBttn');
+        //     await page.click('button#hintBttn');
+        //     await page.waitForSelector('button.btn-primary');
+        //     await page.click('button.btn-primary');
+        //     await page.waitForSelector('button#num7');
+        //     await page.click('button#num7');
+        //     await page.click('button#pound');
+           
         //     await page.waitForSelector('div.synopsis'); 
         //     const text=await page.$eval('div.synopsis',(e)=>e.textContent); 
         //     expect(text).toBe('Math is hard regardless of your level of education!')
@@ -264,29 +273,29 @@ describe("Game component testing", () => {
         //     await page.click('button#start-btn');
         //     await page.click('button#start-btn');
             
-        //     // page.on('dialog', async dialog => {
-        //     //     console.log(dialog.message());
-        //     //     await dialog.accept();
-        //     //     //await browser.close();
-        //     //   });
+        //     page.on('dialog', async dialog => {
+        //         console.log(dialog.message());
+        //         await dialog.accept();
+        //         //await browser.close();
+        //       });
               
         //     await page.waitForSelector('button#num2');
         //     await page.click('button#num2');
-        //     // await page.click('button#pound');
+        //     await page.click('button#pound');
 
+        // },50000);
 
-
-        //    // expect( await page.$eval('.start',(e)=>e.className)).toBe('start')
-        //     // await page.waitForSelector('.start');
-        //     // await page.click('.start');
-        //     // await page.waitForSelector('button#start-btn');
-        //     // await page.click('button#start-btn')
+           // expect( await page.$eval('.start',(e)=>e.className)).toBe('start')
+            // await page.waitForSelector('.start');
+            // await page.click('.start');
+            // await page.waitForSelector('button#start-btn');
+            // await page.click('button#start-btn')
             
-        //     // await page.waitForSelector('p#timer');
-        //     // const time=await page.$eval('p#timer',(e)=>e.textContent); 
-        //     // expect(time).toBe('30:00')
-        //     //const question=await page.$eval('h1',(e)=>e.textContent); 
-        //    // expect(question).toBe('chalenge')
+            // await page.waitForSelector('p#timer');
+            // const time=await page.$eval('p#timer',(e)=>e.textContent); 
+            // expect(time).toBe('30:00')
+            //const question=await page.$eval('h1',(e)=>e.textContent); 
+           // expect(question).toBe('chalenge')
 
         //     await browser.close();
         // },40000);
@@ -384,6 +393,3 @@ describe("Game component testing", () => {
     //         expect(tree).toMatchSnapshot();
     //     });
         
-    // })
-    
-    })
