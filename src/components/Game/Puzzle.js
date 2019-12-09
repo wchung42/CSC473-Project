@@ -176,7 +176,7 @@ class Puzzle extends Component {
                 // calculate user's distance to target
                 dist = getDistanceFromLatLonInKm(userCoords.latitude, userCoords.longitude, target.latitude, target.longitude);
                 // player must be within 20 meters of location for answer to appear
-                if (dist >= 0.09) {
+                if (dist <= 0.009) {
                     console.log('You are here!');
                     // stop watching player location
                     navigator.geolocation.clearWatch(current)
