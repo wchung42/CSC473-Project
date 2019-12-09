@@ -56,6 +56,15 @@ class gamePanel extends Component {
                         >
                             RESET
                         </button>
+                        <button
+                            // hidden={['admin', 'admin123', 'admin2'].includes(this.props.username)}
+                            id={"EditBttn" + item.id}
+                            className="btn btn-lg btn-primary"
+                            type="button"
+                            onClick={() => this.props.editFunc(item.id)}
+                        >
+                            EDIT
+                        </button>
 
                     </li>
                 </div>
