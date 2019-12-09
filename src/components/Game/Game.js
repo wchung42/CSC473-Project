@@ -336,8 +336,8 @@ class Game extends Component {
                 func={this.getGameId}
                 resetFunc={this.resetGame}
                 deleteFunc={this.deleteGame}
-                editFunc={this.editGame} 
-                isAdmin = {this.state.isAdmin}/>
+                editFunc={this.editGame}
+                isAdmin={this.state.isAdmin} />
             </div>
             <br />
           </div>
@@ -359,7 +359,7 @@ class Game extends Component {
             <a href="/Game" className="nounderline"><p>Browse more games</p></a>
           </div>
           <div className='game-title'>
-            <h1>{this.state.games[this.state.gameID].Title}</h1>
+            <h1>{this.state.gameTitle}</h1>
           </div>
           <br /><br />
           <div className='synopsis-inner-container'>
@@ -370,7 +370,7 @@ class Game extends Component {
               <hr />
             </div>
             <div className="synopsis">
-              <p>{this.state.games[this.state.gameID].Story}</p>
+              <p>{this.state.gameStory}</p>
             </div>
 
             <div className='section-divider'>
@@ -378,10 +378,10 @@ class Game extends Component {
             </div>
             <div className='section-title'>
               <h3><strong>Starting Location</strong></h3>
-              
+
             </div>
-            <div className = 'starting-location'>
-              <h5>{this.state.games[this.state.gameID].Location}</h5>
+            <div className='starting-location'>
+              <h5>{this.state.gameLocation}</h5>
             </div>
             <div className='section-divider'>
               <hr />
@@ -413,7 +413,7 @@ class Game extends Component {
           </div>
           <button
             hidden={!this.state.isAdmin}
-            disabled = {!this.state.isAdmin}
+            disabled={!this.state.isAdmin}
             id={"deleteBttn" + this.state.gameID}
             className="btn btn-lg btn-primary"
             type="button"

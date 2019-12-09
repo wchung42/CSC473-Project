@@ -60,7 +60,7 @@ class Puzzle extends Component {
                 const lQuestion = {
                     id: this.props.gID,
                     At_Question: 0,
-                    Capacity: 15,
+                    Capacity: 8,
                     Players: [],
                     Finished: true,
                     Time_Left: this.props.gTimeLimit,
