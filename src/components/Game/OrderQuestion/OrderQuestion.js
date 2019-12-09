@@ -59,15 +59,16 @@ class OrderQuestion extends Component {
             data: newState,
             order: newState.rows['row1'].imageIds.toString()
         });
-        //console.log(this.state.order)
 
     }
 
     //handle order change -- returns the order to the parent
-    handleOrderChange = () => {
+    handleOrderChange = (e) => {
         let currentOrder = this.state.data.rows['row1'].imageIds.toString();
         console.log("TEST: " + currentOrder)
-        this.props.handleOrderChange(currentOrder)
+        //this.props.handleOrderChange(currentOrder);
+        document.getElementById("submitButtonOrder").value = currentOrder;
+        this.props.action(e);
 
     }
 
@@ -89,7 +90,9 @@ class OrderQuestion extends Component {
                     return (
                         <div className="orderQuestion">
                             <Row key={row.id} row={row} images={images} />
-                            <button id="submitButtonOrderVerify" className="btn btn-primary" type="button" onClick={this.handleOrderChange} value="">&nbsp; Verify Order &nbsp;</button>
+                            <p id = 'incorrect-prompt' className = 'blinking'></p>
+                            <br/>
+                            <button id="submitButtonOrder" className="btn-lg btn-success" type="button" onClick={this.handleOrderChange} value="">&nbsp; Submit &nbsp;</button>
                         </div>
 
 

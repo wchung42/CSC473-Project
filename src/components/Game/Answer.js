@@ -22,10 +22,11 @@ class Answer extends Component {
     // index order of images will be assigned to submit button
     handleOrderAnswer(order) {
         document.getElementById("submitButtonOrder").value = order
+        //this.props.action();
     }
 
     render() {
-        if (this.props.answerType == "Number") {
+        if (this.props.answerType === "Number") {
             return (
                 // Construct Num Pad
                 <div className="answerSpace">
@@ -50,15 +51,15 @@ class Answer extends Component {
                 </div>
             )
         }
-        else if (this.props.answerType == "Ordering") {
+        else if (this.props.answerType === "Ordering") {
             return (
                 <div className="answerSpace">
                     <div id="orderingAnswer">
-                        <OrderQuestion id="1" handleOrderChange={this.handleOrderAnswer} data={this.props.aidStuffs} />
+                        <OrderQuestion id="1" data={this.props.aidStuffs} action={this.props.action} />
                         <br />
-                        <div className="submit">
+                        {/* <div className="submit">
                             <button id="submitButtonOrder" className="btn-lg  btn-success" type="button" onClick={this.props.action} value="">&nbsp; Submit &nbsp;</button>
-                        </div>
+                        </div> */}
                     </div>
 
 

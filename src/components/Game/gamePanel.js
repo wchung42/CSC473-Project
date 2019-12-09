@@ -7,7 +7,6 @@ class gamePanel extends Component {
         const gameCardListStyle = {
             'list-style-type': 'none'
         }
-
         let listItems = this.props.games
             .map(item =>
                 <div id={"game" + item.id} className="card">
@@ -21,12 +20,52 @@ class gamePanel extends Component {
                             <strong>{item.Title}</strong>
                         </h5>
                         <ul className="card-text">
-                            <li>Location: {item.Location}</li>
-                            <li>Capacity: {item.Capacity}</li>
-                            <li>Game Length: {item.Time_Limit / 60} minutes</li>
-                            <li>Difficulty: {item.Difficulty}/5</li>
+                            <li key="rating">Rating: {item.Average_Rating} ({item.ReviewCount})</li>
+                            <li key="location">Location: {item.Location}</li>
+                            <li key="capacity"><strong>Capacity: {item.Capacity}</strong></li>
+                            <li key="gameLength">Game Length: {item.Time_Limit / 60} minutes</li>
+                            <li key="difficulty">Difficulty: {item.Difficulty}/5</li>
                         </ul>
-                        <button id={"bttn" + item.id} className="btn btn-lg btn-primary" type="button" onClick={this.props.func} value={item.id}>START</button>
+                        {console.log(item.In_Progress)}
+                        {
+                            (item.In_Progess || item.Capacity === 0) ?
+                                <button
+                                    disabled={item.In_Progress}
+                                    id={"bttn" + item.id}
+                                    className="btn btn-lg btn-primary"
+                                    type="button"
+                                >
+                                    In Progress
+                        </button> :
+                                <button
+                                    disabled={item.Capacity === 0}
+                                    id={"bttn" + item.id}
+                                    className="btn btn-lg btn-primary"
+                                    type="button"
+                                    onClick={() => this.props.func(item.id)}
+                                >
+                                    More Info
+                        </button>
+                        }
+                        <button
+                            hidden={['admin', 'admin123', 'admin2'].includes(this.props.username)}
+                            id={"resetBttn" + item.id}
+                            className="btn btn-lg btn-primary"
+                            type="button"
+                            onClick={() => this.props.resetFunc(item.id)}
+                        >
+                            RESET
+                        </button>
+                        <button
+                            // hidden={['admin', 'admin123', 'admin2'].includes(this.props.username)}
+                            id={"EditBttn" + item.id}
+                            className="btn btn-lg btn-primary"
+                            type="button"
+                            onClick={() => this.props.editFunc(item.id)}
+                        >
+                            EDIT
+                        </button>
+
                     </li>
                 </div>
             );

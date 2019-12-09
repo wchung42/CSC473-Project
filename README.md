@@ -7,6 +7,10 @@
 
 * Product owner：William Chung
 
+Live App: https://master.d39glwzrwynmmi.amplifyapp.com/ 
+
+The App is meant to be viewed on strictly mobile and has not been optimized for desktop/laptop use. If you want to see it on desktop, press F12 and on the top left of the new panel, click the icon that looks like a phone/tablet.
+
 ### Info:
 
 - Mobile Web App that allows users to play an "Escape room" on their phone outside of the house.

@@ -11,11 +11,14 @@ export const createGame = `mutation CreateGame($input: CreateGameInput!) {
     Capacity
     Story
     Time_Limit
+    Time_Left
     Geo_Location
     Players
     Finished
+    In_Progress
     Total_Questions
     Total_Hints
+    Hint_Count
     At_Question
     Questions {
       items {
@@ -43,7 +46,16 @@ export const createGame = `mutation CreateGame($input: CreateGameInput!) {
       }
       nextToken
     }
+    ReviewCount
+    Average_Rating
     Aid_Stuffs
+    Record {
+      items {
+        id
+        time
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -57,11 +69,14 @@ export const updateGame = `mutation UpdateGame($input: UpdateGameInput!) {
     Capacity
     Story
     Time_Limit
+    Time_Left
     Geo_Location
     Players
     Finished
+    In_Progress
     Total_Questions
     Total_Hints
+    Hint_Count
     At_Question
     Questions {
       items {
@@ -89,7 +104,16 @@ export const updateGame = `mutation UpdateGame($input: UpdateGameInput!) {
       }
       nextToken
     }
+    ReviewCount
+    Average_Rating
     Aid_Stuffs
+    Record {
+      items {
+        id
+        time
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -103,11 +127,14 @@ export const deleteGame = `mutation DeleteGame($input: DeleteGameInput!) {
     Capacity
     Story
     Time_Limit
+    Time_Left
     Geo_Location
     Players
     Finished
+    In_Progress
     Total_Questions
     Total_Hints
+    Hint_Count
     At_Question
     Questions {
       items {
@@ -135,7 +162,16 @@ export const deleteGame = `mutation DeleteGame($input: DeleteGameInput!) {
       }
       nextToken
     }
+    ReviewCount
+    Average_Rating
     Aid_Stuffs
+    Record {
+      items {
+        id
+        time
+      }
+      nextToken
+    }
   }
 }
 `;
@@ -151,11 +187,14 @@ export const createQuestion = `mutation CreateQuestion($input: CreateQuestionInp
       Capacity
       Story
       Time_Limit
+      Time_Left
       Geo_Location
       Players
       Finished
+      In_Progress
       Total_Questions
       Total_Hints
+      Hint_Count
       At_Question
       Questions {
         nextToken
@@ -163,7 +202,12 @@ export const createQuestion = `mutation CreateQuestion($input: CreateQuestionInp
       Review {
         nextToken
       }
+      ReviewCount
+      Average_Rating
       Aid_Stuffs
+      Record {
+        nextToken
+      }
     }
     Instruction
     Question_Geo
@@ -191,11 +235,14 @@ export const updateQuestion = `mutation UpdateQuestion($input: UpdateQuestionInp
       Capacity
       Story
       Time_Limit
+      Time_Left
       Geo_Location
       Players
       Finished
+      In_Progress
       Total_Questions
       Total_Hints
+      Hint_Count
       At_Question
       Questions {
         nextToken
@@ -203,7 +250,12 @@ export const updateQuestion = `mutation UpdateQuestion($input: UpdateQuestionInp
       Review {
         nextToken
       }
+      ReviewCount
+      Average_Rating
       Aid_Stuffs
+      Record {
+        nextToken
+      }
     }
     Instruction
     Question_Geo
@@ -231,11 +283,14 @@ export const deleteQuestion = `mutation DeleteQuestion($input: DeleteQuestionInp
       Capacity
       Story
       Time_Limit
+      Time_Left
       Geo_Location
       Players
       Finished
+      In_Progress
       Total_Questions
       Total_Hints
+      Hint_Count
       At_Question
       Questions {
         nextToken
@@ -243,7 +298,12 @@ export const deleteQuestion = `mutation DeleteQuestion($input: DeleteQuestionInp
       Review {
         nextToken
       }
+      ReviewCount
+      Average_Rating
       Aid_Stuffs
+      Record {
+        nextToken
+      }
     }
     Instruction
     Question_Geo
@@ -271,11 +331,14 @@ export const createReview = `mutation CreateReview($input: CreateReviewInput!) {
       Capacity
       Story
       Time_Limit
+      Time_Left
       Geo_Location
       Players
       Finished
+      In_Progress
       Total_Questions
       Total_Hints
+      Hint_Count
       At_Question
       Questions {
         nextToken
@@ -283,7 +346,12 @@ export const createReview = `mutation CreateReview($input: CreateReviewInput!) {
       Review {
         nextToken
       }
+      ReviewCount
+      Average_Rating
       Aid_Stuffs
+      Record {
+        nextToken
+      }
     }
     rating
     review
@@ -303,11 +371,14 @@ export const updateReview = `mutation UpdateReview($input: UpdateReviewInput!) {
       Capacity
       Story
       Time_Limit
+      Time_Left
       Geo_Location
       Players
       Finished
+      In_Progress
       Total_Questions
       Total_Hints
+      Hint_Count
       At_Question
       Questions {
         nextToken
@@ -315,7 +386,12 @@ export const updateReview = `mutation UpdateReview($input: UpdateReviewInput!) {
       Review {
         nextToken
       }
+      ReviewCount
+      Average_Rating
       Aid_Stuffs
+      Record {
+        nextToken
+      }
     }
     rating
     review
@@ -335,11 +411,14 @@ export const deleteReview = `mutation DeleteReview($input: DeleteReviewInput!) {
       Capacity
       Story
       Time_Limit
+      Time_Left
       Geo_Location
       Players
       Finished
+      In_Progress
       Total_Questions
       Total_Hints
+      Hint_Count
       At_Question
       Questions {
         nextToken
@@ -347,11 +426,301 @@ export const deleteReview = `mutation DeleteReview($input: DeleteReviewInput!) {
       Review {
         nextToken
       }
+      ReviewCount
+      Average_Rating
       Aid_Stuffs
+      Record {
+        nextToken
+      }
     }
     rating
     review
     username
+  }
+}
+`;
+export const createUserProfile = `mutation CreateUserProfile($input: CreateUserProfileInput!) {
+  createUserProfile(input: $input) {
+    id
+    Username
+    Name
+    Bio
+    ProfilePic
+    isAdmin
+    record {
+      id
+      game {
+        id
+        Title
+        Thumbnail
+        Location
+        Difficulty
+        Capacity
+        Story
+        Time_Limit
+        Time_Left
+        Geo_Location
+        Players
+        Finished
+        In_Progress
+        Total_Questions
+        Total_Hints
+        Hint_Count
+        At_Question
+        ReviewCount
+        Average_Rating
+        Aid_Stuffs
+      }
+      user {
+        id
+        Username
+        Name
+        Bio
+        ProfilePic
+        isAdmin
+      }
+      time
+    }
+  }
+}
+`;
+export const updateUserProfile = `mutation UpdateUserProfile($input: UpdateUserProfileInput!) {
+  updateUserProfile(input: $input) {
+    id
+    Username
+    Name
+    Bio
+    ProfilePic
+    isAdmin
+    record {
+      id
+      game {
+        id
+        Title
+        Thumbnail
+        Location
+        Difficulty
+        Capacity
+        Story
+        Time_Limit
+        Time_Left
+        Geo_Location
+        Players
+        Finished
+        In_Progress
+        Total_Questions
+        Total_Hints
+        Hint_Count
+        At_Question
+        ReviewCount
+        Average_Rating
+        Aid_Stuffs
+      }
+      user {
+        id
+        Username
+        Name
+        Bio
+        ProfilePic
+        isAdmin
+      }
+      time
+    }
+  }
+}
+`;
+export const deleteUserProfile = `mutation DeleteUserProfile($input: DeleteUserProfileInput!) {
+  deleteUserProfile(input: $input) {
+    id
+    Username
+    Name
+    Bio
+    ProfilePic
+    isAdmin
+    record {
+      id
+      game {
+        id
+        Title
+        Thumbnail
+        Location
+        Difficulty
+        Capacity
+        Story
+        Time_Limit
+        Time_Left
+        Geo_Location
+        Players
+        Finished
+        In_Progress
+        Total_Questions
+        Total_Hints
+        Hint_Count
+        At_Question
+        ReviewCount
+        Average_Rating
+        Aid_Stuffs
+      }
+      user {
+        id
+        Username
+        Name
+        Bio
+        ProfilePic
+        isAdmin
+      }
+      time
+    }
+  }
+}
+`;
+export const createRecord = `mutation CreateRecord($input: CreateRecordInput!) {
+  createRecord(input: $input) {
+    id
+    game {
+      id
+      Title
+      Thumbnail
+      Location
+      Difficulty
+      Capacity
+      Story
+      Time_Limit
+      Time_Left
+      Geo_Location
+      Players
+      Finished
+      In_Progress
+      Total_Questions
+      Total_Hints
+      Hint_Count
+      At_Question
+      Questions {
+        nextToken
+      }
+      Review {
+        nextToken
+      }
+      ReviewCount
+      Average_Rating
+      Aid_Stuffs
+      Record {
+        nextToken
+      }
+    }
+    user {
+      id
+      Username
+      Name
+      Bio
+      ProfilePic
+      isAdmin
+      record {
+        id
+        time
+      }
+    }
+    time
+  }
+}
+`;
+export const updateRecord = `mutation UpdateRecord($input: UpdateRecordInput!) {
+  updateRecord(input: $input) {
+    id
+    game {
+      id
+      Title
+      Thumbnail
+      Location
+      Difficulty
+      Capacity
+      Story
+      Time_Limit
+      Time_Left
+      Geo_Location
+      Players
+      Finished
+      In_Progress
+      Total_Questions
+      Total_Hints
+      Hint_Count
+      At_Question
+      Questions {
+        nextToken
+      }
+      Review {
+        nextToken
+      }
+      ReviewCount
+      Average_Rating
+      Aid_Stuffs
+      Record {
+        nextToken
+      }
+    }
+    user {
+      id
+      Username
+      Name
+      Bio
+      ProfilePic
+      isAdmin
+      record {
+        id
+        time
+      }
+    }
+    time
+  }
+}
+`;
+export const deleteRecord = `mutation DeleteRecord($input: DeleteRecordInput!) {
+  deleteRecord(input: $input) {
+    id
+    game {
+      id
+      Title
+      Thumbnail
+      Location
+      Difficulty
+      Capacity
+      Story
+      Time_Limit
+      Time_Left
+      Geo_Location
+      Players
+      Finished
+      In_Progress
+      Total_Questions
+      Total_Hints
+      Hint_Count
+      At_Question
+      Questions {
+        nextToken
+      }
+      Review {
+        nextToken
+      }
+      ReviewCount
+      Average_Rating
+      Aid_Stuffs
+      Record {
+        nextToken
+      }
+    }
+    user {
+      id
+      Username
+      Name
+      Bio
+      ProfilePic
+      isAdmin
+      record {
+        id
+        time
+      }
+    }
+    time
   }
 }
 `;

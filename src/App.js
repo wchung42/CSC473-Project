@@ -10,16 +10,15 @@ import Home from './components/home/home';
 import Footer from './components/Footer/Footer'
 import About from './components/About/About';
 import Contact from './components/Contact/Contact';
+import ProfilePage from './components/Profile/Profile';
 import CreateGame from './components/createGame/createGame';
-import GameStory from './components/createGame/gameStory'
-import Amplify, { Analytics, API, Auth, graphqlOperation, Storage } from 'aws-amplify';
+import GameQuestions from './components/createGame/gameQuestions';
+import AdminDashboard from './components/AdminDashboard/AdminDashboard';
+import Amplify, { Auth, Analytics } from 'aws-amplify';
+
 //backend stuffs START HERE
 
 import aws_config from './aws-exports';
-import { Connect } from 'aws-amplify-react';
-import * as queries from './graphql/queries';
-import * as mutations from './graphql/mutations';
-
 
 Amplify.configure(aws_config);
 
@@ -33,10 +32,9 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      sideDrawerMenuOpen: false
+      sideDrawerMenuOpen: false,
     }
   }
-
 
   // toggle drawer button handler
   drawerToggleClickHandler = () => {
@@ -68,22 +66,22 @@ class App extends Component {
 
         <meta name="viewport" content="600px"></meta>
 
-        <div key={this.state.sideDrawerMenuOpen.toString()} >
-          <Navbar drawerClickHandler={this.drawerToggleClickHandler} />
 
-          <SideDrawerMenu show={this.state.sideDrawerMenuOpen} />
+        <Navbar drawerClickHandler={this.drawerToggleClickHandler} />
+        <div key={this.state.sideDrawerMenuOpen.toString()} >
+          <SideDrawerMenu show={this.state.sideDrawerMenuOpen}/>
           {backdrop}
         </div>
         <div className="body-page">
 
           <Router>
             <Switch>
-
+              <Route path='/admin' component = {AdminDashboard}/>
               <Route path='/Game' component={Game} />
               <Route path='/about' component={About} />
               <Route path='/contact' component={Contact} />
-              <Route path ='/cc' component={CreateGame}/>
-              <Route path ='/gs' component={GameStory}/>
+              <Route path='/cc' component={CreateGame} />
+              <Route path='/profile' component={ProfilePage} />
               <Route path='/' component={Home} />
 
 

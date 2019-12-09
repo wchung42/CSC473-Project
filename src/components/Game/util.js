@@ -33,7 +33,7 @@ export function getDistanceFromLatLonInKm(lat1, lng1, lat2, lng2) {
     return dist;
 }
   
-function deg2rad(deg) {
+export function deg2rad(deg) {
     return deg * (Math.PI/180)
 }
 

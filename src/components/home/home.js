@@ -5,7 +5,7 @@ import './home.css';
 //declare query to listGames
 
 
-class home extends React.Component {
+class home extends Component {
   render() {
     return (
       <div className='landing'>

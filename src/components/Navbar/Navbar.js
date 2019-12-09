@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { Nav, Navbar } from 'react-bootstrap';
 import Amplify, { Auth } from 'aws-amplify';
-import { Authenticator, Greetings } from 'aws-amplify-react';
-import Button from '@material-ui/core/Button';
+import { Authenticator } from 'aws-amplify-react';
+// import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import awsconfig from '../../aws-exports';
 import '../Navbar/Navbar.css'
 import DrawerToggleButton from '../SideDrawerMenu/DrawerToggleButton';
-import { minHeight } from '@material-ui/system';
+// import { minHeight } from '@material-ui/system';
 
 Amplify.configure(awsconfig);
-
+let exportUserName = '';
 class Navigation extends Component {
 
   constructor(props) {
@@ -19,12 +19,14 @@ class Navigation extends Component {
       username: '',
       showAuth: false,
       isLoggedIn: false,
+      user: '',
     };
   }
 
   async componentDidMount() {
-    const user = await Auth.currentUserInfo();
-    //const user = Auth.currentUserInfo();
+    //const user = await Auth.currentUserInfo();
+    // get info of current user
+    const user = await Auth.currentAuthenticatedUser();
     if (user) {
       this.setState({
         username: user.username,
@@ -67,6 +69,7 @@ class Navigation extends Component {
 
 
     const { username, showAuth } = this.state;
+    exportUserName = this.state.username;
     const {
       handleShowAuth, handleCloseAuth, handleAuthStateChange,
     } = this;
@@ -105,7 +108,7 @@ class Navigation extends Component {
           </div>
 
           <div>
-            <DrawerToggleButton click={this.props.drawerClickHandler} />
+            <DrawerToggleButton click={this.props.drawerClickHandler } currentUser = { this.props.currentUser }/>
           </div>
         </Navbar>
 
@@ -120,3 +123,4 @@ class Navigation extends Component {
   }
 }
 export default Navigation;
+export { exportUserName };
