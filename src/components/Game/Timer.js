@@ -160,6 +160,7 @@ class Timer extends Component {
     }
 
     async componentDidMount() {
+        console.log("timer component willmount")
         this._isMounted = true;
         const { startCount } = this.props;
         this.setState({
@@ -177,6 +178,7 @@ class Timer extends Component {
     async componentWillUnmount() {
         this._isMounted = false;
         clearInterval(this.myInterval);
+        console.log("timer component unmout")
     }
 
 }
