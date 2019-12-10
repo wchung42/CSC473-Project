@@ -165,7 +165,7 @@ class Puzzle extends Component {
     // when state changes, check to see if the game has ended
     // stop timer when game is completed
 
-    async componentDidMount() {
+    async componentDidUpdate() {
         if (this.state.win) {
             this.props.gameHandler();
         } else {
@@ -176,7 +176,7 @@ class Puzzle extends Component {
                 // calculate user's distance to target
                 dist = getDistanceFromLatLonInKm(userCoords.latitude, userCoords.longitude, target.latitude, target.longitude);
                 // player must be within 20 meters of location for answer to appear
-                if (dist <= 0.050) {
+                if (dist <= 0.030) {
                     console.log('You are here!');
                     // stop watching player location
                     navigator.geolocation.clearWatch(current)

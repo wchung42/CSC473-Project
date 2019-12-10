@@ -239,7 +239,7 @@ class Game extends Component {
       // calculate distance to target
       dist = getDistanceFromLatLonInKm(userCoords.latitude, userCoords.longitude, target.latitude, target.longitude);
       // player must be within 10 meters of starting point for game to begin
-      if (dist >= 0.09) {
+      if (dist >= 0) {
         // stop watching player location
         currentState.setState({
           gameSynopsis: 0,

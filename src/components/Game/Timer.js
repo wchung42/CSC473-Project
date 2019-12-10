@@ -129,12 +129,12 @@ class Timer extends Component {
                     <div id="time">
                         <h3 id="timer"><strong>{this.convertSeconds(count)}</strong></h3>
                         <Puzzle
+                            key={this.props.gameAtQuestion}
                             gID={this.props.gameID}
                             gTitle={this.props.gameTitle}
                             gTimeLimit={this.props.gameTimeLimit}
                             gTimeLeft={count}
                             gTotalQuestions={this.props.gameTotalQuestions}
-                            gPlayers={this.props.gamePlayers}
                             gTotalHints={this.props.gameTotalHints}
                             gHintCount={this.props.gameHintCount}
                             gAtQuestion={this.props.gameAtQuestion}
@@ -160,6 +160,7 @@ class Timer extends Component {
     }
 
     async componentDidMount() {
+        console.log("timer component willmount")
         this._isMounted = true;
         const { startCount } = this.props;
         this.setState({
@@ -177,6 +178,7 @@ class Timer extends Component {
     async componentWillUnmount() {
         this._isMounted = false;
         clearInterval(this.myInterval);
+        console.log("timer component unmout")
     }
 
 }
