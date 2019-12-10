@@ -25,5 +25,28 @@ describe('<DrawerToggleButton/> component testing', () => {
     
       })
 
+      it('testing button class name', () => {
+
+        const wrapper = shallow(<div className="toggle-button-line" />);
+        expect(wrapper.is('.toggle-button-line')).toEqual(true);
+    
+      })
+
+      it('testing button event', () => {
+        const wrapper= shallow(<DrawerToggleButton />);
+        expect(wrapper.find('.toggle-button').length).toEqual(1);
+        wrapper.find('.toggle-button').simulate('click');
+        expect(wrapper.find('.toggle-button').length).toEqual(1);
+      })
+
+
+
+
+
+ 
+          
+
       
+
+
 })
