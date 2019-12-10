@@ -129,12 +129,12 @@ class Timer extends Component {
                     <div id="time">
                         <h3 id="timer"><strong>{this.convertSeconds(count)}</strong></h3>
                         <Puzzle
+                            key={this.props.gameAtQuestion}
                             gID={this.props.gameID}
                             gTitle={this.props.gameTitle}
                             gTimeLimit={this.props.gameTimeLimit}
                             gTimeLeft={count}
                             gTotalQuestions={this.props.gameTotalQuestions}
-                            gPlayers={this.props.gamePlayers}
                             gTotalHints={this.props.gameTotalHints}
                             gHintCount={this.props.gameHintCount}
                             gAtQuestion={this.props.gameAtQuestion}
