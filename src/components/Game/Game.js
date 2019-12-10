@@ -75,7 +75,7 @@ class Game extends Component {
       gameVisualAid2: [],
       gameVisualAid3: [],
       gameSynopsis: 0, // 0: don't display game synopsis ; 1: display synopsis
-      gameStart: 1, // 0: start button clicked, start game ; 1: stay on synopsis page
+      gameStart: 0, // 0: start button clicked, start game ; 1: stay on synopsis page
       editGame: false,
     };
     this.getGameId = this.getGameId.bind(this);
