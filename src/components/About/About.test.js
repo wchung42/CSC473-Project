@@ -10,6 +10,15 @@ describe('about page', () => {
       const wrapper = shallow(< About />);
       expect(wrapper.hasClass('navigation'))
     });
+    it('check about page child length', () => {
+        const wrapper = shallow(< About />);
+        expect(wrapper.find('div.about-container').children().length).toBe(4);
+      });
+
+      it('check about childs parent', () => {
+        const wrapper = shallow(< About />);
+        expect(wrapper.find('div.heading').parent().length).toEqual(4);
+      });
 
     it('check that has user',()=>{
         const wrapper = shallow(< About />); 
