@@ -43,18 +43,18 @@ describe("Game component testing", () => {
 
 
         // renders synopsis
-        it('renders div with className synopsis', () => {
-            wrapper.setState( {
-                gameReady: true,
-                gameSynopsis: 1,
-                gameStart: 0,
-            });
-            wrapper.update();
-            const button = wrapper.find('#bttn0');
-            expect(button.length).toBe(1);
-            button.simulate('click');
-            expect(wrapper.find('div.synopsis').length).toBe(1);
-        });
+        // it('renders div with className synopsis', () => {
+        //     wrapper.setState( {
+        //         gameReady: true,
+        //         gameSynopsis: 1,
+        //         gameStart: 0,
+        //     });
+        //     wrapper.update();
+        //     const button = wrapper.find('#bttn0');
+        //     expect(button.length).toBe(1);
+        //     button.simulate('click');
+        //     expect(wrapper.find('div.synopsis').length).toBe(1);
+        // });
 
         // it('renders div with className gameInterface', () => {
         //     // wrapper.setState ( {
@@ -116,34 +116,32 @@ describe("Game component testing", () => {
     //         await browser.close(); 
     //     },20000);
 
-    //     test('testing location ',async() => {
+        test('testing location ',async() => {
 
-    //         const browser = await puppeteer.launch({
-    //             headless: false,
-    //             slowMo:50,
-    //             args:['--window-size=1920,1080']
-    //            });
-    //         const page = await browser.newPage();
-    //         await page.goto('https://master.d4apr1nsr4agq.amplifyapp.com/');
+            const browser = await puppeteer.launch({
+               
+               });
+            const page = await browser.newPage();
+            await page.goto('https://master.d4apr1nsr4agq.amplifyapp.com/');
             
-    //         await page.click('button.login');
-    //         await page.click('input.Input__input___3e_bf');
-    //         await page.type('input.Input__input___3e_bf','admin2');
-    //         await page.click('[type=password]');
-    //         await page.type('[type=password]','admin123')
-    //         await page.click('button.Button__button___vS7Mv');
-    //         await page.click('button.toggle-button');
-    //         await page.click('div.toggle-button-line');
-    //         await page.waitForSelector('[href="/Game"]');
-    //         await page.click('[href="/Game"]');
-    //         await page.waitForSelector('button.Location');
-    //         await page.click('button.Location');
-    //         const location=await page.$eval('button.Location',(button)=>button.className)   
-    //         expect(location).toBe('Location');   
+            await page.click('button.login');
+            await page.click('input.Input__input___3e_bf');
+            await page.type('input.Input__input___3e_bf','admin2');
+            await page.click('[type=password]');
+            await page.type('[type=password]','admin123')
+            await page.click('button.Button__button___vS7Mv');
+            await page.click('button.toggle-button');
+            await page.click('div.toggle-button-line');
+            await page.waitForSelector('[href="/Game"]');
+            await page.click('[href="/Game"]');
+            await page.waitForSelector('button.Location');
+            await page.click('button.Location');
+            const location=await page.$eval('button.Location',(button)=>button.className)   
+            expect(location).toBe('Location');   
                 
             
-    //         await browser.close(); 
-    //     },30000);
+            await browser.close(); 
+        },30000);
     
     
         // test('testing exist button',async() => {

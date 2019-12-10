@@ -2,6 +2,7 @@ import React from 'react';
 import Timer from './../Timer';
 import Puzzle from './../Puzzle';
 import Endgame from './../Endgame';
+import Game from './../Game';
 import { shallow, mount } from 'enzyme';
 
 // initial test
@@ -18,6 +19,13 @@ describe("Timer component", () => {
             count: 1
         })
         expect(wrapper.state('count')).toEqual(1);
+    });
+    it("renders with initial time 0 second", () => {
+        let wrapper = shallow(<Timer />)
+        wrapper.setState({
+            count: 0
+        })
+        expect(wrapper.state('count')).toEqual(0);
     });
 
     it("renders with initial time 300 seconds", () => {
@@ -47,6 +55,7 @@ describe("Timer component", () => {
             const value = wrapper.instance().convertSeconds(30);
             expect(value).toEqual('00:30');
         });
+    
     });
 
     // test renders when time up
@@ -64,6 +73,28 @@ describe("Timer component", () => {
             });
             expect(wrapper.find(Puzzle).length).toBe(0);
         })
+        it("renders game when time still remain and game finish", () => {
+            wrapper.setState({
+                count: 1,
+                isFinished: true
+            });
+            expect(wrapper.find(Game).length).toBe(0);
+        })
+        it("renders game when time is zero", () => {
+            wrapper.setState({
+                count: 0,
+                isFinished: false
+            });
+            expect(wrapper.find(Game).length).toBe(0);
+        })
+        it("renders game when time begin", () => {
+            wrapper.setState({
+                count: 1,
+                isReady: true
+            });
+            expect(wrapper.find(Game).length).toBe(0);
+        })
+        
     });
 
     // test decrement
