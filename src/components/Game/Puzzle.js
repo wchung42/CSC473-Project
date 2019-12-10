@@ -165,7 +165,7 @@ class Puzzle extends Component {
     // when state changes, check to see if the game has ended
     // stop timer when game is completed
 
-    async componentDidMount() {
+    async componentDidUpdate() {
         if (this.state.win) {
             this.props.gameHandler();
         } else {
