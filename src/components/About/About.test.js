@@ -17,7 +17,7 @@ describe('about page', () => {
 
       it('check about childs parent', () => {
         const wrapper = shallow(< About />);
-        expect(wrapper.find('div.heading').parent().length).toEqual(4);
+        expect(wrapper.find('div.heading').parent().length).toEqual(1);
       });
 
     it('check that has user',()=>{
