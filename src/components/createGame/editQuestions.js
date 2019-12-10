@@ -117,9 +117,9 @@ class EditQuestions extends Component {
                             <input id='question-instruction' type='text' className='form-control' required defaultValue={this.props.gameInstruction[this.props.editAtQuestion]} ></input>
                             {/* Geo Location */}
                             <label for='question-longtitude'>Longtitude Value for Question</label>
-                            <input id='question-longtitude' type='text' className='form-control' required defaultValue={this.props.gameQuestionGeos[this.props.editAtQuestion][1]}></input>
+                            <input id='question-longtitude' type='text' className='form-control' required defaultValue={this.props.gameQuestionGeos[this.props.editAtQuestion][0]}></input>
                             <label for='question-latitude'>Lattitude Value for Question</label>
-                            <input id='question-latitude' type='text' className='form-control' required defaultValue={this.props.gameQuestionGeos[this.props.editAtQuestion][0]}></input>
+                            <input id='question-latitude' type='text' className='form-control' required defaultValue={this.props.gameQuestionGeos[this.props.editAtQuestion][1]}></input>
                             {/* Question Content */}
                             <label for='question-question'>Content of Question to be displayed</label>
                             <input id='question-question' type='text' className='form-control' required defaultValue={this.props.gameQuestions[this.props.editAtQuestion]}></input>
