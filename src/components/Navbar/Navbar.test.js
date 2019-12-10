@@ -13,3 +13,13 @@ describe('<Navbar /> component testing', () => {
        
     })
 })
+describe('<navbar /> component testing', () => {
+    test('navbar render testing', () => {
+  
+      const nav= shallow(<Navbar  />);
+
+      expect(nav.text()).toEqual('Sign in<DrawerToggleButton /><Authenticator />');
+      //expect(nav.find('div.navbar').length).toBe(1)
+  
+});
+})

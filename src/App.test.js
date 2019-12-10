@@ -11,14 +11,29 @@ it('renders without crashing', () => {
   ReactDOM.unmountComponentAtNode(div);
 });
 
+test('backdropClickHandler Testing',()=>{
+  let component=renderer.create(<App />).getInstance();
 
+  component.backdropClickHandler();
+
+  expect(component.state.sideDrawerMenuOpen).toBeFalsy;
+
+})
+test('drawerToggleClickHandler Testing',()=>{
+  let component=renderer.create(<App />).getInstance();
+
+  component.drawerToggleClickHandler();
+
+  expect(component.state.sideDrawerMenuOpen).toHaveReturned;
+
+})
 const puppeteer=require('puppeteer');
 
 test('testing hero of angle game',async() => {
     const browser = await puppeteer.launch({
-        headless: false,
-        slowMo: 180,
-        args:['window-size = 1920,1080']
+        // headless: false,
+        // slowMo: 180,
+        // args:['window-size = 1920,1080']
     });
     const page = await browser.newPage();
     await page.goto('https://master.dlhem6nvy7qu4.amplifyapp.com');

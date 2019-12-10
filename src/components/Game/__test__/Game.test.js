@@ -38,19 +38,23 @@ describe("Game component testing", () => {
             expect(wrapper.find('div.game-list').length).toBe(1);
         });
 
-        // // renders synopsis
-        // it('renders div with className synopsis', () => {
-        //     wrapper.setState( {
-        //         gameReady: true,
-        //         gameSynopsis: 1,
-        //         gameStart: 0,
-        //     });
-        //     wrapper.update();
-        //     const button = wrapper.find('#bttn0');
-        //     expect(button.length).toBe(1);
-        //     button.simulate('click');
-        //     expect(wrapper.find('div.synopsis').length).toBe(1);
-        // });
+        
+
+
+
+        // renders synopsis
+        it('renders div with className synopsis', () => {
+            wrapper.setState( {
+                gameReady: true,
+                gameSynopsis: 1,
+                gameStart: 0,
+            });
+            wrapper.update();
+            const button = wrapper.find('#bttn0');
+            expect(button.length).toBe(1);
+            button.simulate('click');
+            expect(wrapper.find('div.synopsis').length).toBe(1);
+        });
 
         // it('renders div with className gameInterface', () => {
         //     // wrapper.setState ( {
