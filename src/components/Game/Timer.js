@@ -134,6 +134,7 @@ class Timer extends Component {
                             gTimeLimit={this.props.gameTimeLimit}
                             gTimeLeft={count}
                             gTotalQuestions={this.props.gameTotalQuestions}
+                            gPlayers={this.props.gamePlayers}
                             gTotalHints={this.props.gameTotalHints}
                             gHintCount={this.props.gameHintCount}
                             gAtQuestion={this.props.gameAtQuestion}

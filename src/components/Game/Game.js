@@ -449,6 +449,7 @@ class Game extends Component {
               gameThumbnail={this.state.gameThumbnail}
               gameLocation={this.state.gameLocation}
               gameDifficulty={this.state.gameDifficulty}
+              gamePlayers={this.state.gamePlayers}
               gameStory={this.state.gameStory}
               gameFinished={this.state.gameFinished}
               gameInProgress={this.state.gameInProgress}
