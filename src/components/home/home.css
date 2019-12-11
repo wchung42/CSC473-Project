@@ -78,13 +78,11 @@
     font-size: 100px;
 }
 
-.intro-dividers {
-    color: rgb(255, 187, 0);
-    font-size: 250%;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    font-weight: bolder;
-    /* margin: 0 auto; */
+.section-divider hr {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    max-width: 550px;
+    border-top: 5px solid rgb(255, 187, 0)
 }
 
 #intro ul li {
