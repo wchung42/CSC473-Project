@@ -40,8 +40,10 @@ class CreateGame extends Component {
     async componentDidMount() {
         try {
             const apiData = await API.graphql(graphqlOperation(ListGames));
-            const games = apiData.data.listGames.items;
-            this.setState({ id: games.length.toString() });
+            const games = apiData.data.listGames.items.map(game => game.id);
+            console.log(games);
+            this.setState({ id: Number(games.reduce((max, val) => max > val ? max : val, games[0])) + 1 });
+            console.log(this.state.id);
         } catch (error) { console.log(error) }
     }
 

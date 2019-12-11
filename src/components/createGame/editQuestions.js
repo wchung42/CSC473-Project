@@ -9,10 +9,10 @@ class EditQuestions extends Component {
         this.state = {
             imgLink: '',
             hidden: true,
-            disable0: (this.props.gameVisualAid0[this.props.editAtQuestion].length > 0) ? false : true,
-            disable1: (this.props.gameVisualAid1[this.props.editAtQuestion].length > 0) ? false : true,
-            disable2: (this.props.gameVisualAid2[this.props.editAtQuestion].length > 0) ? false : true,
-            disable3: (this.props.gameVisualAid3[this.props.editAtQuestion].length > 0) ? false : true,
+            disable0: (this.props.gameVisualAid0[this.props.editAtQuestion] == null) ? true : (this.props.gameVisualAid0[this.props.editAtQuestion].length > 0),
+            disable1: (this.props.gameVisualAid1[this.props.editAtQuestion] == null) ? true : (this.props.gameVisualAid1[this.props.editAtQuestion].length > 0),
+            disable2: (this.props.gameVisualAid2[this.props.editAtQuestion] == null) ? true : (this.props.gameVisualAid2[this.props.editAtQuestion].length > 0),
+            disable3: (this.props.gameVisualAid3[this.props.editAtQuestion] == null) ? true : (this.props.gameVisualAid3[this.props.editAtQuestion].length > 0)
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleOnChange = this.handleOnChange.bind(this);
@@ -60,7 +60,10 @@ class EditQuestions extends Component {
         try {
             console.log(updatedQuestion)
             await API.graphql(graphqlOperation(mutations.updateQuestion, { input: updatedQuestion }));
-        } catch (error) { console.log(error) }
+        } catch (error) {
+            await API.graphql(graphqlOperation(mutations.createQuestion, { input: updatedQuestion }));
+            console.log(error)
+        }
 
         this.props.func();
     }
@@ -114,18 +117,18 @@ class EditQuestions extends Component {
 
                             {/* Instruction */}
                             <label for='question-instruction'>Instruction for this Question</label>
-                            <input id='question-instruction' type='text' className='form-control' required defaultValue={this.props.gameInstruction[this.props.editAtQuestion]} ></input>
+                            <input id='question-instruction' type='text' className='form-control' required defaultValue={(this.props.gameInstruction[this.props.editAtQuestion] == null) ? "" : this.props.gameInstruction[this.props.editAtQuestion]} ></input>
                             {/* Geo Location */}
                             <label for='question-longtitude'>Longtitude Value for Question</label>
-                            <input id='question-longtitude' type='text' className='form-control' required defaultValue={this.props.gameQuestionGeos[this.props.editAtQuestion][0]}></input>
+                            <input id='question-longtitude' type='text' className='form-control' required defaultValue={(this.props.gameQuestionGeos[this.props.editAtQuestion] == null) ? " " : this.props.gameQuestionGeos[this.props.editAtQuestion][0]}></input>
                             <label for='question-latitude'>Lattitude Value for Question</label>
-                            <input id='question-latitude' type='text' className='form-control' required defaultValue={this.props.gameQuestionGeos[this.props.editAtQuestion][1]}></input>
+                            <input id='question-latitude' type='text' className='form-control' required defaultValue={(this.props.gameQuestionGeos[this.props.editAtQuestion] == null) ? " " : this.props.gameQuestionGeos[this.props.editAtQuestion][1]}></input>
                             {/* Question Content */}
                             <label for='question-question'>Content of Question to be displayed</label>
-                            <input id='question-question' type='text' className='form-control' required defaultValue={this.props.gameQuestions[this.props.editAtQuestion]}></input>
+                            <input id='question-question' type='text' className='form-control' required defaultValue={(this.props.gameQuestions[this.props.editAtQuestion] == null) ? "" : this.props.gameQuestions[this.props.editAtQuestion]}></input>
                             {/* Question Visual Aid */}
                             <label for='question-aid'>Visual Aid for Question</label>
-                            <input id="question-aid" type='text' className='form-control' onChange={this.handleOnChange} value={this.props.gameQuestionVisualAids[this.props.editAtQuestion]} ></input>
+                            <input id="question-aid" type='text' className='form-control' onChange={this.handleOnChange} value={(this.props.gameQuestionVisualAids[this.props.editAtQuestion] == null) ? " " : this.props.gameQuestionVisualAids[this.props.editAtQuestion]} ></input>
                             <br />
                             <img src={this.state.imgLink} style={{ width: '50%', height: '50%' }} alt="Visual Aid" hidden={this.state.hidden}></img>
                             <br />
