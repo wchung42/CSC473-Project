@@ -28,4 +28,12 @@ test('checking navbar children length', () => {
 
 })
 
+test('checking logo is render', () => {
+  
+    const nav= shallow(<Navbar  />);
+    //expect(nav.find('Navbar.navigation').length).toBe(1)
+    expect(nav.find('div.nav-logo').length).toBe(1)
+
+})
+
 })
