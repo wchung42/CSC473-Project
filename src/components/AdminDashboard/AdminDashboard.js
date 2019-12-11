@@ -238,7 +238,7 @@ class AdminDashboard extends Component {
                                             </TableCell>
                                             <TableCell key={user.Username}>
                                                 <Switch
-                                                    checked={!user.isUserAdmin}//if not admin will be checked
+                                                    checked={user.isUserAdmin}//if not admin will be checked
                                                     onClick={(event) => this.promoteUserToAdmin(event, user)}
                                                     id={user.Username + 'Admin'} />
                                             </TableCell>
@@ -272,7 +272,7 @@ class AdminDashboard extends Component {
                                         <TableCell>
                                             <Switch
                                                 color="primary"
-                                                checked={!user.Enabled}
+                                                checked={user.Enabled}
                                                 onClick={(event) => this.handleDisable(event, user)}
                                                 id={user.Username} />
                                         </TableCell>
