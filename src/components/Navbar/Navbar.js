@@ -19,20 +19,24 @@ class Navigation extends Component {
       username: '',
       showAuth: false,
       isLoggedIn: false,
-      user: '',
+
     };
+
   }
 
   async componentDidMount() {
     //const user = await Auth.currentUserInfo();
     // get info of current user
-    const user = await Auth.currentAuthenticatedUser();
-    if (user) {
-      this.setState({
-        username: user.username,
-        isLoggedIn: true,
-      });
-    }
+
+    Auth.currentAuthenticatedUser()
+      .then(user =>
+        this.setState({
+          username: user.username,
+          isLoggedIn: true,
+        })
+      )
+      .catch(err => console.log(err))
+
   }
 
   handleShowAuth = () => {
@@ -108,7 +112,7 @@ class Navigation extends Component {
           </div>
 
           <div>
-            <DrawerToggleButton click={this.props.drawerClickHandler } currentUser = { this.props.currentUser }/>
+            <DrawerToggleButton click={this.props.drawerClickHandler} currentUser={this.props.currentUser} />
           </div>
         </Navbar>
 
@@ -123,4 +127,3 @@ class Navigation extends Component {
   }
 }
 export default Navigation;
-export { exportUserName };

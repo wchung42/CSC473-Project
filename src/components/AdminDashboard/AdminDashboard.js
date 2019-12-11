@@ -8,6 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Switch from '@material-ui/core/Switch';
+import { withAuthenticator } from 'aws-amplify-react';
 
 
 class AdminDashboard extends Component {
@@ -290,4 +291,4 @@ class AdminDashboard extends Component {
 
 }
 
-export default AdminDashboard;
+export default withAuthenticator(AdminDashboard)
