@@ -36,4 +36,27 @@ test('checking logo is render', () => {
 
 })
 
+test('checking logo is render', () => {
+  
+    const nav= shallow(<Navbar  />);
+    //expect(nav.find('Navbar.navigation').length).toBe(1)
+    expect(nav.find('div.nav-logo').length).toBe(1)
+
+})
+test('checking nav-items is render', () => {
+  
+    const nav= shallow(<Navbar  />);
+    //expect(nav.find('Navbar.navigation').length).toBe(1)
+    expect(nav.find('div.nav-items').length).toBe(1)
+
+})
+
+test('checking toggle-button is render', () => {
+  
+    const nav= shallow(<Navbar  />);
+    //expect(nav.find('Navbar.navigation').length).toBe(1)
+    expect(nav.find('button.toggle-button').length).toBe(1)
+
+})
+
 })
