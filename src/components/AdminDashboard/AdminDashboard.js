@@ -14,43 +14,58 @@ class AdminDashboard extends Component {
     constructor(props) {
         super(props);
         this.state = ({
-            users: [],
+            users: {},
             status: false,
+            ready: false,
+            showAdmin: false
         })
         this.getUsers = this.getUsers.bind(this);
         this.handleDisable = this.handleDisable.bind(this);
         this.promoteUserToAdmin = this.promoteUserToAdmin.bind(this);
+        this.turnOnAdmin = this.turnOnAdmin.bind(this);
     }
-
     /*
         getUsers() calls the cognito function listUsers to get a list of users
         sets the returned array of users to the users state
     */
     async getUsers() {
         try {
-            let allUsers = [];
+            let allUsers = {};
             let more = true;
             let paginationToken = '';
+            let params = {
+                UserPoolId: process.env.REACT_APP_USER_POOL_ID,
+                Limit: 60
+            };
 
+            AWS.config.update({
+                region: process.env.REACT_APP_REGION,
+                accessKeyId: process.env.REACT_APP_ACCESS_KEY_ID,
+                secretAccessKey: process.env.REACT_APP_SECRET_KEY,
+            });
             while (more) {
-                let params = {
-                    UserPoolId: process.env.REACT_APP_USER_POOL_ID,
-                    Limit: 60
-                };
+
                 if (paginationToken !== '') {
                     params.PaginationToken = paginationToken;
                 }
-
-                AWS.config.update({
-                    region: process.env.REACT_APP_REGION,
-                    accessKeyId: process.env.REACT_APP_ACCESS_KEY_ID,
-                    secretAccessKey: process.env.REACT_APP_SECRET_KEY,
-                });
                 const cognito = new AWS.CognitoIdentityServiceProvider();
                 const rawUsers = await cognito.listUsers(params).promise();
-                allUsers = allUsers.concat(rawUsers.Users);
-                console.log(allUsers);
-                console.log(allUsers[3].Attributes.filter(attr => { return attr.Name === "email" })[0].Value)
+                // console.log("allUsers before map: ", rawUsers);
+                allUsers = rawUsers.Users.map(user => cognito.adminListGroupsForUser({
+                    UserPoolId: process.env.REACT_APP_USER_POOL_ID, Username: user.Username
+                }, function (err, data) {
+                    (err)
+                        ? console.log("Error on getting Data: ", err)
+                        : (data.Groups.length >= 1)
+                            ? (data.Groups[0].GroupName === "Administrators")
+                                ? user.isUserAdmin = true
+                                : user.isUserAdmin = false
+                            : user.isUserAdmin = false
+                    // user.isUserAdmin = false
+                }));
+                this.setState({
+                    users: rawUsers.Users
+                })
                 if (rawUsers.PaginationToken) {
                     paginationToken = rawUsers.PaginationToken;
                 } else {
@@ -58,47 +73,36 @@ class AdminDashboard extends Component {
                 }
             }
 
-            let cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider();
 
-            for (let i = 0; i < allUsers.length; i++) {
-                let params = {
-                    UserPoolId: process.env.REACT_APP_USER_POOL_ID,
-                    Username: allUsers[i].Username,
-                };
-                cognitoidentityserviceprovider.adminListGroupsForUser(params, function (err, data) {
-                    if (data.Groups.length >= 1 && data.Groups[0].GroupName === "Administrators") {
-                        allUsers[i].isUserAdmin = true;
-                    } else {
-                        allUsers[i].isUserAdmin = false;
-                    }
-                })
-            }
-            //console.log(allUsers)
-            this.setState({
-                users: allUsers,
-            })
+            // console.log(user.Username)
+            // let params = {
+            //     UserPoolId: process.env.REACT_APP_USER_POOL_ID,
+            //     Username: user.Username
+            // };
+
+
 
         } catch (e) {
             console.log(e);
         }
     }
-
-    async componentDidMount() {
-        await this.getUsers();
+    async turnOnAdmin() {
+        await this.setState({
+            showAdmin: !this.state.showAdmin
+        })
     }
-    // async getData() {
-    //     const userData = await this.getUsers();
-    //     console.log(userData);
-    //     let usernames = [];
-    //     for (let i = 0; i < userData.length; i++) {
-    //         usernames.push({username:userData[i].Username});
-    //     }
-    //     this.setState({
-    //         usernames: usernames
-    //     })
-    //     //console.log(usernames)
-    // }
+    async componentDidMount() {
 
+        await this.getUsers();
+        // await this.getAdmins();
+        this.setState({
+            ready: true,
+        })
+    }
+
+    async shouldComponentUpdate(prevState) {
+        return true
+    }
     async handleDisable(event, user) {
         event.preventDefault();
         let cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider();
@@ -116,7 +120,6 @@ class AdminDashboard extends Component {
                 else {
                     console.log("User disabled")
                 }
-
             })
             this.setState({
                 status: false,
@@ -129,14 +132,12 @@ class AdminDashboard extends Component {
                 } else {
                     console.log("User enabled");
                 }
-
             })
             this.setState({
                 status: true,
             });
             user.Enabled = true;
         }
-
     };
 
     // promote user to admin
@@ -206,83 +207,85 @@ class AdminDashboard extends Component {
             user.isUserAdmin = true;
         }
         console.log(user);
-
-
-        // move selected user to 'Administrators' group
-
-
-        // check that user is confirmed
-        // if (!(user.UserStatus === "CONFIRMED" && user.Attributes.email_verified === "true")){
-        //     console.log("User was not properly confirmed and/or email was not verified");
-        // }
-        // console.log(isAdmin)
-        // if (isAdmin){
-        //     cognitoidentityserviceprovider.adminRemoveUserFromGroup(removeParams, function(err, data) {
-        //         if (err) {
-        //             console.log(err);
-        //         } else {
-        //             console.log("Removed from admin");
-        //         }
-        //     })
-        //     console.log("User is already an Administrator or is not in a group")   
-        // }
-        // else {
-
-        //     cognitoidentityserviceprovider.adminAddUserToGroup(params, function(err, data) {
-        //     if (err) {
-        //         console.log(err);
-        //     } else {
-        //         console.log("Changed to admin"); 
-        //     }
-        // })
-        // }
     }
 
     render() {
-        const { users } = this.state
-        console.log(users);
-        return (
-            <div className='about-container'>
-                <div className='heading'><h1>Admin DB</h1></div>
-                <Paper>
-                    <Table stickyHeader aria-label="sticky table" style={{ background: 'gray' }}>
-                        <TableHead>
-                            <TableRow >
-                                <TableCell style={{ fontSize: '3vh', color: 'white', background: 'black' }} >Users</TableCell>
-                                {/* <TableCell>Email</TableCell> */}
-                                <TableCell style={{ fontSize: '3vh', color: 'white', background: 'black' }}>Disabled</TableCell>
-                                <TableCell style={{ fontSize: '3vh', color: 'white', background: 'black' }}>Admin</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {users.map(row => (
-                                <TableRow key={row.Username}>
-                                    <TableCell style={{ fontSize: '2.5vh' }} component="th" scope="row">
-                                        {row.Username}
-                                    </TableCell>
-                                    <TableCell>
-                                        <Switch
-                                            color="primary"
-                                            checked={!row.Enabled}
-                                            onClick={(event) => this.handleDisable(event, row)}
-                                            id={row.Username} />
-                                    </TableCell>
-                                    <TableCell>
-                                        <Switch
-                                            checked={!row.isUserAdmin}
-                                            onClick={(event) => this.promoteUserToAdmin(event, row)}
-                                            id={row.Username + 'Admin'} />
-                                    </TableCell>
+        if (!this.state.ready) {
+            return (
+                <h1>Loading...</h1>
+            )
+        } else {
+            const { users } = this.state
+            if (this.state.showAdmin) {
+                return (
+                    <div className='about-container'>
+                        <div className='heading'><h1>Admin DB</h1></div>
+                        <button onClick={this.turnOnAdmin}>Show Enabled User</button>
+                        <Paper>
+                            <Table stickyHeader aria-label="sticky table" style={{ background: 'gray' }}>
+                                <TableHead>
+                                    <TableRow >
+                                        <TableCell style={{ fontSize: '3vh', color: 'white', background: 'black' }} >Users</TableCell>
+                                        {/* <TableCell>Email</TableCell> */}
+                                        <TableCell style={{ fontSize: '3vh', color: 'white', background: 'black' }}>Admin</TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {users.map(user => (
+                                        <TableRow key={user.Username}>
+                                            <TableCell style={{ fontSize: '2.5vh' }} component="th" scope="row">
+                                                {user.Username}
+                                            </TableCell>
+                                            <TableCell key={user.Username}>
+                                                <Switch
+                                                    checked={!user.isUserAdmin}//if not admin will be checked
+                                                    onClick={(event) => this.promoteUserToAdmin(event, user)}
+                                                    id={user.Username + 'Admin'} />
+                                            </TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        </Paper>
+                    </div>
+                )
+            }
+            return (
+                <div className='about-container'>
+                    <div className='heading'><h1>Admin DB</h1></div>
+                    <button onClick={this.turnOnAdmin}>Show Admin Role</button>
+                    <Paper>
+                        <Table stickyHeader aria-label="sticky table" style={{ background: 'gray' }}>
+                            <TableHead>
+                                <TableRow >
+                                    <TableCell style={{ fontSize: '3vh', color: 'white', background: 'black' }} >Users</TableCell>
+                                    {/* <TableCell>Email</TableCell> */}
+                                    <TableCell style={{ fontSize: '3vh', color: 'white', background: 'black' }}>Disabled</TableCell>
                                 </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </Paper>
-            </div>
+                            </TableHead>
+                            <TableBody>
+                                {users.map(user => (
+                                    <TableRow key={user.Username}>
+                                        <TableCell style={{ fontSize: '2.5vh' }} component="th" scope="row">
+                                            {user.Username}
+                                        </TableCell>
+                                        <TableCell>
+                                            <Switch
+                                                color="primary"
+                                                checked={!user.Enabled}
+                                                onClick={(event) => this.handleDisable(event, user)}
+                                                id={user.Username} />
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </Paper>
+                </div>
 
-        )
+            )
 
-
+        }
     }
 
 }
