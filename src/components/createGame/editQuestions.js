@@ -125,10 +125,10 @@ class EditQuestions extends Component {
                             <input id='question-latitude' type='text' className='form-control' required defaultValue={(this.props.gameQuestionGeos[this.props.editAtQuestion] == null) ? " " : this.props.gameQuestionGeos[this.props.editAtQuestion][1]}></input>
                             {/* Question Content */}
                             <label for='question-question'>Content of Question to be displayed</label>
-                            <input id='question-question' type='text' className='form-control' required defaultValue={(this.props.gameQuestions[this.props.editAtQuestion] = null) ? "" : this.props.gameQuestions[this.props.editAtQuestion]}></input>
+                            <input id='question-question' type='text' className='form-control' required defaultValue={(this.props.gameQuestions[this.props.editAtQuestion] == null) ? "" : this.props.gameQuestions[this.props.editAtQuestion]}></input>
                             {/* Question Visual Aid */}
                             <label for='question-aid'>Visual Aid for Question</label>
-                            <input id="question-aid" type='text' className='form-control' onChange={this.handleOnChange} value={(this.props.gameQuestionVisualAids[this.props.editAtQuestion] = null) ? " " : this.props.gameQuestionVisualAids[this.props.editAtQuestion]} ></input>
+                            <input id="question-aid" type='text' className='form-control' onChange={this.handleOnChange} value={(this.props.gameQuestionVisualAids[this.props.editAtQuestion] == null) ? " " : this.props.gameQuestionVisualAids[this.props.editAtQuestion]} ></input>
                             <br />
                             <img src={this.state.imgLink} style={{ width: '50%', height: '50%' }} alt="Visual Aid" hidden={this.state.hidden}></img>
                             <br />
