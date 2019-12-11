@@ -14,12 +14,18 @@ describe('<navbar /> component testing', () => {
   
 });
 
-test('navbar render testing', () => {
+    test('navbar render testing', () => {
   
     const nav= shallow(<Navbar  />);
     expect(nav.find('Navbar.navigation').length).toBe(1)
 
 })
+test('checking navbar children length', () => {
+  
+    const nav= shallow(<Navbar  />);
+    //expect(nav.find('Navbar.navigation').length).toBe(1)
+    expect(nav.find('Navbar.navigation').children().length).toBe(4);
 
+})
 
 })
