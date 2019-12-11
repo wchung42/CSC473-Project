@@ -1,44 +1,20 @@
 import React from 'react';
-import App from './App';
-import Game from './components/Game/Game';
-import renderer from 'react-test-renderer';
-import ReactDOM from 'react-dom';
-import Puzzle from './components/Game/Puzzle'
-import Navbar from './components/Navbar/Navbar'
-import Footer from './components/Footer/Footer'
-import backdrop from './components/Backdrop/Backdrop'
+import { shallow } from 'enzyme';
+import Footer from './Footer'
 
 
-import { shallow, mount } from 'enzyme';
-import { async } from 'q';
+describe('<footer /> component testing', () => {
+    let wrapper;
+    it("footer child testing", () => {
+        wrapper = shallow(<Footer />);
+        const child=wrapper.find('div.footer-social')
+        expect(child.length).toBe(1);
+        //expect(wrapper.find('/Home').simulate('click').toHaveBeenCalled())
+       
+            
+            
 
-
-
-test('backdropClickHandler Testing',()=>{
-  let component=renderer.create(<App />).getInstance();
-
-  component.backdropClickHandler();
-
-  expect(component.state.sideDrawerMenuOpen).toBeFalsy;
-
-})
-test('drawerToggleClickHandler Testing',()=>{
-  let component=renderer.create(<App />).getInstance();
-
-  component.drawerToggleClickHandler();
-
-  expect(component.state.sideDrawerMenuOpen).toHaveReturned;
-
-})
-describe('<navbar /> component testing', () => {
-    test('navbar render testing', () => {
-  
-      const nav= shallow(<Navbar  />);
-
-      expect(nav.text()).toEqual('Sign in<DrawerToggleButton /><Authenticator />');
-      //expect(nav.find('div.navbar').length).toBe(1)
-  
-});
+    })
 })
 describe('<footer /> component testing', () => {
     test('footer Testing', () => {
@@ -109,15 +85,4 @@ describe('<footer /> text and icon testing', () => {
 
 
 })
-
-// test('Backdrop Testing', () => {
-
-//   const Backdrop = shallow(<backdrop />);
-
-//   expect(Backdrop.find('footer.footer-all').length).toBe(1)
-
-
-// });
-
-
-
+    
