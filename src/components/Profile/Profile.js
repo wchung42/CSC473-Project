@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Table from 'react-bootstrap/Table';
 import * as mutations from '../../graphql/mutations';
 import * as queries from '../../graphql/queries';
+import { withAuthenticator } from 'aws-amplify-react';
 
 class ProfilePage extends Component {
   constructor(props) {
@@ -19,6 +20,7 @@ class ProfilePage extends Component {
       record: [],
       userExisted: false,
       edit: false,
+      loading: true
     };
     this.setUserInfo = this.setUserInfo.bind(this);
     this.createUserProfile = this.createUserProfile.bind(this);
@@ -29,44 +31,68 @@ class ProfilePage extends Component {
       .then(user =>
         this.setUserInfo(user)
       )
-      .catch(err => console.log(err))
+      .catch(err => console.log("Authentication Error: ", err))
 
     try {
       console.log("username before retrieving data: ", this.state.userName);
       const apiData = await API.graphql(graphqlOperation(queries.getUserProfile, { id: this.state.id }));
-      console.log("apiData", apiData)
+      // console.log("apiData", apiData)
       const userData = apiData.data.getUserProfile;
       console.log(userData);
-      this.setState({
+      await this.setState({
         name: userData.Name,
         bio: userData.Bio,
         profilePic: userData.ProfilePic,
-        record: (userData.record) ? userData.record : []
+        record: (userData.record) ? userData.record : [],
+        userExisted: true,
+        loading: false
       })
     } catch (error) {
       this.setState({
-        edit: true
+        edit: true,
+        userExisted: false
       })
       console.log("Error on Retrieving User Data", error);
     }
   }
 
   async createUserProfile(e) {
-    e.preventDefault();
+    // e.preventDefault();
     console.log("id, Username", this.state.userName);
     console.log("Name", this.state.name)
+    console.log("user bio input:", e.target["user-Bio"].value)
+    console.log("user-ProfilePic", e.target["user-profilePic"].value)
+
 
     const defaultProfile = {
       id: this.state.userName,
       Username: this.state.userName,
-      Bio: this.state.bio,
-      Name: this.state.name,
-      ProfilePic: this.state.profilePic,
-      isAdmin: this.state.isAdmin
+      Bio: e.target["user-Bio"].value,
+      Name: e.target["user-Name"].value,
+      ProfilePic: e.target["user-profilePic"].value,
     }
-    try {
-      await API.graphql(graphqlOperation(mutations.createUserProfile, { input: defaultProfile }))
-    } catch (error) { console.log("Error on Creating User Profile: ", error) }
+    if (this.state.userExisted) {
+      try {
+        await API.graphql(graphqlOperation(mutations.updateUserProfile, { input: defaultProfile }))
+        this.setState({
+          edit: false,
+          loading: false
+        })
+
+      } catch (error) {
+        console.log("Error on Updating User Profile: ", error)
+      }
+    } else {
+      try {
+        await API.graphql(graphqlOperation(mutations.createUserProfile, { input: defaultProfile }))
+        this.setState({
+          edit: false,
+          loading: false
+        })
+      } catch (error) {
+        console.log("Error on Creating User Profile: ", error)
+      }
+    }
   }
 
   async setUserInfo(user) {
@@ -77,14 +103,11 @@ class ProfilePage extends Component {
     });
     console.log("user", this.state.userName)
     if (user.signInUserSession.idToken.payload['cognito:groups'] == 'Administrators') {
-      this.setState({
+      await this.setState({
         isAdmin: true,
       })
     }
   }
-
-
-
 
 
   render() {
@@ -92,7 +115,7 @@ class ProfilePage extends Component {
       return (
         <div>
           <div className='form-area was-validated'>
-            <form onSubmit={this.currentAuthenticatedUser} action='/profile'>
+            <form onSubmit={this.createUserProfile} action='/profile'>
               <a href='/profile'></a>
               <div className='form-group'>
 
@@ -102,7 +125,7 @@ class ProfilePage extends Component {
                 <label for='user-Bio'>Bio</label>
                 <input id='user-Bio' type='text' className='form-control' required defaultValue={this.state.bio}></input>
 
-                <label for='user-profilePic'>Location</label>
+                <label for='user-profilePic'>Profile's Picture Link</label>
                 <input id='user-profilePic' type='text' className='form-control' required defaultValue={this.state.profilePic}></input>
                 <br></br>
                 <button type='submit' className='btn-lg btn-success' id="profileSubmitButton">Update</button>
@@ -111,14 +134,17 @@ class ProfilePage extends Component {
           </div>
         </div>
       )
-    } else {
+    } else if (this.state.loading) {
+      return (<div>Loading User Info...</div>)
+    }
+    else {
       return (
         <div>
-          <div className="container">
+          <div className="container" key={this.state.name}>
             <br />
             <Avatar
               name={this.state.username}
-              uri={{ uri: this.state.profilePic }}
+              src={this.state.profilePic}
               size="300"
               round={true} />
             <br />
@@ -162,4 +188,4 @@ class ProfilePage extends Component {
 
 }
 
-export default ProfilePage;
+export default withAuthenticator(ProfilePage)
