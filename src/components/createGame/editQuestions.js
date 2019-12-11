@@ -60,7 +60,10 @@ class EditQuestions extends Component {
         try {
             console.log(updatedQuestion)
             await API.graphql(graphqlOperation(mutations.updateQuestion, { input: updatedQuestion }));
-        } catch (error) { console.log(error) }
+        } catch (error) {
+            await API.graphql(graphqlOperation(mutations.createQuestion, { input: updatedQuestion }));
+            console.log(error)
+        }
 
         this.props.func();
     }
