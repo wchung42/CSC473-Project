@@ -220,7 +220,7 @@ class AdminDashboard extends Component {
                 return (
                     <div className='about-container'>
                         <div className='heading'><h1>Admin DB</h1></div>
-                        <button onClick={this.turnOnAdmin}>Show Enabled User</button>
+                        <button id = "admin-button-select" onClick={this.turnOnAdmin}>Show Enabled User</button>
                         <Paper>
                             <Table stickyHeader aria-label="sticky table" style={{ background: 'gray' }}>
                                 <TableHead>
@@ -253,7 +253,7 @@ class AdminDashboard extends Component {
             return (
                 <div className='about-container'>
                     <div className='heading'><h1>Admin DB</h1></div>
-                    <button onClick={this.turnOnAdmin}>Show Admin Role</button>
+                    <button id = "admin-button-select" onClick={this.turnOnAdmin}>Show Admin Role</button>
                     <Paper>
                         <Table stickyHeader aria-label="sticky table" style={{ background: 'gray' }}>
                             <TableHead>
