@@ -4,6 +4,7 @@ import Navbar from './Navbar';
 
 
 
+
 describe('<navbar /> component testing', () => {
     test('navbar render testing', () => {
   
@@ -51,12 +52,16 @@ test('checking nav-items is render', () => {
 
 })
 
-test('checking toggle-button is render', () => {
+// test('checking toggle-button is render', () => {
   
-    const nav= shallow(<Navbar  />);
-    //expect(nav.find('Navbar.navigation').length).toBe(1)
-    expect(nav.find('button.toggle-button').length).toBe(1)
+//     const nav= shallow(<Navbar  />);
+//     //expect(nav.find('Navbar.navigation').length).toBe(1)
+//     nav.setState({
+//         username: 'admin'
+//     })
+//     expect(nav.state(username).foo(1))
 
-})
+
+// })
 
 })
