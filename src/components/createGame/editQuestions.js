@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import * as mutations from '../../graphql/mutations';
 import { API, graphqlOperation } from 'aws-amplify';
+import Switch from '@material-ui/core/Switch';
 
 
 class EditQuestions extends Component {
@@ -8,7 +9,7 @@ class EditQuestions extends Component {
         super(props)
         this.state = {
             imgLink: '',
-            hidden: true,
+            hidden: false,
             disable0: (this.props.gameVisualAid0[this.props.editAtQuestion] == null) ? true : (this.props.gameVisualAid0[this.props.editAtQuestion].length > 0),
             disable1: (this.props.gameVisualAid1[this.props.editAtQuestion] == null) ? true : (this.props.gameVisualAid1[this.props.editAtQuestion].length > 0),
             disable2: (this.props.gameVisualAid2[this.props.editAtQuestion] == null) ? true : (this.props.gameVisualAid2[this.props.editAtQuestion].length > 0),
@@ -24,7 +25,7 @@ class EditQuestions extends Component {
     async handleSubmit(e) {
         const updatedQuestion = {
             id: "00" + this.props.gameId + this.props.atQuestion,
-            questionGameId: this.props.id,
+            questionGameId: this.props.gameId,
             Instruction: document.getElementById("question-instruction").value,
             Question_Geo: [document.getElementById("question-longtitude").value, document.getElementById("question-latitude").value],
             Question: document.getElementById("question-question").value,
@@ -64,16 +65,9 @@ class EditQuestions extends Component {
             await API.graphql(graphqlOperation(mutations.createQuestion, { input: updatedQuestion }));
             console.log(error)
         }
-
         this.props.func();
     }
 
-    componentWillMount() {
-        console.log("Edit Question Component Did Mount")
-        console.log(this.props.gameQuestions[this.props.editAtQuestion])
-        console.log(this.props.gameAnswerType[this.props.editAtQuestion])
-        console.log(this.props.gameAnswers[this.props.editAtQuestion])
-    }
 
     async handleOnChange(e) {
         await this.setState({
@@ -84,25 +78,28 @@ class EditQuestions extends Component {
     }
 
     async handleAid0(e) {
-
         await this.setState({
             disable0: !this.state.disable0
         })
+        console.log("disable0: ", this.state.disable0)
     }
     async handleAid1(e) {
         await this.setState({
             disable1: !this.state.disable1
         })
+        console.log("disable1: ", this.state.disable1)
     }
     async handleAid2(e) {
         await this.setState({
             disable2: !this.state.disable2
         })
+        console.log("disable2: ", this.state.disable2)
     }
     async handleAid3(e) {
         await this.setState({
             disable3: !this.state.disable3
         })
+        console.log("disable3: ", this.state.disable3)
     }
 
     render() {
@@ -128,7 +125,7 @@ class EditQuestions extends Component {
                             <input id='question-question' type='text' className='form-control' required defaultValue={(this.props.gameQuestions[this.props.editAtQuestion] == null) ? "" : this.props.gameQuestions[this.props.editAtQuestion]}></input>
                             {/* Question Visual Aid */}
                             <label for='question-aid'>Visual Aid for Question</label>
-                            <input id="question-aid" type='text' className='form-control' onChange={this.handleOnChange} value={(this.props.gameQuestionVisualAids[this.props.editAtQuestion] == null) ? " " : this.props.gameQuestionVisualAids[this.props.editAtQuestion]} ></input>
+                            <input id="question-aid" type='text' className='form-control' onChange={this.handleOnChange} required defaultValue={(this.props.gameQuestionVisualAids[this.props.editAtQuestion] == null) ? " " : this.props.gameQuestionVisualAids[this.props.editAtQuestion]} ></input>
                             <br />
                             <img src={this.state.imgLink} style={{ width: '50%', height: '50%' }} alt="Visual Aid" hidden={this.state.hidden}></img>
                             <br />
@@ -149,53 +146,57 @@ class EditQuestions extends Component {
 
                             {/* Answer Aid 0 */}
                             <label for='answer-aid0'>Answer Aid0 for this Question</label>
-                            <input
-                                type="checkbox"
-                                name="answer-aid0"
-                                id="answer-aid0"
-                                onChange={this.handleAid0} // Triggers the function in the Part 2
-                            />
-                            <input id='answer-aid00' hidden={this.state.disable0} type='text' className='form-control' defaultValue={this.state.disable0 ? "" : this.props.gameVisualAid0[this.props.editAtQuestion][0]}></input>
-                            <input id='answer-aid01' hidden={this.state.disable1} type='text' className='form-control' defaultValue={this.state.disable0 ? "" : this.props.gameVisualAid0[this.props.editAtQuestion][1]}></input>
-                            <input id='answer-aid02' hidden={this.state.disable2} type='text' className='form-control' defaultValue={this.state.disable0 ? "" : this.props.gameVisualAid0[this.props.editAtQuestion][2]}></input>
-                            <input id='answer-aid03' hidden={this.state.disable3} type='text' className='form-control' defaultValue={this.state.disable0 ? "" : this.props.gameVisualAid0[this.props.editAtQuestion][3]}></input>
+                            <Switch
+                                checked={!this.state.disable0}
+                                onClick={this.handleAid0}
+                                id="answer-aid0" />
+
+                            <div id="aid0" hidden={this.state.disable0}>
+                                <input id='answer-aid00' type='text' className='form-control' defaultValue={(this.props.gameVisualAid0[this.props.editAtQuestion] == null) ? "" : this.props.gameVisualAid0[this.props.editAtQuestion][0]}></input>
+                                <input id='answer-aid01' type='text' className='form-control' defaultValue={(this.props.gameVisualAid0[this.props.editAtQuestion] == null) ? "" : this.props.gameVisualAid0[this.props.editAtQuestion][1]}></input>
+                                <input id='answer-aid02' type='text' className='form-control' defaultValue={(this.props.gameVisualAid0[this.props.editAtQuestion] == null) ? "" : this.props.gameVisualAid0[this.props.editAtQuestion][2]}></input>
+                                <input id='answer-aid03' type='text' className='form-control' defaultValue={(this.props.gameVisualAid0[this.props.editAtQuestion] == null) ? "" : this.props.gameVisualAid0[this.props.editAtQuestion][3]}></input>
+
+                            </div>
                             {/* Answer Aid 1 */}
 
                             <label for='answer-aid1'>Answer Aid1 for this Question</label>
-                            <input
-                                type="checkbox"
-                                name="answer-aid1"
-                                id="answer-aid1"
-                                onChange={this.handleAid1} // Triggers the function in the Part 2
-                            />
-                            <input id='answer-aid10' hidden={this.state.disable1} type='text' className='form-control' defaultValue={this.state.disable1 ? "" : this.props.gameVisualAid1[this.props.editAtQuestion][0]}></input>
-                            <input id='answer-aid11' hidden={this.state.disable1} type='text' className='form-control' defaultValue={this.state.disable1 ? "" : this.props.gameVisualAid1[this.props.editAtQuestion][1]}></input>
-                            <input id='answer-aid12' hidden={this.state.disable1} type='text' className='form-control' defaultValue={this.state.disable1 ? "" : this.props.gameVisualAid1[this.props.editAtQuestion][2]}></input>
-                            <input id='answer-aid13' hidden={this.state.disable1} type='text' className='form-control' defaultValue={this.state.disable1 ? "" : this.props.gameVisualAid1[this.props.editAtQuestion][3]}></input>
+                            <Switch
+                                checked={!this.state.disable1}
+                                onClick={this.handleAid1}
+                                id="answer-aid1" />
+                            <div id="aid1" hidden={this.state.disable1}>
+                                <input id='answer-aid10' type='text' className='form-control' defaultValue={(this.props.gameVisualAid1[this.props.editAtQuestion] == null) ? "" : this.props.gameVisualAid1[this.props.editAtQuestion][0]}></input>
+                                <input id='answer-aid11' type='text' className='form-control' defaultValue={(this.props.gameVisualAid1[this.props.editAtQuestion] == null) ? "" : this.props.gameVisualAid1[this.props.editAtQuestion][1]}></input>
+                                <input id='answer-aid12' type='text' className='form-control' defaultValue={(this.props.gameVisualAid1[this.props.editAtQuestion] == null) ? "" : this.props.gameVisualAid1[this.props.editAtQuestion][2]}></input>
+                                <input id='answer-aid13' type='text' className='form-control' defaultValue={(this.props.gameVisualAid1[this.props.editAtQuestion] == null) ? "" : this.props.gameVisualAid1[this.props.editAtQuestion][3]}></input>
+                            </div>
                             {/* Answer Aid 2 */}
                             <label for='answer-aid2'>Answer Aid2 for this Question</label>
-                            <input
-                                type="checkbox"
-                                name="answer-aid2"
-                                id="answer-aid2"
-                                onChange={this.handleAid2} // Triggers the function in the Part 2
-                            />
-                            <input id='answer-aid20' hidden={this.state.disable2} type='text' className='form-control' defaultValue={this.state.disable2 ? "" : this.props.gameVisualAid2[this.props.editAtQuestion][0]}></input>
-                            <input id='answer-aid21' hidden={this.state.disable2} type='text' className='form-control' defaultValue={this.state.disable2 ? "" : this.props.gameVisualAid2[this.props.editAtQuestion][1]}></input>
-                            <input id='answer-aid22' hidden={this.state.disable2} type='text' className='form-control' defaultValue={this.state.disable2 ? "" : this.props.gameVisualAid2[this.props.editAtQuestion][2]}></input>
-                            <input id='answer-aid23' hidden={this.state.disable2} type='text' className='form-control' defaultValue={this.state.disable2 ? "" : this.props.gameVisualAid2[this.props.editAtQuestion][3]}></input>
+                            <Switch
+                                checked={!this.state.disable2}
+                                onClick={this.handleAid2}
+                                id="answer-aid2" />
+                            <div id="aid2" hidden={this.state.disable2}>
+                                <input id='answer-aid20' type='text' className='form-control' defaultValue={(this.props.gameVisualAid2[this.props.editAtQuestion] == null) ? "" : this.props.gameVisualAid2[this.props.editAtQuestion][0]}></input>
+                                <input id='answer-aid21' type='text' className='form-control' defaultValue={(this.props.gameVisualAid2[this.props.editAtQuestion] == null) ? "" : this.props.gameVisualAid2[this.props.editAtQuestion][1]}></input>
+                                <input id='answer-aid22' type='text' className='form-control' defaultValue={(this.props.gameVisualAid2[this.props.editAtQuestion] == null) ? "" : this.props.gameVisualAid2[this.props.editAtQuestion][2]}></input>
+                                <input id='answer-aid23' type='text' className='form-control' defaultValue={(this.props.gameVisualAid2[this.props.editAtQuestion] == null) ? "" : this.props.gameVisualAid2[this.props.editAtQuestion][3]}></input>
+
+                            </div>
                             {/* Answer Aid 3 */}
                             <label for='answer-aid3'>Answer Aid3 for this Question</label>
-                            <input
-                                type="checkbox"
-                                name="answer-aid3"
-                                id="answer-aid3"
-                                onChange={this.handleAid3} // Triggers the function in the Part 2
-                            />
-                            <input id='answer-aid30' hidden={this.state.disable3} type='text' className='form-control' defaultValue={this.state.disable3 ? "" : this.props.gameVisualAid3[this.props.editAtQuestion][0]} ></input>
-                            <input id='answer-aid31' hidden={this.state.disable3} type='text' className='form-control' defaultValue={this.state.disable3 ? "" : this.props.gameVisualAid3[this.props.editAtQuestion][0]} ></input>
-                            <input id='answer-aid32' hidden={this.state.disable3} type='text' className='form-control' defaultValue={this.state.disable3 ? "" : this.props.gameVisualAid3[this.props.editAtQuestion][0]} ></input>
-                            <input id='answer-aid33' hidden={this.state.disable3} type='text' className='form-control' defaultValue={this.state.disable3 ? "" : this.props.gameVisualAid3[this.props.editAtQuestion][0]} ></input>
+                            <Switch
+                                checked={!this.state.disable3}
+                                onClick={this.handleAid3}
+                                id="answer-aid3" />
+                            <div id="aid3" hidden={this.state.disable3}>
+                                <input id='answer-aid30' type='text' className='form-control' defaultValue={(this.props.gameVisualAid3[this.props.editAtQuestion] == null) ? "" : this.props.gameVisualAid3[this.props.editAtQuestion][0]} ></input>
+                                <input id='answer-aid31' type='text' className='form-control' defaultValue={(this.props.gameVisualAid3[this.props.editAtQuestion] == null) ? "" : this.props.gameVisualAid3[this.props.editAtQuestion][0]} ></input>
+                                <input id='answer-aid32' type='text' className='form-control' defaultValue={(this.props.gameVisualAid3[this.props.editAtQuestion] == null) ? "" : this.props.gameVisualAid3[this.props.editAtQuestion][0]} ></input>
+                                <input id='answer-aid33' type='text' className='form-control' defaultValue={(this.props.gameVisualAid3[this.props.editAtQuestion] == null) ? "" : this.props.gameVisualAid3[this.props.editAtQuestion][0]} ></input>
+
+                            </div>
                             <br />
                             <button type='button' className='btn-lg btn-success' onClick={this.handleSubmit}>Add</button>
                         </div>
