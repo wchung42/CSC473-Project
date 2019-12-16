@@ -1,3 +1,10 @@
+/*
+    This is the Admin Dashboard component. It is only viewable to users 
+    with the "Administrators" role. Here the user can enable/disable other users
+    and grant/remove administrative privelages from users. This is done using
+    the AWS SDK.
+*/
+
 import React, { Component } from 'react';
 import AWS from 'aws-sdk';
 import './AdminDashboard.css';
@@ -8,6 +15,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Switch from '@material-ui/core/Switch';
+import { Auth } from 'aws-amplify';
 import { withAuthenticator } from 'aws-amplify-react';
 
 
@@ -18,12 +26,14 @@ class AdminDashboard extends Component {
             users: {},
             status: false,
             ready: false,
-            showAdmin: false
+            showAdmin: false,
+            isCurrentUserAdmin: false, // state for current user
         })
         this.getUsers = this.getUsers.bind(this);
         this.handleDisable = this.handleDisable.bind(this);
         this.promoteUserToAdmin = this.promoteUserToAdmin.bind(this);
         this.turnOnAdmin = this.turnOnAdmin.bind(this);
+        this.setCurrentUserInfo = this.setCurrentUserInfo.bind(this);
     }
     /*
         getUsers() calls the cognito function listUsers to get a list of users
@@ -74,31 +84,37 @@ class AdminDashboard extends Component {
                 }
             }
 
-
-            // console.log(user.Username)
-            // let params = {
-            //     UserPoolId: process.env.REACT_APP_USER_POOL_ID,
-            //     Username: user.Username
-            // };
-
-
-
         } catch (e) {
             console.log(e);
         }
     }
+
     async turnOnAdmin() {
         await this.setState({
             showAdmin: !this.state.showAdmin
         })
     }
-    async componentDidMount() {
 
+    async componentDidMount() {
+        // get current user info
+        await Auth.currentAuthenticatedUser()
+            .then(
+                user => { 
+                    this.setCurrentUserInfo(user);
+                }
+            )
         await this.getUsers();
-        // await this.getAdmins();
         this.setState({
             ready: true,
         })
+    }
+
+    setCurrentUserInfo(user) {
+        if (user.signInUserSession.idToken.payload['cognito:groups'] == 'Administrators') {
+            this.setState({
+              isCurrentUserAdmin: true,
+            })
+          }
     }
 
     async shouldComponentUpdate(prevState) {
@@ -164,9 +180,6 @@ class AdminDashboard extends Component {
             UserPoolId: process.env.REACT_APP_USER_POOL_ID,
         }
 
-        /*
-        add condition to check for disabled 
-        */
         /* 
             This function calls adminListGroupsForUser to get the groups the user is in.
             If the user is already in the 'Administrators' group, then remove them from it
@@ -216,19 +229,53 @@ class AdminDashboard extends Component {
                 <h1>Loading...</h1>
             )
         } else {
-            const { users } = this.state
-            if (this.state.showAdmin) {
+            if (this.state.isCurrentUserAdmin) {
+                const { users } = this.state
+                if (this.state.showAdmin) {
+                    return (
+                        <div className='about-container'>
+                            <div className='heading'><h1>Admin DB</h1></div>
+                            <button id = "admin-button-select" onClick={this.turnOnAdmin}>Show Enabled User</button>
+                            <Paper>
+                                <Table stickyHeader aria-label="sticky table" style={{ background: 'gray' }}>
+                                    <TableHead>
+                                        <TableRow >
+                                            <TableCell style={{ fontSize: '3vh', color: 'white', background: 'black' }} >Users</TableCell>
+                                            {/* <TableCell>Email</TableCell> */}
+                                            <TableCell style={{ fontSize: '3vh', color: 'white', background: 'black' }}>Admin</TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        {users.map(user => (
+                                            <TableRow key={user.Username}>
+                                                <TableCell style={{ fontSize: '2.5vh' }} component="th" scope="row">
+                                                    {user.Username}
+                                                </TableCell>
+                                                <TableCell key={user.Username}>
+                                                    <Switch
+                                                        checked={user.isUserAdmin}//if not admin will be checked
+                                                        onClick={(event) => this.promoteUserToAdmin(event, user)}
+                                                        id={user.Username + 'Admin'} />
+                                                </TableCell>
+                                            </TableRow>
+                                        ))}
+                                    </TableBody>
+                                </Table>
+                            </Paper>
+                        </div>
+                    )
+                }
                 return (
                     <div className='about-container'>
                         <div className='heading'><h1>Admin DB</h1></div>
-                        <button id = "admin-button-select" onClick={this.turnOnAdmin}>Show Enabled User</button>
+                        <button id = "admin-button-select" onClick={this.turnOnAdmin}>Show Admin Role</button>
                         <Paper>
                             <Table stickyHeader aria-label="sticky table" style={{ background: 'gray' }}>
                                 <TableHead>
                                     <TableRow >
                                         <TableCell style={{ fontSize: '3vh', color: 'white', background: 'black' }} >Users</TableCell>
                                         {/* <TableCell>Email</TableCell> */}
-                                        <TableCell style={{ fontSize: '3vh', color: 'white', background: 'black' }}>Admin</TableCell>
+                                        <TableCell style={{ fontSize: '3vh', color: 'white', background: 'black' }}>Disabled</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -237,11 +284,12 @@ class AdminDashboard extends Component {
                                             <TableCell style={{ fontSize: '2.5vh' }} component="th" scope="row">
                                                 {user.Username}
                                             </TableCell>
-                                            <TableCell key={user.Username}>
+                                            <TableCell>
                                                 <Switch
-                                                    checked={user.isUserAdmin}//if not admin will be checked
-                                                    onClick={(event) => this.promoteUserToAdmin(event, user)}
-                                                    id={user.Username + 'Admin'} />
+                                                    color="primary"
+                                                    checked={user.Enabled}
+                                                    onClick={(event) => this.handleDisable(event, user)}
+                                                    id={user.Username} />
                                             </TableCell>
                                         </TableRow>
                                     ))}
@@ -249,42 +297,16 @@ class AdminDashboard extends Component {
                             </Table>
                         </Paper>
                     </div>
+    
                 )
             }
-            return (
-                <div className='about-container'>
-                    <div className='heading'><h1>Admin DB</h1></div>
-                    <button id = "admin-button-select" onClick={this.turnOnAdmin}>Show Admin Role</button>
-                    <Paper>
-                        <Table stickyHeader aria-label="sticky table" style={{ background: 'gray' }}>
-                            <TableHead>
-                                <TableRow >
-                                    <TableCell style={{ fontSize: '3vh', color: 'white', background: 'black' }} >Users</TableCell>
-                                    {/* <TableCell>Email</TableCell> */}
-                                    <TableCell style={{ fontSize: '3vh', color: 'white', background: 'black' }}>Disabled</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {users.map(user => (
-                                    <TableRow key={user.Username}>
-                                        <TableCell style={{ fontSize: '2.5vh' }} component="th" scope="row">
-                                            {user.Username}
-                                        </TableCell>
-                                        <TableCell>
-                                            <Switch
-                                                color="primary"
-                                                checked={user.Enabled}
-                                                onClick={(event) => this.handleDisable(event, user)}
-                                                id={user.Username} />
-                                        </TableCell>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </Paper>
-                </div>
-
-            )
+            else {
+                return (
+                    <div>
+                        <h1>ACCESS DENIED</h1>
+                    </div>
+                )
+            }
 
         }
     }

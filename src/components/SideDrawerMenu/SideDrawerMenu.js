@@ -26,28 +26,6 @@ class sideDrawerMenu extends Component {
         }
       )
       .catch(err => console.log(err));
-    //const user = await Auth.currentUserInfo();
-    // console.log(currentUserInfo)
-    // if (currentUserInfo) {
-    //   this.setState({
-    //     username: currentUserInfo.username,
-    //     isLoggedIn: true,
-    //   });
-    //   console.log(currentUserInfo);
-    // get currentuser group and compare with admin
-    // if (user.signInUserSession.idToken.payload['cognito:groups'] == "Administrator") {
-    //   this.setState({
-    //     isAdmin: true,
-    //   })
-    // }
-
-    // for(var i = 0; i< amins.length;i++){
-    //   if (this.state.username === amins[i]){
-    //     this.setState({
-    //       isadmin: true
-    //     });
-    //   }
-
   }
 
   // method to get the userinfo and set it to states
