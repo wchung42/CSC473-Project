@@ -109,6 +109,7 @@ class AdminDashboard extends Component {
         })
     }
 
+    // this is a helper function to check if current user is admin
     setCurrentUserInfo(user) {
         if (user.signInUserSession.idToken.payload['cognito:groups'] == 'Administrators') {
             this.setState({
@@ -120,6 +121,8 @@ class AdminDashboard extends Component {
     async shouldComponentUpdate(prevState) {
         return true
     }
+
+    // handleDisable is the function that handles the disable user event
     async handleDisable(event, user) {
         event.preventDefault();
         let cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider();
@@ -229,6 +232,11 @@ class AdminDashboard extends Component {
                 <h1>Loading...</h1>
             )
         } else {
+            /* 
+                this is a security feature to stop non-admins from abusing
+                the redirect /admin. If the user is not an admin, the page will
+                render "ACCESS DENIED" instead of the admin commands
+            */
             if (this.state.isCurrentUserAdmin) {
                 const { users } = this.state
                 if (this.state.showAdmin) {
@@ -302,7 +310,7 @@ class AdminDashboard extends Component {
             }
             else {
                 return (
-                    <div>
+                    <div className = "nonAdmin">
                         <h1>ACCESS DENIED</h1>
                     </div>
                 )

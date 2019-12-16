@@ -2,3 +2,13 @@
     font-size: 50px;
     margin-bottom: 25px;
 }
+
+.nonAdmin {
+    background-image: url('../home/home-background.jpg');
+    height: 100vh;
+}
+
+.nonAdmin h1 {
+    font-size: 200px;
+    color: white;
+}
